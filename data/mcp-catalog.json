@@ -1,0 +1,296 @@
+{
+  "gh": {
+    "name": "GitHub",
+    "status": "Official",
+    "purpose": "Repos, PRs, issues, Actions checks",
+    "source": "github.com/github/github-mcp-server"
+  },
+  "gl": {
+    "name": "GitLab",
+    "status": "Official",
+    "purpose": "Merge requests, pipelines, issues",
+    "source": "docs.gitlab.com"
+  },
+  "atl": {
+    "name": "Atlassian (Jira + Confluence)",
+    "status": "Official",
+    "purpose": "Tickets, sprints, JQL, specs and pages",
+    "source": "atlassian.com/platform/remote-mcp-server"
+  },
+  "lin": {
+    "name": "Linear",
+    "status": "Official",
+    "purpose": "Issues, cycles, roadmaps",
+    "source": "linear.app/docs/mcp"
+  },
+  "ado": {
+    "name": "Azure DevOps",
+    "status": "Official",
+    "purpose": "Boards, repos, pipelines, test plans",
+    "source": "github.com/microsoft/azure-devops-mcp"
+  },
+  "miro": {
+    "name": "Miro",
+    "status": "Official",
+    "purpose": "Boards, journey maps, workshop canvases",
+    "source": "miro.com"
+  },
+  "notion": {
+    "name": "Notion",
+    "status": "Official",
+    "purpose": "Wikis, decision logs, databases",
+    "source": "developers.notion.com"
+  },
+  "figma": {
+    "name": "Figma",
+    "status": "Official",
+    "purpose": "Dev Mode design context, components, variables",
+    "source": "figma.com/mcp-catalog"
+  },
+  "sentry": {
+    "name": "Sentry",
+    "status": "Official",
+    "purpose": "Errors, stack traces, release health",
+    "source": "docs.sentry.io"
+  },
+  "dd": {
+    "name": "Datadog",
+    "status": "Official",
+    "purpose": "Metrics, logs, traces, monitors",
+    "source": "docs.datadoghq.com"
+  },
+  "graf": {
+    "name": "Grafana",
+    "status": "Official",
+    "purpose": "Dashboards, Prometheus/Loki queries, alerts",
+    "source": "github.com/grafana/mcp-grafana"
+  },
+  "pd": {
+    "name": "PagerDuty",
+    "status": "Official",
+    "purpose": "Incidents, on-call schedules, escalation",
+    "source": "pagerduty.com"
+  },
+  "aws": {
+    "name": "AWS MCP Server",
+    "status": "Official",
+    "purpose": "AWS APIs, docs, cost and infra (GA May 2026)",
+    "source": "aws.amazon.com"
+  },
+  "az": {
+    "name": "Azure MCP",
+    "status": "Official",
+    "purpose": "Azure resources, Monitor, Key Vault",
+    "source": "github.com/microsoft/mcp"
+  },
+  "tf": {
+    "name": "HashiCorp Terraform",
+    "status": "Official",
+    "purpose": "Registry modules, providers, workspaces",
+    "source": "github.com/hashicorp/terraform-mcp-server"
+  },
+  "k8s": {
+    "name": "Kubernetes",
+    "status": "Community",
+    "purpose": "Cluster resources, pods, logs",
+    "source": "github.com/containers/kubernetes-mcp-server"
+  },
+  "cf": {
+    "name": "Cloudflare",
+    "status": "Official",
+    "purpose": "DNS, Workers, network and security config",
+    "source": "developers.cloudflare.com"
+  },
+  "vercel": {
+    "name": "Vercel",
+    "status": "Official",
+    "purpose": "Deployments, logs, domains",
+    "source": "mcp.vercel.com"
+  },
+  "pw": {
+    "name": "Playwright",
+    "status": "Official",
+    "purpose": "Browser automation, E2E and accessibility checks",
+    "source": "github.com/microsoft/playwright-mcp"
+  },
+  "semgrep": {
+    "name": "Semgrep",
+    "status": "Official",
+    "purpose": "SAST findings and custom rules",
+    "source": "github.com/semgrep/mcp"
+  },
+  "snyk": {
+    "name": "Snyk",
+    "status": "Official",
+    "purpose": "Dependency and code vulnerability scanning",
+    "source": "github.com/snyk/cli"
+  },
+  "burp": {
+    "name": "Burp Suite (PortSwigger)",
+    "status": "Official",
+    "purpose": "Web app testing via Burp",
+    "source": "github.com/PortSwigger/mcp-server"
+  },
+  "splunk": {
+    "name": "Splunk",
+    "status": "Community",
+    "purpose": "SPL search over SIEM events",
+    "source": "glama.ai (deslicer/mcp-for-splunk)"
+  },
+  "cs": {
+    "name": "CrowdStrike Falcon",
+    "status": "Community",
+    "purpose": "EDR detections, hosts",
+    "source": "mcpservers.org (SecurityInfrastructure)"
+  },
+  "nvd": {
+    "name": "CVE / NVD / CISA KEV",
+    "status": "Community",
+    "purpose": "CVE lookup, EPSS, ATT&CK mapping",
+    "source": "mcpservers.org/topics/security-mcp"
+  },
+  "snow": {
+    "name": "Snowflake",
+    "status": "Official",
+    "purpose": "Warehouse-managed MCP per account",
+    "source": "docs.snowflake.com"
+  },
+  "dbx": {
+    "name": "Databricks",
+    "status": "Official",
+    "purpose": "Unity Catalog, Genie, vector search",
+    "source": "docs.databricks.com"
+  },
+  "dbt": {
+    "name": "dbt",
+    "status": "Official",
+    "purpose": "Models, lineage, semantic layer",
+    "source": "github.com/dbt-labs/dbt-mcp"
+  },
+  "pg": {
+    "name": "PostgreSQL",
+    "status": "Reference",
+    "purpose": "Read-only SQL",
+    "source": "github.com/modelcontextprotocol/servers"
+  },
+  "supa": {
+    "name": "Supabase",
+    "status": "Official",
+    "purpose": "Postgres, auth, storage",
+    "source": "supabase.com/docs"
+  },
+  "hf": {
+    "name": "Hugging Face",
+    "status": "Official",
+    "purpose": "Models, datasets, Spaces",
+    "source": "huggingface.co"
+  },
+  "jup": {
+    "name": "Jupyter",
+    "status": "Community",
+    "purpose": "Notebook execution and cells",
+    "source": "github.com/datalayer/jupyter-mcp-server"
+  },
+  "sn": {
+    "name": "ServiceNow",
+    "status": "Official / Community",
+    "purpose": "ITSM incidents, changes, CMDB, knowledge",
+    "source": "servicenow.com / ServiceNow Store"
+  },
+  "zd": {
+    "name": "Zendesk",
+    "status": "Official",
+    "purpose": "Tickets, macros, help centre",
+    "source": "developer.zendesk.com"
+  },
+  "sf": {
+    "name": "Salesforce",
+    "status": "Official",
+    "purpose": "CRM objects, opportunities, accounts",
+    "source": "developer.salesforce.com"
+  },
+  "hub": {
+    "name": "HubSpot",
+    "status": "Official",
+    "purpose": "Contacts, deals, marketing emails",
+    "source": "developers.hubspot.com"
+  },
+  "ga": {
+    "name": "Google Analytics",
+    "status": "Official",
+    "purpose": "GA4 reporting and audiences",
+    "source": "github.com/googleanalytics/google-analytics-mcp"
+  },
+  "canva": {
+    "name": "Canva",
+    "status": "Official",
+    "purpose": "Brand kits, designs, export",
+    "source": "canva.dev"
+  },
+  "gdrive": {
+    "name": "Google Drive / Docs",
+    "status": "Official",
+    "purpose": "Documents, tender packs, templates",
+    "source": "workspace.google.com"
+  },
+  "m365": {
+    "name": "Microsoft 365 (SharePoint, Outlook, Teams)",
+    "status": "Official",
+    "purpose": "Docs, mail, meetings",
+    "source": "learn.microsoft.com"
+  },
+  "slack": {
+    "name": "Slack",
+    "status": "Official",
+    "purpose": "Channels, threads, comms",
+    "source": "api.slack.com"
+  },
+  "stripe": {
+    "name": "Stripe",
+    "status": "Official",
+    "purpose": "Payments, invoices, billing",
+    "source": "docs.stripe.com/mcp"
+  },
+  "wd": {
+    "name": "Workday",
+    "status": "Community / build",
+    "purpose": "Workers, org, positions (no official server as of Apr 2026)",
+    "source": "learn.engineering.vips.edu/mcp/mcp-workday-server"
+  },
+  "lms": {
+    "name": "LMS (Moodle / Canvas LMS)",
+    "status": "Community",
+    "purpose": "Courses, enrolments, grades",
+    "source": "github (community)"
+  },
+  "ctx7": {
+    "name": "Context7",
+    "status": "Community",
+    "purpose": "Up-to-date library docs for coding agents",
+    "source": "github.com/upstash/context7"
+  },
+  "git": {
+    "name": "Git (reference)",
+    "status": "Reference",
+    "purpose": "Local repo history and diffs",
+    "source": "github.com/modelcontextprotocol/servers"
+  },
+  "fs": {
+    "name": "Filesystem (reference)",
+    "status": "Reference",
+    "purpose": "Scoped local files",
+    "source": "github.com/modelcontextprotocol/servers"
+  },
+  "fetch": {
+    "name": "Fetch (reference)",
+    "status": "Reference",
+    "purpose": "Read web pages, standards, vendor docs",
+    "source": "github.com/modelcontextprotocol/servers"
+  },
+  "sfia": {
+    "name": "SFIA framework (build-your-own)",
+    "status": "Build",
+    "purpose": "Expose SFIA 9 skills/levels from your licensed copy as an MCP resource",
+    "source": "sfia-online.org"
+  }
+}

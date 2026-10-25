@@ -1,0 +1,5012 @@
+[
+ {
+  "page": 7,
+  "role": "Agile change agents",
+  "family": "Agile Delivery",
+  "desc": "Roles responsible for developing, implementing, supporting, guiding, nurturing and improving agile working practices.",
+  "titles": "Scrum Master, Agile Coach",
+  "core": [
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Organisation design and implementation",
+    "levels": "3-7",
+    "code": "ORDI"
+   },
+   {
+    "name": "Organisational facilitation",
+    "levels": "4-6",
+    "code": "OFCL"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Innovation management",
+    "levels": "5-7",
+    "code": "INOV"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Employee experience",
+    "levels": "4-6",
+    "code": "EEXP"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Learning delivery",
+    "levels": "2-5",
+    "code": "ETDL"
+   },
+   {
+    "name": "Consultancy",
+    "levels": "4-7",
+    "code": "CNSL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Organisational change management",
+    "levels": "2-6",
+    "code": "CIPM"
+   },
+   {
+    "name": "Organisational change enablement",
+    "levels": "4-6",
+    "code": "OCEN"
+   }
+  ]
+ },
+ {
+  "page": 8,
+  "role": "Agile product management",
+  "family": "Agile Delivery",
+  "desc": "Roles responsible for defining, prioritising and delivering product outcomes using adaptive planning and iterative development. Includes managing product backlogs, translating user needs into requirements, and working with development teams to deliver value incrementally. Involves balancing stakeholder priorities, tracking product performance and refining direction based on data and feedback.",
+  "titles": "Product Manager, Product Owner, Release Train Engineer",
+  "core": [
+   {
+    "name": "Product management",
+    "levels": "2-6",
+    "code": "PROD"
+   },
+   {
+    "name": "Delivery management",
+    "levels": "3-6",
+    "code": "DEMG"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Feasibility assessment",
+    "levels": "2-6",
+    "code": "FEAS"
+   },
+   {
+    "name": "Customer experience",
+    "levels": "2-6",
+    "code": "CEXP"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Business process improvement",
+    "levels": "2-7",
+    "code": "BPRE"
+   },
+   {
+    "name": "Innovation management",
+    "levels": "5-7",
+    "code": "INOV"
+   }
+  ],
+  "other": [
+   {
+    "name": "User research",
+    "levels": "2-6",
+    "code": "URCH"
+   },
+   {
+    "name": "Deployment",
+    "levels": "2-6",
+    "code": "DEPL"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Information systems coordination",
+    "levels": "6-7",
+    "code": "ISCO"
+   },
+   {
+    "name": "Solution architecture",
+    "levels": "4-6",
+    "code": "ARCH"
+   },
+   {
+    "name": "Release management",
+    "levels": "2-6",
+    "code": "RELM"
+   },
+   {
+    "name": "Market research",
+    "levels": "3-6",
+    "code": "MRCH"
+   },
+   {
+    "name": "Selling",
+    "levels": "3-6",
+    "code": "SALE"
+   }
+  ]
+ },
+ {
+  "page": 9,
+  "role": "Delivery management practitioners",
+  "family": "Agile Delivery",
+  "desc": "Roles responsible for leading the day-to-day delivery of digital and technology work, removing blockers, ensuring team health, facilitating agile ceremonies, and enabling continuous flow of value through delivery teams.",
+  "titles": "Delivery Manager, Senior Delivery Manager, Head of Delivery, Agile Delivery Manager, Programme Delivery Manager, Associate Delivery Manager, Head of Agile Delivery",
+  "core": [
+   {
+    "name": "Delivery management",
+    "levels": "3-6",
+    "code": "DEMG"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Organisational facilitation",
+    "levels": "4-6",
+    "code": "OFCL"
+   },
+   {
+    "name": "Portfolio, programme and project support",
+    "levels": "2-6",
+    "code": "PROF"
+   },
+   {
+    "name": "Financial management",
+    "levels": "4-6",
+    "code": "FMIT"
+   },
+   {
+    "name": "Organisational change management",
+    "levels": "2-6",
+    "code": "CIPM"
+   }
+  ],
+  "other": [
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Release management",
+    "levels": "2-6",
+    "code": "RELM"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   }
+  ]
+ },
+ {
+  "page": 10,
+  "role": "Application development practitioners",
+  "family": "Application Platform",
+  "desc": "Roles responsible for developing reliable, flexible, scalable and secure software applications to support organisational capabilities.",
+  "titles": "Web Developer, Front End developer, Full Stack Engineer, Back End Developer",
+  "core": [
+   {
+    "name": "Programming/software development",
+    "levels": "2-6",
+    "code": "PROG"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Release management",
+    "levels": "2-6",
+    "code": "RELM"
+   },
+   {
+    "name": "Deployment",
+    "levels": "2-6",
+    "code": "DEPL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Application support",
+    "levels": "2-5",
+    "code": "ASUP"
+   }
+  ]
+ },
+ {
+  "page": 11,
+  "role": "Application platform management practitioners",
+  "family": "Application Platform",
+  "desc": "Roles responsible for managing the provision of reliable secure software applications which support business capabilities and are easily re-used, maintained and updated to meet current and future organisational needs.",
+  "titles": "Platform Owner, Application Owner, Platform Manager, Head of Platform Engineering",
+  "core": [
+   {
+    "name": "Application support",
+    "levels": "2-5",
+    "code": "ASUP"
+   },
+   {
+    "name": "Release management",
+    "levels": "2-6",
+    "code": "RELM"
+   },
+   {
+    "name": "Deployment",
+    "levels": "2-6",
+    "code": "DEPL"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Systems development management",
+    "levels": "4-7",
+    "code": "DLMG"
+   }
+  ],
+  "other": [
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Systems and software lifecycle engineering",
+    "levels": "3-7",
+    "code": "SLEN"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "Contract management",
+    "levels": "2-7",
+    "code": "ITCM"
+   }
+  ]
+ },
+ {
+  "page": 12,
+  "role": "Application support practitioners",
+  "family": "Application Platform",
+  "desc": "Roles responsible for operational support of software applications to support organisational capabilities.",
+  "titles": "Application Support Analyst, IT Analyst, Application Maintenance Analyst",
+  "core": [
+   {
+    "name": "Application support",
+    "levels": "2-5",
+    "code": "ASUP"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Incident management",
+    "levels": "1-6",
+    "code": "USUP"
+   },
+   {
+    "name": "Change control",
+    "levels": "2-6",
+    "code": "CHMG"
+   }
+  ],
+  "other": [
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   }
+  ]
+ },
+ {
+  "page": 13,
+  "role": "Architecture practice management",
+  "family": "Architecture",
+  "desc": "Roles responsible for leading, managing, developing and deploying architects and architecture capabilities.",
+  "titles": "Architecture Practice Leader, Head of Enterprise Architecture, Head of Solutions Architecture, Chief Architect",
+  "core": [
+   {
+    "name": "Performance management",
+    "levels": "4-6",
+    "code": "PEMT"
+   },
+   {
+    "name": "Employee experience",
+    "levels": "4-6",
+    "code": "EEXP"
+   },
+   {
+    "name": "Resourcing",
+    "levels": "2-6",
+    "code": "RESC"
+   },
+   {
+    "name": "Professional development",
+    "levels": "4-6",
+    "code": "PDSV"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   }
+  ],
+  "other": [
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Competency assessment",
+    "levels": "2-6",
+    "code": "LEDA"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   }
+  ]
+ },
+ {
+  "page": 14,
+  "role": "Data architecture practitioners",
+  "family": "Architecture",
+  "desc": "Roles responsible for designing, governing, and evolving the data architecture of an organisation, including logical and physical data models, data flows, metadata frameworks, and data integration patterns.",
+  "titles": "Data Architect, Senior Data Architect, Chief Data Architect, Lead Data Architect, Enterprise Data Architect, Information Architect, Data Integration Architect, Data Modeller, Master Data Architect",
+  "core": [
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   },
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Data modelling and design",
+    "levels": "2-5",
+    "code": "DTAN"
+   },
+   {
+    "name": "Database design",
+    "levels": "2-5",
+    "code": "DBDS"
+   },
+   {
+    "name": "Solution architecture",
+    "levels": "4-6",
+    "code": "ARCH"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Strategic planning",
+    "levels": "4-7",
+    "code": "ITSP"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   },
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   },
+   {
+    "name": "Consultancy",
+    "levels": "4-7",
+    "code": "CNSL"
+   }
+  ]
+ },
+ {
+  "page": 15,
+  "role": "Enterprise architecture practitioners",
+  "family": "Architecture",
+  "desc": "Roles responsible for developing, maintaining, communicating and governing Enterprise Architectures and roadmaps, ensuring alignment with corporate strategies, business goals and technology strategies and plans.",
+  "titles": "Enterprise Architect, Lead Enterprise Architect, Chief Enterprise Architect, Data Architect, Infrastructure Architect, Innovation Architect, Business Architect, Strategy Architect, Security architect, Cloud architect",
+  "core": [
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Strategic planning",
+    "levels": "4-7",
+    "code": "ITSP"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   },
+   {
+    "name": "Business process improvement",
+    "levels": "2-7",
+    "code": "BPRE"
+   },
+   {
+    "name": "Data modelling and design",
+    "levels": "2-5",
+    "code": "DTAN"
+   },
+   {
+    "name": "Infrastructure design",
+    "levels": "2-6",
+    "code": "IFDN"
+   },
+   {
+    "name": "Network design",
+    "levels": "2-6",
+    "code": "NTDS"
+   }
+  ],
+  "other": [
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Information systems coordination",
+    "levels": "6-7",
+    "code": "ISCO"
+   },
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   },
+   {
+    "name": "Feasibility assessment",
+    "levels": "2-6",
+    "code": "FEAS"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Innovation management",
+    "levels": "5-7",
+    "code": "INOV"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Consultancy",
+    "levels": "4-7",
+    "code": "CNSL"
+   },
+   {
+    "name": "Business modelling",
+    "levels": "2-6",
+    "code": "BSMO"
+   }
+  ]
+ },
+ {
+  "page": 16,
+  "role": "Network architecture practitioners",
+  "family": "Architecture",
+  "desc": "Roles responsible for designing, specifying, and governing network infrastructure architectures including LAN, WAN, cloud networking, and security topology, ensuring resilience, performance, and alignment with technology strategy.",
+  "titles": "Network Architect, Senior Network Architect, Lead Network Architect, Cloud Network Architect, Infrastructure Architect (Networks), WAN Architect, Network Design Engineer, Telecommunications Architect",
+  "core": [
+   {
+    "name": "Network design",
+    "levels": "2-6",
+    "code": "NTDS"
+   },
+   {
+    "name": "Infrastructure design",
+    "levels": "2-6",
+    "code": "IFDN"
+   },
+   {
+    "name": "Systems design",
+    "levels": "2-6",
+    "code": "DESN"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   },
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   }
+  ],
+  "other": [
+   {
+    "name": "Network support",
+    "levels": "1-5",
+    "code": "NTAS"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ]
+ },
+ {
+  "page": 17,
+  "role": "Solution architecture practitioners",
+  "family": "Architecture",
+  "desc": "Roles responsible for developing, maintaining and ensuring the integrity of end to end technology solutions to address specific project / programme / product requirements and align to technology strategies, architectures and engineering standards.",
+  "titles": "Solutions Architect, Cloud Solutions Architect, Solutions Designer, Cloud Solutions Designer, Cloud Services Architect, Lead Solutions Architect, Product Architect, Domain Architect",
+  "core": [
+   {
+    "name": "Solution architecture",
+    "levels": "4-6",
+    "code": "ARCH"
+   },
+   {
+    "name": "Systems design",
+    "levels": "2-6",
+    "code": "DESN"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   },
+   {
+    "name": "Data modelling and design",
+    "levels": "2-5",
+    "code": "DTAN"
+   },
+   {
+    "name": "Infrastructure design",
+    "levels": "2-6",
+    "code": "IFDN"
+   },
+   {
+    "name": "Network design",
+    "levels": "2-6",
+    "code": "NTDS"
+   },
+   {
+    "name": "Database design",
+    "levels": "2-5",
+    "code": "DBDS"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Feasibility assessment",
+    "levels": "2-6",
+    "code": "FEAS"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Software design",
+    "levels": "2-6",
+    "code": "SWDN"
+   },
+   {
+    "name": "Business modelling",
+    "levels": "2-6",
+    "code": "BSMO"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   },
+   {
+    "name": "Business process improvement",
+    "levels": "2-7",
+    "code": "BPRE"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Consultancy",
+    "levels": "4-7",
+    "code": "CNSL"
+   }
+  ]
+ },
+ {
+  "page": 18,
+  "role": "Technical architecture practitioners",
+  "family": "Architecture",
+  "desc": "Roles responsible for providing detailed technical design and architectural guidance at the implementation level, bridging solution architecture and engineering, ensuring that systems are built to specification, standards, and quality.",
+  "titles": "Technical Architect, Senior Technical Architect, Lead Technical Architect, Principal Technical Architect, Application Architect, Cloud Technical Architect, Platform Architect, Integration Architect",
+  "core": [
+   {
+    "name": "Infrastructure design",
+    "levels": "2-6",
+    "code": "IFDN"
+   },
+   {
+    "name": "Systems design",
+    "levels": "2-6",
+    "code": "DESN"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Solution architecture",
+    "levels": "4-6",
+    "code": "ARCH"
+   }
+  ],
+  "other": [
+   {
+    "name": "Software design",
+    "levels": "2-6",
+    "code": "SWDN"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Feasibility assessment",
+    "levels": "2-6",
+    "code": "FEAS"
+   },
+   {
+    "name": "Sourcing",
+    "levels": "2-7",
+    "code": "SORC"
+   },
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   }
+  ]
+ },
+ {
+  "page": 19,
+  "role": "AV Installation Engineer",
+  "family": "Audio-Visual",
+  "desc": "Roles responsible for the physical installation, configuration, testing and commissioning of AV systems and equipment, from site preparation through to system handover.",
+  "titles": "AV Installation Engineer, AV Field Technician, AV Commissioning Engineer, Rack Build Technician, AV Systems Integrator",
+  "core": [
+   {
+    "name": "Systems installation and removal",
+    "levels": "1-5",
+    "code": "HSIN"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Network support",
+    "levels": "1-5",
+    "code": "NTAS"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "System software administration",
+    "levels": "2-5",
+    "code": "SYSP"
+   }
+  ],
+  "other": [
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   }
+  ]
+ },
+ {
+  "page": 20,
+  "role": "AV Support Engineer",
+  "family": "Audio-Visual",
+  "desc": "Roles responsible for the ongoing operational support, fault diagnosis, maintenance and incident resolution of AV systems and the systems they are integrated with.",
+  "titles": "AV Support Engineer, AV Service Desk Analyst, AV Field Support Technician, AV Operations Analyst, Managed AV Services Engineer",
+  "core": [
+   {
+    "name": "Systems installation and removal",
+    "levels": "1-5",
+    "code": "HSIN"
+   },
+   {
+    "name": "Incident management",
+    "levels": "1-6",
+    "code": "USUP"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Network support",
+    "levels": "1-5",
+    "code": "NTAS"
+   },
+   {
+    "name": "Infrastructure operations",
+    "levels": "1-5",
+    "code": "ITOP"
+   }
+  ],
+  "other": [
+   {
+    "name": "Application support",
+    "levels": "2-5",
+    "code": "ASUP"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "System software administration",
+    "levels": "2-5",
+    "code": "SYSP"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   }
+  ]
+ },
+ {
+  "page": 21,
+  "role": "AV Systems Designer",
+  "family": "Audio-Visual",
+  "desc": "Roles responsible for translating client and stakeholder requirements into AV system designs, coordinating with allied disciplines (architectural, structural, mechanical, electrical, IT and networking), and producing design documentation for complex AV environments such as lecture theatres, conferencing facilities and specialist environments.",
+  "titles": "AV Systems Designer, AV Solutions Architect, AV Design Consultant, AV Systems Engineer, Technology Integration Designer",
+  "core": [
+   {
+    "name": "Systems design",
+    "levels": "2-6",
+    "code": "DESN"
+   },
+   {
+    "name": "Network design",
+    "levels": "2-6",
+    "code": "NTDS"
+   },
+   {
+    "name": "Infrastructure design",
+    "levels": "2-6",
+    "code": "IFDN"
+   },
+   {
+    "name": "Hardware design",
+    "levels": "2-6",
+    "code": "HWDE"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Solution architecture",
+    "levels": "4-6",
+    "code": "ARCH"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Radio frequency engineering",
+    "levels": "2-6",
+    "code": "RFEN"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   }
+  ]
+ },
+ {
+  "page": 22,
+  "role": "Business analysis practice management",
+  "family": "Business Analysis",
+  "desc": "Roles responsible for leading, managing, developing and deploying business analysts and business analysis capabilities.",
+  "titles": "Business Analysis Practice Leader, Business Analysis Manager, Head of Business Analysis",
+  "core": [
+   {
+    "name": "Professional development",
+    "levels": "4-6",
+    "code": "PDSV"
+   },
+   {
+    "name": "Resourcing",
+    "levels": "2-6",
+    "code": "RESC"
+   },
+   {
+    "name": "Performance management",
+    "levels": "4-6",
+    "code": "PEMT"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Employee experience",
+    "levels": "4-6",
+    "code": "EEXP"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   }
+  ],
+  "other": [
+   {
+    "name": "Competency assessment",
+    "levels": "2-6",
+    "code": "LEDA"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   }
+  ]
+ },
+ {
+  "page": 23,
+  "role": "Business analysis practitioners",
+  "family": "Business Analysis",
+  "desc": "Roles responsible for investigating operational issues, problems and new opportunities. Finding effective business solutions through improvements in aspects of business operations and business systems.",
+  "titles": "Business Analyst, Junior Business Analyst, Lead Business Analyst, Principal Business Analyst, Business Systems Analyst, Requirements analyst",
+  "core": [
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Business modelling",
+    "levels": "2-6",
+    "code": "BSMO"
+   },
+   {
+    "name": "Feasibility assessment",
+    "levels": "2-6",
+    "code": "FEAS"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "User acceptance testing",
+    "levels": "2-6",
+    "code": "BPTS"
+   },
+   {
+    "name": "Data modelling and design",
+    "levels": "2-5",
+    "code": "DTAN"
+   },
+   {
+    "name": "Business process improvement",
+    "levels": "2-7",
+    "code": "BPRE"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Benefits management",
+    "levels": "3-6",
+    "code": "BENM"
+   },
+   {
+    "name": "Organisational change management",
+    "levels": "2-6",
+    "code": "CIPM"
+   },
+   {
+    "name": "User experience analysis",
+    "levels": "2-5",
+    "code": "UNAN"
+   },
+   {
+    "name": "Product management",
+    "levels": "2-6",
+    "code": "PROD"
+   },
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Innovation management",
+    "levels": "5-7",
+    "code": "INOV"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Consultancy",
+    "levels": "4-7",
+    "code": "CNSL"
+   },
+   {
+    "name": "Strategic planning",
+    "levels": "4-7",
+    "code": "ITSP"
+   }
+  ]
+ },
+ {
+  "page": 24,
+  "role": "Change management practitioners",
+  "family": "Change Management",
+  "desc": "Roles responsible for designing, managing, and implementing organisational change initiatives. These roles ensure that changes align with organisational goals, minimise disruption, and support the smooth transition of people, processes, and systems.",
+  "titles": "Change Manager, Senior Change Manager, Change Lead, Change Consultant, Change Programme Manager, Organisational Change Manager, Business Change Manager, Transformation Manager, Change Analyst, Change Specialist, Organisational Development Manager, Change Implementation Manager, Change Delivery Lead",
+  "core": [
+   {
+    "name": "Organisational change management",
+    "levels": "2-6",
+    "code": "CIPM"
+   },
+   {
+    "name": "Organisational change enablement",
+    "levels": "4-6",
+    "code": "OCEN"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Organisational facilitation",
+    "levels": "4-6",
+    "code": "OFCL"
+   },
+   {
+    "name": "Benefits management",
+    "levels": "3-6",
+    "code": "BENM"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   }
+  ],
+  "other": [
+   {
+    "name": "Job analysis and design",
+    "levels": "3-5",
+    "code": "JADN"
+   },
+   {
+    "name": "Organisation design and implementation",
+    "levels": "3-7",
+    "code": "ORDI"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Consultancy",
+    "levels": "4-7",
+    "code": "CNSL"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   }
+  ]
+ },
+ {
+  "page": 25,
+  "role": "Computational science practitioners",
+  "family": "Computational Science",
+  "desc": "Roles responsible for understanding and solving complex problems using advanced computing capabilities. These roles can be found in many scientific disciplines which require the development of models and simulations to understand natural systems.",
+  "titles": "Computational Chemist, Computational Biologist, Research Scientist, Computational Research Assistant",
+  "core": [
+   {
+    "name": "Scientific modelling",
+    "levels": "4-7",
+    "code": "SCMO"
+   },
+   {
+    "name": "Numerical analysis",
+    "levels": "4-7",
+    "code": "NUAN"
+   },
+   {
+    "name": "High-performance computing",
+    "levels": "4-7",
+    "code": "HPCC"
+   },
+   {
+    "name": "Formal research",
+    "levels": "2-6",
+    "code": "RSCH"
+   }
+  ],
+  "other": [
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   },
+   {
+    "name": "Project management",
+    "levels": "4-7",
+    "code": "PRMG"
+   },
+   {
+    "name": "Data modelling and design",
+    "levels": "2-5",
+    "code": "DTAN"
+   },
+   {
+    "name": "Data science",
+    "levels": "2-6",
+    "code": "DATS"
+   },
+   {
+    "name": "Data visualisation",
+    "levels": "2-5",
+    "code": "VISL"
+   },
+   {
+    "name": "Machine learning",
+    "levels": "2-6",
+    "code": "MLNG"
+   }
+  ]
+ },
+ {
+  "page": 26,
+  "role": "Data analytics practitioners",
+  "family": "Data & Analytics",
+  "desc": "Roles responsible for analysing data to identify patterns, trends, and insights that support decision-making. Developing and applying analytical models and visualisation techniques, collaborating with business stakeholders to translate data findings into actionable. usiness strategies. Ensuring data quality and relevance throughout the analysis process.",
+  "titles": "Data analyst, Business intelligence analyst, Data insights specialist, Reporting analyst",
+  "core": [
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   },
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Data visualisation",
+    "levels": "2-5",
+    "code": "VISL"
+   },
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   }
+  ],
+  "other": [
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Content design and authoring",
+    "levels": "1-6",
+    "code": "INCA"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Content publishing",
+    "levels": "1-6",
+    "code": "ICPM"
+   }
+  ]
+ },
+ {
+  "page": 27,
+  "role": "Data engineering practitioners",
+  "family": "Data & Analytics",
+  "desc": "Roles responsible for designing, building, testing and operationalising software and infrastructure components for data pipelines and data stores.",
+  "titles": "Data engineer, Cloud Data engineer, Cloud Data Architect",
+  "core": [
+   {
+    "name": "Data engineering",
+    "levels": "2-6",
+    "code": "DENG"
+   },
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Programming/software development",
+    "levels": "2-6",
+    "code": "PROG"
+   },
+   {
+    "name": "Data modelling and design",
+    "levels": "2-5",
+    "code": "DTAN"
+   },
+   {
+    "name": "Database design",
+    "levels": "2-5",
+    "code": "DBDS"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   }
+  ],
+  "other": [
+   {
+    "name": "Software design",
+    "levels": "2-6",
+    "code": "SWDN"
+   },
+   {
+    "name": "Solution architecture",
+    "levels": "4-6",
+    "code": "ARCH"
+   }
+  ]
+ },
+ {
+  "page": 28,
+  "role": "Data governance practitioners",
+  "family": "Data & Analytics",
+  "desc": "Roles responsible for establishing and enforcing the policies, standards, processes, and accountabilities that ensure data is managed as a high-quality, secure, compliant, and strategically valuable organisational asset.",
+  "titles": "Data Governance Manager, Lead Data Governance Manager, Head of Data Governance, Data Steward, Senior Data Steward, Chief Data Steward, Data Quality Manager, Data Compliance Manager, Data Policy Manager, Information Governance Manager",
+  "core": [
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   },
+   {
+    "name": "Information and data compliance",
+    "levels": "4-6",
+    "code": "PEDP"
+   },
+   {
+    "name": "Governance",
+    "levels": "6-7",
+    "code": "GOVN"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Information management",
+    "levels": "3-7",
+    "code": "IRMG"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ],
+  "other": [
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Quality assurance",
+    "levels": "2-6",
+    "code": "QUAS"
+   },
+   {
+    "name": "Audit",
+    "levels": "2-7",
+    "code": "AUDT"
+   }
+  ]
+ },
+ {
+  "page": 29,
+  "role": "Data operations practitioners",
+  "family": "Data & Analytics",
+  "desc": "Roles responsible for data and machine learning models in production. Automation of data extraction and data quality. Managing production performance and resolving production issues.",
+  "titles": "Database Administrator, Cloud Database Administrator, Data operations engineer, ML operations engineer, Data production engineer",
+  "core": [
+   {
+    "name": "Deployment",
+    "levels": "2-6",
+    "code": "DEPL"
+   },
+   {
+    "name": "Infrastructure operations",
+    "levels": "1-5",
+    "code": "ITOP"
+   },
+   {
+    "name": "Database administration",
+    "levels": "2-5",
+    "code": "DBAD"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "Change control",
+    "levels": "2-6",
+    "code": "CHMG"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Release management",
+    "levels": "2-6",
+    "code": "RELM"
+   }
+  ],
+  "other": [
+   {
+    "name": "Incident management",
+    "levels": "1-6",
+    "code": "USUP"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Technology service management",
+    "levels": "5-7",
+    "code": "ITMG"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   }
+  ]
+ },
+ {
+  "page": 30,
+  "role": "Data science practitioners",
+  "family": "Data & Analytics",
+  "desc": "Roles responsible for using scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.",
+  "titles": "Data scientist, Lead data scientist, Quantitative analyst, Data analyst",
+  "core": [
+   {
+    "name": "Artificial intelligence (AI) and data ethics",
+    "levels": "3-6",
+    "code": "AIDE"
+   },
+   {
+    "name": "Data science",
+    "levels": "2-6",
+    "code": "DATS"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   },
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   },
+   {
+    "name": "Data visualisation",
+    "levels": "2-5",
+    "code": "VISL"
+   },
+   {
+    "name": "Programming/software development",
+    "levels": "2-6",
+    "code": "PROG"
+   },
+   {
+    "name": "Machine learning",
+    "levels": "2-6",
+    "code": "MLNG"
+   },
+   {
+    "name": "Data modelling and design",
+    "levels": "2-5",
+    "code": "DTAN"
+   }
+  ],
+  "other": [
+   {
+    "name": "Data engineering",
+    "levels": "2-6",
+    "code": "DENG"
+   },
+   {
+    "name": "Innovation management",
+    "levels": "5-7",
+    "code": "INOV"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Formal research",
+    "levels": "2-6",
+    "code": "RSCH"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Information systems coordination",
+    "levels": "6-7",
+    "code": "ISCO"
+   }
+  ]
+ },
+ {
+  "page": 31,
+  "role": "Machine learning engineering practitioners",
+  "family": "Data & Analytics",
+  "desc": "Roles responsible for designing, building, deploying, and operating machine learning systems and models in production environments, bridging the gap between data science research and scalable software engineering.",
+  "titles": "Machine Learning Engineer, Senior Machine Learning Engineer, Lead Machine Learning Engineer, MLOps Engineer, AI Engineer, Applied ML Engineer, ML Platform Engineer, ML Infrastructure Engineer, AI/ML Engineer",
+  "core": [
+   {
+    "name": "Machine learning",
+    "levels": "2-6",
+    "code": "MLNG"
+   },
+   {
+    "name": "Data engineering",
+    "levels": "2-6",
+    "code": "DENG"
+   },
+   {
+    "name": "Programming/software development",
+    "levels": "2-6",
+    "code": "PROG"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Application support",
+    "levels": "2-5",
+    "code": "ASUP"
+   }
+  ],
+  "other": [
+   {
+    "name": "Artificial intelligence (AI) and data ethics",
+    "levels": "3-6",
+    "code": "AIDE"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Deployment",
+    "levels": "2-6",
+    "code": "DEPL"
+   }
+  ]
+ },
+ {
+  "page": 32,
+  "role": "Performance analysis practitioners",
+  "family": "Data & Analytics",
+  "desc": "Roles responsible for collecting, analysing, and interpreting data about the performance of digital products, services, and business outcomes, providing insights that drive continuous improvement.",
+  "titles": "Performance Analyst, Senior Performance Analyst, Lead Performance Analyst, Head of Performance Analysis, Digital Analyst, Web Analyst, Product Analyst, Data Analyst (Performance), Insights Analyst",
+  "core": [
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   },
+   {
+    "name": "Data visualisation",
+    "levels": "2-5",
+    "code": "VISL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Delivery management",
+    "levels": "3-6",
+    "code": "DEMG"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Artificial intelligence (AI) and data ethics",
+    "levels": "3-6",
+    "code": "AIDE"
+   },
+   {
+    "name": "Quality assurance",
+    "levels": "2-6",
+    "code": "QUAS"
+   }
+  ]
+ },
+ {
+  "page": 33,
+  "role": "DevOps automation engineer",
+  "family": "DevOps",
+  "desc": "Roles responsible for developing and operating applications and services using automated delivery practices. They write automation and tooling code to create build pipelines, manage configuration and enable reliable, repeatable software deployment.",
+  "titles": "DevOps Engineer, Senior DevOps Engineer, Cloud DevOps Engineer, DevOps Software Engineer, DevOps Automation Engineer, DevOps Pipeline Engineer, CI/CD Engineer, Cloud CI/CD Engineer, Integration Engineer, Build Engineer, Release Engineer, Cloud Release Engineer",
+  "core": [
+   {
+    "name": "Programming/software development",
+    "levels": "2-6",
+    "code": "PROG"
+   },
+   {
+    "name": "Systems and software lifecycle engineering",
+    "levels": "3-7",
+    "code": "SLEN"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Deployment",
+    "levels": "2-6",
+    "code": "DEPL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Software design",
+    "levels": "2-6",
+    "code": "SWDN"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Release management",
+    "levels": "2-6",
+    "code": "RELM"
+   }
+  ]
+ },
+ {
+  "page": 34,
+  "role": "DevOps practice management",
+  "family": "DevOps",
+  "desc": "Roles responsible for leading, managing, developing and deploying DevOps practitioners and DevOps capabilities.",
+  "titles": "Head of DevOps, Lead DevOps Manager, DevOps Practice Lead, Director of DevOps Engineering, DevOps Transformation Manager",
+  "core": [
+   {
+    "name": "Systems development management",
+    "levels": "4-7",
+    "code": "DLMG"
+   },
+   {
+    "name": "Systems and software lifecycle engineering",
+    "levels": "3-7",
+    "code": "SLEN"
+   },
+   {
+    "name": "Technology service management",
+    "levels": "5-7",
+    "code": "ITMG"
+   },
+   {
+    "name": "Product management",
+    "levels": "2-6",
+    "code": "PROD"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Quality assurance",
+    "levels": "2-6",
+    "code": "QUAS"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Resourcing",
+    "levels": "2-6",
+    "code": "RESC"
+   },
+   {
+    "name": "Performance management",
+    "levels": "4-6",
+    "code": "PEMT"
+   },
+   {
+    "name": "Employee experience",
+    "levels": "4-6",
+    "code": "EEXP"
+   },
+   {
+    "name": "Professional development",
+    "levels": "4-6",
+    "code": "PDSV"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   },
+   {
+    "name": "Competency assessment",
+    "levels": "2-6",
+    "code": "LEDA"
+   }
+  ]
+ },
+ {
+  "page": 35,
+  "role": "Platform engineer",
+  "family": "DevOps",
+  "desc": "Roles responsible for designing, building and operating the shared infrastructure platforms and environments that support automated software delivery. They automate infrastructure provisioning and configuration, enabling development teams to deploy and run services consistently and securely.",
+  "titles": "Platform Engineer, Senior Platform Engineer, Cloud Platform Engineer, Infrastructure Automation Engineer, Infrastructure Engineer, Cloud Infrastructure Engineer, Infrastructure as Code (IaC) Engineer, Cloud Infrastructure as Code (IaC) Engineer, Configuration Management Engineer, Cloud Configuration Management Engineer, Runtime Operations Engineer",
+  "core": [
+   {
+    "name": "Infrastructure design",
+    "levels": "2-6",
+    "code": "IFDN"
+   },
+   {
+    "name": "Infrastructure operations",
+    "levels": "1-5",
+    "code": "ITOP"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "Deployment",
+    "levels": "2-6",
+    "code": "DEPL"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Database administration",
+    "levels": "2-5",
+    "code": "DBAD"
+   },
+   {
+    "name": "Vulnerability assessment",
+    "levels": "2-5",
+    "code": "VUAS"
+   },
+   {
+    "name": "Release management",
+    "levels": "2-6",
+    "code": "RELM"
+   },
+   {
+    "name": "Change control",
+    "levels": "2-6",
+    "code": "CHMG"
+   },
+   {
+    "name": "Systems and software lifecycle engineering",
+    "levels": "3-7",
+    "code": "SLEN"
+   }
+  ]
+ },
+ {
+  "page": 36,
+  "role": "Site reliability engineer (SRE)",
+  "family": "DevOps",
+  "desc": "Roles responsible for maintaining the reliability, availability and performance of production services. They use monitoring, observability and operational automation to detect issues, manage incidents and improve the resilience and scalability of systems.",
+  "titles": "Site Reliability Engineer, Senior Site Reliability Engineer, Cloud Site Reliability Engineer, Service Reliability Engineer, Observability Engineer, Cloud Observability Engineer, Monitoring Engineer, Cloud Monitoring Engineer, Reliability Engineer, DevOps Support Engineer",
+  "core": [
+   {
+    "name": "Infrastructure operations",
+    "levels": "1-5",
+    "code": "ITOP"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Incident management",
+    "levels": "1-6",
+    "code": "USUP"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   },
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   }
+  ],
+  "other": [
+   {
+    "name": "Continuity management",
+    "levels": "2-6",
+    "code": "COPL"
+   },
+   {
+    "name": "Systems and software lifecycle engineering",
+    "levels": "3-7",
+    "code": "SLEN"
+   },
+   {
+    "name": "Change control",
+    "levels": "2-6",
+    "code": "CHMG"
+   },
+   {
+    "name": "Deployment",
+    "levels": "2-6",
+    "code": "DEPL"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ]
+ },
+ {
+  "page": 37,
+  "role": "Bid management practitioners",
+  "family": "Digital Product Development, Sales & Marketing",
+  "desc": "Roles responsible for coordinating and managing the preparation of bids, proposals, and tenders for new business opportunities. Analysing client requirements, developing compliant and compelling bid responses, and managing timelines and inputs from various internal teams. Ensuring bid submissions align with both client needs and company capabilities, while maintaining high standards of quality and accuracy.",
+  "titles": "Bid manager, Proposal manager, Tender coordinator, Bid coordinator",
+  "core": [
+   {
+    "name": "Bid/proposal management",
+    "levels": "3-6",
+    "code": "BIDM"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Content design and authoring",
+    "levels": "1-6",
+    "code": "INCA"
+   }
+  ],
+  "other": [
+   {
+    "name": "Project management",
+    "levels": "4-7",
+    "code": "PRMG"
+   },
+   {
+    "name": "Delivery management",
+    "levels": "3-6",
+    "code": "DEMG"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   }
+  ]
+ },
+ {
+  "page": 38,
+  "role": "Digital marketing practitioners",
+  "family": "Digital Product Development, Sales & Marketing",
+  "desc": "Roles responsible for planning and executing digital marketing campaigns across various channels. Includes analysing performance metrics, refining strategies, and managing digital tools to drive lead generation and brand awareness. Involves collaboration with content creators and designers to deliver targeted, engaging content.",
+  "titles": "Digital marketing specialist, SEO analyst, Social media manager, Email marketing coordinator",
+  "core": [
+   {
+    "name": "Digital marketing",
+    "levels": "2-5",
+    "code": "DIGM"
+   },
+   {
+    "name": "Product management",
+    "levels": "2-6",
+    "code": "PROD"
+   },
+   {
+    "name": "Market research",
+    "levels": "3-6",
+    "code": "MRCH"
+   },
+   {
+    "name": "Customer experience",
+    "levels": "2-6",
+    "code": "CEXP"
+   },
+   {
+    "name": "Customer engagement and loyalty",
+    "levels": "3-6",
+    "code": "CELO"
+   },
+   {
+    "name": "Brand management",
+    "levels": "4-6",
+    "code": "BRMG"
+   },
+   {
+    "name": "Marketing campaign management",
+    "levels": "3-5",
+    "code": "MKCM"
+   },
+   {
+    "name": "Marketing management",
+    "levels": "4-7",
+    "code": "MKTG"
+   }
+  ],
+  "other": [
+   {
+    "name": "Content design and authoring",
+    "levels": "1-6",
+    "code": "INCA"
+   },
+   {
+    "name": "Content publishing",
+    "levels": "1-6",
+    "code": "ICPM"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   }
+  ]
+ },
+ {
+  "page": 39,
+  "role": "Sales and sales support practitioners",
+  "family": "Digital Product Development, Sales & Marketing",
+  "desc": "Roles focused on managing client relationships, meeting sales targets, and supporting sales through lead generation, market research, and customer outreach. Includes providing product or service information, analysing sales performance data, and optimising sales approaches.",
+  "titles": "Sales representative, Sales support coordinator, Business development executive, Client relationship manager",
+  "core": [
+   {
+    "name": "Selling",
+    "levels": "3-6",
+    "code": "SALE"
+   },
+   {
+    "name": "Sales support",
+    "levels": "1-6",
+    "code": "SSUP"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Customer service support",
+    "levels": "1-6",
+    "code": "CSMG"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   },
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   }
+  ]
+ },
+ {
+  "page": 40,
+  "role": "Accessibility practitioners",
+  "family": "Experience Design",
+  "desc": "Roles responsible for ensuring digital products, services, and content are accessible and inclusive to all users, including those with disabilities, through design guidance, testing, auditing, and standards compliance.",
+  "titles": "Accessibility Specialist, Senior Accessibility Specialist, Head of Accessibility, Digital Accessibility Advisor, Web Accessibility Auditor, Assistive Technology Specialist, Accessibility Consultant, Digital Accessibility Specialist, Accessibility Analyst",
+  "core": [
+   {
+    "name": "Accessibility and inclusion",
+    "levels": "2-6",
+    "code": "ACIN"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   },
+   {
+    "name": "Quality assurance",
+    "levels": "2-6",
+    "code": "QUAS"
+   }
+  ],
+  "other": [
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Learning delivery",
+    "levels": "2-5",
+    "code": "ETDL"
+   },
+   {
+    "name": "User experience analysis",
+    "levels": "2-5",
+    "code": "UNAN"
+   },
+   {
+    "name": "User experience design",
+    "levels": "2-6",
+    "code": "HCEV"
+   }
+  ]
+ },
+ {
+  "page": 41,
+  "role": "Content design practitioners",
+  "family": "Experience Design",
+  "desc": "Roles responsible for designing and creating content that meets user needs in the most effective way, deciding what to say, to whom, and in what form, across digital services and products.",
+  "titles": "Content Designer, Senior Content Designer, Lead Content Designer, Head of Content Design, Content Manager, Digital Content Specialist, Content Producer, Content Developer, Content Publisher, Web Copywriter, Content Analyst, Content Lead",
+  "core": [
+   {
+    "name": "User experience analysis",
+    "levels": "2-5",
+    "code": "UNAN"
+   },
+   {
+    "name": "Content design and authoring",
+    "levels": "1-6",
+    "code": "INCA"
+   },
+   {
+    "name": "Content publishing",
+    "levels": "1-6",
+    "code": "ICPM"
+   }
+  ],
+  "other": [
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   }
+  ]
+ },
+ {
+  "page": 42,
+  "role": "Graphic design and visual communication practitioners",
+  "family": "Experience Design",
+  "desc": "Roles responsible for visual communication through the creation of graphics, illustrations, layouts, and visual identity assets, across digital and print media.",
+  "titles": "Graphic Designer, Senior Graphic Designer, Visual Designer, Lead Graphic Designer, Head of Graphic Design, Visual Communication Designer, Visual Communicator, Visual Communication Lead, Junior Graphic Designer, Brand Designer, Illustrator",
+  "core": [
+   {
+    "name": "Graphic design",
+    "levels": "1-5",
+    "code": "GRDN"
+   },
+   {
+    "name": "User experience analysis",
+    "levels": "2-5",
+    "code": "UNAN"
+   },
+   {
+    "name": "Content publishing",
+    "levels": "1-6",
+    "code": "ICPM"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Data visualisation",
+    "levels": "2-5",
+    "code": "VISL"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   }
+  ]
+ },
+ {
+  "page": 43,
+  "role": "Interaction design practitioners",
+  "family": "Experience Design",
+  "desc": "Roles responsible for the detailed design of how users interact with digital products and services, encompassing interface behaviour, interaction flows, prototypes, and design specifications.",
+  "titles": "Interaction Designer, Senior Interaction Designer, Lead Interaction Designer, Head of Interaction Design, UX/UI Designer, UI Designer, Interface Designer, Interactive Designer, Experience Designer, User Interface Designer",
+  "core": [
+   {
+    "name": "User experience design",
+    "levels": "2-6",
+    "code": "HCEV"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   },
+   {
+    "name": "User experience analysis",
+    "levels": "2-5",
+    "code": "UNAN"
+   },
+   {
+    "name": "Data visualisation",
+    "levels": "2-5",
+    "code": "VISL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Customer experience",
+    "levels": "2-6",
+    "code": "CEXP"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   }
+  ]
+ },
+ {
+  "page": 44,
+  "role": "Service experience design practitioners",
+  "family": "Experience Design",
+  "desc": "Roles responsible for designing end-to-end services and experiences that span multiple touchpoints, channels and interactions over time. They analyse user needs, map journeys and design integrated experiences that connect digital, physical and human interactions.",
+  "titles": "Service Designer, Senior Service Designer, Customer Experience Designer, Multi-channel Designer, Product Designer, Customer Journey Designer",
+  "core": [
+   {
+    "name": "Customer experience",
+    "levels": "2-6",
+    "code": "CEXP"
+   },
+   {
+    "name": "User experience analysis",
+    "levels": "2-5",
+    "code": "UNAN"
+   },
+   {
+    "name": "User experience design",
+    "levels": "2-6",
+    "code": "HCEV"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   },
+   {
+    "name": "Feasibility assessment",
+    "levels": "2-6",
+    "code": "FEAS"
+   }
+  ],
+  "other": [
+   {
+    "name": "User research",
+    "levels": "2-6",
+    "code": "URCH"
+   },
+   {
+    "name": "Business process improvement",
+    "levels": "2-7",
+    "code": "BPRE"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Business modelling",
+    "levels": "2-6",
+    "code": "BSMO"
+   },
+   {
+    "name": "Product management",
+    "levels": "2-6",
+    "code": "PROD"
+   }
+  ]
+ },
+ {
+  "page": 45,
+  "role": "Technical writing practitioners",
+  "family": "Experience Design",
+  "desc": "Roles responsible for planning, creating, and maintaining technical documentation that clearly explains complex systems, processes, products, and services to varied audiences, ensuring content is accurate, accessible, and fit for purpose.",
+  "titles": "Technical Writer, Senior Technical Writer, Lead Technical Writer, Documentation Specialist, Technical Author, Technical Documentation Manager, API Writer, Policy Writer, Technical Document Writer, Technical Content Manager",
+  "core": [
+   {
+    "name": "Content design and authoring",
+    "levels": "1-6",
+    "code": "INCA"
+   },
+   {
+    "name": "Content publishing",
+    "levels": "1-6",
+    "code": "ICPM"
+   }
+  ],
+  "other": [
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Accessibility and inclusion",
+    "levels": "2-6",
+    "code": "ACIN"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   },
+   {
+    "name": "Information management",
+    "levels": "3-7",
+    "code": "IRMG"
+   }
+  ]
+ },
+ {
+  "page": 46,
+  "role": "User experience practitioners",
+  "family": "Experience Design",
+  "desc": "Roles responsible for designing and evaluating user experiences across digital products and services. Includes using user research, creating prototypes and wireframes, and testing designs to ensure they meet user needs. Involves collaboration with product, engineering and content teams to deliver intuitive, accessible and engaging interfaces.",
+  "titles": "UX designer, UX analyst, UX architect",
+  "core": [
+   {
+    "name": "Customer experience",
+    "levels": "2-6",
+    "code": "CEXP"
+   },
+   {
+    "name": "Graphic design",
+    "levels": "1-5",
+    "code": "GRDN"
+   },
+   {
+    "name": "Content design and authoring",
+    "levels": "1-6",
+    "code": "INCA"
+   },
+   {
+    "name": "User experience analysis",
+    "levels": "2-5",
+    "code": "UNAN"
+   },
+   {
+    "name": "User experience design",
+    "levels": "2-6",
+    "code": "HCEV"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   }
+  ],
+  "other": [
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   }
+  ]
+ },
+ {
+  "page": 47,
+  "role": "User research practitioners",
+  "family": "Experience Design",
+  "desc": "Roles responsible for identifying users' behaviours, needs and motivations through observational and investigative research methods. They plan and conduct research studies, analyse findings and provide evidence-based insights that guide the design and improvement of products and services.",
+  "titles": "User Researcher, Senior User researcher, Lead User Researcher, UX Researcher, Design Researcher, Service Design Researcher",
+  "core": [
+   {
+    "name": "User research",
+    "levels": "2-6",
+    "code": "URCH"
+   },
+   {
+    "name": "User experience analysis",
+    "levels": "2-5",
+    "code": "UNAN"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   }
+  ],
+  "other": [
+   {
+    "name": "Market research",
+    "levels": "3-6",
+    "code": "MRCH"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Consultancy",
+    "levels": "4-7",
+    "code": "CNSL"
+   }
+  ]
+ },
+ {
+  "page": 48,
+  "role": "Technology finance practitioners",
+  "family": "Finance & Procurement",
+  "desc": "Roles responsible for managing and delivering financial leadership, management and operational support for technology organisations",
+  "titles": "Finance Manager, Finance Business Partner, Finance Analyst, Technology Management Accountant, Technology procurement practitioners, FinOps Analyst",
+  "core": [
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Budgeting and forecasting",
+    "levels": "2-6",
+    "code": "BUDF"
+   },
+   {
+    "name": "Cost management",
+    "levels": "2-6",
+    "code": "COMG"
+   },
+   {
+    "name": "Financial analysis",
+    "levels": "2-6",
+    "code": "FIAN"
+   },
+   {
+    "name": "Financial management",
+    "levels": "4-6",
+    "code": "FMIT"
+   },
+   {
+    "name": "Investment appraisal",
+    "levels": "4-6",
+    "code": "INVA"
+   }
+  ],
+  "other": [
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Benefits management",
+    "levels": "3-6",
+    "code": "BENM"
+   }
+  ]
+ },
+ {
+  "page": 49,
+  "role": "Technology procurement practitioners",
+  "family": "Finance & Procurement",
+  "desc": "Roles responsible for managing and delivering procurement leadership, management and operational support for technology organisations.",
+  "titles": "Head of Procurement, Contract Manager, Contract Analyst, Vendor Manager, Commercial Manager, Supplier Analyst, Commercial Analyst",
+  "core": [
+   {
+    "name": "Sourcing",
+    "levels": "2-7",
+    "code": "SORC"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Contract management",
+    "levels": "2-7",
+    "code": "ITCM"
+   }
+  ],
+  "other": [
+   {
+    "name": "Investment appraisal",
+    "levels": "4-6",
+    "code": "INVA"
+   },
+   {
+    "name": "Financial analysis",
+    "levels": "2-6",
+    "code": "FIAN"
+   },
+   {
+    "name": "Benefits management",
+    "levels": "3-6",
+    "code": "BENM"
+   }
+  ]
+ },
+ {
+  "page": 50,
+  "role": "Organisation design practitioners",
+  "family": "Human Resource & Workforce Management",
+  "desc": "Roles responsible for defining the structure of organisations and teams, performing job analysis, designing jobs and allocating people in the right places to improve efficiency and increase productivity.",
+  "titles": "Organisation Development Consultant, Finance and Procurement, Technology finance practitioners",
+  "core": [
+   {
+    "name": "Organisation design and implementation",
+    "levels": "3-7",
+    "code": "ORDI"
+   },
+   {
+    "name": "Job analysis and design",
+    "levels": "3-5",
+    "code": "JADN"
+   },
+   {
+    "name": "Organisational facilitation",
+    "levels": "4-6",
+    "code": "OFCL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Workforce planning",
+    "levels": "4-6",
+    "code": "WFPL"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Competency assessment",
+    "levels": "2-6",
+    "code": "LEDA"
+   },
+   {
+    "name": "Organisational change management",
+    "levels": "2-6",
+    "code": "CIPM"
+   },
+   {
+    "name": "Organisational change enablement",
+    "levels": "4-6",
+    "code": "OCEN"
+   }
+  ]
+ },
+ {
+  "page": 51,
+  "role": "Resource management practitioners",
+  "family": "Human Resource & Workforce Management",
+  "desc": "Roles responsible for planning, allocating and optimising people resources across technology teams and programmes. Includes forecasting demand, recruitment, matching skills to assignments, and supporting workforce capacity planning to ensure delivery commitments can be met.",
+  "titles": "Resource Manager, Resource Analyst, Workforce Planning Manager, Workforce Planner, Organisation design practitioners",
+  "core": [
+   {
+    "name": "Resourcing",
+    "levels": "2-6",
+    "code": "RESC"
+   },
+   {
+    "name": "Workforce planning",
+    "levels": "4-6",
+    "code": "WFPL"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Competency assessment",
+    "levels": "2-6",
+    "code": "LEDA"
+   },
+   {
+    "name": "Contract management",
+    "levels": "2-7",
+    "code": "ITCM"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Job analysis and design",
+    "levels": "3-5",
+    "code": "JADN"
+   },
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   }
+  ]
+ },
+ {
+  "page": 52,
+  "role": "Workforce planning practitioners",
+  "family": "Human Resource & Workforce Management",
+  "desc": "Roles responsible for analysing and planning workforce composition, capability pipelines, succession needs, and future skills requirements to ensure organisations have the right people, with the right skills, at the right time.",
+  "titles": "Workforce Planner, Senior Workforce Planner, Workforce Planning Manager, Workforce Director, Workforce Adviser, Senior Workforce Adviser, Workforce Data Analyst, Workforce Specialist, Workforce Intelligence Analyst, Capability Planning Manager",
+  "core": [
+   {
+    "name": "Workforce planning",
+    "levels": "4-6",
+    "code": "WFPL"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   }
+  ],
+  "other": [
+   {
+    "name": "Organisation design and implementation",
+    "levels": "3-7",
+    "code": "ORDI"
+   },
+   {
+    "name": "Organisational facilitation",
+    "levels": "4-6",
+    "code": "OFCL"
+   },
+   {
+    "name": "Resourcing",
+    "levels": "2-6",
+    "code": "RESC"
+   },
+   {
+    "name": "Organisational change management",
+    "levels": "2-6",
+    "code": "CIPM"
+   },
+   {
+    "name": "Budgeting and forecasting",
+    "levels": "2-6",
+    "code": "BUDF"
+   }
+  ]
+ },
+ {
+  "page": 53,
+  "role": "Incident management practitioners",
+  "family": "Information & Cyber Security",
+  "desc": "Roles responsible for analysing, designing, managing and delivering the services required to minimise the negative impact of security incidents and restoring normal service operation as quickly as possible.",
+  "titles": "Incident Analyst, Incident Manager, Major Incident Manager, Lead Incident Manager, Cyber Incident Manager",
+  "core": [
+   {
+    "name": "Incident management",
+    "levels": "1-6",
+    "code": "USUP"
+   },
+   {
+    "name": "Security operations",
+    "levels": "1-6",
+    "code": "SCAD"
+   },
+   {
+    "name": "Digital forensics",
+    "levels": "2-6",
+    "code": "DGFS"
+   }
+  ],
+  "other": [
+   {
+    "name": "Continuity management",
+    "levels": "2-6",
+    "code": "COPL"
+   },
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   }
+  ]
+ },
+ {
+  "page": 54,
+  "role": "Penetration testing practitioners",
+  "family": "Information & Cyber Security",
+  "desc": "Roles responsible for identifying, assessing, and reporting security vulnerabilities through authorised offensive security testing.",
+  "titles": "Penetration Tester, Senior Penetration Tester, Lead Penetration Tester, Vulnerability Analyst, Vulnerability Assessment Specialist, Cyber Security Assessor, Security Consultant (Penetration Testing), Ethical Hacker, Red Team Analyst, Application Security Tester",
+  "core": [
+   {
+    "name": "Penetration testing",
+    "levels": "2-6",
+    "code": "PENT"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Quality assurance",
+    "levels": "2-6",
+    "code": "QUAS"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   }
+  ],
+  "other": [
+   {
+    "name": "Process testing",
+    "levels": "1-6",
+    "code": "PRTS"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Systems and software lifecycle engineering",
+    "levels": "3-7",
+    "code": "SLEN"
+   },
+   {
+    "name": "Systems development management",
+    "levels": "4-7",
+    "code": "DLMG"
+   },
+   {
+    "name": "Digital forensics",
+    "levels": "2-6",
+    "code": "DGFS"
+   }
+  ]
+ },
+ {
+  "page": 55,
+  "role": "Security architecture practitioners",
+  "family": "Information & Cyber Security",
+  "desc": "Roles responsible for designing and specifying security controls, patterns, and architectures to protect systems, applications, networks, and data, ensuring security is embedded by design across the technology estate.",
+  "titles": "Security Architect, Senior Security Architect, Lead Security Architect, Principal Security Architect, Cloud Security Architect, Cyber Security Architect, Enterprise Security Architect, Information Security Architect",
+  "core": [
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   },
+   {
+    "name": "Solution architecture",
+    "levels": "4-6",
+    "code": "ARCH"
+   },
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   }
+  ],
+  "other": [
+   {
+    "name": "Information assurance",
+    "levels": "2-7",
+    "code": "INAS"
+   },
+   {
+    "name": "Systems design",
+    "levels": "2-6",
+    "code": "DESN"
+   },
+   {
+    "name": "Network design",
+    "levels": "2-6",
+    "code": "NTDS"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Vulnerability assessment",
+    "levels": "2-5",
+    "code": "VUAS"
+   }
+  ]
+ },
+ {
+  "page": 56,
+  "role": "Security leadership, strategy and management",
+  "family": "Information & Cyber Security",
+  "desc": "Roles responsible for leading the development, governance and execution of information and cyber security strategies, policies and programmes. Includes building security culture, managing security investment, and providing leadership across risk, compliance and operational security functions.",
+  "titles": "Chief Information Security Officer CISO, Information security manager, Security architect, Cloud Security Architect, Information security analyst, Cyber security manager, Cyber security governance manager, Cyber security analyst",
+  "core": [
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   },
+   {
+    "name": "Governance",
+    "levels": "6-7",
+    "code": "GOVN"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Information management",
+    "levels": "3-7",
+    "code": "IRMG"
+   },
+   {
+    "name": "Information assurance",
+    "levels": "2-7",
+    "code": "INAS"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ]
+ },
+ {
+  "page": 57,
+  "role": "Security operations",
+  "family": "Information & Cyber Security",
+  "desc": "Roles responsible for day to day execution of security policies and procedures. Using monitoring tools to identify threats and incidents.",
+  "titles": "Cyber Security Technician, Information Security Technician, Security Operations Manager, Infrastructure Specialist, Operations Support Analyst, Security Operations Centre (SOC) Service Desk Analyst, Security Operations Centre (SOC) Analyst",
+  "core": [
+   {
+    "name": "Identity and access management",
+    "levels": "1-6",
+    "code": "IAMT"
+   },
+   {
+    "name": "Security operations",
+    "levels": "1-6",
+    "code": "SCAD"
+   },
+   {
+    "name": "Infrastructure operations",
+    "levels": "1-5",
+    "code": "ITOP"
+   },
+   {
+    "name": "Incident management",
+    "levels": "1-6",
+    "code": "USUP"
+   },
+   {
+    "name": "Network support",
+    "levels": "1-5",
+    "code": "NTAS"
+   },
+   {
+    "name": "System software administration",
+    "levels": "2-5",
+    "code": "SYSP"
+   },
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   },
+   {
+    "name": "Asset management",
+    "levels": "2-6",
+    "code": "ASMG"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Technology service management",
+    "levels": "5-7",
+    "code": "ITMG"
+   }
+  ],
+  "other": [
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Software configuration",
+    "levels": "2-6",
+    "code": "PORT"
+   },
+   {
+    "name": "Systems installation and removal",
+    "levels": "1-5",
+    "code": "HSIN"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Facilities management",
+    "levels": "2-6",
+    "code": "DCMA"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Penetration testing",
+    "levels": "2-6",
+    "code": "PENT"
+   }
+  ]
+ },
+ {
+  "page": 58,
+  "role": "Security risk management, audit and compliance",
+  "family": "Information & Cyber Security",
+  "desc": "Roles responsible for assessing risk and ensuring security systems and operations comply with organisational and regulatory requirements.",
+  "titles": "IT auditor, Info sec compliance consultant, Security assessment auditor, Audit manager, Security leadership, strategy and management",
+  "core": [
+   {
+    "name": "Information and data compliance",
+    "levels": "4-6",
+    "code": "PEDP"
+   },
+   {
+    "name": "Information assurance",
+    "levels": "2-7",
+    "code": "INAS"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Process testing",
+    "levels": "1-6",
+    "code": "PRTS"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Audit",
+    "levels": "2-7",
+    "code": "AUDT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Consultancy",
+    "levels": "4-7",
+    "code": "CNSL"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ]
+ },
+ {
+  "page": 59,
+  "role": "Vulnerability analysis practitioners",
+  "family": "Information & Cyber Security",
+  "desc": "Roles responsible for identifying, assessing, and reporting security vulnerabilities through vulnerability scanning, and security assessment activities.",
+  "titles": "Security Assessment Analyst, Vulnerability Analyst, Systems Vulnerability Specialist, IT Security Assessor, Cybersecurity Assessment Engineer, Senior Vulnerability Management Analyst, Cyber Defense Analyst, Network Security Evaluator, Cyber Risk Assessor, Security Configuration Analyst.",
+  "core": [
+   {
+    "name": "Vulnerability assessment",
+    "levels": "2-5",
+    "code": "VUAS"
+   },
+   {
+    "name": "Penetration testing",
+    "levels": "2-6",
+    "code": "PENT"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ],
+  "other": [
+   {
+    "name": "Content design and authoring",
+    "levels": "1-6",
+    "code": "INCA"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Audit",
+    "levels": "2-7",
+    "code": "AUDT"
+   },
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   }
+  ]
+ },
+ {
+  "page": 60,
+  "role": "Learning & development (L&D) practitioners",
+  "family": "Learning & Development",
+  "desc": "Roles responsible for analysing, designing, delivering and managing activities to develop people's skills, knowledge, behaviours and competencies - typically to improve individual performance, contribution, impact and employability.",
+  "titles": "L&D Manager, Chief Learning Officer, Head of L&D, L&D Consultant, Learning and performance consultant, L&D administrator, Trainer",
+  "core": [
+   {
+    "name": "Learning and development management",
+    "levels": "2-7",
+    "code": "ETMG"
+   },
+   {
+    "name": "Learning delivery",
+    "levels": "2-5",
+    "code": "ETDL"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   }
+  ],
+  "other": [
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Content publishing",
+    "levels": "1-6",
+    "code": "ICPM"
+   },
+   {
+    "name": "Content design and authoring",
+    "levels": "1-6",
+    "code": "INCA"
+   }
+  ]
+ },
+ {
+  "page": 61,
+  "role": "Teaching practitioners",
+  "family": "Learning & Development",
+  "desc": "Roles responsible for teaching others in a formal education context, such as at schools, colleges or universities.",
+  "titles": "Teacher, Lecturer, Department Head, Programme Director, Chair of Examiners, Subject Lead, Trainee Teacher",
+  "core": [
+   {
+    "name": "Teaching",
+    "levels": "2-7",
+    "code": "TEAC"
+   },
+   {
+    "name": "Subject formation",
+    "levels": "4-7",
+    "code": "SUBF"
+   }
+  ],
+  "other": [
+   {
+    "name": "Learning delivery",
+    "levels": "2-5",
+    "code": "ETDL"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Formal research",
+    "levels": "2-6",
+    "code": "RSCH"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   }
+  ]
+ },
+ {
+  "page": 62,
+  "role": "Product management practitioners",
+  "family": "Product Management",
+  "desc": "Roles responsible for defining, developing, and managing the strategy, roadmap, and delivery of products and services throughout their lifecycle, balancing user needs with business goals and technical feasibility.",
+  "titles": "Product Manager, Senior Product Manager, Lead Product Manager, Head of Product, Principal Product Manager, Group Product Manager, Chief Product Officer, Product Owner, Director of Product Management, Digital Product Manager",
+  "core": [
+   {
+    "name": "Product management",
+    "levels": "2-6",
+    "code": "PROD"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Feasibility assessment",
+    "levels": "2-6",
+    "code": "FEAS"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ],
+  "other": [
+   {
+    "name": "Delivery management",
+    "levels": "3-6",
+    "code": "DEMG"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Financial analysis",
+    "levels": "2-6",
+    "code": "FIAN"
+   },
+   {
+    "name": "Benefits management",
+    "levels": "3-6",
+    "code": "BENM"
+   },
+   {
+    "name": "Customer experience",
+    "levels": "2-6",
+    "code": "CEXP"
+   }
+  ]
+ },
+ {
+  "page": 63,
+  "role": "Service ownership practitioners",
+  "family": "Product Management",
+  "desc": "Roles accountable for the overall performance, quality, and continuous improvement of a defined service, including user outcomes, financial sustainability, operational fitness, and service lifecycle governance.",
+  "titles": "Service Owner, Service Manager, Senior Service Owner, Head of Service, Service Acceptance Analyst, Service Readiness Manager, Service Portfolio Owner",
+  "core": [
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Service acceptance",
+    "levels": "3-6",
+    "code": "SEAC"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Financial management",
+    "levels": "4-6",
+    "code": "FMIT"
+   },
+   {
+    "name": "Budgeting and forecasting",
+    "levels": "2-6",
+    "code": "BUDF"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ],
+  "other": [
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   },
+   {
+    "name": "Benefits management",
+    "levels": "3-6",
+    "code": "BENM"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   }
+  ]
+ },
+ {
+  "page": 64,
+  "role": "Project delivery practice management",
+  "family": "Project Delivery",
+  "desc": "Roles responsible for leading, managing, developing and deploying project delivery professionals and project delivery capabilities.",
+  "titles": "Project Delivery Practice Leader, Head of Project Delivery, Head of Project & Programme Management, Project Director, Programme Director, Portfolio Director",
+  "core": [
+   {
+    "name": "Resourcing",
+    "levels": "2-6",
+    "code": "RESC"
+   },
+   {
+    "name": "Professional development",
+    "levels": "4-6",
+    "code": "PDSV"
+   },
+   {
+    "name": "Performance management",
+    "levels": "4-6",
+    "code": "PEMT"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Employee experience",
+    "levels": "4-6",
+    "code": "EEXP"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Competency assessment",
+    "levels": "2-6",
+    "code": "LEDA"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   }
+  ]
+ },
+ {
+  "page": 65,
+  "role": "Project delivery practitioners",
+  "family": "Project Delivery",
+  "desc": "Roles responsible for planning, managing and delivering projects, programmes and portfolios to time, cost and quality. Includes defining scope, managing risks and dependencies, and coordinating resources across stakeholder groups. Involves applying structured or agile delivery methods to achieve business objectives and realise benefits.",
+  "titles": "Programme Manager, Programme Director, Portfolio Manager, Project Manager, Project Analyst, Project Office Manager, Project Office Analyst, PMO Analyst, PMO Manager, Project Director, Portfolio Director",
+  "core": [
+   {
+    "name": "Delivery management",
+    "levels": "3-6",
+    "code": "DEMG"
+   },
+   {
+    "name": "Project management",
+    "levels": "4-7",
+    "code": "PRMG"
+   },
+   {
+    "name": "Programme management",
+    "levels": "6-7",
+    "code": "PGMG"
+   },
+   {
+    "name": "Portfolio management",
+    "levels": "5-7",
+    "code": "POMG"
+   },
+   {
+    "name": "Portfolio, programme and project support",
+    "levels": "2-6",
+    "code": "PROF"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Benefits management",
+    "levels": "3-6",
+    "code": "BENM"
+   }
+  ],
+  "other": [
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Financial management",
+    "levels": "4-6",
+    "code": "FMIT"
+   },
+   {
+    "name": "Organisational change management",
+    "levels": "2-6",
+    "code": "CIPM"
+   },
+   {
+    "name": "Information systems coordination",
+    "levels": "6-7",
+    "code": "ISCO"
+   },
+   {
+    "name": "Investment appraisal",
+    "levels": "4-6",
+    "code": "INVA"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   }
+  ]
+ },
+ {
+  "page": 66,
+  "role": "IT Service designer",
+  "family": "Service Management",
+  "desc": "Roles responsible for designing IT services, service models and supporting operational processes to meet business requirements. They define service architecture, operational processes, support models and service performance measures.",
+  "titles": "IT Service Designer, Service Design Manager, IT Service Architect, Service Transition Designer, Service Catalogue Designer, Service Process Designer, Service Model Designer",
+  "core": [
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Business process improvement",
+    "levels": "2-7",
+    "code": "BPRE"
+   },
+   {
+    "name": "Availability management",
+    "levels": "3-6",
+    "code": "AVMT"
+   },
+   {
+    "name": "Capacity management",
+    "levels": "2-6",
+    "code": "CPMG"
+   },
+   {
+    "name": "Service catalogue management",
+    "levels": "2-5",
+    "code": "SCMG"
+   }
+  ],
+  "other": [
+   {
+    "name": "Business modelling",
+    "levels": "2-6",
+    "code": "BSMO"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Benefits management",
+    "levels": "3-6",
+    "code": "BENM"
+   },
+   {
+    "name": "Solution architecture",
+    "levels": "4-6",
+    "code": "ARCH"
+   }
+  ]
+ },
+ {
+  "page": 67,
+  "role": "Service desk practitioners",
+  "family": "Service Management",
+  "desc": "Roles responsible for providing first and second line technical support to users, triaging and resolving incidents, managing service requests, and maintaining user satisfaction as the primary point of contact for technology services.",
+  "titles": "Service Desk Analyst, IT Support Analyst, Helpdesk Analyst, Service Desk Agent, Service Desk Officer, Service Desk Team Lead, Service desk manager, Technical Support Analyst, End User Support Specialist, ICT Support Officer, Service Centre Analyst, Desktop Support Officer, Service Desk Technician, Tech Bar Analyst, IT concierge",
+  "core": [
+   {
+    "name": "Incident management",
+    "levels": "1-6",
+    "code": "USUP"
+   },
+   {
+    "name": "Customer service support",
+    "levels": "1-6",
+    "code": "CSMG"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   }
+  ],
+  "other": [
+   {
+    "name": "Identity and access management",
+    "levels": "1-6",
+    "code": "IAMT"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   }
+  ]
+ },
+ {
+  "page": 68,
+  "role": "Service introduction practitioners",
+  "family": "Service Management",
+  "desc": "Roles responsible for planning and managing the introduction of new or changed services into operational environments. They coordinate service readiness, operational acceptance and transition activities to ensure services can be supported effectively.",
+  "titles": "Service Introduction Manager, Service Transition Manager, Service Acceptance Manager",
+  "core": [
+   {
+    "name": "Service acceptance",
+    "levels": "3-6",
+    "code": "SEAC"
+   },
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Change control",
+    "levels": "2-6",
+    "code": "CHMG"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Release management",
+    "levels": "2-6",
+    "code": "RELM"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   },
+   {
+    "name": "Organisational change management",
+    "levels": "2-6",
+    "code": "CIPM"
+   },
+   {
+    "name": "Service catalogue management",
+    "levels": "2-5",
+    "code": "SCMG"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   }
+  ]
+ },
+ {
+  "page": 69,
+  "role": "Service management architecture practitioners",
+  "family": "Service Management",
+  "desc": "Roles responsible for defining the architecture and operating model for how services are delivered and managed. They design service frameworks, service models and supporting capabilities to ensure alignment with business objectives, technology strategies and organisational operating models.",
+  "titles": "Service Architect, Service Tooling Architect, Service Model Architect, Service Platform Architect",
+  "core": [
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Portfolio management",
+    "levels": "5-7",
+    "code": "POMG"
+   },
+   {
+    "name": "Availability management",
+    "levels": "3-6",
+    "code": "AVMT"
+   },
+   {
+    "name": "Capacity management",
+    "levels": "2-6",
+    "code": "CPMG"
+   }
+  ],
+  "other": [
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   }
+  ]
+ },
+ {
+  "page": 70,
+  "role": "Service operations practitioners",
+  "family": "Service Management",
+  "desc": "Roles responsible for managing, delivering and continuously improving technology operational services. Includes monitoring service performance, managing incidents and problems, and ensuring services meet agreed levels. Involves coordinating across teams to maintain service stability and drive operational efficiency.",
+  "titles": "Service Desk Analyst, Service Desk Manager, Service Desk Lead, Problem Analyst, Problem Manager, Service Operations Manager, Identity & Access Management (IAM) Analyst, Customer Service Manager, Customer Engagement Manager, Service Data Analyst, Service Supplier Manager, Service Performance Manager",
+  "core": [
+   {
+    "name": "Identity and access management",
+    "levels": "1-6",
+    "code": "IAMT"
+   },
+   {
+    "name": "Asset management",
+    "levels": "2-6",
+    "code": "ASMG"
+   },
+   {
+    "name": "Change control",
+    "levels": "2-6",
+    "code": "CHMG"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Security operations",
+    "levels": "1-6",
+    "code": "SCAD"
+   },
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   }
+  ],
+  "other": [
+   {
+    "name": "Business intelligence",
+    "levels": "2-5",
+    "code": "BINT"
+   },
+   {
+    "name": "Business situation analysis",
+    "levels": "2-6",
+    "code": "BUSA"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Continuity management",
+    "levels": "2-6",
+    "code": "COPL"
+   },
+   {
+    "name": "Application support",
+    "levels": "2-5",
+    "code": "ASUP"
+   }
+  ]
+ },
+ {
+  "page": 71,
+  "role": "Software engineering practice management",
+  "family": "Software Engineering",
+  "desc": "Roles responsible for leading, managing, developing and deploying software engineers and software engineering capabilities.",
+  "titles": "Engineering Manager, Senior Engineering Manager, Director of Engineering, Senior Director of Engineering, VP of Engineering, Senior VP of Engineering",
+  "core": [
+   {
+    "name": "Systems development management",
+    "levels": "4-7",
+    "code": "DLMG"
+   },
+   {
+    "name": "Project management",
+    "levels": "4-7",
+    "code": "PRMG"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   },
+   {
+    "name": "Safety assessment",
+    "levels": "4-6",
+    "code": "SFAS"
+   }
+  ],
+  "other": [
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Quality assurance",
+    "levels": "2-6",
+    "code": "QUAS"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Resourcing",
+    "levels": "2-6",
+    "code": "RESC"
+   },
+   {
+    "name": "Performance management",
+    "levels": "4-6",
+    "code": "PEMT"
+   },
+   {
+    "name": "Employee experience",
+    "levels": "4-6",
+    "code": "EEXP"
+   },
+   {
+    "name": "Professional development",
+    "levels": "4-6",
+    "code": "PDSV"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   },
+   {
+    "name": "Competency assessment",
+    "levels": "2-6",
+    "code": "LEDA"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ]
+ },
+ {
+  "page": 72,
+  "role": "Software engineering practitioners",
+  "family": "Software Engineering",
+  "desc": "Roles responsible for the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software (i.e. the application of engineering to software).",
+  "titles": "Software Engineer, Principal Software Engineer, Senior Software Engineer, Software Development Engineer, Cloud Software Engineer",
+  "core": [
+   {
+    "name": "Programming/software development",
+    "levels": "2-6",
+    "code": "PROG"
+   },
+   {
+    "name": "Real-time/embedded systems development",
+    "levels": "2-6",
+    "code": "RESD"
+   },
+   {
+    "name": "Safety engineering",
+    "levels": "2-6",
+    "code": "SFEN"
+   },
+   {
+    "name": "Requirements definition and management",
+    "levels": "2-6",
+    "code": "REQM"
+   },
+   {
+    "name": "Software design",
+    "levels": "2-6",
+    "code": "SWDN"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   }
+  ],
+  "other": [
+   {
+    "name": "Application support",
+    "levels": "2-5",
+    "code": "ASUP"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "Quality assurance",
+    "levels": "2-6",
+    "code": "QUAS"
+   },
+   {
+    "name": "Systems design",
+    "levels": "2-6",
+    "code": "DESN"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   }
+  ]
+ },
+ {
+  "page": 73,
+  "role": "Chief Data Officer",
+  "family": "Technology Executive",
+  "desc": "Executive leadership role with accountability for the organisation's data strategy, data governance, and the exploitation of data as a strategic and commercial asset, including AI and analytics capability.",
+  "titles": "Chief Data Officer, CDO, Head of Data, Director of Data, VP of Data, Chief Analytics Officer, Head of Data and Analytics, Chief Data and Analytics Officer",
+  "core": [
+   {
+    "name": "Data management",
+    "levels": "2-6",
+    "code": "DATM"
+   },
+   {
+    "name": "Governance",
+    "levels": "6-7",
+    "code": "GOVN"
+   },
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Data analytics",
+    "levels": "2-7",
+    "code": "DAAN"
+   },
+   {
+    "name": "Information systems coordination",
+    "levels": "6-7",
+    "code": "ISCO"
+   }
+  ],
+  "other": [
+   {
+    "name": "Innovation management",
+    "levels": "5-7",
+    "code": "INOV"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Technology service management",
+    "levels": "5-7",
+    "code": "ITMG"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Information and data compliance",
+    "levels": "4-6",
+    "code": "PEDP"
+   },
+   {
+    "name": "Artificial intelligence (AI) and data ethics",
+    "levels": "3-6",
+    "code": "AIDE"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   }
+  ]
+ },
+ {
+  "page": 74,
+  "role": "Chief Information Officer",
+  "family": "Technology Executive",
+  "desc": "Executive leadership role with strategic accountability for the information technology function, ensuring IT strategy, investment, and governance align with and enable the organisation's business objectives.",
+  "titles": "Chief Information Officer, CIO, Head of IT, IT Director, Director of Information Technology, Director of IT, VP of Information Technology",
+  "core": [
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Strategic planning",
+    "levels": "4-7",
+    "code": "ITSP"
+   },
+   {
+    "name": "Information systems coordination",
+    "levels": "6-7",
+    "code": "ISCO"
+   },
+   {
+    "name": "Information management",
+    "levels": "3-7",
+    "code": "IRMG"
+   },
+   {
+    "name": "Technology service management",
+    "levels": "5-7",
+    "code": "ITMG"
+   },
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Governance",
+    "levels": "6-7",
+    "code": "GOVN"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Financial management",
+    "levels": "4-6",
+    "code": "FMIT"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Systems development management",
+    "levels": "4-7",
+    "code": "DLMG"
+   },
+   {
+    "name": "Systems and software lifecycle engineering",
+    "levels": "3-7",
+    "code": "SLEN"
+   }
+  ]
+ },
+ {
+  "page": 75,
+  "role": "Chief Information Security Officer",
+  "family": "Technology Executive",
+  "desc": "Executive leadership role with accountability for the organisation's information and cyber security strategy, programme, and culture, ensuring information assets and technologies are adequately and proportionately protected.",
+  "titles": "Chief Information Security Officer, CISO, Head of Information Security, Director of Information Security, VP of Cyber Security, Head of Cyber Security, Information Security Director",
+  "core": [
+   {
+    "name": "Information security",
+    "levels": "2-7",
+    "code": "SCTY"
+   },
+   {
+    "name": "Governance",
+    "levels": "6-7",
+    "code": "GOVN"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Information management",
+    "levels": "3-7",
+    "code": "IRMG"
+   },
+   {
+    "name": "Information assurance",
+    "levels": "2-7",
+    "code": "INAS"
+   },
+   {
+    "name": "Identity and access management",
+    "levels": "1-6",
+    "code": "IAMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Information systems coordination",
+    "levels": "6-7",
+    "code": "ISCO"
+   },
+   {
+    "name": "Security operations",
+    "levels": "1-6",
+    "code": "SCAD"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ]
+ },
+ {
+  "page": 76,
+  "role": "Chief Technology Officer",
+  "family": "Technology Executive",
+  "desc": "Executive leadership role with accountability for technology vision, innovation, and technical direction, evaluating and exploiting emerging technologies to advance the organisation's products, services, and competitive position.",
+  "titles": "Chief Technology Officer, CTO, VP of Technology, Head of Technology, Director of Technology, VP Engineering, Chief Engineer",
+  "core": [
+   {
+    "name": "Enterprise and business architecture",
+    "levels": "5-7",
+    "code": "STPL"
+   },
+   {
+    "name": "Strategic planning",
+    "levels": "4-7",
+    "code": "ITSP"
+   },
+   {
+    "name": "Emerging technology monitoring",
+    "levels": "4-6",
+    "code": "EMRG"
+   },
+   {
+    "name": "Governance",
+    "levels": "6-7",
+    "code": "GOVN"
+   },
+   {
+    "name": "Systems development management",
+    "levels": "4-7",
+    "code": "DLMG"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   }
+  ],
+  "other": [
+   {
+    "name": "Innovation management",
+    "levels": "5-7",
+    "code": "INOV"
+   },
+   {
+    "name": "Technology service management",
+    "levels": "5-7",
+    "code": "ITMG"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Information systems coordination",
+    "levels": "6-7",
+    "code": "ISCO"
+   },
+   {
+    "name": "Financial management",
+    "levels": "4-6",
+    "code": "FMIT"
+   }
+  ]
+ },
+ {
+  "page": 77,
+  "role": "Infrastructure engineers",
+  "family": "Technology Infrastructure Platform",
+  "desc": "Roles responsible for providing a reliable, flexible, scalable, secure and efficient IT infrastructure to meet current and future organisational needs.",
+  "titles": "Cloud Engineer, Network Specialist, Cloud Network Architect, Systems Administrator, EUC and Voice Analyst, IT Service Support Analyst, Infrastructure Technical SME, Cloud Site Reliability Engineer",
+  "core": [
+   {
+    "name": "Infrastructure design",
+    "levels": "2-6",
+    "code": "IFDN"
+   },
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Infrastructure operations",
+    "levels": "1-5",
+    "code": "ITOP"
+   },
+   {
+    "name": "System software administration",
+    "levels": "2-5",
+    "code": "SYSP"
+   },
+   {
+    "name": "Systems integration and build",
+    "levels": "2-6",
+    "code": "SINT"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Network design",
+    "levels": "2-6",
+    "code": "NTDS"
+   },
+   {
+    "name": "Network support",
+    "levels": "1-5",
+    "code": "NTAS"
+   },
+   {
+    "name": "Storage management",
+    "levels": "2-6",
+    "code": "STMG"
+   },
+   {
+    "name": "Systems installation and removal",
+    "levels": "1-5",
+    "code": "HSIN"
+   }
+  ],
+  "other": [
+   {
+    "name": "Systems design",
+    "levels": "2-6",
+    "code": "DESN"
+   },
+   {
+    "name": "Facilities management",
+    "levels": "2-6",
+    "code": "DCMA"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   }
+  ]
+ },
+ {
+  "page": 78,
+  "role": "Infrastructure operations practitioners",
+  "family": "Technology Infrastructure Platform",
+  "desc": "Roles responsible for the day-to-day operation, monitoring, maintenance, and support of technology infrastructure, ensuring availability, performance, and continuity of infrastructure services.",
+  "titles": "Infrastructure Operations Engineer, IT Operations Engineer, Systems Administrator, Infrastructure Analyst, IT Operations Analyst, Cloud Operations Engineer, Site Reliability Engineer (Operations), Infrastructure Support Engineer, End User Computing Engineer, Operations Centre Analyst, NOC Engineer",
+  "core": [
+   {
+    "name": "Infrastructure operations",
+    "levels": "1-5",
+    "code": "ITOP"
+   },
+   {
+    "name": "Change control",
+    "levels": "2-6",
+    "code": "CHMG"
+   },
+   {
+    "name": "Configuration management",
+    "levels": "2-6",
+    "code": "CFMG"
+   },
+   {
+    "name": "Asset management",
+    "levels": "2-6",
+    "code": "ASMG"
+   },
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Continuity management",
+    "levels": "2-6",
+    "code": "COPL"
+   }
+  ],
+  "other": [
+   {
+    "name": "Facilities management",
+    "levels": "2-6",
+    "code": "DCMA"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Availability management",
+    "levels": "3-6",
+    "code": "AVMT"
+   },
+   {
+    "name": "Systems installation and removal",
+    "levels": "1-5",
+    "code": "HSIN"
+   },
+   {
+    "name": "Technology service management",
+    "levels": "5-7",
+    "code": "ITMG"
+   },
+   {
+    "name": "Problem management",
+    "levels": "2-5",
+    "code": "PBMG"
+   },
+   {
+    "name": "Network support",
+    "levels": "1-5",
+    "code": "NTAS"
+   },
+   {
+    "name": "Measurement",
+    "levels": "2-6",
+    "code": "MEAS"
+   }
+  ]
+ },
+ {
+  "page": 79,
+  "role": "Infrastructure platform management practitioners",
+  "family": "Technology Infrastructure Platform",
+  "desc": "Roles responsible for managing the provision of a reliable and secure technology infrastructure to support current and future organisational needs.",
+  "titles": "Infrastructure Platform Owner, Cloud Service Manager, ICT Operations Manager",
+  "core": [
+   {
+    "name": "Technology service management",
+    "levels": "5-7",
+    "code": "ITMG"
+   },
+   {
+    "name": "Infrastructure operations",
+    "levels": "1-5",
+    "code": "ITOP"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Service level management",
+    "levels": "2-7",
+    "code": "SLMO"
+   },
+   {
+    "name": "Contract management",
+    "levels": "2-7",
+    "code": "ITCM"
+   },
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   }
+  ],
+  "other": [
+   {
+    "name": "Infrastructure design",
+    "levels": "2-6",
+    "code": "IFDN"
+   },
+   {
+    "name": "Systems and software lifecycle engineering",
+    "levels": "3-7",
+    "code": "SLEN"
+   },
+   {
+    "name": "Facilities management",
+    "levels": "2-6",
+    "code": "DCMA"
+   },
+   {
+    "name": "Continuity management",
+    "levels": "2-6",
+    "code": "COPL"
+   }
+  ]
+ },
+ {
+  "page": 80,
+  "role": "Testing practice management",
+  "family": "Testing",
+  "desc": "Roles responsible for leading, managing, developing and deploying testers and testing capabilities.",
+  "titles": "Testing Practice Leader, Head of Testing, Head of QA and Testing",
+  "core": [
+   {
+    "name": "Systems development management",
+    "levels": "4-7",
+    "code": "DLMG"
+   },
+   {
+    "name": "Performance management",
+    "levels": "4-6",
+    "code": "PEMT"
+   },
+   {
+    "name": "Employee experience",
+    "levels": "4-6",
+    "code": "EEXP"
+   },
+   {
+    "name": "Resourcing",
+    "levels": "2-6",
+    "code": "RESC"
+   },
+   {
+    "name": "Professional development",
+    "levels": "4-6",
+    "code": "PDSV"
+   },
+   {
+    "name": "Knowledge management",
+    "levels": "2-7",
+    "code": "KNOW"
+   },
+   {
+    "name": "Organisational capability development",
+    "levels": "5-7",
+    "code": "OCDV"
+   },
+   {
+    "name": "Stakeholder relationship management",
+    "levels": "4-7",
+    "code": "RLMT"
+   }
+  ],
+  "other": [
+   {
+    "name": "Supplier management",
+    "levels": "2-7",
+    "code": "SUPP"
+   },
+   {
+    "name": "Demand management",
+    "levels": "4-6",
+    "code": "DEMM"
+   },
+   {
+    "name": "Competency assessment",
+    "levels": "2-6",
+    "code": "LEDA"
+   },
+   {
+    "name": "Learning design and development",
+    "levels": "2-5",
+    "code": "TMCR"
+   },
+   {
+    "name": "Quality management",
+    "levels": "2-7",
+    "code": "QUMG"
+   }
+  ]
+ },
+ {
+  "page": 81,
+  "role": "Testing practitioners",
+  "family": "Testing",
+  "desc": "Roles responsible for planning, designing and executing tests to assess the quality, functionality and performance of software and systems. Includes defining test approaches, identifying defects, and providing evidence-based assurance.",
+  "titles": "Tester, Test Manager, Test Architect, Test Automation Analyst, Test Programme Manager, Test Analyst, CloudTest Analyst, Junior Tester",
+  "core": [
+   {
+    "name": "Functional testing",
+    "levels": "1-6",
+    "code": "TEST"
+   },
+   {
+    "name": "Process testing",
+    "levels": "1-6",
+    "code": "PRTS"
+   },
+   {
+    "name": "Quality assurance",
+    "levels": "2-6",
+    "code": "QUAS"
+   },
+   {
+    "name": "Non-functional testing",
+    "levels": "1-6",
+    "code": "NFTS"
+   },
+   {
+    "name": "Methods and tools",
+    "levels": "2-6",
+    "code": "METL"
+   },
+   {
+    "name": "User experience evaluation",
+    "levels": "2-6",
+    "code": "USEV"
+   }
+  ],
+  "other": [
+   {
+    "name": "User acceptance testing",
+    "levels": "2-6",
+    "code": "BPTS"
+   },
+   {
+    "name": "Service acceptance",
+    "levels": "3-6",
+    "code": "SEAC"
+   },
+   {
+    "name": "Programming/software development",
+    "levels": "2-6",
+    "code": "PROG"
+   },
+   {
+    "name": "Penetration testing",
+    "levels": "2-6",
+    "code": "PENT"
+   },
+   {
+    "name": "Risk management",
+    "levels": "2-7",
+    "code": "BURM"
+   },
+   {
+    "name": "Specialist advice",
+    "levels": "4-6",
+    "code": "TECH"
+   }
+  ]
+ }
+]

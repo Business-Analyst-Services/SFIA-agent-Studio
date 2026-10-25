@@ -1,0 +1,248 @@
+{
+  "byFamily": {
+    "Agile Delivery": [
+      "atl",
+      "lin",
+      "ado",
+      "miro",
+      "slack",
+      "notion"
+    ],
+    "Application Platform": [
+      "gh",
+      "sentry",
+      "dd",
+      "sn",
+      "ctx7",
+      "pw"
+    ],
+    "Architecture": [
+      "atl",
+      "miro",
+      "aws",
+      "az",
+      "tf",
+      "cf",
+      "fetch"
+    ],
+    "Audio-Visual": [
+      "sn",
+      "m365",
+      "gdrive",
+      "fetch"
+    ],
+    "Business Analysis": [
+      "atl",
+      "miro",
+      "figma",
+      "notion",
+      "m365",
+      "pg"
+    ],
+    "Change Management": [
+      "m365",
+      "slack",
+      "miro",
+      "notion",
+      "sfia"
+    ],
+    "Computational Science": [
+      "jup",
+      "hf",
+      "aws",
+      "gh",
+      "pg"
+    ],
+    "Data & Analytics": [
+      "snow",
+      "dbx",
+      "dbt",
+      "pg",
+      "jup",
+      "hf",
+      "graf"
+    ],
+    "DevOps": [
+      "gh",
+      "gl",
+      "tf",
+      "k8s",
+      "aws",
+      "dd",
+      "graf",
+      "pd"
+    ],
+    "Digital Product Development, Sales & Marketing": [
+      "sf",
+      "hub",
+      "ga",
+      "canva",
+      "gdrive"
+    ],
+    "Experience Design": [
+      "figma",
+      "miro",
+      "pw",
+      "notion",
+      "canva"
+    ],
+    "Finance & Procurement": [
+      "stripe",
+      "aws",
+      "m365",
+      "gdrive",
+      "sn"
+    ],
+    "Human Resource & Workforce Management": [
+      "wd",
+      "m365",
+      "notion",
+      "sfia",
+      "slack"
+    ],
+    "Information & Cyber Security": [
+      "semgrep",
+      "snyk",
+      "splunk",
+      "cs",
+      "nvd",
+      "burp",
+      "gh"
+    ],
+    "Learning & Development": [
+      "lms",
+      "notion",
+      "gdrive",
+      "canva",
+      "sfia"
+    ],
+    "Product Management": [
+      "atl",
+      "lin",
+      "figma",
+      "ga",
+      "hub",
+      "notion"
+    ],
+    "Project Delivery": [
+      "atl",
+      "ado",
+      "m365",
+      "slack",
+      "notion"
+    ],
+    "Service Management": [
+      "sn",
+      "zd",
+      "pd",
+      "atl",
+      "dd"
+    ],
+    "Software Engineering": [
+      "gh",
+      "gl",
+      "ctx7",
+      "sentry",
+      "pw",
+      "semgrep",
+      "git"
+    ],
+    "Technology Executive": [
+      "m365",
+      "atl",
+      "aws",
+      "dd",
+      "sfia",
+      "notion"
+    ],
+    "Technology Infrastructure Platform": [
+      "aws",
+      "az",
+      "tf",
+      "k8s",
+      "cf",
+      "dd",
+      "graf"
+    ],
+    "Testing": [
+      "pw",
+      "gh",
+      "atl",
+      "ado",
+      "sentry"
+    ]
+  },
+  "byRole": {
+    "Accessibility practitioners": [
+      "pw"
+    ],
+    "Penetration testing practitioners": [
+      "burp",
+      "nvd"
+    ],
+    "Security operations": [
+      "splunk",
+      "cs",
+      "pd"
+    ],
+    "Incident management practitioners": [
+      "pd",
+      "splunk",
+      "slack"
+    ],
+    "Machine learning engineering practitioners": [
+      "hf",
+      "dbx",
+      "aws"
+    ],
+    "Data governance practitioners": [
+      "dbt",
+      "snow",
+      "dbx"
+    ],
+    "Chief Information Security Officer": [
+      "splunk",
+      "semgrep",
+      "nvd"
+    ],
+    "Chief Data Officer": [
+      "snow",
+      "dbx",
+      "dbt"
+    ],
+    "Service desk practitioners": [
+      "zd",
+      "sn",
+      "slack"
+    ],
+    "Site reliability engineer (SRE)": [
+      "pd",
+      "dd",
+      "sentry"
+    ],
+    "Technical writing practitioners": [
+      "gh",
+      "notion",
+      "atl"
+    ],
+    "Bid management practitioners": [
+      "gdrive",
+      "m365",
+      "sf"
+    ],
+    "Digital marketing practitioners": [
+      "ga",
+      "hub",
+      "canva"
+    ],
+    "Technology finance practitioners": [
+      "aws",
+      "stripe"
+    ],
+    "Network architecture practitioners": [
+      "cf",
+      "az",
+      "aws"
+    ]
+  }
+}
