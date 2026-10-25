@@ -27,7 +27,7 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site
-          cp site/index.html _site/
+          cp site/*.html _site/
           cp -r data agents orchestrators _site/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5

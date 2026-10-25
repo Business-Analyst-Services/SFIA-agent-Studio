@@ -1,0 +1,836 @@
+{
+ "capabilities": {
+  "Strategy & Governance": [
+   "Stewardship of UTS Digital Strategy & UTS Cyber Strategy",
+   "IT Governance",
+   "IT Performance Management",
+   "IT Management & Policy",
+   "Innovation",
+   "Stakeholder Relations & Business Engagement",
+   "Digital advisory; support for Faculty and Division strategy, governance, and planning"
+  ],
+  "Financial Management": [
+   "Sourcing & Procurement",
+   "Cost & Budget Management"
+  ],
+  "People & Resources": [
+   "IT Human Resource Management",
+   "IT Leadership, Culture and Values",
+   "IT Organisational Design",
+   "IT Knowledge Management",
+   "Organisational Change",
+   "Training & Adoption"
+  ],
+  "Architecture": [
+   "Enterprise Architecture",
+   "Solution Ideation, Analysis & Design",
+   "Maintenance of digital roadmaps, standards, policies and principles",
+   "Digital advisory; support for Faculty and Divisions"
+  ],
+  "Infrastructure & Operations": [
+   "End User Computing",
+   "Access & Identity",
+   "Cloud, Hosting, & Infrastructure",
+   "Backup & Recovery",
+   "Disaster Recovery"
+  ],
+  "Data & BI": [
+   "Data Quality Management",
+   "BI & Reporting"
+  ],
+  "Service Management": [
+   "Service Desk",
+   "Knowledge Mgt",
+   "Incident & Problem Management",
+   "IT Change Management",
+   "Asset, license & configuration management",
+   "Capacity & Availability Management"
+  ],
+  "Security & Risk": [
+   "Risk Management",
+   "Cybersecurity Strategy & Roadmap",
+   "Audit and Compliance",
+   "Monitoring & Detection",
+   "Incident Response",
+   "Training & Awareness"
+  ],
+  "Applications": [
+   "Application Portfolio Management",
+   "Solution Configuration, Enhancement and Development",
+   "Solution testing and deployment",
+   "System Administration",
+   "Monitor, Schedule & Apply system updates",
+   "Application Support"
+  ],
+  "PPM & Projects": [
+   "IT Project Portfolio Management",
+   "Digital Initiative Process",
+   "Project Initiation",
+   "Project Governance & reporting",
+   "Service Transition",
+   "IT Project Management",
+   "Delivery Assurance"
+  ]
+ },
+ "mapping": {
+  "Chief Information Officer": [
+   {
+    "domain": "Strategy & Governance",
+    "capability": "Stewardship of UTS Digital Strategy & UTS Cyber Strategy",
+    "role": "lead"
+   },
+   {
+    "domain": "Strategy & Governance",
+    "capability": "IT Governance",
+    "role": "lead"
+   },
+   {
+    "domain": "People & Resources",
+    "capability": "IT Leadership, Culture and Values",
+    "role": "lead"
+   },
+   {
+    "domain": "Strategy & Governance",
+    "capability": "IT Management & Policy",
+    "role": "contributes"
+   },
+   {
+    "domain": "Strategy & Governance",
+    "capability": "Stakeholder Relations & Business Engagement",
+    "role": "contributes"
+   }
+  ],
+  "Chief Technology Officer": [
+   {
+    "domain": "Strategy & Governance",
+    "capability": "Innovation",
+    "role": "lead"
+   },
+   {
+    "domain": "Architecture",
+    "capability": "Maintenance of digital roadmaps, standards, policies and principles",
+    "role": "contributes"
+   }
+  ],
+  "Chief Information Security Officer": [
+   {
+    "domain": "Security & Risk",
+    "capability": "Cybersecurity Strategy & Roadmap",
+    "role": "lead"
+   },
+   {
+    "domain": "Strategy & Governance",
+    "capability": "Stewardship of UTS Digital Strategy & UTS Cyber Strategy",
+    "role": "lead"
+   }
+  ],
+  "Chief Data Officer": [
+   {
+    "domain": "Data & BI",
+    "capability": "Data Quality Management",
+    "role": "lead"
+   },
+   {
+    "domain": "Data & BI",
+    "capability": "BI & Reporting",
+    "role": "lead"
+   },
+   {
+    "domain": "Strategy & Governance",
+    "capability": "IT Governance",
+    "role": "contributes"
+   }
+  ],
+  "Performance analysis practitioners": [
+   {
+    "domain": "Strategy & Governance",
+    "capability": "IT Performance Management",
+    "role": "lead"
+   }
+  ],
+  "Business analysis practice management": [
+   {
+    "domain": "Strategy & Governance",
+    "capability": "Digital advisory; support for Faculty and Division strategy, governance, and planning",
+    "role": "lead"
+   },
+   {
+    "domain": "Strategy & Governance",
+    "capability": "Stakeholder Relations & Business Engagement",
+    "role": "contributes"
+   }
+  ],
+  "Business analysis practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Solution Ideation, Analysis & Design",
+    "role": "lead"
+   },
+   {
+    "domain": "PPM & Projects",
+    "capability": "Project Initiation",
+    "role": "contributes"
+   },
+   {
+    "domain": "Architecture",
+    "capability": "Digital advisory; support for Faculty and Divisions",
+    "role": "contributes"
+   }
+  ],
+  "Product management practitioners": [
+   {
+    "domain": "Applications",
+    "capability": "Application Portfolio Management",
+    "role": "contributes"
+   },
+   {
+    "domain": "Strategy & Governance",
+    "capability": "Innovation",
+    "role": "contributes"
+   }
+  ],
+  "Service ownership practitioners": [
+   {
+    "domain": "Applications",
+    "capability": "Application Portfolio Management",
+    "role": "lead"
+   },
+   {
+    "domain": "Strategy & Governance",
+    "capability": "Stakeholder Relations & Business Engagement",
+    "role": "contributes"
+   }
+  ],
+  "Agile product management": [
+   {
+    "domain": "PPM & Projects",
+    "capability": "Digital Initiative Process",
+    "role": "contributes"
+   }
+  ],
+  "Agile change agents": [
+   {
+    "domain": "PPM & Projects",
+    "capability": "Digital Initiative Process",
+    "role": "lead"
+   },
+   {
+    "domain": "People & Resources",
+    "capability": "Organisational Change",
+    "role": "contributes"
+   }
+  ],
+  "Delivery management practitioners": [
+   {
+    "domain": "PPM & Projects",
+    "capability": "IT Project Management",
+    "role": "lead"
+   },
+   {
+    "domain": "PPM & Projects",
+    "capability": "Delivery Assurance",
+    "role": "contributes"
+   }
+  ],
+  "Project delivery practice management": [
+   {
+    "domain": "PPM & Projects",
+    "capability": "IT Project Portfolio Management",
+    "role": "lead"
+   },
+   {
+    "domain": "PPM & Projects",
+    "capability": "Project Governance & reporting",
+    "role": "lead"
+   },
+   {
+    "domain": "PPM & Projects",
+    "capability": "Delivery Assurance",
+    "role": "lead"
+   }
+  ],
+  "Project delivery practitioners": [
+   {
+    "domain": "PPM & Projects",
+    "capability": "IT Project Management",
+    "role": "lead"
+   },
+   {
+    "domain": "PPM & Projects",
+    "capability": "Project Initiation",
+    "role": "lead"
+   }
+  ],
+  "Service introduction practitioners": [
+   {
+    "domain": "PPM & Projects",
+    "capability": "Service Transition",
+    "role": "lead"
+   }
+  ],
+  "Technology finance practitioners": [
+   {
+    "domain": "Financial Management",
+    "capability": "Cost & Budget Management",
+    "role": "lead"
+   }
+  ],
+  "Technology procurement practitioners": [
+   {
+    "domain": "Financial Management",
+    "capability": "Sourcing & Procurement",
+    "role": "lead"
+   }
+  ],
+  "Organisation design practitioners": [
+   {
+    "domain": "People & Resources",
+    "capability": "IT Organisational Design",
+    "role": "lead"
+   }
+  ],
+  "Resource management practitioners": [
+   {
+    "domain": "People & Resources",
+    "capability": "IT Human Resource Management",
+    "role": "lead"
+   }
+  ],
+  "Workforce planning practitioners": [
+   {
+    "domain": "People & Resources",
+    "capability": "IT Human Resource Management",
+    "role": "lead"
+   }
+  ],
+  "Change management practitioners": [
+   {
+    "domain": "People & Resources",
+    "capability": "Organisational Change",
+    "role": "lead"
+   }
+  ],
+  "Learning & development (L&D) practitioners": [
+   {
+    "domain": "People & Resources",
+    "capability": "Training & Adoption",
+    "role": "lead"
+   },
+   {
+    "domain": "Security & Risk",
+    "capability": "Training & Awareness",
+    "role": "contributes"
+   }
+  ],
+  "Architecture practice management": [
+   {
+    "domain": "Architecture",
+    "capability": "Maintenance of digital roadmaps, standards, policies and principles",
+    "role": "lead"
+   }
+  ],
+  "Enterprise architecture practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Enterprise Architecture",
+    "role": "lead"
+   },
+   {
+    "domain": "Architecture",
+    "capability": "Digital advisory; support for Faculty and Divisions",
+    "role": "lead"
+   }
+  ],
+  "Solution architecture practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Solution Ideation, Analysis & Design",
+    "role": "lead"
+   }
+  ],
+  "Technical architecture practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Solution Ideation, Analysis & Design",
+    "role": "contributes"
+   }
+  ],
+  "Data architecture practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Enterprise Architecture",
+    "role": "contributes"
+   },
+   {
+    "domain": "Data & BI",
+    "capability": "Data Quality Management",
+    "role": "contributes"
+   }
+  ],
+  "Network architecture practitioners": [
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Cloud, Hosting, & Infrastructure",
+    "role": "contributes"
+   }
+  ],
+  "Security architecture practitioners": [
+   {
+    "domain": "Security & Risk",
+    "capability": "Cybersecurity Strategy & Roadmap",
+    "role": "contributes"
+   },
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Access & Identity",
+    "role": "contributes"
+   }
+  ],
+  "Application platform management practitioners": [
+   {
+    "domain": "Applications",
+    "capability": "Application Portfolio Management",
+    "role": "lead"
+   }
+  ],
+  "Application development practitioners": [
+   {
+    "domain": "Applications",
+    "capability": "Solution Configuration, Enhancement and Development",
+    "role": "lead"
+   }
+  ],
+  "Software engineering practitioners": [
+   {
+    "domain": "Applications",
+    "capability": "Solution Configuration, Enhancement and Development",
+    "role": "lead"
+   }
+  ],
+  "Software engineering practice management": [
+   {
+    "domain": "Applications",
+    "capability": "Solution Configuration, Enhancement and Development",
+    "role": "contributes"
+   }
+  ],
+  "Testing practitioners": [
+   {
+    "domain": "Applications",
+    "capability": "Solution testing and deployment",
+    "role": "lead"
+   }
+  ],
+  "Testing practice management": [
+   {
+    "domain": "Applications",
+    "capability": "Solution testing and deployment",
+    "role": "contributes"
+   },
+   {
+    "domain": "PPM & Projects",
+    "capability": "Delivery Assurance",
+    "role": "contributes"
+   }
+  ],
+  "DevOps automation engineer": [
+   {
+    "domain": "Applications",
+    "capability": "Solution testing and deployment",
+    "role": "contributes"
+   },
+   {
+    "domain": "Applications",
+    "capability": "Monitor, Schedule & Apply system updates",
+    "role": "contributes"
+   }
+  ],
+  "DevOps practice management": [
+   {
+    "domain": "Applications",
+    "capability": "Solution testing and deployment",
+    "role": "contributes"
+   }
+  ],
+  "Application support practitioners": [
+   {
+    "domain": "Applications",
+    "capability": "Application Support",
+    "role": "lead"
+   },
+   {
+    "domain": "Applications",
+    "capability": "Monitor, Schedule & Apply system updates",
+    "role": "lead"
+   },
+   {
+    "domain": "Applications",
+    "capability": "System Administration",
+    "role": "contributes"
+   }
+  ],
+  "Interaction design practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Solution Ideation, Analysis & Design",
+    "role": "contributes"
+   }
+  ],
+  "User experience practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Solution Ideation, Analysis & Design",
+    "role": "contributes"
+   }
+  ],
+  "User research practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Solution Ideation, Analysis & Design",
+    "role": "contributes"
+   }
+  ],
+  "Service experience design practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Solution Ideation, Analysis & Design",
+    "role": "contributes"
+   }
+  ],
+  "Content design practitioners": [
+   {
+    "domain": "Architecture",
+    "capability": "Solution Ideation, Analysis & Design",
+    "role": "contributes"
+   }
+  ],
+  "Accessibility practitioners": [
+   {
+    "domain": "Applications",
+    "capability": "Solution testing and deployment",
+    "role": "contributes"
+   }
+  ],
+  "Graphic design and visual communication practitioners": [
+   {
+    "domain": "People & Resources",
+    "capability": "Training & Adoption",
+    "role": "contributes"
+   }
+  ],
+  "Technical writing practitioners": [
+   {
+    "domain": "Service Management",
+    "capability": "Knowledge Mgt",
+    "role": "lead"
+   },
+   {
+    "domain": "People & Resources",
+    "capability": "IT Knowledge Management",
+    "role": "contributes"
+   }
+  ],
+  "Security risk management, audit and compliance": [
+   {
+    "domain": "Security & Risk",
+    "capability": "Risk Management",
+    "role": "lead"
+   },
+   {
+    "domain": "Security & Risk",
+    "capability": "Audit and Compliance",
+    "role": "lead"
+   }
+  ],
+  "Security leadership, strategy and management": [
+   {
+    "domain": "Security & Risk",
+    "capability": "Cybersecurity Strategy & Roadmap",
+    "role": "lead"
+   }
+  ],
+  "Security operations": [
+   {
+    "domain": "Security & Risk",
+    "capability": "Monitoring & Detection",
+    "role": "lead"
+   }
+  ],
+  "Incident management practitioners": [
+   {
+    "domain": "Security & Risk",
+    "capability": "Incident Response",
+    "role": "lead"
+   }
+  ],
+  "Vulnerability analysis practitioners": [
+   {
+    "domain": "Security & Risk",
+    "capability": "Risk Management",
+    "role": "contributes"
+   },
+   {
+    "domain": "Security & Risk",
+    "capability": "Monitoring & Detection",
+    "role": "contributes"
+   }
+  ],
+  "Penetration testing practitioners": [
+   {
+    "domain": "Security & Risk",
+    "capability": "Audit and Compliance",
+    "role": "contributes"
+   }
+  ],
+  "Service desk practitioners": [
+   {
+    "domain": "Service Management",
+    "capability": "Service Desk",
+    "role": "lead"
+   }
+  ],
+  "Service operations practitioners": [
+   {
+    "domain": "Service Management",
+    "capability": "Incident & Problem Management",
+    "role": "lead"
+   },
+   {
+    "domain": "Service Management",
+    "capability": "IT Change Management",
+    "role": "lead"
+   },
+   {
+    "domain": "Service Management",
+    "capability": "Asset, license & configuration management",
+    "role": "lead"
+   }
+  ],
+  "IT Service designer": [
+   {
+    "domain": "PPM & Projects",
+    "capability": "Service Transition",
+    "role": "contributes"
+   },
+   {
+    "domain": "Service Management",
+    "capability": "Capacity & Availability Management",
+    "role": "contributes"
+   }
+  ],
+  "Service management architecture practitioners": [
+   {
+    "domain": "Service Management",
+    "capability": "IT Change Management",
+    "role": "contributes"
+   },
+   {
+    "domain": "Architecture",
+    "capability": "Maintenance of digital roadmaps, standards, policies and principles",
+    "role": "contributes"
+   }
+  ],
+  "Site reliability engineer (SRE)": [
+   {
+    "domain": "Service Management",
+    "capability": "Capacity & Availability Management",
+    "role": "lead"
+   },
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Disaster Recovery",
+    "role": "contributes"
+   }
+  ],
+  "Infrastructure engineers": [
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Cloud, Hosting, & Infrastructure",
+    "role": "lead"
+   },
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Access & Identity",
+    "role": "contributes"
+   }
+  ],
+  "Infrastructure operations practitioners": [
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Backup & Recovery",
+    "role": "lead"
+   },
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Disaster Recovery",
+    "role": "lead"
+   },
+   {
+    "domain": "Applications",
+    "capability": "System Administration",
+    "role": "lead"
+   }
+  ],
+  "Infrastructure platform management practitioners": [
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Cloud, Hosting, & Infrastructure",
+    "role": "lead"
+   },
+   {
+    "domain": "Service Management",
+    "capability": "Capacity & Availability Management",
+    "role": "contributes"
+   }
+  ],
+  "Platform engineer": [
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "Cloud, Hosting, & Infrastructure",
+    "role": "contributes"
+   }
+  ],
+  "Data governance practitioners": [
+   {
+    "domain": "Data & BI",
+    "capability": "Data Quality Management",
+    "role": "lead"
+   }
+  ],
+  "Data operations practitioners": [
+   {
+    "domain": "Data & BI",
+    "capability": "Data Quality Management",
+    "role": "contributes"
+   }
+  ],
+  "Data analytics practitioners": [
+   {
+    "domain": "Data & BI",
+    "capability": "BI & Reporting",
+    "role": "lead"
+   }
+  ],
+  "Data engineering practitioners": [
+   {
+    "domain": "Data & BI",
+    "capability": "BI & Reporting",
+    "role": "contributes"
+   }
+  ],
+  "Data science practitioners": [
+   {
+    "domain": "Data & BI",
+    "capability": "BI & Reporting",
+    "role": "contributes"
+   }
+  ],
+  "AV Support Engineer": [
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "End User Computing",
+    "role": "contributes"
+   }
+  ],
+  "AV Installation Engineer": [
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "End User Computing",
+    "role": "contributes"
+   }
+  ],
+  "AV Systems Designer": [
+   {
+    "domain": "Infrastructure & Operations",
+    "capability": "End User Computing",
+    "role": "contributes"
+   }
+  ],
+  "Bid management practitioners": [
+   {
+    "domain": "Financial Management",
+    "capability": "Sourcing & Procurement",
+    "role": "contributes"
+   }
+  ]
+ },
+ "fit": {
+  "Chief Information Officer": "strong",
+  "Chief Technology Officer": "strong",
+  "Chief Information Security Officer": "strong",
+  "Chief Data Officer": "strong",
+  "Performance analysis practitioners": "strong",
+  "Business analysis practice management": "strong",
+  "Business analysis practitioners": "strong",
+  "Product management practitioners": "partial",
+  "Service ownership practitioners": "strong",
+  "Agile product management": "partial",
+  "Agile change agents": "strong",
+  "Delivery management practitioners": "strong",
+  "Project delivery practice management": "strong",
+  "Project delivery practitioners": "strong",
+  "Service introduction practitioners": "strong",
+  "Technology finance practitioners": "strong",
+  "Technology procurement practitioners": "strong",
+  "Organisation design practitioners": "strong",
+  "Resource management practitioners": "strong",
+  "Workforce planning practitioners": "strong",
+  "Change management practitioners": "strong",
+  "Learning & development (L&D) practitioners": "strong",
+  "Architecture practice management": "strong",
+  "Enterprise architecture practitioners": "strong",
+  "Solution architecture practitioners": "strong",
+  "Technical architecture practitioners": "strong",
+  "Data architecture practitioners": "strong",
+  "Network architecture practitioners": "strong",
+  "Security architecture practitioners": "strong",
+  "Application platform management practitioners": "strong",
+  "Application development practitioners": "strong",
+  "Software engineering practitioners": "strong",
+  "Software engineering practice management": "strong",
+  "Testing practitioners": "strong",
+  "Testing practice management": "strong",
+  "DevOps automation engineer": "partial",
+  "DevOps practice management": "partial",
+  "Application support practitioners": "strong",
+  "Interaction design practitioners": "partial",
+  "User experience practitioners": "partial",
+  "User research practitioners": "partial",
+  "Service experience design practitioners": "partial",
+  "Content design practitioners": "partial",
+  "Accessibility practitioners": "strong",
+  "Graphic design and visual communication practitioners": "partial",
+  "Technical writing practitioners": "strong",
+  "Security risk management, audit and compliance": "strong",
+  "Security leadership, strategy and management": "strong",
+  "Security operations": "strong",
+  "Incident management practitioners": "strong",
+  "Vulnerability analysis practitioners": "strong",
+  "Penetration testing practitioners": "strong",
+  "Service desk practitioners": "strong",
+  "Service operations practitioners": "strong",
+  "IT Service designer": "strong",
+  "Service management architecture practitioners": "strong",
+  "Site reliability engineer (SRE)": "strong",
+  "Infrastructure engineers": "strong",
+  "Infrastructure operations practitioners": "strong",
+  "Infrastructure platform management practitioners": "strong",
+  "Platform engineer": "partial",
+  "Data governance practitioners": "strong",
+  "Data operations practitioners": "strong",
+  "Data analytics practitioners": "strong",
+  "Data engineering practitioners": "strong",
+  "Data science practitioners": "partial",
+  "AV Support Engineer": "partial",
+  "AV Installation Engineer": "partial",
+  "AV Systems Designer": "partial",
+  "Bid management practitioners": "partial"
+ },
+ "unmapped": {
+  "Machine learning engineering practitioners": "No AI/ML capability on the map. Closest is BI & Reporting, which undersells model build and MLOps.",
+  "Computational science practitioners": "Research computing (HPC, eResearch) is not on the map.",
+  "Digital marketing practitioners": "Marketing sits outside ITU at most universities.",
+  "Sales and sales support practitioners": "ITU buys rather than sells, so there is no sales capability.",
+  "Teaching practitioners": "Academic teaching belongs to faculties, not ITU."
+ }
+}

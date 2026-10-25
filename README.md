@@ -20,7 +20,7 @@ Turns the SFIA Foundation's **SFIA 9 illustrative skills profiles** (March 2026)
 ## Run locally
 
 ```bash
-mkdir -p _site && cp site/index.html _site/ && cp -r data agents orchestrators _site/
+mkdir -p _site && cp site/*.html _site/ && cp -r data agents orchestrators _site/
 python3 -m http.server --directory _site 8000
 # open http://localhost:8000
 ```
