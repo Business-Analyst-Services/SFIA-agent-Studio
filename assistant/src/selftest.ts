@@ -1,4 +1,4 @@
-// Offline self-test: fakes the Claude API, then drives Pip through the web API.
+// Offline self-test: fakes the Claude API, then drives Muster through the web API.
 // Run: npm test   (no API key or channel credentials needed)
 import http from "node:http";
 import assert from "node:assert/strict";
@@ -13,11 +13,11 @@ const fake = http.createServer((req, res) => {
     const hasResult = Array.isArray(last.content) && last.content.some((b: { type: string }) => b.type === "tool_result");
     const msg = (content: unknown[], stop: string) => ({ id: "msg_test", type: "message", role: "assistant", model: r.model, content, stop_reason: stop, stop_sequence: null, usage: { input_tokens: 1, output_tokens: 1 } });
     let out;
-    if (sys.startsWith("You are Pip")) {
+    if (sys.startsWith("You are Muster")) {
       out = hasResult
         ? msg([{ type: "text", text: "Service Operations has it: incident logged and a problem record proposed." }], "end_turn")
         : msg([
-            { type: "text", text: "Ooh, I know someone for this! Calling in Service Operations." },
+            { type: "text", text: "Righto, let me muster the crew. Calling in Service Operations." },
             { type: "tool_use", id: "tu_1", name: "delegate", input: { agent_id: "service-operations", task: "Triage the student portal outage" } },
           ], "tool_use");
     } else {
@@ -32,7 +32,7 @@ await new Promise<void>(ok => fake.listen(0, ok));
 const fakePort = (fake.address() as { port: number }).port;
 process.env.ANTHROPIC_BASE_URL = `http://127.0.0.1:${fakePort}`;
 process.env.ANTHROPIC_API_KEY = "test";
-process.env.PIP_WEB_TOKEN = "secret";
+process.env.MUSTER_WEB_TOKEN = "secret";
 
 const { classify, decide } = await import("./autonomy.js");
 assert.equal(classify("list_issues"), "read");
@@ -44,7 +44,7 @@ assert.equal(decide("site-reliability-engineer-sre", "write"), "auto"); // level
 assert.equal(decide("site-reliability-engineer-sre", "destructive"), "approve");
 console.log("✓ autonomy rules");
 
-const { catalog } = await import("./pip.js");
+const { catalog } = await import("./muster.js");
 assert.equal(catalog.agents.size, 75);
 assert.ok(catalog.agents.get("business-analysis")?.itu.length);
 console.log(`✓ catalogue: ${catalog.agents.size} agents, ${Object.keys(catalog.orchestrators).length} orchestrators`);
@@ -70,7 +70,7 @@ const j = await res.json() as { reply: string; events: { text: string }[] };
 assert.equal(res.status, 200);
 assert.match(j.reply, /Service Operations has it/);
 assert.match(j.events[0].text, /Calling in Service Operations/);
-console.log("✓ web chat → Pip → delegate → service-operations agent → reply");
+console.log("✓ web chat → Muster → delegate → service-operations agent → reply");
 assert.equal((await (await call("/healthz")).json() as { agents: number }).agents, 75);
 console.log("✓ health endpoint\nAll self-tests passed.");
 server.close(); fake.close();

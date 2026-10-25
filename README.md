@@ -17,9 +17,9 @@ Turns the SFIA Foundation's **SFIA 9 illustrative skills profiles** (March 2026)
 | `scripts/extract_profiles.py` | Rebuilds `data/roles.json` from the SFIA PDF. |
 | `scripts/build_agents.py` | Regenerates `agents/` and `orchestrators/` from the data. |
 
-## Pip: the assistant
+## Muster: the assistant
 
-`assistant/` is a working service: **Pip**, a cheerful IT helper that lives in Slack, Teams, Gmail and the web, routes each request to the right SFIA role agent, and lets agents act through MCP tools within limits set by their SFIA level. See [assistant/README.md](assistant/README.md).
+`assistant/` is a working service: **Muster**, a cheerful IT helper that lives in Slack, Teams, Gmail and the web, routes each request to the right SFIA role agent, and lets agents act through MCP tools within limits set by their SFIA level. See [assistant/README.md](assistant/README.md).
 
 The **ITU capability role map** (`site/itu.html`, data in `data/itu-map.json`) places the 75 roles on the ITU capability model and shows the gaps and value-stream handoffs.
 

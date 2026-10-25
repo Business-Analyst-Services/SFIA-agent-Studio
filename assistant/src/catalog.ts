@@ -4,7 +4,7 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-export const REPO_ROOT = process.env.PIP_REPO_ROOT ?? resolve(here, "../..");
+export const REPO_ROOT = process.env.MUSTER_REPO_ROOT ?? resolve(here, "../..");
 export const ASSISTANT_ROOT = resolve(here, "..");
 
 export interface Skill { name: string; code: string; levels: string }
@@ -55,7 +55,7 @@ export function loadCatalog() {
   return { agents, orchestrators, mcpCatalog };
 }
 
-/** One compact line per agent, used in Pip's system prompt so it can pick who to call. */
+/** One compact line per agent, used in Muster's system prompt so it can pick who to call. */
 export function roster(agents: Map<string, AgentDef>): string {
   return [...agents.values()].map(a => {
     const where = a.itu.filter(x => x.role === "lead").map(x => x.capability).slice(0, 2).join("; ");

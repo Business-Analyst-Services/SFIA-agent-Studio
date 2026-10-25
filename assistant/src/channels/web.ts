@@ -2,7 +2,7 @@
 import express, { type Request, type Response, type NextFunction } from "express";
 import { join } from "node:path";
 import { ASSISTANT_ROOT } from "../catalog.js";
-import { handle, catalog } from "../pip.js";
+import { handle, catalog } from "../muster.js";
 import { resolveApproval, listPending, type Notifier, type PendingAction } from "../approvals.js";
 
 export const app = express();
@@ -14,9 +14,9 @@ const inbox = new Map<string, WebEvent[]>();
 const push = (id: string, e: WebEvent): void => { inbox.set(id, [...(inbox.get(id) ?? []), e].slice(-50)); };
 
 function auth(req: Request, res: Response, next: NextFunction) {
-  const token = process.env.PIP_WEB_TOKEN;
+  const token = process.env.MUSTER_WEB_TOKEN;
   if (!token || req.get("authorization") === `Bearer ${token}`) return next();
-  res.status(401).json({ error: "Missing or wrong token. Set the widget's data-token to PIP_WEB_TOKEN." });
+  res.status(401).json({ error: "Missing or wrong token. Set the widget's data-token to MUSTER_WEB_TOKEN." });
 }
 
 function notifierFor(conversationId: string): Notifier {

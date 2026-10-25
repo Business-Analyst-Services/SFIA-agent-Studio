@@ -4,7 +4,7 @@ import {
   type ConversationReference,
 } from "botbuilder";
 import type { Express } from "express";
-import { handle } from "../pip.js";
+import { handle } from "../muster.js";
 import { resolveApproval, type Notifier, type PendingAction } from "../approvals.js";
 
 export function mountTeams(app: Express) {
@@ -30,8 +30,8 @@ export function mountTeams(app: Express) {
             { type: "TextBlock", text: JSON.stringify(a.input).slice(0, 800), fontType: "Monospace", wrap: true },
           ],
           actions: [
-            { type: "Action.Submit", title: "Approve", style: "positive", data: { pipAction: "approve", id: a.id } },
-            { type: "Action.Submit", title: "Reject", style: "destructive", data: { pipAction: "reject", id: a.id } },
+            { type: "Action.Submit", title: "Approve", style: "positive", data: { musterAction: "approve", id: a.id } },
+            { type: "Action.Submit", title: "Reject", style: "destructive", data: { musterAction: "reject", id: a.id } },
           ],
         })] });
       }),
@@ -42,9 +42,9 @@ export function mountTeams(app: Express) {
   bot.onMessage(async (ctx, next) => {
     const ref = TurnContext.getConversationReference(ctx.activity);
     const user = ctx.activity.from?.name ?? "Teams user";
-    const value = ctx.activity.value as { pipAction?: string; id?: string } | undefined;
-    if (value?.pipAction && value.id) {
-      await ctx.sendActivity(await resolveApproval(value.id, value.pipAction === "approve", user));
+    const value = ctx.activity.value as { musterAction?: string; id?: string } | undefined;
+    if (value?.musterAction && value.id) {
+      await ctx.sendActivity(await resolveApproval(value.id, value.musterAction === "approve", user));
       return next();
     }
     const text = TurnContext.removeRecipientMention(ctx.activity)?.trim() ?? ctx.activity.text ?? "";
@@ -55,10 +55,10 @@ export function mountTeams(app: Express) {
   });
   bot.onMembersAdded(async (ctx, next) => {
     if (ctx.activity.membersAdded?.some(m => m.id !== ctx.activity.recipient.id))
-      await ctx.sendActivity("Hi, I'm Pip! Tell me what you need and I'll bring in the right IT expert.");
+      await ctx.sendActivity("G'day, I'm Muster! Tell me what you need and I'll round up the right IT crew for it.");
     await next();
   });
 
   app.post("/api/messages", async (req, res) => { await adapter.process(req, res, ctx => bot.run(ctx)); });
-  console.log("Pip is listening on Teams at /api/messages");
+  console.log("Muster is listening on Teams at /api/messages");
 }

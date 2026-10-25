@@ -1,8 +1,8 @@
 {
-  "name": "pip-sfia-assistant",
+  "name": "muster-sfia-assistant",
   "version": "0.1.0",
   "private": true,
-  "description": "Pip: a cheerful IT helper that routes requests to SFIA 9 role agents across Slack, Teams, Gmail and the web.",
+  "description": "Muster: a cheerful IT helper that routes requests to SFIA 9 role agents across Slack, Teams, Gmail and the web.",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {

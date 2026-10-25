@@ -16,7 +16,7 @@ const cfg: AutonomyConfig = JSON.parse(readFileSync(join(ASSISTANT_ROOT, "config
 export const MAX_TOOL_CALLS = cfg.maxToolCallsPerTask ?? 25;
 
 export function levelFor(agentId: string): number {
-  return cfg.agentLevels[agentId] ?? Number(process.env.PIP_DEFAULT_LEVEL ?? 4);
+  return cfg.agentLevels[agentId] ?? Number(process.env.MUSTER_DEFAULT_LEVEL ?? 4);
 }
 
 export function decide(agentId: string, risk: Risk): Decision {

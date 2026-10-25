@@ -1,11 +1,11 @@
 # Create the Slack app from this manifest: api.slack.com/apps → Create New App → From a manifest.
 display_information:
-  name: Pip
+  name: Muster
   description: Your IT helper. Routes requests to SFIA role agents.
   background_color: "#0f6e64"
 features:
   bot_user:
-    display_name: Pip
+    display_name: Muster
     always_online: true
   app_home:
     messages_tab_enabled: true

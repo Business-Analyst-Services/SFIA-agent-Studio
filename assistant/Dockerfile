@@ -1,5 +1,5 @@
 # Build from the repo root so the agents/ and data/ folders are included:
-#   docker build -f assistant/Dockerfile -t pip .
+#   docker build -f assistant/Dockerfile -t muster .
 FROM node:22-slim AS build
 WORKDIR /app/assistant
 COPY assistant/package*.json ./

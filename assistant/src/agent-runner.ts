@@ -7,7 +7,7 @@ import { requestApproval, type Notifier } from "./approvals.js";
 import { audit } from "./audit.js";
 
 const anthropic = new Anthropic();
-const MODEL = process.env.PIP_AGENT_MODEL ?? "claude-sonnet-5-5";
+const MODEL = process.env.MUSTER_AGENT_MODEL ?? "claude-sonnet-5-5";
 
 export interface AgentResult { agentId: string; output: string; toolCalls: number; pendingApprovals: string[]; unavailableTools: string[] }
 
@@ -20,7 +20,7 @@ export async function runAgent(agent: AgentDef, task: string, context: string, n
   const system = `${agent.prompt}
 
 ## Execution context
-- You were called by Pip, the IT assistant, on behalf of ${requestedBy}. Your output goes back to Pip, who will relay it.
+- You were called by Muster, the IT assistant, on behalf of ${requestedBy}. Your output goes back to Muster, who will relay it.
 - Your SFIA level for this task is ${level}. Tools are gated to match: some actions run straight away, some need a person's approval, some are not allowed.
 - If a tool result says PENDING_APPROVAL, a person has been asked. Do not retry it. Carry on with the rest of the work and list the pending action in your report.
 - Tools from these catalogue servers are not connected: ${unavailable.join(", ") || "none"}. If you need them, say what you would have done and what a person should do instead.

@@ -1,6 +1,6 @@
-// Gmail: Pip watches a label, answers each new thread, and writes a draft reply (or sends, if allowed).
+// Gmail: Muster watches a label, answers each new thread, and writes a draft reply (or sends, if allowed).
 import { google, type gmail_v1 } from "googleapis";
-import { handle } from "../pip.js";
+import { handle } from "../muster.js";
 import type { Notifier, PendingAction } from "../approvals.js";
 
 const header = (m: gmail_v1.Schema$Message, name: string) => m.payload?.headers?.find(h => h.name?.toLowerCase() === name.toLowerCase())?.value ?? "";
@@ -11,14 +11,14 @@ function bodyText(p?: gmail_v1.Schema$MessagePart): string {
   for (const part of p.parts ?? []) { const t = bodyText(part); if (t) return t; }
   return "";
 }
-// Drop quoted history so Pip only reads the newest message.
+// Drop quoted history so Muster only reads the newest message.
 const latest = (t: string) => t.split(/\r?\n(?:On .+wrote:|>)/)[0].trim().slice(0, 8000);
 
 export async function startGmail() {
   const auth = new google.auth.OAuth2(process.env.GMAIL_CLIENT_ID, process.env.GMAIL_CLIENT_SECRET);
   auth.setCredentials({ refresh_token: process.env.GMAIL_REFRESH_TOKEN });
   const gmail = google.gmail({ version: "v1", auth });
-  const label = process.env.GMAIL_WATCH_LABEL ?? "Ask-Pip";
+  const label = process.env.GMAIL_WATCH_LABEL ?? "Ask-Muster";
   const mode = process.env.GMAIL_REPLY_MODE === "send" ? "send" : "draft";
   const me = (await gmail.users.getProfile({ userId: "me" })).data.emailAddress ?? "";
 
@@ -52,11 +52,11 @@ export async function startGmail() {
         await gmail.users.messages.modify({ userId: "me", id: id!, requestBody: { removeLabelIds: ["UNREAD"] } });
         const text = `Subject: ${header(m, "Subject")}\n\n${latest(bodyText(m.payload))}`;
         const answer = await handle({ conversationId: `gmail:${m.threadId}`, user: header(m, "From"), text, channel: "gmail" }, notifierFor(m));
-        await reply(m, `${answer}\n\n— Pip, your IT helper`);
+        await reply(m, `${answer}\n\n— Muster, your IT helper`);
       }
     } catch (e) { console.error("Gmail poll failed:", e instanceof Error ? e.message : e); }
   }
   await poll();
   setInterval(poll, Number(process.env.GMAIL_POLL_SECONDS ?? 60) * 1000);
-  console.log(`Pip is watching Gmail label "${label}" (${mode} mode)`);
+  console.log(`Muster is watching Gmail label "${label}" (${mode} mode)`);
 }

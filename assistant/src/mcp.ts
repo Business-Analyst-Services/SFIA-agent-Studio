@@ -33,7 +33,7 @@ export const enabledServers = () => Object.entries(servers).filter(([, s]) => s.
 
 async function connect(id: string): Promise<Client> {
   const s = servers[id];
-  const client = new Client({ name: "pip-sfia-assistant", version: "0.1.0" });
+  const client = new Client({ name: "muster-sfia-assistant", version: "0.1.0" });
   const transport = s.transport === "http"
     ? new StreamableHTTPClientTransport(new URL(env(s.url!)), {
         requestInit: { headers: Object.fromEntries(Object.entries(s.headers ?? {}).map(([k, v]) => [k, env(v)])) },

@@ -1,4 +1,4 @@
-// Pip: the front-door assistant. Holds the conversation, picks SFIA agents and delegates to them.
+// Muster: the front-door assistant. Holds the conversation, picks SFIA agents and delegates to them.
 import Anthropic from "@anthropic-ai/sdk";
 import { loadCatalog, roster } from "./catalog.js";
 import { PERSONA } from "./persona.js";
@@ -7,7 +7,7 @@ import { resolveApproval, listPending, type Notifier } from "./approvals.js";
 import { audit } from "./audit.js";
 
 const anthropic = new Anthropic();
-const MODEL = process.env.PIP_MODEL ?? "claude-opus-5-5";
+const MODEL = process.env.MUSTER_MODEL ?? "claude-opus-5-5";
 export const catalog = loadCatalog();
 const SYSTEM = `${PERSONA}\n\n## Agent roster (id | family | key SFIA skill codes | ITU capability led)\n${roster(catalog.agents)}`;
 
@@ -35,7 +35,7 @@ export interface IncomingMessage {
   channel: "slack" | "teams" | "gmail" | "web";
 }
 
-/** Handle one message and return Pip's reply. Progress and approvals go through the notifier. */
+/** Handle one message and return Muster's reply. Progress and approvals go through the notifier. */
 export async function handle(msg: IncomingMessage, notifier: Notifier): Promise<string> {
   // Approvals typed as text work in every channel: "approve 1a2b3c4d" or "reject 1a2b3c4d".
   const m = msg.text.trim().match(/^(approve|reject)\s+([a-f0-9]{8})\b/i);
@@ -47,7 +47,7 @@ export async function handle(msg: IncomingMessage, notifier: Notifier): Promise<
 
   const msgs = history.get(msg.conversationId) ?? [];
   msgs.push({ role: "user", content: `[${msg.channel}] ${msg.user}: ${msg.text}` });
-  audit("pip.message", { conversation: msg.conversationId, user: msg.user, channel: msg.channel });
+  audit("muster.message", { conversation: msg.conversationId, user: msg.user, channel: msg.channel });
 
   let reply = "";
   for (let turn = 0; turn < 8; turn++) {
@@ -56,7 +56,7 @@ export async function handle(msg: IncomingMessage, notifier: Notifier): Promise<
     const text = res.content.filter((b): b is Anthropic.TextBlock => b.type === "text").map(b => b.text).join("\n").trim();
     const uses = res.content.filter((b): b is Anthropic.ToolUseBlock => b.type === "tool_use");
     if (res.stop_reason !== "tool_use" || !uses.length) { reply = text; break; }
-    if (text) await notifier.say(text); // e.g. "Ooh, I know someone for this! Calling in…"
+    if (text) await notifier.say(text); // e.g. "Righto, let me muster the crew. Calling in…"
     const results = await Promise.all(uses.map(async (u): Promise<Anthropic.ToolResultBlockParam> => {
       const { agent_id, task, context } = u.input as { agent_id: string; task: string; context?: string };
       const agent = catalog.agents.get(agent_id);

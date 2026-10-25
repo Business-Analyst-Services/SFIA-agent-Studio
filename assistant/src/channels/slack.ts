@@ -1,6 +1,6 @@
-// Slack: mention @Pip in a channel or DM it. Replies go in thread; approvals get buttons.
+// Slack: mention @Muster in a channel or DM it. Replies go in thread; approvals get buttons.
 import bolt from "@slack/bolt";
-import { handle } from "../pip.js";
+import { handle } from "../muster.js";
 import { resolveApproval, type Notifier, type PendingAction } from "../approvals.js";
 
 const { App } = bolt;
@@ -22,8 +22,8 @@ export async function startSlack() {
         blocks: [
           { type: "section", text: { type: "mrkdwn", text: `${text}\n\`\`\`${JSON.stringify(a.input, null, 1).slice(0, 2500)}\`\`\`` } },
           { type: "actions", elements: [
-            { type: "button", style: "primary", text: { type: "plain_text", text: "Approve" }, action_id: "pip_approve", value: a.id },
-            { type: "button", style: "danger", text: { type: "plain_text", text: "Reject" }, action_id: "pip_reject", value: a.id },
+            { type: "button", style: "primary", text: { type: "plain_text", text: "Approve" }, action_id: "muster_approve", value: a.id },
+            { type: "button", style: "danger", text: { type: "plain_text", text: "Reject" }, action_id: "muster_reject", value: a.id },
           ] },
           { type: "context", elements: [{ type: "mrkdwn", text: `Approval id ${a.id}` }] },
         ],
@@ -48,7 +48,7 @@ export async function startSlack() {
     await respond(m.channel, m.ts, m.thread_ts, m.user ?? "unknown", m.text);
   });
 
-  for (const [actionId, approved] of [["pip_approve", true], ["pip_reject", false]] as const) {
+  for (const [actionId, approved] of [["muster_approve", true], ["muster_reject", false]] as const) {
     app.action(actionId, async ({ ack, body, action, client }) => {
       await ack();
       const id = (action as { value?: string }).value ?? "";
@@ -59,5 +59,5 @@ export async function startSlack() {
   }
 
   await app.start();
-  console.log("Pip is listening on Slack (Socket Mode)");
+  console.log("Muster is listening on Slack (Socket Mode)");
 }

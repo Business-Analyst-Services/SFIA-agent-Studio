@@ -9,10 +9,10 @@
     "privacyUrl": "https://business-analyst.services/privacy",
     "termsOfUseUrl": "https://business-analyst.services/terms"
   },
-  "name": { "short": "Pip", "full": "Pip IT Helper" },
+  "name": { "short": "Muster", "full": "Muster IT Helper" },
   "description": {
     "short": "Your IT helper, backed by SFIA role agents.",
-    "full": "Pip routes IT requests to 75 SFIA 9 role agents (service desk, architecture, security, data and more). Agents ask for approval before making changes."
+    "full": "Muster routes IT requests to 75 SFIA 9 role agents (service desk, architecture, security, data and more). Agents ask for approval before making changes."
   },
   "icons": { "color": "color.png", "outline": "outline.png" },
   "accentColor": "#0F6E64",
