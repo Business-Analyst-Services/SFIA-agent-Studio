@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pip IT Helper</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&family=Public+Sans:wght@400;600&display=swap">
+<style>
+:root{--bg:#f4f6f6;--ink:#14211f;--muted:#5b6b68;--accent:#0f6e64;--line:#d9e1df}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--ink:#e3ecea;--muted:#93a6a2;--accent:#5cc9b8;--line:#273634;color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Public Sans",system-ui,sans-serif}
+main{max-width:680px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-left,0px)) 160px}
+h1{font:700 34px/1.1 "Familjen Grotesk",system-ui,sans-serif;margin:0 0 12px}
+p{color:var(--muted)} code{background:var(--line);padding:1px 5px;border-radius:4px;font-size:14px;word-break:break-all}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+<h1>Pip is running</h1>
+<p>Click Pip in the corner to chat. Pip routes your request to the right SFIA 9 role agent, and agents ask before making changes.</p>
+<p>Embed Pip on any intranet page:</p>
+<p><code>&lt;script src="https://YOUR-HOST/pip.js" data-api="https://YOUR-HOST" data-token="…" data-user="Jane Citizen" defer&gt;&lt;/script&gt;</code></p>
+<p>Health: <a href="/healthz">/healthz</a> · Agents: <a href="/api/agents">/api/agents</a></p>
+</main>
+<script src="/pip.js" defer></script>
+</body>
+</html>

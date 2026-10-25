@@ -1,0 +1,19 @@
+{
+  "_doc": "How freely an agent may act, keyed by its SFIA level of responsibility. read = tools marked read-only; write = changes that can be undone; destructive = deletes, sends to outside parties, deploys, payments. auto = act without asking; approve = ask a human first; never = do not attempt.",
+  "levels": {
+    "1": { "read": "approve", "write": "never",   "destructive": "never" },
+    "2": { "read": "auto",    "write": "never",   "destructive": "never" },
+    "3": { "read": "auto",    "write": "approve", "destructive": "never" },
+    "4": { "read": "auto",    "write": "approve", "destructive": "approve" },
+    "5": { "read": "auto",    "write": "auto",    "destructive": "approve" },
+    "6": { "read": "auto",    "write": "auto",    "destructive": "approve" },
+    "7": { "read": "auto",    "write": "auto",    "destructive": "approve" }
+  },
+  "_note": "Destructive actions always need a human, whatever the level. Raise an individual agent's level in agentLevels.",
+  "agentLevels": {
+    "service-desk": 3,
+    "business-analysis": 4,
+    "site-reliability-engineer-sre": 5
+  },
+  "maxToolCallsPerTask": 25
+}

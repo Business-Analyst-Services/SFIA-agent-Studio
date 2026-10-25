@@ -1,0 +1,33 @@
+{
+  "name": "pip-sfia-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pip: a cheerful IT helper that routes requests to SFIA 9 role agents across Slack, Teams, Gmail and the web.",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx src/selftest.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@slack/bolt": "^5.1.0",
+    "botbuilder": "^4.23.3",
+    "express": "^5.3.0",
+    "googleapis": "^188.0.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "_doc": "Connection details for the MCP catalogue ids in ../data/mcp-catalog.json. Only servers listed here AND enabled are connected. ${VAR} is read from the environment. Check each URL against the vendor's current docs before enabling.",
+  "servers": {
+    "gh":     { "enabled": false, "transport": "http",  "url": "https://api.githubcopilot.com/mcp/", "headers": { "Authorization": "Bearer ${GITHUB_TOKEN}" } },
+    "atl":    { "enabled": false, "transport": "http",  "url": "https://mcp.atlassian.com/v1/mcp", "headers": { "Authorization": "Bearer ${ATLASSIAN_TOKEN}" } },
+    "sentry": { "enabled": false, "transport": "http",  "url": "https://mcp.sentry.dev/mcp", "headers": { "Authorization": "Bearer ${SENTRY_TOKEN}" } },
+    "notion": { "enabled": false, "transport": "http",  "url": "https://mcp.notion.com/mcp", "headers": { "Authorization": "Bearer ${NOTION_TOKEN}" } },
+    "lin":    { "enabled": false, "transport": "http",  "url": "https://mcp.linear.app/mcp", "headers": { "Authorization": "Bearer ${LINEAR_TOKEN}" } },
+    "vercel": { "enabled": false, "transport": "http",  "url": "https://mcp.vercel.com" },
+    "pw":     { "enabled": false, "transport": "stdio", "command": "npx", "args": ["-y", "@playwright/mcp@latest"] },
+    "fetch":  { "enabled": false, "transport": "stdio", "command": "uvx", "args": ["mcp-server-fetch"] },
+    "git":    { "enabled": false, "transport": "stdio", "command": "uvx", "args": ["mcp-server-git"] }
+  }
+}
