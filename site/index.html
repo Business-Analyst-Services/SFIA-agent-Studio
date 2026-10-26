@@ -41,7 +41,8 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 [data-ui=meet] .callstage{flex-direction:column;justify-content:center;padding:26px 12px 8px}
 .stage{flex:none;width:92px;height:92px;perspective:700px}
 [data-ui=meet] .stage{width:min(38vh,340px);height:min(38vh,340px)}
-.stage canvas{width:100%;height:100%;display:block}
+.stage canvas{width:100%;height:100%;display:block;border-radius:14px}
+[data-ui=meet] .stage canvas{border-radius:18px;border:1px solid var(--mline);box-shadow:0 14px 44px rgba(0,0,0,.45)}
 .head3d{width:100%;height:100%;transform-style:preserve-3d;transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .25s ease;animation:sway 6s ease-in-out infinite}
 @keyframes sway{0%,100%{translate:0 0}50%{translate:0 -3px}}
 .head3d svg{width:100%;height:100%;filter:drop-shadow(0 5px 7px rgba(0,0,0,.22))}
@@ -363,7 +364,7 @@ const Head={el:$('#head'),mouth:null,talkUntil:0,tts:false,
  hush(){this.talkUntil=0;this.tts=false}};
 Head.init();
 
-/* ---------- The 3D head: a low-poly kelpie modelled in three.js; the drawn head stays as fallback ---------- */
+/* ---------- The 3D Muster: a full low-poly kelpie, sitting in a paddock at dusk ---------- */
 (function init3D(){
  try{
   if(!window.THREE)return;
@@ -371,44 +372,69 @@ Head.init();
   const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
   const px=Math.min(devicePixelRatio||1,2);renderer.setPixelRatio(px);let RW=stage.clientWidth||100;renderer.setSize(RW,RW);
   const scene=new THREE.Scene();
-  const cam=new THREE.PerspectiveCamera(30,1,.1,50);cam.position.set(0,.55,6.6);cam.lookAt(0,.05,0);
-  scene.add(new THREE.HemisphereLight(0xfff3e4,0x2a1c12,.85));
-  const key=new THREE.DirectionalLight(0xffffff,1.2);key.position.set(2.2,3,4);scene.add(key);
-  const fill=new THREE.DirectionalLight(0xffe9c9,.35);fill.position.set(-2.5,.5,2);scene.add(fill);
-  const rim=new THREE.DirectionalLight(0x5cc9b8,.6);rim.position.set(-2,2,-3);scene.add(rim);
+  const cam=new THREE.PerspectiveCamera(31,1,.1,80);cam.position.set(0,1.7,9.4);let camY=1.7,camZ=9.4,lookY=1.25;cam.lookAt(0,lookY,0);
+  scene.add(new THREE.HemisphereLight(0xffe9c9,0x2a2216,.95));
+  const key=new THREE.DirectionalLight(0xfff2dc,1.1);key.position.set(3,5,4);scene.add(key);
+  const rim=new THREE.DirectionalLight(0xffb15c,.6);rim.position.set(-4,2.4,-3);scene.add(rim);
   const M=(c,o)=>new THREE.MeshStandardMaterial(Object.assign({color:c,flatShading:true,roughness:.85},o));
   const russet=M(0xa8502a),darkR=M(0x7a3216),tan=M(0xdf9f72),black=new THREE.MeshStandardMaterial({color:0x17100c,roughness:.3}),teal=M(0x0f6e64,{roughness:.55}),brass=new THREE.MeshStandardMaterial({color:0xf2c14e,roughness:.3,metalness:.55});
-  const rig=new THREE.Group();scene.add(rig);rig.position.y=.25;
-  const add=(geo,mat,x,y,z,g)=>{const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);(g||rig).add(m);return m};
-  // skull and cheeks
-  add(new THREE.SphereGeometry(1.02,7,5),russet,0,0,0).scale.set(1,.9,.98);
-  add(new THREE.SphereGeometry(.47,6,4),tan,.45,-.28,.46).scale.set(1,.72,.8);
-  add(new THREE.SphereGeometry(.47,6,4),tan,-.45,-.28,.46).scale.set(1,.72,.8);
-  // muzzle bridge (top) and nose
-  const bridge=add(new THREE.CylinderGeometry(.21,.44,1.25,6),russet,0,.1,1.1);bridge.rotation.x=Math.PI/2;
-  add(new THREE.SphereGeometry(.42,6,4),tan,0,-.14,1.0).scale.set(1.02,.72,1.45); // snout mass
-  add(new THREE.DodecahedronGeometry(.115),black,0,.12,1.8);
-  const mouth=add(new THREE.BoxGeometry(.3,.22,.16),black,0,-.3,1.38);mouth.scale.y=.12;
-  // jaw (pivots to talk)
-  const jawG=new THREE.Group();jawG.position.set(0,-.3,.5);rig.add(jawG);
+  const add=(geo,mat,x,y,z,g)=>{const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);g.add(m);return m};
+
+  /* the paddock */
+  const world=new THREE.Group();scene.add(world);
+  const cv=document.createElement('canvas');cv.width=64;cv.height=128;const cx2=cv.getContext('2d');
+  const gr=cx2.createLinearGradient(0,0,0,128);gr.addColorStop(0,'#0d2a33');gr.addColorStop(.5,'#1d5a52');gr.addColorStop(.78,'#d98a3f');gr.addColorStop(1,'#f2b45c');
+  cx2.fillStyle=gr;cx2.fillRect(0,0,64,128);
+  add(new THREE.PlaneGeometry(40,20),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cv)}),0,4.6,-12,world);
+  add(new THREE.CircleGeometry(.95,24),new THREE.MeshBasicMaterial({color:0xffd98c}),-3.6,3.2,-11.8,world);
+  add(new THREE.CircleGeometry(1.8,24),new THREE.MeshBasicMaterial({color:0xffc879,transparent:true,opacity:.22}),-3.6,3.2,-11.85,world);
+  const ground=add(new THREE.CircleGeometry(12,26),M(0x5a6b3a,{roughness:1}),0,0,-1,world);ground.rotation.x=-Math.PI/2;
+  const shadow=add(new THREE.CircleGeometry(1.5,20),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.22}),0,.012,0,world);shadow.rotation.x=-Math.PI/2;
+  [[-5.5,-10,3.1,0x3f5231],[4.8,-10.5,3.6,0x465c35],[0,-11,5,0x36462b]].forEach(([x,z,r,c])=>{add(new THREE.SphereGeometry(r,7,5),M(c,{roughness:1}),x,-r*.5,z,world)});
+  const tree=new THREE.Group();tree.position.set(3.4,0,-2.6);world.add(tree);
+  add(new THREE.CylinderGeometry(.09,.17,2.1,6),M(0xcbb79b),0,1.05,0,tree).rotation.z=.08;
+  [[.12,2.35,0,.6],[-.4,1.95,.15,.45],[.55,2,-.1,.42]].forEach(([x,y,z,r])=>add(new THREE.SphereGeometry(r,6,5),M(0x6d7f46,{roughness:1}),x,y,z,tree));
+  for(let i=0;i<3;i++){const post=add(new THREE.BoxGeometry(.15,1.05,.15),M(0x8a7a62),-2.0-i*1.1,.52,-1.8-i*1.0,world);post.rotation.y=.4}
+  [.82,.48].forEach(y=>{const r=add(new THREE.BoxGeometry(3.4,.09,.09),M(0x8a7a62),-3.1,y,-2.75,world);r.rotation.y=.4});
+  [[-1.7,1.4,.24],[2.1,1.7,.17],[-2.4,.6,.14]].forEach(([x,z,r])=>add(new THREE.DodecahedronGeometry(r),M(0x7c7f82),x,r*.55,z,world));
+
+  /* the dog: sitting kelpie */
+  const dog=new THREE.Group();scene.add(dog);
+  add(new THREE.SphereGeometry(.8,7,5),russet,0,.64,-.52,dog).scale.set(1.18,.85,1.05);           // haunches
+  const chest=add(new THREE.SphereGeometry(.62,7,5),russet,0,1.1,.14,dog);chest.scale.set(.95,1.28,.92); // torso leaning up
+  add(new THREE.SphereGeometry(.4,6,4),tan,0,1.0,.52,dog).scale.set(.8,1.15,.6);                  // chest blaze
+  [-.3,.3].forEach(x=>{add(new THREE.CylinderGeometry(.1,.12,1.1,6),russet,x,.56,.5,dog);         // front legs
+   add(new THREE.SphereGeometry(.16,6,4),tan,x,.09,.64,dog).scale.set(1,.5,1.55)});               // front paws
+  [-.55,.55].forEach(x=>add(new THREE.SphereGeometry(.18,6,4),tan,x,.09,.22,dog).scale.set(1,.5,1.6)); // rear paws
+  const tail=new THREE.Group();tail.position.set(.58,.42,-1.05);dog.add(tail);
+  const t1=add(new THREE.CylinderGeometry(.07,.11,.85,6),russet,.18,.28,0,tail);t1.rotation.z=-.95;
+  const t2=add(new THREE.CylinderGeometry(.035,.07,.6,6),darkR,.6,.62,0,tail);t2.rotation.z=-1.25;
+  add(new THREE.CylinderGeometry(.3,.44,.75,7),russet,0,1.78,.26,dog);                            // neck
+  const col=add(new THREE.TorusGeometry(.43,.09,8,14),teal,0,1.95,.27,dog);col.rotation.x=1.35;
+  const tag=add(new THREE.CylinderGeometry(.11,.11,.05,10),brass,0,1.78,.58,dog);tag.rotation.x=1.2;
+
+  /* the head (tracks you, talks) */
+  const headG=new THREE.Group();headG.position.set(0,2.48,.3);headG.scale.setScalar(.66);dog.add(headG);
+  add(new THREE.SphereGeometry(1.02,7,5),russet,0,0,0,headG).scale.set(1,.9,.98);
+  add(new THREE.SphereGeometry(.47,6,4),tan,.45,-.28,.46,headG).scale.set(1,.72,.8);
+  add(new THREE.SphereGeometry(.47,6,4),tan,-.45,-.28,.46,headG).scale.set(1,.72,.8);
+  const bridge=add(new THREE.CylinderGeometry(.21,.44,1.25,6),russet,0,.1,1.1,headG);bridge.rotation.x=Math.PI/2;
+  add(new THREE.SphereGeometry(.42,6,4),tan,0,-.14,1.0,headG).scale.set(1.02,.72,1.45);
+  add(new THREE.DodecahedronGeometry(.115),black,0,.12,1.8,headG);
+  const mouth=add(new THREE.BoxGeometry(.3,.22,.16),black,0,-.3,1.38,headG);mouth.scale.y=.12;
+  const jawG=new THREE.Group();jawG.position.set(0,-.3,.5);headG.add(jawG);
   add(new THREE.CylinderGeometry(.24,.28,.14,6),tan,0,-.12,.62,jawG).rotation.y=.5;
-  // eyes
-  const eyeL=add(new THREE.SphereGeometry(.16,10,8),black,.43,.34,.78);
-  const eyeR=add(new THREE.SphereGeometry(.16,10,8),black,-.43,.34,.78);
-  // brows
-  add(new THREE.BoxGeometry(.32,.09,.16),darkR,.44,.57,.74).rotation.z=-.16;
-  add(new THREE.BoxGeometry(.32,.09,.16),darkR,-.44,.57,.74).rotation.z=.16;
-  // ears: outer + inner
+  const eyeL=add(new THREE.SphereGeometry(.16,10,8),black,.43,.34,.78,headG);
+  const eyeR=add(new THREE.SphereGeometry(.16,10,8),black,-.43,.34,.78,headG);
+  add(new THREE.BoxGeometry(.32,.09,.16),darkR,.44,.57,.74,headG).rotation.z=-.16;
+  add(new THREE.BoxGeometry(.32,.09,.16),darkR,-.44,.57,.74,headG).rotation.z=.16;
   const earL=new THREE.Group(),earR=new THREE.Group();
-  earL.position.set(.46,.72,-.1);earR.position.set(-.46,.72,-.1);rig.add(earL,earR);
+  earL.position.set(.46,.72,-.1);earR.position.set(-.46,.72,-.1);headG.add(earL);headG.add(earR);
   const eo=new THREE.ConeGeometry(.37,1.0,4),ei=new THREE.ConeGeometry(.2,.58,4);
   add(eo,darkR,0,.4,0,earL).scale.set(1,1,.6);add(ei,tan,0,.34,.12,earL).scale.set(1,1,.5);
   add(eo,darkR,0,.4,0,earR).scale.set(1,1,.6);add(ei,tan,0,.34,.12,earR).scale.set(1,1,.5);
-  // neck, collar, tag
-  add(new THREE.CylinderGeometry(.55,.78,.95,7),russet,0,-1.1,-.08);
-  const col=add(new THREE.TorusGeometry(.66,.11,8,14),teal,0,-.98,-.05);col.rotation.x=1.38;
-  const tag=add(new THREE.CylinderGeometry(.14,.14,.06,10),brass,0,-1.3,.55);tag.rotation.x=1.25;
-  renderer.render(scene,cam); // first frame proves WebGL works before we swap
+
+  renderer.render(scene,cam);
   const svg=Head.el.querySelector('svg');if(svg)svg.style.display='none';
   Head.el.style.animation='none';Head.el.style.transform='none';
   Head.el.appendChild(renderer.domElement);
@@ -419,10 +445,13 @@ Head.init();
    if(talking&&st!=='talk')Head.el.dataset.state='talk';
    if(!talking&&st==='talk')Head.el.dataset.state='idle';
    const idle=reduce?0:1;
-   ry+=(((Head.tRy||0)+idle*Math.sin(t*.6)*.06)-ry)*.1;
-   rx+=(((Head.tRx||0)+.07+(st==='think'?-.16:0)+idle*Math.sin(t*1.1)*.02)-rx)*.1;
-   rig.rotation.y=ry;rig.rotation.x=rx;rig.rotation.z=idle*Math.sin(t*.8)*.015;
-   rig.position.y=.25+idle*Math.sin(t*1.4)*.03;
+   ry+=(((Head.tRy||0)*1.2+idle*Math.sin(t*.6)*.06)-ry)*.1;
+   rx+=(((Head.tRx||0)+.06+(st==='think'?-.18:0)+idle*Math.sin(t*1.1)*.02)-rx)*.1;
+   headG.rotation.y=ry;headG.rotation.x=rx;headG.rotation.z=idle*Math.sin(t*.8)*.02;
+   dog.rotation.y=idle*Math.sin(t*.45)*.03;
+   chest.scale.y=1.28+idle*Math.sin(t*2.1)*.022;                      // breathing
+   const happy=talking||st==='listen';
+   tail.rotation.y=Math.sin(t*(happy?10:2.2))*(happy?.5:.16);         // wag
    const op=talking?Math.abs(Math.sin(t*13)):0;
    jawG.rotation.x=op*.22;mouth.scale.y=.12+op*.8;mouth.position.y=-.3-op*.07;
    const perk=st==='listen'?1:0;
@@ -430,6 +459,10 @@ Head.init();
    earL.rotation.x=earR.rotation.x=-.08-perk*.12;
    if(now>blinkAt){eyeL.scale.y=eyeR.scale.y=.1;blinkUntil=now+130;blinkAt=now+2300+Math.random()*2800}
    if(blinkUntil&&now>blinkUntil){eyeL.scale.y=eyeR.scale.y=1;blinkUntil=0}
+   const meetUI=document.getElementById('callwrap').dataset.ui==='meet';
+   const tY=meetUI?1.7:2.3,tZ=meetUI?9.4:4.4,tL=meetUI?1.25:2.15;
+   camY+=(tY-camY)*.08;camZ+=(tZ-camZ)*.08;lookY+=(tL-lookY)*.08;
+   cam.position.set(0,camY,camZ);cam.lookAt(0,lookY,0);
    if((fr++%45)===0&&stage.clientWidth&&stage.clientWidth!==RW){RW=stage.clientWidth;renderer.setSize(RW,RW)}
    renderer.render(scene,cam)})(performance.now());
  }catch(e){/* WebGL unavailable: the drawn head stays */}
