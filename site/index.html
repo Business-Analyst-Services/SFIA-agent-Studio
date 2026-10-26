@@ -386,7 +386,7 @@ const Head={el:$('#head'),mouth:null,talkUntil:0,tts:false,
    this.tRy=dx*.33;this.tRx=dy*.16;this.el.style.setProperty('--ry',(dx*13)+'deg');this.el.style.setProperty('--rx',(-dy*8)+'deg')});},
  set(s){this.el.dataset.state=s},
  mouthFor(text){this.talkUntil=Math.max(this.talkUntil,Date.now()+Math.min(900+text.length*52,9000))},
- hush(){this.talkUntil=0;this.tts=false}};
+ hush(){this.talkUntil=0;this.tts=false},react(){}};
 Head.init();
 
 /* ---------- The 3D Muster: a full low-poly kelpie, sitting in a paddock at dusk ---------- */
@@ -412,7 +412,15 @@ Head.init();
   cx2.fillStyle=gr;cx2.fillRect(0,0,64,128);
   add(new THREE.PlaneGeometry(40,20),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cv)}),0,4.6,-12,world);
   add(new THREE.CircleGeometry(.95,24),new THREE.MeshBasicMaterial({color:0xffd98c}),-3.6,3.2,-11.8,world);
-  add(new THREE.CircleGeometry(1.8,24),new THREE.MeshBasicMaterial({color:0xffc879,transparent:true,opacity:.22}),-3.6,3.2,-11.85,world);
+  const glowM=add(new THREE.CircleGeometry(1.8,24),new THREE.MeshBasicMaterial({color:0xffc879,transparent:true,opacity:.22}),-3.6,3.2,-11.85,world);
+  const cloudM=new THREE.MeshBasicMaterial({color:0xf2e7d0,transparent:true,opacity:.85});
+  const mkCloud=(sc)=>{const c=new THREE.Group();[[0,0,0,.55],[.6,.1,0,.4],[-.55,.08,0,.38]].forEach(([x,y,z,r])=>{const m=new THREE.Mesh(new THREE.SphereGeometry(r,6,4),cloudM);m.position.set(x,y,z);m.scale.y=.55;c.add(m)});c.scale.setScalar(sc);world.add(c);return c};
+  const cloudA=mkCloud(1);cloudA.position.set(-2,3.9,-11.6);
+  const cloudB=mkCloud(.7);cloudB.position.set(4,4.5,-11.7);
+  const bird=new THREE.Group();world.add(bird);bird.visible=false;
+  const wingM=new THREE.MeshBasicMaterial({color:0x22303a});
+  const wL=new THREE.Mesh(new THREE.BoxGeometry(.34,.035,.08),wingM);wL.position.x=-.16;bird.add(wL);
+  const wR=new THREE.Mesh(new THREE.BoxGeometry(.34,.035,.08),wingM);wR.position.x=.16;bird.add(wR);
   const ground=add(new THREE.CircleGeometry(12,26),M(0x5a6b3a,{roughness:1}),0,0,-1,world);ground.rotation.x=-Math.PI/2;
   const shadow=add(new THREE.CircleGeometry(1.5,20),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.22}),0,.012,0,world);shadow.rotation.x=-Math.PI/2;
   [[-5.5,-10,3.1,0x3f5231],[4.8,-10.5,3.6,0x465c35],[0,-11,5,0x36462b]].forEach(([x,z,r,c])=>{add(new THREE.SphereGeometry(r,7,5),M(c,{roughness:1}),x,-r*.5,z,world)});
@@ -463,27 +471,64 @@ Head.init();
   const svg=Head.el.querySelector('svg');if(svg)svg.style.display='none';
   Head.el.style.animation='none';Head.el.style.transform='none';
   Head.el.appendChild(renderer.domElement);
-  let t=0,ry=0,rx=0,fr=0,blinkAt=performance.now()+2400,blinkUntil=0;
+  /* Motion system — easing, envelopes and event choreography in the spirit of the
+     motion-graphics-music-video skill: outBack overshoots, decaying shakes, layered noise. */
+  const EZ={oc:x=>1-Math.pow(1-x,3),ob:x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)},io:x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+  const env=(p,ain,aout)=>p<0||p>1?0:Math.min(ain?Math.min(1,p/ain):1,aout?Math.min(1,(1-p)/aout):1);
+  const n2=(tt,sd)=>(Math.sin(tt*.9+sd)+.55*Math.sin(tt*2.17+sd*1.7)+.31*Math.sin(tt*4.03+sd*2.3))/1.86;
+  const GES={perk:.8,bounce:1.05,shake:.9,nod:.7,look:2.6,flick:.45,sniff:1.5,shift:1.8,wag2:1.5};
+  let ges=null,nextIdle=performance.now()+4500;
+  Head.react=n=>{if(!reduce&&GES[n])ges={n,t0:performance.now(),dur:GES[n]*1000,dir:Math.random()<.5?-1:1}};
+  let t=0,ry=0,rx=0,vy=0,vx=0,fr=0,blinkAt=performance.now()+2400,blinkUntil=0,nextBird=performance.now()+7000,birdT0=0;
   (function loop(now){requestAnimationFrame(loop);t+=.016;
    const st=Head.el.dataset.state;
    const talking=Head.tts||Date.now()<Head.talkUntil;
    if(talking&&st!=='talk')Head.el.dataset.state='talk';
    if(!talking&&st==='talk')Head.el.dataset.state='idle';
    const idle=reduce?0:1;
-   ry+=(((Head.tRy||0)*1.2+idle*Math.sin(t*.6)*.06)-ry)*.1;
-   rx+=(((Head.tRx||0)+.06+(st==='think'?-.18:0)+idle*Math.sin(t*1.1)*.02)-rx)*.1;
-   headG.rotation.y=ry;headG.rotation.x=rx;headG.rotation.z=idle*Math.sin(t*.8)*.02;
-   dog.rotation.y=idle*Math.sin(t*.45)*.03;
-   chest.scale.y=1.28+idle*Math.sin(t*2.1)*.022;                      // breathing
-   const happy=talking||st==='listen';
-   tail.rotation.y=Math.sin(t*(happy?10:2.2))*(happy?.5:.16);         // wag
-   const op=talking?Math.abs(Math.sin(t*13)):0;
+   let g=0,gn=null;
+   if(ges){g=(now-ges.t0)/ges.dur;if(g>=1)ges=null;else gn=ges.n}
+   if(!ges&&!talking&&st==='idle'&&!reduce&&now>nextIdle){Head.react(['look','flick','sniff','shift','wag2'][Math.floor(Math.random()*5)]);nextIdle=now+6500+Math.random()*9000}
+   if(talking||st!=='idle')nextIdle=Math.max(nextIdle,now+4500);
+   let gry=0,grx=0,dRotZ=0,dPosY=0,hop=0,sqY=1,earX=0,flickL=0,flickR=0,tailBoost=0,sniffJaw=0;
+   if(gn==='look'){const e=EZ.io(env(g,.2,.25));gry=ges.dir*.55*e;grx=.05*e}
+   else if(gn==='flick'){const sfl=Math.sin(Math.PI*g)*.55;if(ges.dir>0)flickL=sfl;else flickR=sfl}
+   else if(gn==='sniff'){const e=env(g,.2,.3);grx=.26*e;sniffJaw=.2*Math.max(0,Math.sin(g*Math.PI*6))*e}
+   else if(gn==='shift'){dRotZ=.06*Math.sin(g*Math.PI*2)*env(g,.15,.15);dPosY=-.05*Math.sin(g*Math.PI)}
+   else if(gn==='wag2'){tailBoost=env(g,.15,.2)}
+   else if(gn==='perk'){const e=EZ.ob(Math.min(1,g*1.5))*env(g,.1,.35);earX=.3*e;grx=-.12*e;hop=.05*Math.sin(Math.PI*Math.min(1,g*2))}
+   else if(gn==='bounce'){const p=g;hop=.22*Math.sin(Math.PI*p);sqY=1+.09*Math.sin(Math.PI*p)-.05*Math.sin(Math.PI*Math.min(1,p*2.4));tailBoost=1}
+   else if(gn==='shake'){gry=.38*Math.sin(g*Math.PI*5)*(1-g)}
+   else if(gn==='nod'){grx=.22*Math.sin(g*Math.PI*2)*(1-g*.4)}
+   const tRY=(Head.tRy||0)*1.2+idle*.07*n2(t*.5,1)+gry;
+   const tRX=(Head.tRx||0)+.06+(st==='think'?-.18:0)+idle*.035*n2(t*.8,4)+grx;
+   vy=(vy+(tRY-ry)*.03)*.86;ry+=vy;
+   vx=(vx+(tRX-rx)*.03)*.86;rx+=vx;
+   headG.rotation.y=ry;headG.rotation.x=rx;headG.rotation.z=idle*.02*n2(t*.6,7);
+   dog.rotation.y=idle*.03*n2(t*.3,2);dog.rotation.z=dRotZ+idle*.012*n2(t*.37,9);
+   dog.position.y=dPosY+hop;
+   dog.scale.y=sqY;dog.scale.x=dog.scale.z=1+(1-sqY)*.5;
+   chest.scale.y=1.28+idle*.024*Math.sin(t*2.1+n2(t*.2,3));
+   const happy=talking||st==='listen'||tailBoost>0;
+   tail.rotation.y=Math.sin(t*(happy?10:2.2))*(happy?.5:.16)+idle*.05*n2(t*.7,5);
+   const op=talking?Math.abs(Math.sin(t*13)):sniffJaw;
    jawG.rotation.x=op*.22;mouth.scale.y=.12+op*.8;mouth.position.y=-.3-op*.07;
    const perk=st==='listen'?1:0;
-   earL.rotation.z+=((-.12-perk*.22)-earL.rotation.z)*.12;earR.rotation.z+=((.12+perk*.22)-earR.rotation.z)*.12;
-   earL.rotation.x=earR.rotation.x=-.08-perk*.12;
+   earL.rotation.z+=((-.12-perk*.22-earX-flickL)-earL.rotation.z)*.16;
+   earR.rotation.z+=((.12+perk*.22+earX+flickR)-earR.rotation.z)*.16;
+   earL.rotation.x=earR.rotation.x=-.08-perk*.12-earX*.4;
    if(now>blinkAt){eyeL.scale.y=eyeR.scale.y=.1;blinkUntil=now+130;blinkAt=now+2300+Math.random()*2800}
    if(blinkUntil&&now>blinkUntil){eyeL.scale.y=eyeR.scale.y=1;blinkUntil=0}
+   if(!reduce){
+    cloudA.position.x=((t*.12+2)%26)-13;cloudB.position.x=((t*.07+16)%26)-13;
+    tree.rotation.z=.08+.025*n2(t*.45,11);
+    glowM.material.opacity=.18+.06*Math.sin(t*.6);
+    if(!bird.visible&&now>nextBird){bird.visible=true;birdT0=now}
+    if(bird.visible){const bp=(now-birdT0)/12000;
+     if(bp>=1){bird.visible=false;nextBird=now+14000+Math.random()*20000}
+     else{bird.position.set(-10+20*bp,3.3+.35*Math.sin(bp*9),-10.9);
+      const fl=Math.sin(t*16)*.55;wL.rotation.z=fl;wR.rotation.z=-fl}}
+   }
    const meetUI=document.getElementById('callwrap').dataset.ui==='meet';
    const tY=meetUI?1.7:2.3,tZ=meetUI?9.4:4.4,tL=meetUI?1.25:2.15;
    camY+=(tY-camY)*.08;camZ+=(tZ-camZ)*.08;lookY+=(tL-lookY)*.08;
@@ -555,7 +600,7 @@ if(SR){rec=new SR();rec.lang='en-AU';rec.interimResults=false;rec.maxAlternative
 else{$('#mic').disabled=true;$('#mic').title="Voice input isn't available in this browser — Chrome and Edge support it"}
 function stopMic(){listening=false;$('#mic').setAttribute('aria-pressed','false');if(Head.el.dataset.state==='listen')Head.set('idle');if($('#mstatus').textContent==='listening…')status('ready when you are')}
 $('#mic').onclick=()=>{if(!rec)return;if(listening){rec.stop();return}
- try{rec.start();listening=true;$('#mic').setAttribute('aria-pressed','true');Head.set('listen');status('listening…')}catch(e){stopMic()}};
+ try{rec.start();listening=true;$('#mic').setAttribute('aria-pressed','true');Head.set('listen');Head.react('perk');status('listening…')}catch(e){stopMic()}};
 
 /* ---------- Settings, scenario menu, tabs ---------- */
 /* ---------- Session modes, join screen, drawer, text pop-out ---------- */
@@ -621,7 +666,7 @@ function propose(kind,payload,userText){
  if(isStream)mk('🗺 Plan it first',()=>showPlan(payload.v,payload.pack));
  mk('Something else…',()=>{$('#scenbtn').click()});
  b.querySelector('.mb').appendChild(chips);
- chatOpen();
+ chatOpen();Head.react('nod');
  status('your call, boss');
 }
 function runScenario(s,overrideUser,overrideMsg){mode='scenario';dpack=null;scen=(overrideMsg?{...s,user:overrideUser||'You',msg:overrideMsg}:s);started=true;$('#cur').textContent=s.label;play()}
@@ -700,7 +745,7 @@ function matchRequest(text){const t=(' '+text.toLowerCase()+' ');
  let best=null,bs=0;for(const c of allCaps()){const ws=c.name.toLowerCase().split(/[^a-z]+/).filter(w=>w.length>3);const sc=ws.filter(w=>t.includes(w)).length;if(sc>bs){bs=sc;best=c.name}}
  if(bs>=1){const g=generic({cap:best});if(g)return{kind:'scenario',s:g}}
  return null}
-function send(text){text=(text||$('#say').value).trim();if(!text)return;$('#say').value='';
+function send(text){text=(text||$('#say').value).trim();if(!text)return;$('#say').value='';Head.react('perk');
  const m=matchRequest(text);
  if(!m){bubble('You',text);const b=bubble('Muster',"Hmm, that one's outside my demo script — in the real deployment I'd route it by SFIA skill and have a crack. Here, try me on an outage, a new system, an audit, a release… or pick anything from the scenario menu up top.",{bot:true});narrate(b.querySelector('.txt').textContent);return}
  if(m.kind==='plan')showPlan(m.v,m.pack,text);else if(m.kind==='scenario')propose('scenario',{s:m.s},text);else propose('stream',{v:m.v,pack:m.pack||null},text)}
@@ -742,6 +787,7 @@ function addArtefact(a){const g=$('#afgrid');const e=g.querySelector('.empty');i
 /* ---------- Greeting ---------- */
 function greet(){
  $('#conv').innerHTML='';setChannelBar('');$('#fhead').firstChild.textContent="Say g'day";
+ Head.react('bounce');
  const b=mup("G'day! Muster here — resident kelpie and chief crew-wrangler. I've got 75 SFIA specialists one whistle away: analysts, architects, engineers, security folk, the lot. Tell me what needs doing — type it, say it with the mic, or tap one of these and watch us work.");
  const chips=document.createElement('div');chips.className='chips';
  [...SCEN.map(s=>[s.label,()=>propose('scenario',{s})]),['Run an incident end to end',()=>propose('stream',{v:VS.find(v=>v.id==='incident-to-resolution'),pack:null})],['Plan a build lifecycle',()=>showPlan(VS.find(v=>v.id==='idea-to-service'),null,'Plan a build lifecycle for me')],['Pick an industry…',()=>{$('#scenbtn').click();$('#scenbtn').focus()}]].forEach(([l,fn])=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)});
@@ -790,7 +836,7 @@ async function play(){
   const btns=document.createElement('div');btns.className='btns';
   if(chan==='email')btns.insertAdjacentHTML('beforeend',`<em>Reply “approve ${p.id}” or “reject ${p.id}”.</em>`);
   for(const [lab,ok] of [[chan==='email'?'Simulate approve reply':'Approve',true],[chan==='email'?'Simulate reject reply':'Reject',false]]){const b=document.createElement('button');b.type='button';b.textContent=lab;if(!ok)b.className='no';
-   b.onclick=()=>{btns.remove();if(ok){const line=pick(P.ok);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)} ${esc(p.result)}.</em></div>`);narrate(line);const art=simpleArtefact(p.tool,p.summary,p.result,p.a.id);addArtefact(art);c.appendChild(Artefacts.chip(art));log('approval.granted',`${p.id} → ${p.tool} executed`)}else{const line=pick(P.no);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)} Nothing was changed.</em></div>`);narrate(line);log('approval.rejected',p.id)}drawLog();if(!document.querySelector('.card .btns'))status('ready when you are')};btns.appendChild(b)}
+   b.onclick=()=>{btns.remove();if(ok){const line=pick(P.ok);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)} ${esc(p.result)}.</em></div>`);narrate(line);Head.react('bounce');const art=simpleArtefact(p.tool,p.summary,p.result,p.a.id);addArtefact(art);c.appendChild(Artefacts.chip(art));log('approval.granted',`${p.id} → ${p.tool} executed`)}else{const line=pick(P.no);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)} Nothing was changed.</em></div>`);narrate(line);Head.react('shake');log('approval.rejected',p.id)}drawLog();if(!document.querySelector('.card .btns'))status('ready when you are')};btns.appendChild(b)}
   c.appendChild(btns);holder.querySelector('.mb').appendChild(c);
  }
  const st5=stepEl(5,'Audit trail','Every routing decision, tool call and approval is logged.');
@@ -821,7 +867,7 @@ function approvalCard(into,agentName,a,id){
   const btns=document.createElement('div');btns.className='btns';
   if(chan==='email')btns.insertAdjacentHTML('beforeend',`<em>Reply “approve ${id}” or “reject ${id}”.</em>`);
   for(const [lab,ok] of [[chan==='email'?'Simulate approve reply':'Approve',true],[chan==='email'?'Simulate reject reply':'Reject',false]]){const b=document.createElement('button');b.type='button';b.textContent=lab;if(!ok)b.className='no';
-   b.onclick=()=>{btns.remove();const line=ok?pick(P.ok):pick(P.no);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)}</em></div>`);narrate(line);resolve(ok)};btns.appendChild(b)}
+   b.onclick=()=>{btns.remove();const line=ok?pick(P.ok):pick(P.no);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)}</em></div>`);narrate(line);Head.react(ok?'bounce':'shake');resolve(ok)};btns.appendChild(b)}
   c.appendChild(btns);
  });
 }
@@ -855,7 +901,7 @@ async function playStream(){
    const d=decideFor(a.risk,a.tool);
    if(d==='sor-never'){counts.blocked++;log('tool.blocked',`${a.tool} (system-of-record limit)`);mup(`Hold up — ${name} can't touch ${a.tool}. The ${(dpack.systemsOfRecord.find(x=>x.id===a.tool.split('.')[0])||{}).name} is ${dpack.systemsOfRecord.find(x=>x.id===a.tool.split('.')[0]).maxRisk}-only for agents, and that's a line we don't cross. One for a person.`,thread);continue}
    if(d==='auto'){counts.auto++;log('tool.executed',`${a.tool} (auto)`)}
-   else if(d==='never'){counts.blocked++;log('tool.blocked',`${a.tool} (level ${level})`);mup(`${name} would normally run ${a.tool} here, but at SFIA level ${level} that's above their pay grade — I've flagged it for a person instead.`,thread);continue}
+   else if(d==='never'){counts.blocked++;log('tool.blocked',`${a.tool} (level ${level})`);mup(`${name} would normally run ${a.tool} here, but at SFIA level ${level} that's above their pay grade — I've flagged it for a person instead.`,thread);Head.react('shake');continue}
    else{const id=Math.random().toString(16).slice(2,10);log('approval.request',`${id} ${a.tool}`);set(i,'paused','needs you');drawSum();
     const ok=await approvalCard(thread,name,a,id);if(!alive())return;
     if(!ok){log('approval.rejected',id);set(i,'stopped','stopped');for(let j=i+1;j<rows.length;j++)set(j,'','not started');
@@ -869,7 +915,7 @@ async function playStream(){
   if(i<st.steps.length-1){const h=document.createElement('div');h.className='handoff';h.textContent=`Handing over: ${x.handoff}`;(thread||$('#conv')).appendChild(h)}
  }
  await wait(600);if(!alive())return;
- mup(pick(P.wrap)+st.outcome,thread);
+ Head.react('bounce');mup(pick(P.wrap)+st.outcome,thread);
  await wait(500);if(!alive())return;
  mup(pick(P.more),thread);log('done',st.id);drawSum(true);status('ready when you are');
 }
