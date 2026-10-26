@@ -211,15 +211,56 @@
          "id": "DA-118",
          "title": "Tokenised invoices: business rules",
          "fields": {
-          "Status": "Draft"
+          "Status": "Draft for legal review",
+          "Space": "Digital Assets",
+          "Owner": "Business analysis agent",
+          "Reviewers": "Legal, Compliance, Risk"
          },
          "sections": [
           {
-           "h": "Rules",
+           "h": "Purpose",
+           "text": "Define who may hold, transfer and redeem tokenised invoice units, and the compliance controls built into the contract."
+          },
+          {
+           "h": "Business rules",
            "items": [
-            "Who can hold tokens (verified businesses only)",
-            "Transfer limits and travel-rule data",
-            "Redemption at invoice maturity"
+            "Only KYC-verified wholesale investors may hold units",
+            "Transfers over $1,000 carry travel-rule data",
+            "Redemption at invoice maturity, T+2 settlement",
+            "Issuer can pause transfers under a 2-of-3 multisig",
+            "Monthly reserve attestation published on-chain"
+           ]
+          },
+          {
+           "h": "Compliance mapping",
+           "table": [
+            [
+             "Requirement",
+             "Source"
+            ],
+            [
+             "Holder verification",
+             "AML/CTF Act"
+            ],
+            [
+             "Travel-rule data on transfers",
+             "FATF R.16"
+            ],
+            [
+             "Reserve attestation",
+             "Internal policy"
+            ],
+            [
+             "Freeze function",
+             "Risk committee"
+            ]
+           ]
+          },
+          {
+           "h": "Open questions",
+           "items": [
+            "Secondary transfers between verified holders: allowed at launch?",
+            "Treatment of defaulted invoices in the redemption queue"
            ]
           }
          ]
@@ -259,9 +300,31 @@
          "title": "InvoiceToken v0.3 on testnet",
          "fields": {
           "Network": "Test network",
-          "Audit": "Pending",
-          "Owner": "Multisig (2 of 3)"
-         }
+          "Audit": "Booked for next sprint",
+          "Owner": "Multisig (2 of 3)",
+          "Compiler": "solc 0.8.26",
+          "Standard": "ERC-20 with transfer restrictions",
+          "Deploy gas": "1.84M"
+         },
+         "sections": [
+          {
+           "h": "Deployment log",
+           "items": [
+            "14:02 Compiled 4 contracts, 0 warnings",
+            "14:03 Deployed InvoiceToken v0.3",
+            "14:03 Allowlist seeded with 11 verified wallets",
+            "14:04 Pause and freeze functions verified"
+           ]
+          },
+          {
+           "h": "Restrictions in code",
+           "items": [
+            "transfer() reverts unless both parties are on the allowlist",
+            "pause() restricted to the multisig",
+            "redeem() only after maturity timestamp"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -418,15 +481,36 @@
          "title": "Smart repayment reminders",
          "fields": {
           "Stories": "5",
-          "Compliance review": "Required"
+          "Compliance review": "Required",
+          "Project": "LEND",
+          "Priority": "High",
+          "Compliance reviewer": "Assigned",
+          "Target": "Next quarter"
          },
          "sections": [
           {
            "h": "Stories",
            "items": [
-            "Remind 2 days before due date",
-            "Offer to move date to payday (once per term)",
-            "Respect contact preferences and hardship flags"
+            "LEND-78 Remind me 2 days before a repayment is due",
+            "LEND-79 Let me move my repayment date to payday, once per term",
+            "LEND-80 Respect my contact preferences and quiet hours",
+            "LEND-81 Suppress all reminders for hardship-flagged accounts",
+            "LEND-82 Measure missed-payment rate per cohort"
+           ]
+          },
+          {
+           "h": "Acceptance criteria",
+           "items": [
+            "No reminder sent to any account with a hardship flag",
+            "Date moves re-amortise without extra fees",
+            "Opt-out honoured within 24 hours"
+           ]
+          },
+          {
+           "h": "Out of scope",
+           "items": [
+            "Collections messaging",
+            "New credit assessments"
            ]
           }
          ]
@@ -466,8 +550,38 @@
          "title": "Upcoming payment notifications",
          "fields": {
           "Mode": "Test",
-          "Events": "invoice.upcoming"
-         }
+          "Events": "invoice.upcoming",
+          "Endpoint": "https://api.lender.example/muster/payments",
+          "Signing secret": "whsec_\u2022\u2022\u2022\u2022",
+          "API version": "2026-01-15"
+         },
+         "sections": [
+          {
+           "h": "Recent test deliveries",
+           "table": [
+            [
+             "Event",
+             "Response",
+             "Time"
+            ],
+            [
+             "invoice.upcoming",
+             "200 OK",
+             "09:14"
+            ],
+            [
+             "invoice.upcoming",
+             "200 OK",
+             "09:02"
+            ],
+            [
+             "invoice.upcoming",
+             "200 OK",
+             "08:47"
+            ]
+           ]
+          }
+         ]
         }
        }
       ]
@@ -599,8 +713,52 @@
          "title": "AI search: staged rollout",
          "fields": {
           "Success measure": "Search success +10%",
-          "Guardrail": "Error rate under 0.5%"
-         }
+          "Guardrail": "Error rate under 0.5%",
+          "Project": "PROD",
+          "Flag": "ai-search",
+          "Owner": "Product management agent"
+         },
+         "sections": [
+          {
+           "h": "Rollout plan",
+           "table": [
+            [
+             "Stage",
+             "Users",
+             "Gate to proceed"
+            ],
+            [
+             "Internal",
+             "1%",
+             "No crashes for 48h"
+            ],
+            [
+             "Early",
+             "10%",
+             "Errors under 0.5%"
+            ],
+            [
+             "Half",
+             "50%",
+             "Search success +10%"
+            ],
+            [
+             "Everyone",
+             "100%",
+             "Product sign-off"
+            ]
+           ]
+          },
+          {
+           "h": "Stories",
+           "items": [
+            "PROD-302 Natural-language search behind the ai-search flag",
+            "PROD-303 Fallback to keyword search on timeout",
+            "PROD-304 Per-stage analytics dashboard",
+            "PROD-305 Kill switch wired to on-call"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -622,9 +780,33 @@
          "id": "PR #880",
          "title": "AI search behind flag ai-search",
          "fields": {
-          "Checks": "Passing",
-          "Reviewers": "2"
-         }
+          "Checks": "All passing",
+          "Reviewers": "2 approvals",
+          "Branch": "feature/ai-search \u2192 main",
+          "Files changed": "17",
+          "Lines": "+1,204 \u2212310",
+          "Labels": "feature-flag, search"
+         },
+         "sections": [
+          {
+           "h": "Changes",
+           "items": [
+            "search/AiSearch.ts: query pipeline behind the ai-search flag",
+            "search/fallback.ts: keyword fallback on 2s timeout",
+            "flags.ts: register ai-search, default off",
+            "analytics: stage-tagged events",
+            "tests: 42 new cases, flag on and off"
+           ]
+          },
+          {
+           "h": "Test plan",
+           "items": [
+            "Unit and integration suites green",
+            "Load test at 2x peak with flag on",
+            "Accessibility pass on results view"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -648,8 +830,37 @@
          "fields": {
           "Before": "0%",
           "After": "10%",
-          "Approved by": "You"
-         }
+          "Approved by": "You",
+          "Environment": "Production",
+          "Rule": "10% by user-id hash",
+          "Change ref": "FL-2291"
+         },
+         "sections": [
+          {
+           "h": "History",
+           "table": [
+            [
+             "When",
+             "Change",
+             "By"
+            ],
+            [
+             "Today 14:02",
+             "0% \u2192 10%",
+             "Muster, approved by you"
+            ],
+            [
+             "Yesterday",
+             "Flag created, default off",
+             "Platform engineer agent"
+            ]
+           ]
+          },
+          {
+           "h": "Kill switch",
+           "text": "Setting the flag to 0% takes effect within 30 seconds; on-call has the runbook."
+          }
+         ]
         }
        }
       ]
@@ -807,15 +1018,27 @@
          "title": "Discharge journey map",
          "fields": {
           "Workshops": "2 wards",
-          "Pain points": "7"
+          "Pain points": "7",
+          "Participants": "14 staff (nursing, pharmacy, allied health)",
+          "Facilitator": "Service experience design agent"
          },
          "sections": [
           {
-           "h": "Top pain points",
+           "h": "Pain points from the wards",
            "items": [
-            "Medication charts finalised late",
-            "Transport booked on the day",
-            "Families not told the plan"
+            "Medication charts finalised late morning",
+            "Transport booked on the day, not the day before",
+            "Families not told the discharge plan",
+            "Pharmacy queue peaks 10am\u20131pm",
+            "Paperwork waits for one consultant round",
+            "No visibility of bed demand downstream"
+           ]
+          },
+          {
+           "h": "What already works",
+           "items": [
+            "Criteria-led discharge on 4 East pilot",
+            "Weekend discharge checklist"
            ]
           }
          ]
@@ -846,16 +1069,52 @@
          "id": "HLTH-52",
          "title": "Discharge improvement options",
          "fields": {
-          "Clinical sign-off": "Required"
+          "Clinical sign-off": "Required",
+          "Space": "Health improvement",
+          "Status": "For clinical review",
+          "Reviewers": "Director of Medical Services, NUM 4 West"
          },
          "sections": [
           {
+           "h": "Problem",
+           "text": "61% of discharges happen after 11am. The longest wait is pharmacy: medications are requested on the morning of discharge."
+          },
+          {
            "h": "Options",
-           "items": [
-            "Medication review the day before discharge",
-            "Criteria-led discharge for low-risk patients",
-            "Discharge lounge from 9am"
+           "table": [
+            [
+             "Option",
+             "Effort",
+             "Bed-hours saved/day"
+            ],
+            [
+             "Medication review the day before",
+             "Low",
+             "9"
+            ],
+            [
+             "Criteria-led discharge, low-risk patients",
+             "Medium",
+             "14"
+            ],
+            [
+             "Discharge lounge open from 9am",
+             "Medium",
+             "11"
+            ]
            ]
+          },
+          {
+           "h": "Risks",
+           "items": [
+            "Criteria-led discharge needs clear escalation rules",
+            "Lounge staffing on weekends",
+            "Pharmacy workload shifts to afternoons"
+           ]
+          },
+          {
+           "h": "Recommendation",
+           "text": "Pilot options 1 and 2 on one ward for 4 weeks, measured on before-11am discharge rate."
           }
          ]
         }
@@ -1021,16 +1280,59 @@
          "id": "OPS-209",
          "title": "Depot 4 dispatch: current and future process",
          "fields": {
-          "Saving": "About 35 minutes per load"
+          "Saving": "About 35 minutes per load",
+          "Space": "Operations",
+          "Status": "Agreed with the depot manager",
+          "Evidence": "90 days of TMS and telematics data",
+          "Owner": "Business analysis agent"
          },
          "sections": [
           {
+           "h": "Current state",
+           "items": [
+            "Loads staged after 2pm compete for one dock crew",
+            "North cut-off at 3:30pm pushes departures into the peak",
+            "Average dwell at Depot 4: 48 minutes",
+            "3 routes carry 71% of the late deliveries"
+           ]
+          },
+          {
            "h": "Future state",
            "items": [
-            "Pre-stage loads by 1pm",
-            "Move cut-off for north routes to 12:30",
-            "Dock scheduling by route"
+            "Pre-stage north loads by 1pm",
+            "Move the north cut-off to 12:30",
+            "Dock scheduling by route, published the day before",
+            "Second dock crew 12\u20133pm on Mon/Thu peaks"
            ]
+          },
+          {
+           "h": "Expected impact",
+           "table": [
+            [
+             "Measure",
+             "Now",
+             "Expected"
+            ],
+            [
+             "Depot 4 dwell",
+             "48 min",
+             "15 min"
+            ],
+            [
+             "North on-time delivery",
+             "87%",
+             "95%+"
+            ],
+            [
+             "Driver overtime",
+             "6.2 h/week",
+             "2 h/week"
+            ]
+           ]
+          },
+          {
+           "h": "Decision needed",
+           "text": "Approve the 12:30 cut-off with the three affected customers before the TMS change is promoted."
           }
          ]
         }
@@ -1055,8 +1357,28 @@
          "title": "North region cut-off 12:30",
          "fields": {
           "Environment": "Test",
-          "Routes": "3"
-         }
+          "Routes": "3",
+          "Rule set": "North region v12",
+          "Rollback": "Revert to v11 (one click)",
+          "Promotion": "CHG0041, Monday"
+         },
+         "sections": [
+          {
+           "h": "Rule changes",
+           "items": [
+            "Cut-off for north routes: 15:30 \u2192 12:30",
+            "Pre-stage flag required before tender",
+            "Dock windows assigned per route"
+           ]
+          },
+          {
+           "h": "Validation",
+           "items": [
+            "Replayed the last 30 days in test: simulated on-time 94.6%",
+            "No orders orphaned by the earlier cut-off"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -1213,9 +1535,30 @@
          "id": "FIG-claims",
          "title": "Online motor claim lodgement",
          "fields": {
-          "Tested with": "8 customers",
-          "Median time": "6 minutes"
-         }
+          "Tested with": "8 customers, moderated",
+          "Median time": "6 minutes",
+          "Frames": "12",
+          "Flows": "Lodge, track, upload photos",
+          "Completion": "7 of 8 unaided"
+         },
+         "sections": [
+          {
+           "h": "Findings",
+           "items": [
+            "Registration lookup confused 2 users: added a helper and example",
+            "Photo guidance cut retakes by half",
+            "Plain-language excess explainer improved trust",
+            "Progress indicator reduced abandonment in testing"
+           ]
+          },
+          {
+           "h": "Next",
+           "items": [
+            "Test the declined-cover path",
+            "Accessibility review with a screen-reader user"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -1238,8 +1581,33 @@
          "title": "Digital motor claim lodgement",
          "fields": {
           "Stories": "9",
-          "Fraud checks": "Included"
-         }
+          "Fraud checks": "Scored before acceptance",
+          "Project": "CLM",
+          "Target": "Release 3",
+          "Dependencies": "Claims API v2"
+         },
+         "sections": [
+          {
+           "h": "Stories",
+           "items": [
+            "CLM-141 Lodge a motor claim online in under 10 minutes",
+            "CLM-142 Upload damage photos from a phone",
+            "CLM-143 See repairer options by postcode",
+            "CLM-144 Track claim status without calling",
+            "CLM-145 Fraud score runs before acceptance",
+            "CLM-146 Hand off complex claims to a consultant with context"
+           ]
+          },
+          {
+           "h": "Non-functional",
+           "items": [
+            "Photo upload to 10MB, resumable",
+            "WCAG 2.2 AA",
+            "Fraud scoring under 500ms",
+            "Works on 3G connections"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -1389,8 +1757,29 @@
          "title": "Opex variance by cost centre",
          "fields": {
           "Schema": "Sandbox",
-          "Rows": "142"
-         }
+          "Rows": "142",
+          "Grain": "Cost centre \u00d7 month",
+          "Sources": "ERP GL actuals, EPM forecast",
+          "Refreshed": "Today 07:00"
+         },
+         "sections": [
+          {
+           "h": "Definition",
+           "items": [
+            "actual_amount \u2212 forecast_amount AS variance",
+            "variance / forecast_amount AS variance_pct",
+            "Joined on cost_centre and period",
+            "Excludes capitalised project codes"
+           ]
+          },
+          {
+           "h": "Quality checks",
+           "items": [
+            "Row counts match GL control totals",
+            "No unmapped cost centres this month"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -1440,15 +1829,48 @@
          "id": "FIN-VAR-10",
          "title": "October opex variance commentary",
          "fields": {
-          "Variance": "+6% ($820k)"
+          "Variance": "+6% ($820k)",
+          "Period": "October",
+          "Prepared for": "CFO",
+          "Status": "Draft",
+          "Data quality": "All checks passing"
          },
          "sections": [
           {
+           "h": "Summary",
+           "text": "October operating costs are $820k (6%) over forecast. Two drivers explain 80% of the gap; both are known and manageable."
+          },
+          {
            "h": "Drivers",
            "items": [
-            "Cloud spend +$410k: new analytics workloads",
-            "Contractors +$260k: delayed hiring",
-            "Action: reforecast cloud at 14% growth"
+            "Cloud spend +$410k: new analytics workloads, growth 14% vs 3% assumed",
+            "Contractors +$260k: delayed permanent hiring",
+            "Other +$150k: spread across 40 cost centres, no pattern"
+           ]
+          },
+          {
+           "h": "Actions",
+           "table": [
+            [
+             "Action",
+             "Owner",
+             "Due"
+            ],
+            [
+             "Reforecast cloud at 14% growth",
+             "FP&A",
+             "Friday"
+            ],
+            [
+             "Contractor ramp-down plan",
+             "CTO office",
+             "Next sprint"
+            ],
+            [
+             "Re-tag analytics workloads for showback",
+             "Platform team",
+             "Month-end"
+            ]
            ]
           }
          ]
@@ -1595,8 +2017,60 @@
          "title": "Auto-match rules for recurring suppliers",
          "fields": {
           "Rules": "6",
-          "Expected auto-match": "About 870 lines a month"
-         }
+          "Expected auto-match": "About 870 lines a month",
+          "Control": "Match only; approvals unchanged",
+          "Created by": "Business analysis agent, approved by you"
+         },
+         "sections": [
+          {
+           "h": "Rules",
+           "table": [
+            [
+             "Rule",
+             "Supplier",
+             "Matches on"
+            ],
+            [
+             "R1",
+             "CloudCo",
+             "Memo contains CLOUDCO, amount \u00b12%"
+            ],
+            [
+             "R2",
+             "FreightCo",
+             "Reference starts FR-"
+            ],
+            [
+             "R3",
+             "OfficeHub",
+             "Exact amount, weekly"
+            ],
+            [
+             "R4",
+             "Insurer",
+             "Policy number in memo"
+            ],
+            [
+             "R5",
+             "Utilities",
+             "Account number match"
+            ],
+            [
+             "R6",
+             "Telco",
+             "Account number match"
+            ]
+           ]
+          },
+          {
+           "h": "Controls kept",
+           "items": [
+            "Rules suggest matches; a person still reconciles",
+            "No rule touches payments or approvals",
+            "Audit trail records every auto-match"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -1632,16 +2106,27 @@
          "id": "CLOSE-4D",
          "title": "4-day month-end close",
          "fields": {
-          "Owner": "Finance Manager"
+          "Owner": "Finance Manager",
+          "Effective": "Next month-end",
+          "Previous close": "8 days",
+          "Target": "4 days"
          },
          "sections": [
           {
            "h": "Steps",
            "items": [
-            "Day 1: bank rules and auto-match",
-            "Day 2: accruals and prepayments",
-            "Day 3: review and adjustments",
-            "Day 4: sign-off"
+            "Day 1: bank rules and auto-match, exceptions worked",
+            "Day 2: accruals, prepayments, intercompany",
+            "Day 3: review, adjustments, variance notes",
+            "Day 4: sign-off and reporting pack"
+           ]
+          },
+          {
+           "h": "Sign-offs",
+           "items": [
+            "Reconciliations: senior accountant",
+            "Journals over $50k: Financial Controller",
+            "Final pack: CFO"
            ]
           }
          ]
@@ -1786,16 +2271,48 @@
          "id": "MEM-33",
          "title": "Family renewal offer options",
          "fields": {
-          "Target": "4,200 lapsing family members"
+          "Target": "4,200 lapsing family members",
+          "Space": "Membership",
+          "Status": "Option chosen: flexi pack",
+          "Decision": "Head of Membership"
          },
          "sections": [
           {
-           "h": "Options",
+           "h": "Why family members lapse",
            "items": [
-            "Flexi 5-game family pack",
-            "Free junior clinic with renewal",
-            "Pay monthly with no fee"
+            "Attended fewer than 4 games last season",
+            "Fixture clashes with junior sport",
+            "Cost per use feels high for partial attendance"
            ]
+          },
+          {
+           "h": "Options",
+           "table": [
+            [
+             "Option",
+             "Cost to club",
+             "Modelled uptake"
+            ],
+            [
+             "Flexi 5-game family pack",
+             "Low",
+             "31%"
+            ],
+            [
+             "Free junior clinic with renewal",
+             "Medium",
+             "18%"
+            ],
+            [
+             "Monthly payments, no fee",
+             "Low",
+             "24%"
+            ]
+           ]
+          },
+          {
+           "h": "Decision",
+           "text": "Run the flexi pack as the lead offer, with monthly payments available at checkout."
           }
          ]
         }
@@ -1820,9 +2337,33 @@
          "title": "Family flexi pack renewal",
          "fields": {
           "Audience": "4,200 members",
-          "Channel": "Email and SMS",
-          "Status": "Draft"
-         }
+          "Channel": "Email, then SMS to non-openers",
+          "Status": "Draft",
+          "Offer": "Flexi 5-game family pack",
+          "Send": "Tuesday 10am",
+          "Exclusions": "Hardship flags, unsubscribed, renewed"
+         },
+         "sections": [
+          {
+           "h": "Message preview",
+           "text": "Hi {first_name}, you were there for the big ones last season. This year, pick your 5: one family pass, any 5 home games, junior clinic included."
+          },
+          {
+           "h": "Journey",
+           "items": [
+            "Day 0: email to all 4,200",
+            "Day 3: SMS to non-openers",
+            "Day 10: call list of high-tenure members to the service team"
+           ]
+          },
+          {
+           "h": "Measurement",
+           "items": [
+            "Target: 31% uptake (1,300 renewals)",
+            "Holdout group of 400 to measure true lift"
+           ]
+          }
+         ]
         }
        },
        {
@@ -1968,15 +2509,21 @@
          "id": "BRD-grants",
          "title": "Grant application service blueprint",
          "fields": {
-          "Groups involved": "10"
+          "Groups involved": "10",
+          "Sessions": "3 co-design workshops",
+          "Participants": "10 community groups",
+          "Facilitator": "Service experience design agent"
          },
          "sections": [
           {
-           "h": "Changes",
+           "h": "Changes agreed",
            "items": [
-            "Replace budget table with guided questions",
-            "Save and return",
-            "Plain-language eligibility check up front"
+            "Replace the budget table with guided questions",
+            "Save and return at any step",
+            "Plain-language eligibility check up front",
+            "Reuse documents from previous applications",
+            "Autosave with visible confirmation",
+            "Status tracker after submission"
            ]
           }
          ]
@@ -2015,8 +2562,22 @@
          "id": "REC-2026-118",
          "title": "Grant form redesign: decision and design",
          "fields": {
-          "Retention": "Per program records schedule"
-         }
+          "Retention": "7 years after program close",
+          "Classification": "Program records",
+          "Access": "Program team",
+          "Filed by": "Business analysis agent, approved by you"
+         },
+         "sections": [
+          {
+           "h": "Contents",
+           "items": [
+            "Decision memo: form redesign approved",
+            "Service blueprint export",
+            "Co-design consultation notes (10 groups)",
+            "Privacy assessment for the guided budget questions"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -2145,15 +2706,40 @@
          "id": "GOV-71",
          "title": "Student success data: approved use",
          "fields": {
-          "Approved by": "Privacy officer"
+          "Approved by": "Privacy officer",
+          "Review": "Each semester",
+          "Status": "Approved",
+          "Opt-out": "Available to all students"
          },
          "sections": [
           {
            "h": "Conditions",
            "items": [
             "Use LMS activity and enrolment data only",
-            "Purpose: offering support, never penalties",
-            "Students can opt out"
+            "Purpose: offering support, never penalties or progression decisions",
+            "Advisors see a flag and a reason, never raw activity logs",
+            "No individual-level data leaves the SIS or LMS",
+            "Students can opt out; opt-outs reviewed weekly"
+           ]
+          },
+          {
+           "h": "Data used",
+           "table": [
+            [
+             "Source",
+             "Fields",
+             "Purpose"
+            ],
+            [
+             "LMS",
+             "Last login, submissions",
+             "Early-support flag"
+            ],
+            [
+             "SIS",
+             "Enrolment status, study load",
+             "Context for advisors"
+            ]
            ]
           }
          ]
@@ -2199,8 +2785,47 @@
          "title": "Week 5 advisor outreach",
          "fields": {
           "Students": "212",
-          "Owner": "Student advisors"
-         }
+          "Owner": "Student advisors",
+          "Due": "Friday",
+          "Script": "Supportive check-in v2",
+          "Opt-outs excluded": "Yes"
+         },
+         "sections": [
+          {
+           "h": "Breakdown",
+           "table": [
+            [
+             "Faculty",
+             "Students"
+            ],
+            [
+             "Business",
+             "61"
+            ],
+            [
+             "Engineering",
+             "54"
+            ],
+            [
+             "Arts",
+             "49"
+            ],
+            [
+             "Science",
+             "48"
+            ]
+           ]
+          },
+          {
+           "h": "Task template",
+           "items": [
+            "Reason for flag, in plain words",
+            "Suggested opener: check in, don't check up",
+            "Links: study support, counselling, financial help",
+            "Outcome field feeds next week's review"
+           ]
+          }
+         ]
         }
        }
       ]
@@ -2365,15 +2990,47 @@
          "id": "OPS-LE-14",
          "title": "Weekend changeover options",
          "fields": {
-          "Data": "De-identified extract only"
+          "Data": "De-identified extract only",
+          "Space": "Operations",
+          "Status": "For command review",
+          "Author": "Business analysis agent"
          },
          "sections": [
           {
+           "h": "Finding",
+           "text": "Weekend P1 response times slip by 3.5 minutes between 10pm and 2am. Unit availability drops 22% during the 11pm shift changeover."
+          },
+          {
            "h": "Options",
+           "table": [
+            [
+             "Option",
+             "Coverage gain at 23:00",
+             "Cost"
+            ],
+            [
+             "Stagger changeover by 30 min",
+             "+18%",
+             "Nil"
+            ],
+            [
+             "Hold 2 units through changeover",
+             "+9%",
+             "Overtime"
+            ],
+            [
+             "Move weekend changeover to 9pm",
+             "+15%",
+             "Roster change"
+            ]
+           ]
+          },
+          {
+           "h": "Consultation needed",
            "items": [
-            "Stagger changeover by 30 minutes",
-            "Hold 2 units over during changeover",
-            "Move changeover to 9pm on weekends"
+            "Workforce representatives on roster options",
+            "WHS review of extended shifts",
+            "4-week trial with weekly response-time review"
            ]
           }
          ]

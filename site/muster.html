@@ -299,7 +299,10 @@ const SYS={servicenow:'ServiceNow',jira:'Jira',confluence:'Confluence',github:'G
 function simpleArtefact(tool,summary,result,agentId){const sys=tool.split(/[.:]/)[0].trim().toLowerCase();const system=SYS[sys]||tool.split(/[.:]/)[0];
  const id=(result.match(/\b([A-Z]{2,}[-]?\d+|PR #\d+)\b/)||[])[1]||(system.slice(0,3).toUpperCase()+'-'+Math.floor(1000+Math.random()*9000));
  const kind=/incident/i.test(tool)?'Incident':/epic/i.test(tool)?'Epic':/page|document/i.test(tool)?'Document':/restart|deploy|release/i.test(tool)?'Platform action':'Record';
- return {kind,system,id,title:summary,fields:{'Created by':(ROLE[agentId]||{short:agentId}).short+' agent','Result':result}}}
+ const r=ROLE[agentId]||{short:agentId,core:[],f:''};
+ return {kind,system,id,title:summary,
+  fields:{'Status':'Created','Created by':r.short+' agent','Requested via':'Muster','SFIA skills applied':(r.core||[]).slice(0,3).map(x=>x[0]||x.code).join(', '),'Approval':'Granted in the conversation'},
+  sections:[{h:'What was done',text:summary+'.'},{h:'Result',items:[result]},{h:'Traceability',items:['Created through the '+system+' API with its own workflow and audit trail','Logged by Muster: agent, tool, risk class and approver','Linked to the originating conversation']}]}}
 
 // End-to-end run of a value stream: each step hands its output to the next; approvals pause the run.
 function approvalCard(into,agentName,a,id){

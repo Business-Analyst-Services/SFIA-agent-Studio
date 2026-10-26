@@ -19,6 +19,13 @@ def step(agent, capability, task, actions, handoff):
     return {"agent": agent, "capability": capability, "task": task, "handoff": handoff,
             "actions": [dict(tool=t, risk=r, summary=s, result=o, **({"artefact": a} if a else {})) for t, r, s, o, a in actions]}
 
+def sec(h, text=None, items=None, table=None):
+    o = {"h": h}
+    if text: o["text"] = text
+    if items: o["items"] = items
+    if table: o["table"] = table
+    return o
+
 def art(kind, system, id, title, fields, items=None, h="Detail"):
     o = {"kind": kind, "system": system, "id": id, "title": title, "fields": fields}
     if items: o["sections"] = [{"h": h, "items": items}]
@@ -279,7 +286,103 @@ domain("law-enforcement", "Law enforcement", "#22313f", ["Intelligence BA", "Ope
             step("change-management", "Organisational change", "Plan the trial", [("m365.create_document", "write", "Draft the trial plan and union consultation notes", "Trial plan drafted", None)], "Trial ready for decision")],
   "outcome": "Weekend P1 slippage comes from the 11pm shift changeover. Rostering options and a trial plan are ready for command. Agents used only de-identified extracts, and never touched records, evidence or dispatch."})
 
+
+# Depth pass: richer fields and sections for every scenario artefact, merged by artefact id.
+ENRICH = {
+ "DA-118": {"fields": {"Space": "Digital Assets", "Status": "Draft for legal review", "Owner": "Business analysis agent", "Reviewers": "Legal, Compliance, Risk"},
+  "sections": [sec("Purpose", text="Define who may hold, transfer and redeem tokenised invoice units, and the compliance controls built into the contract."),
+   sec("Business rules", items=["Only KYC-verified wholesale investors may hold units", "Transfers over $1,000 carry travel-rule data", "Redemption at invoice maturity, T+2 settlement", "Issuer can pause transfers under a 2-of-3 multisig", "Monthly reserve attestation published on-chain"]),
+   sec("Compliance mapping", table=[["Requirement", "Source"], ["Holder verification", "AML/CTF Act"], ["Travel-rule data on transfers", "FATF R.16"], ["Reserve attestation", "Internal policy"], ["Freeze function", "Risk committee"]]),
+   sec("Open questions", items=["Secondary transfers between verified holders: allowed at launch?", "Treatment of defaulted invoices in the redemption queue"])]},
+ "0x7a\u2026c21": {"fields": {"Network": "Test network", "Compiler": "solc 0.8.26", "Standard": "ERC-20 with transfer restrictions", "Deploy gas": "1.84M", "Audit": "Booked for next sprint", "Owner": "Multisig (2 of 3)"},
+  "sections": [sec("Deployment log", items=["14:02 Compiled 4 contracts, 0 warnings", "14:03 Deployed InvoiceToken v0.3", "14:03 Allowlist seeded with 11 verified wallets", "14:04 Pause and freeze functions verified"]),
+   sec("Restrictions in code", items=["transfer() reverts unless both parties are on the allowlist", "pause() restricted to the multisig", "redeem() only after maturity timestamp"])]},
+ "LEND-77": {"fields": {"Project": "LEND", "Priority": "High", "Compliance reviewer": "Assigned", "Target": "Next quarter", "Stories": "5"},
+  "sections": [sec("Stories", items=["LEND-78 Remind me 2 days before a repayment is due", "LEND-79 Let me move my repayment date to payday, once per term", "LEND-80 Respect my contact preferences and quiet hours", "LEND-81 Suppress all reminders for hardship-flagged accounts", "LEND-82 Measure missed-payment rate per cohort"]),
+   sec("Acceptance criteria", items=["No reminder sent to any account with a hardship flag", "Date moves re-amortise without extra fees", "Opt-out honoured within 24 hours"]),
+   sec("Out of scope", items=["Collections messaging", "New credit assessments"])]},
+ "we_test_41": {"fields": {"Mode": "Test", "Events": "invoice.upcoming", "Endpoint": "https://api.lender.example/muster/payments", "Signing secret": "whsec_\u2022\u2022\u2022\u2022", "API version": "2026-01-15"},
+  "sections": [sec("Recent test deliveries", table=[["Event", "Response", "Time"], ["invoice.upcoming", "200 OK", "09:14"], ["invoice.upcoming", "200 OK", "09:02"], ["invoice.upcoming", "200 OK", "08:47"]])]},
+ "PROD-301": {"fields": {"Project": "PROD", "Flag": "ai-search", "Owner": "Product management agent", "Success measure": "Search success +10%", "Guardrail": "Error rate under 0.5%"},
+  "sections": [sec("Rollout plan", table=[["Stage", "Users", "Gate to proceed"], ["Internal", "1%", "No crashes for 48h"], ["Early", "10%", "Errors under 0.5%"], ["Half", "50%", "Search success +10%"], ["Everyone", "100%", "Product sign-off"]]),
+   sec("Stories", items=["PROD-302 Natural-language search behind the ai-search flag", "PROD-303 Fallback to keyword search on timeout", "PROD-304 Per-stage analytics dashboard", "PROD-305 Kill switch wired to on-call"])]},
+ "PR #880": {"fields": {"Branch": "feature/ai-search \u2192 main", "Files changed": "17", "Lines": "+1,204 \u2212310", "Checks": "All passing", "Reviewers": "2 approvals", "Labels": "feature-flag, search"},
+  "sections": [sec("Changes", items=["search/AiSearch.ts: query pipeline behind the ai-search flag", "search/fallback.ts: keyword fallback on 2s timeout", "flags.ts: register ai-search, default off", "analytics: stage-tagged events", "tests: 42 new cases, flag on and off"]),
+   sec("Test plan", items=["Unit and integration suites green", "Load test at 2x peak with flag on", "Accessibility pass on results view"])]},
+ "ai-search": {"fields": {"Environment": "Production", "Before": "0%", "After": "10%", "Rule": "10% by user-id hash", "Approved by": "You", "Change ref": "FL-2291"},
+  "sections": [sec("History", table=[["When", "Change", "By"], ["Today 14:02", "0% \u2192 10%", "Muster, approved by you"], ["Yesterday", "Flag created, default off", "Platform engineer agent"]]),
+   sec("Kill switch", text="Setting the flag to 0% takes effect within 30 seconds; on-call has the runbook.")]},
+ "BRD-discharge": {"fields": {"Workshops": "2 wards", "Participants": "14 staff (nursing, pharmacy, allied health)", "Facilitator": "Service experience design agent", "Pain points": "7"},
+  "sections": [sec("Pain points from the wards", items=["Medication charts finalised late morning", "Transport booked on the day, not the day before", "Families not told the discharge plan", "Pharmacy queue peaks 10am\u20131pm", "Paperwork waits for one consultant round", "No visibility of bed demand downstream"]),
+   sec("What already works", items=["Criteria-led discharge on 4 East pilot", "Weekend discharge checklist"])]},
+ "HLTH-52": {"fields": {"Space": "Health improvement", "Status": "For clinical review", "Clinical sign-off": "Required", "Reviewers": "Director of Medical Services, NUM 4 West"},
+  "sections": [sec("Problem", text="61% of discharges happen after 11am. The longest wait is pharmacy: medications are requested on the morning of discharge."),
+   sec("Options", table=[["Option", "Effort", "Bed-hours saved/day"], ["Medication review the day before", "Low", "9"], ["Criteria-led discharge, low-risk patients", "Medium", "14"], ["Discharge lounge open from 9am", "Medium", "11"]]),
+   sec("Risks", items=["Criteria-led discharge needs clear escalation rules", "Lounge staffing on weekends", "Pharmacy workload shifts to afternoons"]),
+   sec("Recommendation", text="Pilot options 1 and 2 on one ward for 4 weeks, measured on before-11am discharge rate.")]},
+ "OPS-209": {"fields": {"Space": "Operations", "Status": "Agreed with the depot manager", "Saving": "About 35 minutes per load", "Evidence": "90 days of TMS and telematics data", "Owner": "Business analysis agent"},
+  "sections": [sec("Current state", items=["Loads staged after 2pm compete for one dock crew", "North cut-off at 3:30pm pushes departures into the peak", "Average dwell at Depot 4: 48 minutes", "3 routes carry 71% of the late deliveries"]),
+   sec("Future state", items=["Pre-stage north loads by 1pm", "Move the north cut-off to 12:30", "Dock scheduling by route, published the day before", "Second dock crew 12\u20133pm on Mon/Thu peaks"]),
+   sec("Expected impact", table=[["Measure", "Now", "Expected"], ["Depot 4 dwell", "48 min", "15 min"], ["North on-time delivery", "87%", "95%+"], ["Driver overtime", "6.2 h/week", "2 h/week"]]),
+   sec("Decision needed", text="Approve the 12:30 cut-off with the three affected customers before the TMS change is promoted.")]},
+ "RULE-N12": {"fields": {"Environment": "Test", "Rule set": "North region v12", "Routes": "3", "Rollback": "Revert to v11 (one click)", "Promotion": "CHG0041, Monday"},
+  "sections": [sec("Rule changes", items=["Cut-off for north routes: 15:30 \u2192 12:30", "Pre-stage flag required before tender", "Dock windows assigned per route"]),
+   sec("Validation", items=["Replayed the last 30 days in test: simulated on-time 94.6%", "No orders orphaned by the earlier cut-off"])]},
+ "FIG-claims": {"fields": {"Frames": "12", "Flows": "Lodge, track, upload photos", "Tested with": "8 customers, moderated", "Median time": "6 minutes", "Completion": "7 of 8 unaided"},
+  "sections": [sec("Findings", items=["Registration lookup confused 2 users: added a helper and example", "Photo guidance cut retakes by half", "Plain-language excess explainer improved trust", "Progress indicator reduced abandonment in testing"]),
+   sec("Next", items=["Test the declined-cover path", "Accessibility review with a screen-reader user"])]},
+ "CLM-140": {"fields": {"Project": "CLM", "Stories": "9", "Fraud checks": "Scored before acceptance", "Target": "Release 3", "Dependencies": "Claims API v2"},
+  "sections": [sec("Stories", items=["CLM-141 Lodge a motor claim online in under 10 minutes", "CLM-142 Upload damage photos from a phone", "CLM-143 See repairer options by postcode", "CLM-144 Track claim status without calling", "CLM-145 Fraud score runs before acceptance", "CLM-146 Hand off complex claims to a consultant with context"]),
+   sec("Non-functional", items=["Photo upload to 10MB, resumable", "WCAG 2.2 AA", "Fraud scoring under 500ms", "Works on 3G connections"])]},
+ "VW_OPEX_VAR": {"fields": {"Schema": "Sandbox", "Rows": "142", "Grain": "Cost centre \u00d7 month", "Sources": "ERP GL actuals, EPM forecast", "Refreshed": "Today 07:00"},
+  "sections": [sec("Definition", items=["actual_amount \u2212 forecast_amount AS variance", "variance / forecast_amount AS variance_pct", "Joined on cost_centre and period", "Excludes capitalised project codes"]),
+   sec("Quality checks", items=["Row counts match GL control totals", "No unmapped cost centres this month"])]},
+ "FIN-VAR-10": {"fields": {"Period": "October", "Variance": "+6% ($820k)", "Prepared for": "CFO", "Status": "Draft", "Data quality": "All checks passing"},
+  "sections": [sec("Summary", text="October operating costs are $820k (6%) over forecast. Two drivers explain 80% of the gap; both are known and manageable."),
+   sec("Drivers", items=["Cloud spend +$410k: new analytics workloads, growth 14% vs 3% assumed", "Contractors +$260k: delayed permanent hiring", "Other +$150k: spread across 40 cost centres, no pattern"]),
+   sec("Actions", table=[["Action", "Owner", "Due"], ["Reforecast cloud at 14% growth", "FP&A", "Friday"], ["Contractor ramp-down plan", "CTO office", "Next sprint"], ["Re-tag analytics workloads for showback", "Platform team", "Month-end"]])]},
+ "RULES-6": {"fields": {"Rules": "6", "Expected auto-match": "About 870 lines a month", "Control": "Match only; approvals unchanged", "Created by": "Business analysis agent, approved by you"},
+  "sections": [sec("Rules", table=[["Rule", "Supplier", "Matches on"], ["R1", "CloudCo", "Memo contains CLOUDCO, amount \u00b12%"], ["R2", "FreightCo", "Reference starts FR-"], ["R3", "OfficeHub", "Exact amount, weekly"], ["R4", "Insurer", "Policy number in memo"], ["R5", "Utilities", "Account number match"], ["R6", "Telco", "Account number match"]]),
+   sec("Controls kept", items=["Rules suggest matches; a person still reconciles", "No rule touches payments or approvals", "Audit trail records every auto-match"])]},
+ "CLOSE-4D": {"fields": {"Owner": "Finance Manager", "Effective": "Next month-end", "Previous close": "8 days", "Target": "4 days"},
+  "sections": [sec("Steps", items=["Day 1: bank rules and auto-match, exceptions worked", "Day 2: accruals, prepayments, intercompany", "Day 3: review, adjustments, variance notes", "Day 4: sign-off and reporting pack"]),
+   sec("Sign-offs", items=["Reconciliations: senior accountant", "Journals over $50k: Financial Controller", "Final pack: CFO"])]},
+ "MEM-33": {"fields": {"Space": "Membership", "Status": "Option chosen: flexi pack", "Target": "4,200 lapsing family members", "Decision": "Head of Membership"},
+  "sections": [sec("Why family members lapse", items=["Attended fewer than 4 games last season", "Fixture clashes with junior sport", "Cost per use feels high for partial attendance"]),
+   sec("Options", table=[["Option", "Cost to club", "Modelled uptake"], ["Flexi 5-game family pack", "Low", "31%"], ["Free junior clinic with renewal", "Medium", "18%"], ["Monthly payments, no fee", "Low", "24%"]]),
+   sec("Decision", text="Run the flexi pack as the lead offer, with monthly payments available at checkout.")]},
+ "CMP-2207": {"fields": {"Audience": "4,200 members", "Channel": "Email, then SMS to non-openers", "Offer": "Flexi 5-game family pack", "Send": "Tuesday 10am", "Exclusions": "Hardship flags, unsubscribed, renewed", "Status": "Draft"},
+  "sections": [sec("Message preview", text="Hi {first_name}, you were there for the big ones last season. This year, pick your 5: one family pass, any 5 home games, junior clinic included."),
+   sec("Journey", items=["Day 0: email to all 4,200", "Day 3: SMS to non-openers", "Day 10: call list of high-tenure members to the service team"]),
+   sec("Measurement", items=["Target: 31% uptake (1,300 renewals)", "Holdout group of 400 to measure true lift"])]},
+ "BRD-grants": {"fields": {"Sessions": "3 co-design workshops", "Participants": "10 community groups", "Facilitator": "Service experience design agent"},
+  "sections": [sec("Changes agreed", items=["Replace the budget table with guided questions", "Save and return at any step", "Plain-language eligibility check up front", "Reuse documents from previous applications", "Autosave with visible confirmation", "Status tracker after submission"])]},
+ "REC-2026-118": {"fields": {"Classification": "Program records", "Retention": "7 years after program close", "Access": "Program team", "Filed by": "Business analysis agent, approved by you"},
+  "sections": [sec("Contents", items=["Decision memo: form redesign approved", "Service blueprint export", "Co-design consultation notes (10 groups)", "Privacy assessment for the guided budget questions"])]},
+ "GOV-71": {"fields": {"Approved by": "Privacy officer", "Review": "Each semester", "Status": "Approved", "Opt-out": "Available to all students"},
+  "sections": [sec("Conditions", items=["Use LMS activity and enrolment data only", "Purpose: offering support, never penalties or progression decisions", "Advisors see a flag and a reason, never raw activity logs", "No individual-level data leaves the SIS or LMS", "Students can opt out; opt-outs reviewed weekly"]),
+   sec("Data used", table=[["Source", "Fields", "Purpose"], ["LMS", "Last login, submissions", "Early-support flag"], ["SIS", "Enrolment status, study load", "Context for advisors"]])]},
+ "OUT-W5": {"fields": {"Students": "212", "Owner": "Student advisors", "Due": "Friday", "Script": "Supportive check-in v2", "Opt-outs excluded": "Yes"},
+  "sections": [sec("Breakdown", table=[["Faculty", "Students"], ["Business", "61"], ["Engineering", "54"], ["Arts", "49"], ["Science", "48"]]),
+   sec("Task template", items=["Reason for flag, in plain words", "Suggested opener: check in, don't check up", "Links: study support, counselling, financial help", "Outcome field feeds next week's review"])]},
+ "OPS-LE-14": {"fields": {"Space": "Operations", "Data": "De-identified extract only", "Status": "For command review", "Author": "Business analysis agent"},
+  "sections": [sec("Finding", text="Weekend P1 response times slip by 3.5 minutes between 10pm and 2am. Unit availability drops 22% during the 11pm shift changeover."),
+   sec("Options", table=[["Option", "Coverage gain at 23:00", "Cost"], ["Stagger changeover by 30 min", "+18%", "Nil"], ["Hold 2 units through changeover", "+9%", "Overtime"], ["Move weekend changeover to 9pm", "+15%", "Roster change"]]),
+   sec("Consultation needed", items=["Workforce representatives on roster options", "WHS review of extended shifts", "4-week trial with weekly response-time review"])]},
+}
+
+def apply_enrichment():
+    for d in D:
+        for st in d["scenario"]["steps"]:
+            for a in st["actions"]:
+                art_ = a.get("artefact")
+                if art_ and art_["id"] in ENRICH:
+                    e = ENRICH[art_["id"]]
+                    art_["fields"] = {**art_.get("fields", {}), **e.get("fields", {})}
+                    if "sections" in e: art_["sections"] = e["sections"]
+
 def main():
+    apply_enrichment()
     ids = {re.sub(r"^-|-$", "", re.sub(r"[^a-z0-9]+", "-", r["role"].replace(" practitioners", "").lower())) for r in json.loads((ROOT / "data/roles.json").read_text())}
     caps = {c["name"] for cat in json.loads((ROOT / "data/capability-map.json").read_text())["categories"] for s in cat["subcategories"] for c in s["capabilities"]}
     for d in D:
