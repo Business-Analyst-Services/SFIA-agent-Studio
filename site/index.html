@@ -6,36 +6,42 @@
 <title>Muster</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: slim header (title + Scenario menu), then the chat as the hero with Muster's animated head,
-   settings inside the chat, a composer with voice input, and a tabbed Activity/Artefacts side panel */
+/* Layout: slim header (Scenario menu + drawer buttons), then a call canvas: join screen first,
+   Muster's 3D head as the big participant, captions-style feed, call controls with voice default
+   and a pop-out text bar; Behind the scenes / Artefacts live in a closable right drawer */
 :root{--bg:#f4f6f6;--panel:#fff;--ink:#14211f;--muted:#5b6b68;--line:#d9e1df;--accent:#0f6e64;--accent-soft:#dcefeb;--warm:#c2410c;--warn-soft:#fbecd9;--bad:#b3261e;
 --f-display:"Familjen Grotesk",system-ui,sans-serif;--f-body:"Public Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
 @media (prefers-color-scheme:dark){:root{--bg:#0e1514;--panel:#152120;--ink:#e3ecea;--muted:#93a6a2;--line:#273634;--accent:#5cc9b8;--accent-soft:#183a35;--warm:#ffb15c;--warn-soft:#3a2a16;--bad:#ff8a80;color-scheme:dark}}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
-.wrap{max-width:1240px;margin:0 auto;padding-block:14px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.top{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-bottom:12px}
-h1{font:700 22px/1.1 var(--f-display);margin:0}
-.sub{color:var(--muted);font-size:13px;margin:0;flex:1 1 260px}
-.tools{display:flex;gap:8px;align-items:center;margin-left:auto}
-.cur{font:500 11.5px var(--f-mono);color:var(--muted);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.btn{font:600 13.5px var(--f-body);border:1px solid var(--accent);background:var(--accent);color:var(--bg);border-radius:8px;padding:8px 14px;cursor:pointer}
+.wrap{max-width:1140px;margin:0 auto;padding-block:12px 36px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:10px}
+h1{font:700 21px/1.1 var(--f-display);margin:0}
+.sub{color:var(--muted);font-size:12.5px;margin:0;flex:1 1 200px}
+.tools{display:flex;gap:7px;align-items:center;margin-left:auto;flex-wrap:wrap}
+.cur{font:500 11px var(--f-mono);color:var(--muted);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn{font:600 13px var(--f-body);border:1px solid var(--accent);background:var(--accent);color:var(--bg);border-radius:8px;padding:7px 13px;cursor:pointer}
 .btn.ghost{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.btn .n{font:500 11px var(--f-mono);color:var(--accent);margin-left:4px}
+.btn.pulse{animation:badge .6s ease}
+@keyframes badge{40%{transform:translateY(-3px)}}
 .mwrap{position:relative}
-.smenu{position:absolute;top:calc(100% + 6px);right:0;width:min(400px,calc(100vw - 32px));max-height:min(560px,70vh);overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 44px rgba(0,0,0,.22);padding:8px;display:none;z-index:30}
+.smenu{position:absolute;top:calc(100% + 6px);right:0;width:min(400px,calc(100vw - 32px));max-height:min(560px,68vh);overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 44px rgba(0,0,0,.25);padding:8px;display:none;z-index:60}
 .smenu.open{display:block}
 .smenu h5{font:600 10.5px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 8px 4px}
 .smenu button{display:block;width:100%;text-align:left;font:inherit;border:0;background:none;color:var(--ink);border-radius:8px;padding:7px 10px;cursor:pointer}
 .smenu button:hover{background:var(--accent-soft)}
 .smenu button b{display:block;font-size:13.5px}
 .smenu button span{display:block;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.panes{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:start}
-@media(max-width:920px){.panes{grid-template-columns:1fr}}
-/* chat frame */
-.frame{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0;display:flex;flex-direction:column;height:calc(100vh - 170px);min-height:520px}
-@media(max-width:920px){.frame{height:min(78vh,680px);min-height:460px}}
-.mhead{display:flex;align-items:center;gap:12px;padding:10px 14px 8px;position:relative}
-.stage{flex:none;width:100px;height:100px;perspective:600px}
+/* ---- call canvas ---- */
+.callwrap{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);height:calc(100vh - 128px);min-height:560px}
+[data-ui=meet]{--mink:#e9f4f1;--mmute:#9fbcb5;--mline:rgba(255,255,255,.14);background:radial-gradient(1100px 480px at 50% -8%,#17423a,#0a1512 70%);border-color:#1c3630}
+.callstage{position:relative;display:flex;align-items:center;gap:12px;padding:10px 16px;flex:none}
+[data-ui=meet] .callstage{flex-direction:column;justify-content:center;padding:26px 12px 8px}
+.stage{flex:none;width:92px;height:92px;perspective:700px}
+[data-ui=meet] .stage{width:min(38vh,340px);height:min(38vh,340px)}
+.stage canvas{width:100%;height:100%;display:block}
 .head3d{width:100%;height:100%;transform-style:preserve-3d;transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .25s ease;animation:sway 6s ease-in-out infinite}
 @keyframes sway{0%,100%{translate:0 0}50%{translate:0 -3px}}
 .head3d svg{width:100%;height:100%;filter:drop-shadow(0 5px 7px rgba(0,0,0,.22))}
@@ -46,33 +52,36 @@ h1{font:700 22px/1.1 var(--f-display);margin:0}
 [data-state=listen] .earL{transform:rotate(6deg) scale(1.08)}[data-state=listen] .earR{transform:rotate(-6deg) scale(1.08)}
 [data-state=think] .pup{transform:translate(2px,-2.5px)}
 @media (prefers-reduced-motion:reduce){.head3d,.eye{animation:none}}
-.mid{min-width:0}
-.mid b{font:700 19px var(--f-display);display:block}
+.plabel{min-width:0}
+[data-ui=meet] .plabel{text-align:center}
+.plabel b{font:700 19px var(--f-display);display:block;color:var(--ink)}
+[data-ui=meet] .plabel b{color:var(--mink)}
 #mstatus{font:500 12px var(--f-mono);color:var(--accent);display:block;min-height:16px}
-.hbtns{margin-left:auto;display:flex;gap:6px}
-.hbtns button{width:38px;height:38px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;cursor:pointer;font-size:16px;display:grid;place-items:center}
-.hbtns button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.settings{position:absolute;top:calc(100% - 6px);right:12px;z-index:25;width:min(330px,calc(100vw - 48px));background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 44px rgba(0,0,0,.22);padding:12px 14px}
-.settings h5{font:600 10.5px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 5px}
-.settings h5:first-child{margin-top:0}
-.settings p{font-size:12px;color:var(--muted);margin:5px 0 0}
-.seg{display:flex;flex-wrap:wrap;gap:4px}
-.seg button{font:600 12.5px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px 10px;cursor:pointer}
-.seg button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.seg.lv button{width:31px;padding:5px 0;font-family:var(--f-mono)}
+[data-ui=meet] #mstatus{color:#7fd4c2}
+.youtile{position:absolute;right:14px;bottom:10px;width:92px;height:64px;border-radius:10px;background:#122922;border:1px solid var(--mline);display:grid;place-items:center;font:700 13px var(--f-body);color:var(--mink)}
+.youtile::after{content:"You";position:absolute;left:7px;bottom:4px;font:500 10px var(--f-mono);color:var(--mmute)}
+[data-ui=chat] .youtile{display:none}
 .fhead{display:flex;align-items:center;gap:8px;padding:7px 14px;border-block:1px solid var(--line);font-weight:600;font-size:13px;background:var(--bg)}
 .fhead small{color:var(--muted);font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fhead .ch{margin-left:auto;font:500 11px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
-.conv{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;scrollbar-width:thin}
+[data-ui=meet] .fhead{display:none}
+.conv{flex:1;padding:12px 16px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;scrollbar-width:thin;min-height:0}
+[data-ui=meet] .conv{width:min(780px,100%);margin:0 auto;color:var(--mink)}
 .msg{display:flex;gap:10px;align-items:flex-start;min-width:0}
 .av{flex:none;width:32px;height:32px;border-radius:8px;background:var(--accent-soft);display:grid;place-items:center;font:700 12px var(--f-body);color:var(--accent);overflow:hidden}
 .av svg{width:32px;height:32px}
+[data-ui=meet] .av{background:#143129}
 .mb{min-width:0;flex:1}
 .mb .who{font-weight:700;font-size:13.5px}.mb .who span{font:500 10px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:0 4px;margin-left:6px}
+[data-ui=meet] .mb .who{color:#9fd4c8}[data-ui=meet] .mb .who span{color:var(--mmute);border-color:var(--mline)}
 .mb .txt{white-space:pre-wrap;overflow-wrap:anywhere}
+[data-ui=meet] .msg .txt{display:inline-block;background:rgba(255,255,255,.07);border:1px solid var(--mline);border-radius:12px;padding:8px 12px;font-size:15px}
+[data-ui=meet] .msg.me .txt{background:rgba(92,201,184,.16)}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.chips button{font:600 12.5px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chips button{font:600 12.5px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:6px 13px;cursor:pointer}
 .chips button:hover{border-color:var(--accent);color:var(--accent)}
+[data-ui=meet] .chips button{background:rgba(255,255,255,.06);border-color:var(--mline);color:var(--mink)}
+[data-ui=meet] .chips button:hover{border-color:#7fd4c2;color:#7fd4c2}
 .ch-teams .msg.me{flex-direction:row-reverse}.ch-teams .msg.me .mb{text-align:right}
 .ch-teams .txt,.ch-web .txt{display:inline-block;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
 .ch-teams .msg.me .txt,.ch-web .msg.me .txt{background:var(--accent-soft);border-color:transparent}
@@ -80,29 +89,75 @@ h1{font:700 22px/1.1 var(--f-display);margin:0}
 .ch-email .meta{font-size:12px;color:var(--muted)}
 .ch-slack .thread{margin-left:42px;border-left:2px solid var(--line);padding-left:12px;display:flex;flex-direction:column;gap:12px}
 .card{border:1px solid var(--line);border-left:3px solid var(--warm);border-radius:8px;padding:9px 11px;background:var(--warn-soft);margin-top:4px;font-size:13.5px}
+[data-ui=meet] .card{background:rgba(255,177,92,.13);border-color:rgba(255,177,92,.4);border-left-color:#ffb15c;color:var(--mink)}
 .card code{font:500 12px var(--f-mono)}
 .card .btns{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
-.card button{font:600 12.5px var(--f-body);border-radius:6px;padding:4px 11px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--bg)}
+.card button{font:600 12.5px var(--f-body);border-radius:6px;padding:5px 12px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--bg)}
+[data-ui=meet] .card button{border-color:#5cc9b8;background:#5cc9b8;color:#0a1512}
 .card button.no{background:none;color:var(--accent)}
+[data-ui=meet] .card button.no{color:#7fd4c2}
 .card em{font-size:12.5px;color:var(--muted)}
+[data-ui=meet] .card em{color:var(--mmute)}
 .typing{font-size:12.5px;color:var(--muted);font-style:italic}
+[data-ui=meet] .typing,[data-ui=meet] .handoff{color:var(--mmute)}
 .handoff{font-size:12.5px;color:var(--muted);margin-left:42px}
 .result{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.composer{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
-.composer input{flex:1;min-width:0;font:inherit;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--panel);color:var(--ink)}
-.composer button{flex:none;width:42px;height:42px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;cursor:pointer;font-size:16px}
-.composer button.send{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.composer button[aria-pressed=true]{background:var(--bad);border-color:var(--bad);color:#fff;animation:pulse 1s infinite}
+/* composer pop-out + call controls */
+.composer{display:none;gap:8px;padding:10px 14px 4px}
+.composer.open{display:flex}
+.composer input{flex:1;min-width:0;font:inherit;border:1px solid var(--line);border-radius:12px;padding:10px 13px;background:var(--panel);color:var(--ink)}
+[data-ui=meet] .composer input{background:rgba(255,255,255,.08);border-color:var(--mline);color:var(--mink)}
+[data-ui=meet] .composer input::placeholder{color:var(--mmute)}
+.composer button.send{flex:none;width:44px;border:0;background:var(--accent);color:var(--bg);border-radius:12px;cursor:pointer;font-size:16px}
+.controls{position:relative;display:flex;justify-content:center;align-items:center;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+[data-ui=meet] .controls{border-top-color:var(--mline)}
+.controls>button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;display:grid;place-items:center}
+[data-ui=meet] .controls>button{background:rgba(255,255,255,.08);border-color:var(--mline);color:var(--mink)}
+.controls>button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.controls>button#mic[aria-pressed=true]{background:var(--bad);border-color:var(--bad);color:#fff;animation:pulse 1s infinite}
 @keyframes pulse{50%{opacity:.6}}
-/* side panel */
-.side{min-width:0}
-@media(min-width:920px){.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 58px);max-height:calc(100vh - 76px);display:flex;flex-direction:column}}
-.sidecard{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
-.tabs{display:flex;border-bottom:1px solid var(--line)}
-.tabs button{flex:1;font:600 13.5px var(--f-body);border:0;background:none;color:var(--muted);padding:11px;cursor:pointer;border-bottom:2px solid transparent}
+.controls>button#leave{width:auto;border-radius:999px;padding:0 16px;font:600 13px var(--f-body);background:#b3261e;border-color:#b3261e;color:#fff}
+.hint{position:absolute;left:14px;font:500 11px var(--f-mono);color:var(--muted)}
+[data-ui=meet] .hint{color:var(--mmute)}
+@media(max-width:640px){.hint{display:none}}
+.settings{position:absolute;bottom:64px;left:50%;transform:translateX(-50%);z-index:55;width:min(340px,calc(100vw - 40px));background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 44px rgba(0,0,0,.3);padding:12px 14px;max-height:min(430px,60vh);overflow-y:auto}
+.settings h5{font:600 10.5px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 5px}
+.settings h5:first-child{margin-top:0}
+.settings p{font-size:12px;color:var(--muted);margin:5px 0 0}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button{font:600 12.5px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px 10px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.seg.lv button{width:31px;padding:5px 0;font-family:var(--f-mono)}
+.row2{display:flex;gap:6px}
+#vsel{flex:1;min-width:0;font:600 12px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px}
+#vtest{font:600 12px var(--f-body);border:1px solid var(--accent);background:none;color:var(--accent);border-radius:6px;padding:5px 10px;cursor:pointer}
+/* join screen */
+.join{position:absolute;inset:0;z-index:45;display:none;align-items:center;justify-content:center;padding:18px;background:inherit}
+.join.show{display:flex}
+.jcard{width:min(460px,100%);text-align:center;background:rgba(255,255,255,.06);border:1px solid var(--mline,#d9e1df);border-radius:18px;padding:26px 22px;backdrop-filter:blur(4px)}
+[data-ui=chat] .jcard{background:var(--panel)}
+.jcard h2{font:700 24px var(--f-display);margin:10px 0 4px;color:var(--mink,#14211f)}
+[data-ui=meet] .jcard h2{color:var(--mink)}
+.jcard>p{font-size:13.5px;color:var(--mmute,#5b6b68);margin:0 0 16px}
+.jbig{display:block;width:100%;font:700 16px var(--f-display);border:0;border-radius:12px;background:var(--accent);color:#fff;padding:14px;cursor:pointer}
+[data-ui=meet] .jbig{background:#1fa98f;color:#06211b}
+.jbig small{display:block;font:500 11.5px var(--f-body);margin-top:3px;opacity:.85}
+.jor{font:500 11px var(--f-mono);color:var(--mmute,#5b6b68);margin:12px 0 8px;display:block}
+.jrow{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.jrow button{font:600 12.5px var(--f-body);border:1px solid var(--mline,#d9e1df);background:transparent;color:var(--mink,#14211f);border-radius:999px;padding:7px 13px;cursor:pointer}
+.jrow button:hover{border-color:#7fd4c2;color:#7fd4c2}
+/* drawer */
+.dback{position:fixed;inset:0;background:rgba(8,16,14,.4);z-index:118;display:none}
+.dback.show{display:block}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,94vw);background:var(--panel);border-left:1px solid var(--line);z-index:120;transform:translateX(103%);transition:transform .22s ease;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
+.drawer.open{transform:none;box-shadow:-24px 0 60px rgba(0,0,0,.3)}
+.dhead{display:flex;align-items:center;border-bottom:1px solid var(--line)}
+.tabs{display:flex;flex:1}
+.tabs button{flex:1;font:600 13.5px var(--f-body);border:0;background:none;color:var(--muted);padding:13px 8px;cursor:pointer;border-bottom:2px solid transparent}
 .tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
-.tabs .n{font:500 11px var(--f-mono);color:var(--accent);margin-left:4px}
-.tabbody{padding:14px 16px;overflow-y:auto;min-height:200px;scrollbar-width:thin}
+#dclose{border:0;background:none;color:var(--muted);font-size:19px;cursor:pointer;padding:10px 14px}
+.tabbody{padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));overflow-y:auto;scrollbar-width:thin;flex:1}
 .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .st{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px}
 .st .n{width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:700 12px var(--f-mono);display:grid;place-items:center}
@@ -133,11 +188,7 @@ h1{font:700 22px/1.1 var(--f-display);margin:0}
 @media (prefers-reduced-motion:reduce){.rl.working .d{animation:none}}
 .sum{display:flex;flex-wrap:wrap;gap:8px 20px;margin:10px 0 0;font-size:13px}.sum b{font:700 18px var(--f-display);display:block}
 .afgrid{display:grid;grid-template-columns:1fr;gap:8px}
-.stage canvas{width:100%;height:100%;display:block}
-.row2{display:flex;gap:6px}
-#vsel{flex:1;min-width:0;font:600 12px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px}
-#vtest{font:600 12px var(--f-body);border:1px solid var(--accent);background:none;color:var(--accent);border-radius:6px;padding:5px 10px;cursor:pointer}
-.plan{border:1px solid var(--line);border-radius:10px;margin-top:8px;overflow:hidden;background:var(--panel)}
+.plan{border:1px solid var(--line);border-radius:10px;margin-top:8px;overflow:hidden;background:var(--panel);color:var(--ink)}
 .ph{padding:10px 12px;border-top:1px solid var(--line)}
 .ph:first-child{border-top:0}
 .ph h4{margin:0;font:700 14px var(--f-display);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
@@ -150,29 +201,45 @@ h1{font:700 22px/1.1 var(--f-display);margin:0}
 .ph .gate b{color:var(--ink)}
 .muted{color:var(--muted);font-size:13px}
 .empty{color:var(--muted);font-size:13.5px}
-.live{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px 16px 8px}
+[data-ui=meet] .empty{color:var(--mmute)}
+.live{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px 16px 8px}
 .live summary{font:700 15px var(--f-display);padding:10px 0;cursor:pointer}
 .live .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
 .live input{font:inherit;border:1px solid var(--line);border-radius:7px;padding:8px 10px;background:var(--panel);color:var(--ink);min-width:0;flex:1 1 220px}
 .live button{font:600 13px var(--f-body);border:0;background:var(--accent);color:var(--bg);border-radius:7px;padding:8px 14px;cursor:pointer}
 .live .out{white-space:pre-wrap;font-size:14px;margin:8px 0}
 .live a{color:var(--accent)}
-button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="top">
- <div><h1>Muster</h1></div>
- <p class="sub">The IT helper with 75 SFIA experts on call. A scripted demo: speak or type a request, pick a scenario, or ask for a delivery plan.</p>
+ <h1>Muster</h1>
+ <p class="sub">Your IT crew-wrangler — 75 SFIA experts one whistle away.</p>
  <div class="tools"><span class="cur" id="cur"></span>
   <span class="mwrap"><button class="btn ghost" id="scenbtn" aria-haspopup="true" aria-expanded="false">Scenario ▾</button><div class="smenu" id="smenu" role="menu"></div></span>
+  <button class="btn ghost" id="d-act" type="button">Behind the scenes</button>
+  <button class="btn ghost" id="d-art" type="button">Artefacts<span class="n" id="afn">0</span></button>
   <button class="btn" id="play" type="button">Replay</button></div>
 </header>
-<div class="panes">
- <section class="frame" aria-label="Chat with Muster">
-  <div class="mhead">
-   <div class="stage"><div class="head3d" id="head" data-state="idle"><svg viewBox="0 0 100 100" aria-hidden="true">
+<section class="callwrap" id="callwrap" data-ui="meet" aria-label="Session with Muster">
+ <div class="join show" id="join">
+  <div class="jcard">
+   <h2>Muster is ready for you</h2>
+   <p>Join a live session and talk it through — or drop into chat, like it's Slack or email.</p>
+   <button class="jbig" data-chan="meet" type="button">🎥 Join the meeting<small>Voice session · like Teams, Zoom or Meet</small></button>
+   <span class="jor">— or work by text —</span>
+   <div class="jrow">
+    <button data-chan="slack" type="button"># Slack</button>
+    <button data-chan="teams" type="button">💬 Teams chat</button>
+    <button data-chan="email" type="button">✉️ Email</button>
+    <button data-chan="web" type="button">🌐 Intranet</button>
+   </div>
+  </div>
+ </div>
+ <div class="callstage">
+  <div class="stage"><div class="head3d" id="head" data-state="idle"><svg viewBox="0 0 100 100" aria-hidden="true">
     <defs><radialGradient id="kh" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#d9733d"/><stop offset="1" stop-color="#a84a22"/></radialGradient></defs>
     <g class="earL"><path d="M24 46 L18 6 L44 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2" stroke-linejoin="round"/><path d="M26 38 L22 15 L38 31 Z" fill="#e9a37a"/></g>
     <g class="earR"><path d="M76 46 L82 6 L56 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2" stroke-linejoin="round"/><path d="M74 38 L78 15 L62 31 Z" fill="#e9a37a"/></g>
@@ -183,39 +250,31 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{o
     <path d="M44 60 C44 56 56 56 56 60 C56 64 52 66 50 66 C48 66 44 64 44 60Z" fill="#1d2b29"/>
     <path id="mo" d="M42 71 Q50 77 58 71" fill="#8c2f3f" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg></div></div>
-   <div class="mid"><b>Muster</b><span id="mstatus">ready when you are</span></div>
-   <div class="hbtns">
-    <button id="snd" type="button" aria-pressed="false" title="Read replies aloud" aria-label="Read replies aloud">🔈</button>
-    <button id="gear" type="button" aria-pressed="false" title="Settings: channel, SFIA level, approvals" aria-label="Settings">⚙</button>
-   </div>
-   <div class="settings" id="settings" hidden>
-    <h5>Channel the request arrives in</h5><div class="seg" id="chan"></div>
-    <h5>Agent SFIA level</h5><div class="seg lv" id="lvl"></div><p id="lvlcap"></p>
-    <h5>Approvals in end-to-end runs</h5><div class="seg" id="appr"></div>
-    <h5>Muster's voice</h5><div class="row2"><select id="vsel" aria-label="Muster's voice"></select><button type="button" id="vtest">Test</button></div>
-    <p>Voices come from your browser. Muster picks the deepest Australian or British male voice it can find; choose another if your machine has a better one.</p>
-    <p>Changing a setting replays the current scenario so you can see the difference.</p>
-   </div>
+  <div class="plabel"><b>Muster</b><span id="mstatus">waiting for you to join</span></div>
+  <div class="youtile" id="youtile" aria-hidden="true"></div>
+ </div>
+ <div class="fhead" id="fhead"><span>Say g'day</span><span class="ch">Demo</span></div>
+ <div class="conv" id="conv" aria-live="polite"></div>
+ <form class="composer" id="composer">
+  <input id="say" placeholder="Type to Muster…" aria-label="Type to Muster" autocomplete="off">
+  <button type="submit" class="send" aria-label="Send">➤</button>
+ </form>
+ <div class="controls">
+  <span class="hint" id="hint"></span>
+  <div class="settings" id="settings" hidden>
+   <h5>Where the conversation happens</h5><div class="seg" id="chan"></div>
+   <h5>Agent SFIA level</h5><div class="seg lv" id="lvl"></div><p id="lvlcap"></p>
+   <h5>Approvals in end-to-end runs</h5><div class="seg" id="appr"></div>
+   <h5>Muster's voice</h5><div class="row2"><select id="vsel" aria-label="Muster's voice"></select><button type="button" id="vtest">Test</button></div>
+   <p>Voices come from your browser. Muster picks the deepest Australian or British male voice it can find; choose another if your machine has a better one.</p>
   </div>
-  <div class="fhead" id="fhead"><span>Say g'day</span><span class="ch">Demo</span></div>
-  <div class="conv" id="conv" aria-live="polite"></div>
-  <form class="composer" id="composer">
-   <button type="button" id="mic" aria-pressed="false" title="Speak to Muster" aria-label="Speak to Muster">🎙</button>
-   <input id="say" placeholder="Tell Muster what you need…" aria-label="Tell Muster what you need" autocomplete="off">
-   <button type="submit" class="send" aria-label="Send">➤</button>
-  </form>
- </section>
- <aside class="side">
-  <div class="sidecard">
-   <div class="tabs" role="tablist">
-    <button role="tab" id="t-act" aria-selected="true">Behind the scenes</button>
-    <button role="tab" id="t-art" aria-selected="false">Artefacts<span class="n" id="afn">0</span></button>
-   </div>
-   <div class="tabbody" id="b-act"><ol class="steps" id="steps"><li class="empty" style="list-style:none">Routing, SFIA checks, approvals and the audit trail will appear here as Muster works.</li></ol></div>
-   <div class="tabbody" id="b-art" hidden><div class="afgrid" id="afgrid"><p class="empty">Records, pages and files the agents create land here.</p></div></div>
-  </div>
- </aside>
-</div>
+  <button id="mic" type="button" aria-pressed="false" title="Talk to Muster" aria-label="Talk to Muster">🎙</button>
+  <button id="kb" type="button" aria-pressed="false" title="Type instead" aria-label="Type instead">⌨</button>
+  <button id="snd" type="button" aria-pressed="false" title="Read replies aloud" aria-label="Read replies aloud">🔈</button>
+  <button id="gear" type="button" aria-pressed="false" title="Settings" aria-label="Settings">⚙</button>
+  <button id="leave" type="button" title="Leave the session">Leave</button>
+ </div>
+</section>
 <details class="live">
  <summary>Connect this page to your own Muster server</summary>
  <p class="muted">The demo is scripted. Once the assistant is deployed (see <a href="integrate.html">Integrate</a>), enter its address and web token to chat with the real thing. The server must allow this site in <code>MUSTER_ALLOWED_ORIGINS</code>. Nothing you type here is stored.</p>
@@ -224,6 +283,15 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{o
  <div class="out" id="lout"></div>
 </details>
 </div>
+<div class="dback" id="dback"></div>
+<aside class="drawer" id="drawer" aria-label="Behind the scenes and artefacts">
+ <div class="dhead"><div class="tabs" role="tablist">
+  <button role="tab" id="t-act" aria-selected="true">Behind the scenes</button>
+  <button role="tab" id="t-art" aria-selected="false">Artefacts</button></div>
+  <button id="dclose" type="button" aria-label="Close panel">✕</button></div>
+ <div class="tabbody" id="b-act"><ol class="steps" id="steps"><li class="empty" style="list-style:none">Routing, SFIA checks, approvals and the audit trail will appear here as Muster works.</li></ol></div>
+ <div class="tabbody" id="b-art" hidden><div class="afgrid" id="afgrid"><p class="empty">Records, pages and files the agents create land here.</p></div></div>
+</aside>
 <script src="vendor/three.min.js"></script>
 <script src="artefacts.js"></script>
 <script>
@@ -234,7 +302,7 @@ const RK={read:0,write:1,destructive:2};
 function decideFor(risk,tool){const sorId=tool.split(/[.:]/)[0];const sor=dpack&&dpack.systemsOfRecord.find(x=>x.id===sorId);
  if(sor&&RK[risk]>RK[sor.maxRisk])return 'sor-never';const d=POL[level][risk];if(d==='never')return 'never';if(sor&&risk!=='read')return 'approve';return d}
 const DEC={auto:"runs on its own",approve:"needs approval",never:"not allowed at this level"};
-const CHANNELS={slack:["Slack","# it-help"],teams:["Teams","Chat with Muster"],email:["Email","ask-muster@your-org.com"],web:["Intranet","IT help widget"]};
+const CHANNELS={meet:["Meeting","Live session with Muster"],slack:["Slack","# it-help"],teams:["Teams","Chat with Muster"],email:["Email","ask-muster@your-org.com"],web:["Intranet","IT help widget"]};
 const SCEN=[
 {id:"outage",label:"Portal outage",user:"Priya Nair",msg:"The staff portal has been down since 7am, nobody can log in",cap:"Incident and problem management",
  say:"Ouch — since 7am? Right, no mucking about. I'm getting Service Operations and our SRE on this right now.",
@@ -265,11 +333,12 @@ const P={
  ok:["Beauty — running it now.","Good call, on it.","Done — consider it handled.","Righto, executing."],
  no:["No worries — leaving that one well alone.","Fair enough, I won't touch it.","Righto, skipping that one."],
  wrap:["That's a wrap. ","All sorted. ","And we're done — nice work, team. "],
+ offer:["Righto, I've got just the thing lined up:","Here's what I'd put on the board:","Good pick — this one's a ripper:"],
  plan:["Can do — here's how I'd crew it.","Good thinking: map first, run second.","Righto, here's the game plan."],
  more:["Anything else I can muster for you?","Want to see another? Pick a scenario up top, or just tell me.","Happy to run another — type below or hit the scenario menu."]};
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 let D=null,R=[],ROLE={},MCPC={},MCPM={};
-let DOMS=[],dpack=null,scen=null,chan="slack",level=4,run=0,mode="scenario",VS=[],stream=null,autoApprove=false,started=false;
+let DOMS=[],dpack=null,scen=null,chan="meet",level=4,run=0,mode="scenario",VS=[],stream=null,autoApprove=false,started=false;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const rid=r=>r.replace(/ practitioners$/,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -389,7 +458,7 @@ function narrate(text){
   if(voice)u.voice=voice;u.rate=1.02;u.pitch=voicePitch;u.onstart=()=>{Head.tts=true};u.onend=()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)Head.tts=false};
   speechSynthesis.speak(u)}
  else Head.mouthFor(text)}
-$('#snd').onclick=()=>{soundOn=!soundOn;$('#snd').setAttribute('aria-pressed',String(soundOn));$('#snd').textContent=soundOn?'🔊':'🔈';
+$('#snd').onclick=()=>{soundOn=!soundOn;syncSnd();
  if(!soundOn&&'speechSynthesis' in window){speechSynthesis.cancel();Head.hush()}
  if(soundOn)narrate("Voice is on. I'll read my replies out loud.")};
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null,listening=false;
@@ -403,31 +472,68 @@ $('#mic').onclick=()=>{if(!rec)return;if(listening){rec.stop();return}
  try{rec.start();listening=true;$('#mic').setAttribute('aria-pressed','true');Head.set('listen');status('listening…')}catch(e){stopMic()}};
 
 /* ---------- Settings, scenario menu, tabs ---------- */
+/* ---------- Session modes, join screen, drawer, text pop-out ---------- */
+function applyUI(){const w=$('#callwrap');w.dataset.ui=chan==='meet'?'meet':'chat';
+ $('#kb').hidden=chan!=='meet';$('#leave').hidden=chan!=='meet';
+ $('#composer').classList.toggle('open',chan!=='meet');$('#kb').setAttribute('aria-pressed','false');
+ $('#hint').textContent=chan==='meet'?'voice first — ⌨ to type':'';
+ syncSnd()}
+function syncSnd(){$('#snd').setAttribute('aria-pressed',String(soundOn));$('#snd').textContent=soundOn?'🔊':'🔈'}
+function joinAs(c){chan=c;if(c==='meet'&&'speechSynthesis' in window)soundOn=true;applyUI();drawSettings();
+ $('#join').classList.remove('show');greet();
+ if(c==='meet')narrateOnly("G'day! Good to see you. What are we sorting out today?")}
+function showJoin(){run++;Head.hush();if('speechSynthesis' in window)speechSynthesis.cancel();
+ $('#conv').innerHTML='';$('#join').classList.add('show');started=false;$('#cur').textContent='';status('waiting for you to join')}
+document.querySelectorAll('#join [data-chan]').forEach(b=>b.onclick=()=>joinAs(b.dataset.chan));
+$('#leave').onclick=()=>showJoin();
+$('#kb').onclick=()=>{const c=$('#composer');const open=!c.classList.contains('open');c.classList.toggle('open',open);$('#kb').setAttribute('aria-pressed',String(open));if(open)$('#say').focus()};
+function drawerOpen(tab){$('#drawer').classList.add('open');$('#dback').classList.add('show');if(tab)tabSel(tab)}
+function drawerClose(){$('#drawer').classList.remove('open');$('#dback').classList.remove('show')}
+function tabSel(which){const act=which==='act';$('#t-act').setAttribute('aria-selected',String(act));$('#t-art').setAttribute('aria-selected',String(!act));$('#b-act').hidden=!act;$('#b-art').hidden=act}
+$('#d-act').onclick=()=>drawerOpen('act');$('#d-art').onclick=()=>drawerOpen('art');
+$('#t-act').onclick=()=>tabSel('act');$('#t-art').onclick=()=>tabSel('art');
+$('#dclose').onclick=drawerClose;$('#dback').onclick=drawerClose;
+
 function seg(id,items,cur,on){const el=$(id);el.innerHTML='';items.forEach(([k,l])=>{const b=document.createElement('button');b.type='button';b.textContent=l;b.setAttribute('aria-pressed',k===cur);b.onclick=()=>on(k);el.appendChild(b)})}
 function drawSettings(){
- seg('#chan',Object.entries(CHANNELS).map(([k,v])=>[k,v[0]]),chan,k=>{chan=k;drawSettings();if(started)replay()});
+ seg('#chan',Object.entries(CHANNELS).map(([k,v])=>[k,v[0]]),chan,k=>{chan=k;applyUI();drawSettings();if(started)replay()});
  seg('#lvl',[1,2,3,4,5,6,7].map(n=>[n,String(n)]),level,k=>{level=k;drawSettings();if(started)replay()});
  document.querySelectorAll('#lvl button').forEach((b,i)=>b.title=`Level ${i+1}: ${LV[i+1]}`);
  $('#lvlcap').textContent=`Level ${level} — ${LV[level]}. ${level<3?'Agents only look; they change nothing.':level<5?'Reads run on their own; changes wait for you.':'Routine changes run; destructive steps still wait for you.'}`;
  seg('#appr',[['ask','Ask me first'],['auto','Auto-approve']],autoApprove?'auto':'ask',k=>{autoApprove=k==='auto';drawSettings();if(started&&mode==='stream')replay()});
 }
 $('#gear').onclick=()=>{const s=$('#settings');s.hidden=!s.hidden;$('#gear').setAttribute('aria-pressed',String(!s.hidden))};
-document.addEventListener('click',e=>{if(!$('.mhead').contains(e.target)){$('#settings').hidden=true;$('#gear').setAttribute('aria-pressed','false')}
+document.addEventListener('click',e=>{if(!$('#gear').contains(e.target)&&!$('#settings').contains(e.target)){$('#settings').hidden=true;$('#gear').setAttribute('aria-pressed','false')}
  if(!$('#scenbtn').contains(e.target)&&!$('#smenu').contains(e.target)){$('#smenu').classList.remove('open');$('#scenbtn').setAttribute('aria-expanded','false')}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#settings').hidden=true;$('#smenu').classList.remove('open')}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#settings').hidden=true;$('#smenu').classList.remove('open');drawerClose()}});
 $('#scenbtn').onclick=()=>{const m=$('#smenu');m.classList.toggle('open');$('#scenbtn').setAttribute('aria-expanded',String(m.classList.contains('open')))};
 function menuItem(b,label,sub,fn){const el=document.createElement('button');el.type='button';el.role='menuitem';el.innerHTML=`<b>${esc(label)}</b><span>${esc(sub)}</span>`;el.onclick=()=>{$('#smenu').classList.remove('open');fn()};b.appendChild(el)}
 function buildMenu(){const m=$('#smenu');m.innerHTML='<h5>Quick requests</h5>';
- SCEN.filter(s=>s.id!=='custom').forEach(s=>menuItem(m,s.label,s.msg,()=>runScenario(s)));
+ SCEN.filter(s=>s.id!=='custom').forEach(s=>menuItem(m,s.label,s.msg,()=>propose('scenario',{s})));
  m.insertAdjacentHTML('beforeend','<h5>End to end: value streams</h5>');
- VS.filter(v=>!v.domain).forEach(v=>menuItem(m,v.name,v.why,()=>runStream(v,null)));
+ VS.filter(v=>!v.domain).forEach(v=>menuItem(m,v.name,v.why,()=>propose('stream',{v,pack:null})));
  m.insertAdjacentHTML('beforeend','<h5>End to end: by industry</h5>');
- DOMS.forEach(x=>menuItem(m,x.name,x.scenario.name,()=>runStream(VS.find(v=>v.domain===x.id),x)));
+ DOMS.forEach(x=>menuItem(m,x.name,x.scenario.name,()=>propose('stream',{v:VS.find(v=>v.domain===x.id),pack:x})));
  m.insertAdjacentHTML('beforeend','<h5>Delivery plans: teams and artefacts over a lifecycle</h5>');
  VS.filter(v=>!v.domain).forEach(v=>menuItem(m,'Plan: '+v.name,'Who works together, what they produce, and the gates',()=>showPlan(v,null)));}
 function tab(which){const act=which==='act';$('#t-act').setAttribute('aria-selected',String(act));$('#t-art').setAttribute('aria-selected',String(!act));$('#b-act').hidden=!act;$('#b-art').hidden=act}
 $('#t-act').onclick=()=>tab('act');$('#t-art').onclick=()=>tab('art');
 
+/* ---------- Offer a scenario in chat instead of running straight away ---------- */
+function propose(kind,payload,userText){
+ if(userText)bubble('You',userText);
+ const isStream=kind==='stream';
+ const name=isStream?((payload.pack?payload.pack.name+': ':'')+payload.v.name):payload.s.label;
+ const detail=isStream?`${payload.v.why} ${payload.v.steps.length} handoffs, start to finish.`:`“${payload.s.msg}”`;
+ const b=mup(`${pick(P.offer)} ${name}. ${detail} Want me to crack on${isStream?", or map the plan first so you can see who does what":""}?`);
+ const chips=document.createElement('div');chips.className='chips';
+ const mk=(l,fn)=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)};
+ mk('▶ Run it',()=>{isStream?runStream(payload.v,payload.pack,userText?'You':undefined,userText||undefined):runScenario(payload.s,userText?'You':undefined,userText||undefined)});
+ if(isStream)mk('🗺 Plan it first',()=>showPlan(payload.v,payload.pack));
+ mk('Something else…',()=>{$('#scenbtn').click()});
+ b.querySelector('.mb').appendChild(chips);
+ status('your call, boss');
+}
 function runScenario(s,overrideUser,overrideMsg){mode='scenario';dpack=null;scen=(overrideMsg?{...s,user:overrideUser||'You',msg:overrideMsg}:s);started=true;$('#cur').textContent=s.label;play()}
 function runStream(v,pack,overrideUser,overrideMsg){mode='stream';dpack=pack;stream=(overrideMsg?{...v,trigger:{user:overrideUser||'You',msg:overrideMsg}}:v);started=true;$('#cur').textContent=(pack?pack.name+': ':'')+v.name;play()}
 function replay(){play()}
@@ -506,7 +612,7 @@ function matchRequest(text){const t=(' '+text.toLowerCase()+' ');
 function send(text){text=(text||$('#say').value).trim();if(!text)return;$('#say').value='';
  const m=matchRequest(text);
  if(!m){bubble('You',text);const b=bubble('Muster',"Hmm, that one's outside my demo script — in the real deployment I'd route it by SFIA skill and have a crack. Here, try me on an outage, a new system, an audit, a release… or pick anything from the scenario menu up top.",{bot:true});narrate(b.querySelector('.txt').textContent);return}
- if(m.kind==='plan')showPlan(m.v,m.pack,text);else if(m.kind==='scenario')runScenario(m.s,'You',text);else runStream(m.v,m.pack||null,'You',text)}
+ if(m.kind==='plan')showPlan(m.v,m.pack,text);else if(m.kind==='scenario')propose('scenario',{s:m.s},text);else propose('stream',{v:m.v,pack:m.pack||null},text)}
 $('#composer').onsubmit=e=>{e.preventDefault();send()};
 
 /* ---------- Shared chat pieces ---------- */
@@ -536,17 +642,18 @@ function bubble(who,text,{bot=false,into=null}={}){
  const meta=chan==='email'?`<div class="meta">${bot?'From: Muster &lt;ask-muster@your-org.com&gt;':'From: '+esc(who)} · ${bot?'draft reply':'to ask-muster'}</div>`:'';
  m.innerHTML=`${av}<div class="mb"><div class="who">${esc(bot?'Muster':who)}${bot?'<span>APP</span>':''}</div>${meta}<div class="txt"></div></div>`;
  m.querySelector('.txt').textContent=text;(into||$('#conv')).appendChild(m);return m}
+function narrateOnly(text){narrate(text)}
 function mup(text,into){const b=bubble('Muster',text,{bot:true,into});narrate(text);return b}
 function stepEl(n,title,html){const li=document.createElement('li');li.className='st';li.innerHTML=`<span class="n">${n}</span><div><b>${esc(title)}</b><p>${html}</p></div>`;$('#steps').appendChild(li);return li.querySelector('div')}
 function resetPanels(){$('#afgrid').innerHTML='<p class="empty">Records, pages and files the agents create land here.</p>';$('#afn').textContent='0';$('#steps').innerHTML='';if('speechSynthesis' in window)speechSynthesis.cancel();Head.hush()}
-function addArtefact(a){const g=$('#afgrid');const e=g.querySelector('.empty');if(e)e.remove();g.prepend(Artefacts.card(a,true));$('#afn').textContent=g.querySelectorAll('.af-card').length}
+function addArtefact(a){const g=$('#afgrid');const e=g.querySelector('.empty');if(e)e.remove();g.prepend(Artefacts.card(a,true));$('#afn').textContent=g.querySelectorAll('.af-card').length;const d=$('#d-art');d.classList.remove('pulse');void d.offsetWidth;d.classList.add('pulse')}
 
 /* ---------- Greeting ---------- */
 function greet(){
  $('#conv').innerHTML='';setChannelBar('');$('#fhead').firstChild.textContent="Say g'day";
  const b=mup("G'day! Muster here — resident kelpie and chief crew-wrangler. I've got 75 SFIA specialists one whistle away: analysts, architects, engineers, security folk, the lot. Tell me what needs doing — type it, say it with the mic, or tap one of these and watch us work.");
  const chips=document.createElement('div');chips.className='chips';
- [...SCEN.map(s=>[s.label,()=>runScenario(s)]),['Run an incident end to end',()=>runStream(VS.find(v=>v.id==='incident-to-resolution'),null)],['Plan a build lifecycle',()=>showPlan(VS.find(v=>v.id==='idea-to-service'),null,'Plan a build lifecycle for me')],['Pick an industry…',()=>{$('#scenbtn').click();$('#scenbtn').focus()}]].forEach(([l,fn])=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)});
+ [...SCEN.map(s=>[s.label,()=>propose('scenario',{s})]),['Run an incident end to end',()=>propose('stream',{v:VS.find(v=>v.id==='incident-to-resolution'),pack:null})],['Plan a build lifecycle',()=>showPlan(VS.find(v=>v.id==='idea-to-service'),null,'Plan a build lifecycle for me')],['Pick an industry…',()=>{$('#scenbtn').click();$('#scenbtn').focus()}]].forEach(([l,fn])=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)});
  b.querySelector('.mb').appendChild(chips);status('ready when you are');
 }
 
@@ -694,10 +801,11 @@ Promise.all(['data/capability-map.json','data/roles.json','data/mcp-catalog.json
  const g=(q.get('cap')||q.get('role'))&&generic({cap:q.get('cap'),role:q.get('role')});
  const sq=VS.find(v=>v.id===q.get('stream'));
  const dq=DOMS.find(x=>x.id===q.get('domain'));
- if(g){SCEN.push(g);runScenario(g)}
- else if(dq)runStream(VS.find(v=>v.domain===dq.id),dq);
- else if(sq)runStream(sq,sq.domain?DOMS.find(x=>x.id===sq.domain):null);
- else greet();
+ applyUI();
+ if(g){SCEN.push(g);chan='slack';applyUI();drawSettings();$('#join').classList.remove('show');runScenario(g)}
+ else if(dq){chan='slack';applyUI();drawSettings();$('#join').classList.remove('show');runStream(VS.find(v=>v.domain===dq.id),dq)}
+ else if(sq){chan='slack';applyUI();drawSettings();$('#join').classList.remove('show');runStream(sq,sq.domain?DOMS.find(x=>x.id===sq.domain):null)}
+ else status('waiting for you to join');
 }).catch(e=>{$('#conv').innerHTML=`<p class="empty">Couldn't load the role data (${esc(e.message)}). Serve the site over HTTP rather than opening the file directly.</p>`});
 new MutationObserver(()=>{const c=$('#conv');c.scrollTop=c.scrollHeight}).observe($('#conv'),{childList:true,subtree:true});
 </script>
