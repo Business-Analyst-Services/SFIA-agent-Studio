@@ -1,36 +1,45 @@
 # SFIA Role Agent Studio
 
-Turns the SFIA Foundation's **SFIA 9 illustrative skills profiles** (March 2026) into AI agents: one agent per role, one orchestrator per role family, and MCP server recommendations for the tools each role uses.
+Turns the SFIA Foundation's **SFIA 9 illustrative skills profiles** (March 2026) into an AI agent workforce: one agent per role, one orchestrator per role family, an industry-agnostic capability model, and **Muster** — a kelpie-shaped IT helper that fronts the whole crew.
 
-**Live interface:** https://business-analyst-services.github.io/SFIA-agent-Studio/
+**Live site:** https://business-analyst-services.github.io/SFIA-agent-Studio/
+
+## Meet Muster (the front page)
+
+The site opens on the Muster demo — a call-style session with a full 3D low-poly kelpie sitting in an outback paddock:
+
+- **Join like a meeting.** A lobby offers *Join the meeting* (voice-first, Teams/Zoom/Meet style) or text modes styled as Slack, Teams chat, Email or an intranet widget.
+- **Talk or type.** Voice input uses the browser's speech recognition (Chrome/Edge); replies are read aloud with a deep, gruff voice by default. In the meeting, the 💬 button opens the in-call chat as a floating panel — conversation, approvals and typing live there, with live captions under Muster for voice-only use.
+- **Scenarios are offered, not fired.** Pick from the Scenario menu (quick requests, six end-to-end value streams, twelve industry scenarios) or just describe a problem — Muster proposes it with *Run it / Plan it first / Something else* chips.
+- **Delivery plans.** Ask Muster to "plan" any build and it maps the lifecycle — Discover, Design, Build, Test, Transition, Run — with the teams and agents per phase, the artefacts each produces, approval counts and phase gates, filed as a plan document.
+- **Governance on show.** Every tool action is classed read / write / destructive and gated by the agents' SFIA level and the industry pack's systems-of-record caps; approvals happen in the conversation, and the *Behind the scenes / Artefacts* drawer shows routing, the audit trail and high-fidelity previews of everything created (Jira issues, ServiceNow forms, PRs, dashboards…).
+- **Voice options.** Settings offer Gruff / Deep / Natural tones over your browser's voices, plus an optional ElevenLabs key for a properly gravelly Muster (voices load from your account; the key stays in your browser).
+
+Site navigation lives in the **Background** menu (top right): Capability map, Role agents, Value streams, Domains, Integrate, GitHub.
 
 ## What's in the repo
 
 | Path | What it is |
 |---|---|
-| `site/index.html` | **The main interface: the Muster demo.** Talk to Muster by text or voice (browser speech recognition), watch its animated head read replies aloud, pick quick requests, end-to-end value streams or industry scenarios from one menu, and set channel, SFIA level and approvals inside the chat. `?stream=`, `?domain=`, `?cap=` and `?role=` deep-link a run. `site/muster.html` redirects here. |
-| `site/value-streams.html` | Six end-to-end value streams (data in `data/value-streams.json`): each step's agent, capability, tools and handoff, with a button to run it in the Muster demo (`muster.html?stream=<id>`). Each write action carries an example artefact (incident, epic, business case, PR, change, release…) that the demo shows being created. |
-| `site/domains.html` | Domain packs for 12 industries (data in `data/domains.json`, built by `scripts/build_domains.py`): each industry's systems of record, the standards they speak, the MCP route, what agents may read, write with approval or never touch, and a scenario you can run in the Muster demo (`muster.html?domain=<id>`). |
-| `site/integrate.html` | How to plug Muster into Slack, Teams, email, intranets, Jira Service Management, ServiceNow, the REST API, and Rovo / Copilot Studio / Claude Code. |
+| `site/index.html` | **The Muster demo** described above. `?stream=`, `?domain=`, `?cap=` and `?role=` deep-link straight into a run; `site/muster.html` redirects here. |
 | `site/agents.html` | The role agent studio. Browse 75 roles, choose 5–7 skills, set a target SFIA level (1–7), and copy the agent prompt, agent JSON or orchestrator prompt. |
-| `data/roles.json` | 75 role profiles extracted from the PDF: family, description, example job titles, "look at these first" skills and "other skills to consider", each with code and level range. |
-| `data/mcp-catalog.json` | MCP servers with status (Official, Reference, Community, Build), purpose and source. |
-| `data/mcp-map.json` | Which servers are recommended for each role family, plus role-specific additions. |
+| `site/capability-map.html` | An IT capability model organised by SFIA 9 categories and subcategories, with all 75 roles placed on it and gaps called out (data in `data/capability-map.json`, built by `scripts/build_capability_map.py`). |
+| `site/value-streams.html` | Six end-to-end value streams (data in `data/value-streams.json`): each step's agent, capability, tools, artefacts and handoff, runnable in the demo. |
+| `site/domains.html` | Domain packs for 12 industries (data in `data/domains.json`, built by `scripts/build_domains.py`): systems of record, standards, MCP routes, read/write/never rules and a runnable scenario each. |
+| `site/integrate.html` | How to plug the Muster assistant into Slack, Teams, email, intranets, Jira Service Management, ServiceNow, the REST API, and Rovo / Copilot Studio / Claude Code. |
+| `site/vendor/three.min.js` | three.js (pinned, self-hosted) for the 3D Muster. |
+| `assistant/` | The deployable Muster service — see below and `assistant/README.md`. |
+| `data/roles.json` | 75 role profiles extracted from the PDF: family, description, example job titles, skills with codes and level ranges. |
+| `data/mcp-catalog.json` / `data/mcp-map.json` | MCP servers (status, purpose, source) and which are recommended per role family and role. |
 | `agents/*.md` | Generated role agents (75). Claude Code subagent format: copy into `.claude/agents/`. |
 | `orchestrators/*.md` | Generated family orchestrators (22) that route requests by SFIA skill code. |
 | `scripts/extract_profiles.py` | Rebuilds `data/roles.json` from the SFIA PDF. |
 | `scripts/build_agents.py` | Regenerates `agents/` and `orchestrators/` from the data. |
 
-## Muster: the assistant
-
-`assistant/` is a working service: **Muster**, a cheerful IT helper that lives in Slack, Teams, Gmail and the web, routes each request to the right SFIA role agent, and lets agents act through MCP tools within limits set by their SFIA level. See [assistant/README.md](assistant/README.md).
-
-The **SFIA capability role map** (`site/capability-map.html`, data in `data/capability-map.json`, built by `scripts/build_capability_map.py`) organises IT capabilities by SFIA 9 categories and subcategories, places all 75 roles on them, and shows the gaps and value-stream handoffs.
-
 ## Run locally
 
 ```bash
-mkdir -p _site && cp site/*.html site/*.js _site/ && cp -r data agents orchestrators _site/
+mkdir -p _site && cp site/*.html site/*.js _site/ && cp -r site/vendor data agents orchestrators _site/
 python3 -m http.server --directory _site 8000
 # open http://localhost:8000
 ```

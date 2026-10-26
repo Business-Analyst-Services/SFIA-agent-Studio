@@ -38,7 +38,7 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 .callwrap{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);height:calc(100vh - 128px);min-height:560px}
 [data-ui=meet]{--mink:#e9f4f1;--mmute:#9fbcb5;--mline:rgba(255,255,255,.14);background:radial-gradient(1100px 480px at 50% -8%,#17423a,#0a1512 70%);border-color:#1c3630}
 .callstage{position:relative;display:flex;align-items:center;gap:12px;padding:10px 16px;flex:none}
-[data-ui=meet] .callstage{flex-direction:column;justify-content:center;padding:26px 12px 8px}
+[data-ui=meet] .callstage{flex-direction:column;justify-content:center;padding:18px 12px 8px;flex:1;min-height:0}
 .stage{flex:none;width:92px;height:92px;perspective:700px}
 [data-ui=meet] .stage{width:min(38vh,340px);height:min(38vh,340px)}
 .stage canvas{width:100%;height:100%;display:block;border-radius:14px}
@@ -103,6 +103,17 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 [data-ui=meet] .typing,[data-ui=meet] .handoff{color:var(--mmute)}
 .handoff{font-size:12.5px;color:var(--muted);margin-left:42px}
 .result{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+/* in-call chat dock: inline in chat skins, floating modal in the meeting */
+#chatdock{display:flex;flex-direction:column;flex:1;min-height:0}
+.cph{display:none;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--mline,#d9e1df);font:700 14px var(--f-display);color:var(--mink,#14211f)}
+.cph button{margin-left:auto;border:0;background:none;color:inherit;font-size:16px;cursor:pointer;padding:2px 4px}
+[data-ui=meet] #chatdock{position:fixed;right:16px;top:calc(env(safe-area-inset-top,0px) + 64px);bottom:20px;width:min(400px,calc(100vw - 32px));background:#0e1f1b;border:1px solid var(--mline);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.55);z-index:90;transform:translateX(112%);transition:transform .22s ease}
+@media (prefers-reduced-motion:reduce){[data-ui=meet] #chatdock{transition:none}}
+[data-ui=meet] #chatdock.open{transform:none}
+[data-ui=meet] .cph{display:flex}
+[data-ui=meet] .composer{display:flex}
+.caption{display:none}
+[data-ui=meet] .caption{display:block;margin:6px auto 0;max-width:68ch;min-height:20px;text-align:center;font-size:14px;color:var(--mink);opacity:.9;padding:0 14px}
 /* composer pop-out + call controls */
 .composer{display:none;gap:8px;padding:10px 14px 4px}
 .composer.open{display:flex}
@@ -110,7 +121,7 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 [data-ui=meet] .composer input{background:rgba(255,255,255,.08);border-color:var(--mline);color:var(--mink)}
 [data-ui=meet] .composer input::placeholder{color:var(--mmute)}
 .composer button.send{flex:none;width:44px;border:0;background:var(--accent);color:var(--bg);border-radius:12px;cursor:pointer;font-size:16px}
-.controls{position:relative;display:flex;justify-content:center;align-items:center;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.controls{position:relative;display:flex;justify-content:center;align-items:center;gap:10px;margin-top:auto;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
 [data-ui=meet] .controls{border-top-color:var(--mline)}
 .controls>button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:17px;cursor:pointer;display:grid;place-items:center}
 [data-ui=meet] .controls>button{background:rgba(255,255,255,.08);border-color:var(--mline);color:var(--mink)}
@@ -130,6 +141,9 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 .seg button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
 .seg.lv button{width:31px;padding:5px 0;font-family:var(--f-mono)}
 .row2{display:flex;gap:6px}
+.row2 input{flex:1;min-width:0;font:600 12px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px 8px}
+#xivoice{width:100%;font:600 12px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px}
+.settings a{color:var(--accent)}
 #vsel{flex:1;min-width:0;font:600 12px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px}
 #vtest{font:600 12px var(--f-body);border:1px solid var(--accent);background:none;color:var(--accent);border-radius:6px;padding:5px 10px;cursor:pointer}
 /* join screen */
@@ -252,25 +266,36 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,s
     <path id="mo" d="M42 71 Q50 77 58 71" fill="#8c2f3f" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg></div></div>
   <div class="plabel"><b>Muster</b><span id="mstatus">waiting for you to join</span></div>
+  <p class="caption" id="caption"></p>
   <div class="youtile" id="youtile" aria-hidden="true"></div>
  </div>
  <div class="fhead" id="fhead"><span>Say g'day</span><span class="ch">Demo</span></div>
- <div class="conv" id="conv" aria-live="polite"></div>
- <form class="composer" id="composer">
-  <input id="say" placeholder="Type to Muster…" aria-label="Type to Muster" autocomplete="off">
-  <button type="submit" class="send" aria-label="Send">➤</button>
- </form>
+ <div id="chatdock">
+  <div class="cph">💬 In-call chat<button id="cclose" type="button" aria-label="Close chat">✕</button></div>
+  <div class="conv" id="conv" aria-live="polite"></div>
+  <form class="composer" id="composer">
+   <input id="say" placeholder="Type to Muster…" aria-label="Type to Muster" autocomplete="off">
+   <button type="submit" class="send" aria-label="Send">➤</button>
+  </form>
+ </div>
  <div class="controls">
   <span class="hint" id="hint"></span>
   <div class="settings" id="settings" hidden>
    <h5>Where the conversation happens</h5><div class="seg" id="chan"></div>
    <h5>Agent SFIA level</h5><div class="seg lv" id="lvl"></div><p id="lvlcap"></p>
    <h5>Approvals in end-to-end runs</h5><div class="seg" id="appr"></div>
-   <h5>Muster's voice</h5><div class="row2"><select id="vsel" aria-label="Muster's voice"></select><button type="button" id="vtest">Test</button></div>
-   <p>Voices come from your browser. Muster picks the deepest Australian or British male voice it can find; choose another if your machine has a better one.</p>
+   <h5>Muster's voice</h5>
+   <div class="seg" id="tone"></div>
+   <div class="row2" style="margin-top:6px"><select id="vsel" aria-label="Browser voice"></select><button type="button" id="vtest">Test</button></div>
+   <p>Browser voices are limited — Gruff drops the pitch to make any of them sound more like a working dog.</p>
+   <h5>Premium voice (optional)</h5>
+   <p style="margin:0 0 6px">For a properly gravelly Muster, paste an <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a> API key: your account's voices load below and audio plays straight from your browser. The key is kept only in this browser.</p>
+   <div class="row2"><input id="xikey" type="password" placeholder="ElevenLabs API key" aria-label="ElevenLabs API key"><button type="button" id="xiload">Load</button></div>
+   <select id="xivoice" aria-label="ElevenLabs voice" hidden style="margin-top:6px"></select>
+   <p id="xistat" style="margin-top:4px"></p>
   </div>
   <button id="mic" type="button" aria-pressed="false" title="Talk to Muster" aria-label="Talk to Muster">🎙</button>
-  <button id="kb" type="button" aria-pressed="false" title="Type instead" aria-label="Type instead">⌨</button>
+  <button id="kb" type="button" aria-pressed="false" title="In-call chat and typing" aria-label="In-call chat and typing">💬</button>
   <button id="snd" type="button" aria-pressed="false" title="Read replies aloud" aria-label="Read replies aloud">🔈</button>
   <button id="gear" type="button" aria-pressed="false" title="Settings" aria-label="Settings">⚙</button>
   <button id="leave" type="button" title="Leave the session">Leave</button>
@@ -470,9 +495,13 @@ Head.init();
 
 /* ---------- Voice out (read replies aloud) and voice in (speak to Muster) ---------- */
 let soundOn=false,voice=null,voicePitch=.9;
+const TONES={gruff:['Gruff',.55,.95],deep:['Deep',.75,1],natural:['Natural',.95,1.03]};
+let tone='gruff';try{tone=localStorage.getItem('muster-tone')||'gruff'}catch(e){}
+const xi={key:'',voiceId:'',voices:[],audio:null};
+try{xi.key=localStorage.getItem('muster-xi-key')||'';xi.voiceId=localStorage.getItem('muster-xi-voice')||''}catch(e){}
 const MALEV=/william|russell|daniel|james|liam|lee|gordon|ryan|guy|david|mark|oliver|thomas|george|arthur|\bmale\b/i;
 function enVoices(){return speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang))}
-function setVoice(v){voice=v||null;voicePitch=v&&MALEV.test(v.name)?0.92:0.72;fillVoiceSel()}
+function setVoice(v){voice=v||null;const [,p]=TONES[tone]||TONES.gruff;voicePitch=v&&MALEV.test(v.name)?p+.1:p-.08;fillVoiceSel()}
 function pickVoice(){const vs=enVoices();if(!vs.length)return setVoice(null);
  let saved=null;try{saved=localStorage.getItem('muster-voice')}catch(e){}
  setVoice(vs.find(v=>v.name===saved)
@@ -484,11 +513,35 @@ function fillVoiceSel(){const sel=$('#vsel');if(!sel)return;const vs=enVoices();
  sel.innerHTML=vs.length?vs.map(v=>`<option${voice&&v.name===voice.name?' selected':''}>${esc(v.name)} (${v.lang})</option>`).join(''):'<option>Browser default</option>'}
 if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;
  $('#vsel').onchange=()=>{const name=$('#vsel').value.replace(/ \([^)]*\)$/,'');const v=enVoices().find(x=>name.startsWith(x.name)||x.name===name);if(v){setVoice(v);try{localStorage.setItem('muster-voice',v.name)}catch(e){}}};
- $('#vtest').onclick=()=>{const was=soundOn;soundOn=true;narrate("G'day, this is how I sound. Deep enough for a kelpie?");soundOn=was}}
-else{$('#vsel').disabled=true;$('#vtest').disabled=true}
+}
+else{$('#vsel').disabled=true}
+$('#vtest').onclick=()=>{const was=soundOn;soundOn=true;narrate("G'day, this is how I sound. Rough enough for a kelpie?");soundOn=was};
+$('#xiload').onclick=async()=>{const k=$('#xikey').value.trim();if(!k){$('#xistat').textContent='Paste a key first.';return}
+ $('#xistat').textContent='Loading voices…';
+ try{const r=await fetch('https://api.elevenlabs.io/v1/voices',{headers:{'xi-api-key':k}});if(!r.ok)throw new Error(r.status);
+  const j=await r.json();xi.key=k;xi.voices=j.voices||[];try{localStorage.setItem('muster-xi-key',k)}catch(e){}
+  const sel=$('#xivoice');sel.hidden=false;sel.innerHTML=xi.voices.map(v=>`<option value="${esc(v.voice_id)}"${v.voice_id===xi.voiceId?' selected':''}>${esc(v.name)}${v.labels&&v.labels.description?' — '+esc(v.labels.description):''}</option>`).join('');
+  if(!xi.voices.find(v=>v.voice_id===xi.voiceId))xi.voiceId=(xi.voices[0]||{}).voice_id||'';
+  try{localStorage.setItem('muster-xi-voice',xi.voiceId)}catch(e){}
+  $('#xistat').textContent=xi.voices.length+' voices loaded. Gravelly ones (Clyde-style) suit Muster best.';
+ }catch(e){$('#xistat').textContent='Could not load voices ('+(e.message||e)+'). Check the key.'}};
+$('#xivoice').onchange=()=>{xi.voiceId=$('#xivoice').value;try{localStorage.setItem('muster-xi-voice',xi.voiceId)}catch(e){}};
+if(xi.key)$('#xikey').value=xi.key;
+function xiStop(){if(xi.audio){try{xi.audio.pause()}catch(e){}xi.audio=null;Head.tts=false}}
+async function xiSpeak(text){
+ try{const r=await fetch('https://api.elevenlabs.io/v1/text-to-speech/'+xi.voiceId,{method:'POST',
+  headers:{'xi-api-key':xi.key,'content-type':'application/json'},
+  body:JSON.stringify({text:text.replace(/[—·…]/g,', '),model_id:'eleven_multilingual_v2',voice_settings:{stability:.32,similarity_boost:.85,style:.45}})});
+  if(!r.ok)throw new Error(r.status);
+  const url=URL.createObjectURL(await r.blob());xiStop();
+  const a=new Audio(url);xi.audio=a;a.onplay=()=>{Head.tts=true};a.onended=a.onerror=()=>{if(xi.audio===a){Head.tts=false;xi.audio=null}URL.revokeObjectURL(url)};
+  await a.play();
+ }catch(e){$('#xistat').textContent='Premium voice failed ('+(e.message||e)+') — using the browser voice.';xiFallback(text)}}
+function xiFallback(text){if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text);if(voice)u.voice=voice;const tn=TONES[tone]||TONES.gruff;u.rate=tn[2];u.pitch=voicePitch;u.onstart=()=>{Head.tts=true};u.onend=()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)Head.tts=false};speechSynthesis.speak(u)}else Head.mouthFor(text)}
 function narrate(text){
+ if(soundOn&&xi.key&&xi.voiceId){Head.mouthFor(text);xiSpeak(text);return}
  if(soundOn&&'speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text.replace(/[—·…]/g,', ').replace(/[^\p{L}\p{N}\p{P}\s$%]/gu,''));
-  if(voice)u.voice=voice;u.rate=1.02;u.pitch=voicePitch;u.onstart=()=>{Head.tts=true};u.onend=()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)Head.tts=false};
+  if(voice)u.voice=voice;const tn=TONES[tone]||TONES.gruff;u.rate=tn[2];u.pitch=voicePitch;u.onstart=()=>{Head.tts=true};u.onend=()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)Head.tts=false};
   speechSynthesis.speak(u)}
  else Head.mouthFor(text)}
 $('#snd').onclick=()=>{soundOn=!soundOn;syncSnd();
@@ -508,18 +561,20 @@ $('#mic').onclick=()=>{if(!rec)return;if(listening){rec.stop();return}
 /* ---------- Session modes, join screen, drawer, text pop-out ---------- */
 function applyUI(){const w=$('#callwrap');w.dataset.ui=chan==='meet'?'meet':'chat';
  $('#kb').hidden=chan!=='meet';$('#leave').hidden=chan!=='meet';
- $('#composer').classList.toggle('open',chan!=='meet');$('#kb').setAttribute('aria-pressed','false');
- $('#hint').textContent=chan==='meet'?'voice first — ⌨ to type':'';
+ $('#composer').classList.toggle('open',chan!=='meet');$('#chatdock').classList.remove('open');$('#kb').setAttribute('aria-pressed','false');$('#caption').textContent='';
+ $('#hint').textContent=chan==='meet'?'voice first — 💬 for chat & typing':'';
  syncSnd()}
 function syncSnd(){$('#snd').setAttribute('aria-pressed',String(soundOn));$('#snd').textContent=soundOn?'🔊':'🔈'}
 function joinAs(c){chan=c;if(c==='meet'&&'speechSynthesis' in window)soundOn=true;applyUI();drawSettings();
  $('#join').classList.remove('show');greet();
  if(c==='meet')narrateOnly("G'day! Good to see you. What are we sorting out today?")}
-function showJoin(){run++;Head.hush();if('speechSynthesis' in window)speechSynthesis.cancel();
+function showJoin(){run++;Head.hush();xiStop();if('speechSynthesis' in window)speechSynthesis.cancel();$('#chatdock').classList.remove('open');$('#caption').textContent='';
  $('#conv').innerHTML='';$('#join').classList.add('show');started=false;$('#cur').textContent='';status('waiting for you to join')}
 document.querySelectorAll('#join [data-chan]').forEach(b=>b.onclick=()=>joinAs(b.dataset.chan));
 $('#leave').onclick=()=>showJoin();
-$('#kb').onclick=()=>{const c=$('#composer');const open=!c.classList.contains('open');c.classList.toggle('open',open);$('#kb').setAttribute('aria-pressed',String(open));if(open)$('#say').focus()};
+function chatOpen(v){if($('#callwrap').dataset.ui!=='meet')return;const open=v!==false;$('#chatdock').classList.toggle('open',open);$('#kb').setAttribute('aria-pressed',String(open));if(open)setTimeout(()=>$('#say').focus(),180)}
+$('#kb').onclick=()=>chatOpen(!$('#chatdock').classList.contains('open'));
+$('#cclose').onclick=()=>chatOpen(false);
 function drawerOpen(tab){$('#drawer').classList.add('open');$('#dback').classList.add('show');if(tab)tabSel(tab)}
 function drawerClose(){$('#drawer').classList.remove('open');$('#dback').classList.remove('show')}
 function tabSel(which){const act=which==='act';$('#t-act').setAttribute('aria-selected',String(act));$('#t-art').setAttribute('aria-selected',String(!act));$('#b-act').hidden=!act;$('#b-art').hidden=act}
@@ -534,6 +589,7 @@ function drawSettings(){
  document.querySelectorAll('#lvl button').forEach((b,i)=>b.title=`Level ${i+1}: ${LV[i+1]}`);
  $('#lvlcap').textContent=`Level ${level} — ${LV[level]}. ${level<3?'Agents only look; they change nothing.':level<5?'Reads run on their own; changes wait for you.':'Routine changes run; destructive steps still wait for you.'}`;
  seg('#appr',[['ask','Ask me first'],['auto','Auto-approve']],autoApprove?'auto':'ask',k=>{autoApprove=k==='auto';drawSettings();if(started&&mode==='stream')replay()});
+ seg('#tone',Object.entries(TONES).map(([k,v])=>[k,v[0]]),tone,k=>{tone=k;try{localStorage.setItem('muster-tone',k)}catch(e){}if('speechSynthesis' in window)pickVoice();drawSettings()});
 }
 $('#gear').onclick=()=>{const s=$('#settings');s.hidden=!s.hidden;$('#gear').setAttribute('aria-pressed',String(!s.hidden))};
 document.addEventListener('click',e=>{if(!$('#gear').contains(e.target)&&!$('#settings').contains(e.target)){$('#settings').hidden=true;$('#gear').setAttribute('aria-pressed','false')}
@@ -565,6 +621,7 @@ function propose(kind,payload,userText){
  if(isStream)mk('🗺 Plan it first',()=>showPlan(payload.v,payload.pack));
  mk('Something else…',()=>{$('#scenbtn').click()});
  b.querySelector('.mb').appendChild(chips);
+ chatOpen();
  status('your call, boss');
 }
 function runScenario(s,overrideUser,overrideMsg){mode='scenario';dpack=null;scen=(overrideMsg?{...s,user:overrideUser||'You',msg:overrideMsg}:s);started=true;$('#cur').textContent=s.label;play()}
@@ -619,6 +676,7 @@ function showPlan(v,pack,userText){
  const chips=document.createElement('div');chips.className='chips';
  [['▶ Run this end to end',()=>runStream(v,pack)],['Open the plan document',()=>Artefacts.open(doc)]].forEach(([l,fn])=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)});
  b.querySelector('.mb').appendChild(chips);
+ chatOpen();
  status('ready when you are');
 }
 
@@ -676,9 +734,9 @@ function bubble(who,text,{bot=false,into=null}={}){
  m.innerHTML=`${av}<div class="mb"><div class="who">${esc(bot?'Muster':who)}${bot?'<span>APP</span>':''}</div>${meta}<div class="txt"></div></div>`;
  m.querySelector('.txt').textContent=text;(into||$('#conv')).appendChild(m);return m}
 function narrateOnly(text){narrate(text)}
-function mup(text,into){const b=bubble('Muster',text,{bot:true,into});narrate(text);return b}
+function mup(text,into){const b=bubble('Muster',text,{bot:true,into});if($('#callwrap').dataset.ui==='meet')$('#caption').textContent=text;narrate(text);return b}
 function stepEl(n,title,html){const li=document.createElement('li');li.className='st';li.innerHTML=`<span class="n">${n}</span><div><b>${esc(title)}</b><p>${html}</p></div>`;$('#steps').appendChild(li);return li.querySelector('div')}
-function resetPanels(){$('#afgrid').innerHTML='<p class="empty">Records, pages and files the agents create land here.</p>';$('#afn').textContent='0';$('#steps').innerHTML='';if('speechSynthesis' in window)speechSynthesis.cancel();Head.hush()}
+function resetPanels(){xiStop();$('#caption').textContent='';$('#afgrid').innerHTML='<p class="empty">Records, pages and files the agents create land here.</p>';$('#afn').textContent='0';$('#steps').innerHTML='';if('speechSynthesis' in window)speechSynthesis.cancel();Head.hush()}
 function addArtefact(a){const g=$('#afgrid');const e=g.querySelector('.empty');if(e)e.remove();g.prepend(Artefacts.card(a,true));$('#afn').textContent=g.querySelectorAll('.af-card').length;const d=$('#d-art');d.classList.remove('pulse');void d.offsetWidth;d.classList.add('pulse')}
 
 /* ---------- Greeting ---------- */
@@ -687,7 +745,7 @@ function greet(){
  const b=mup("G'day! Muster here — resident kelpie and chief crew-wrangler. I've got 75 SFIA specialists one whistle away: analysts, architects, engineers, security folk, the lot. Tell me what needs doing — type it, say it with the mic, or tap one of these and watch us work.");
  const chips=document.createElement('div');chips.className='chips';
  [...SCEN.map(s=>[s.label,()=>propose('scenario',{s})]),['Run an incident end to end',()=>propose('stream',{v:VS.find(v=>v.id==='incident-to-resolution'),pack:null})],['Plan a build lifecycle',()=>showPlan(VS.find(v=>v.id==='idea-to-service'),null,'Plan a build lifecycle for me')],['Pick an industry…',()=>{$('#scenbtn').click();$('#scenbtn').focus()}]].forEach(([l,fn])=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)});
- b.querySelector('.mb').appendChild(chips);status('ready when you are');
+ b.querySelector('.mb').appendChild(chips);chatOpen();status('ready when you are');
 }
 
 /* ---------- Single request ---------- */
@@ -759,7 +817,7 @@ function approvalCard(into,agentName,a,id){
   c.innerHTML=`<b>${esc(agentName)}</b> wants to run <code>${esc(a.tool)}</code> (${a.risk})<br>${esc(a.summary)}`;
   holder.querySelector('.mb').appendChild(c);
   if(autoApprove){c.insertAdjacentHTML('beforeend','<div><em>Approved automatically (demo setting).</em></div>');return resolve(true)}
-  status('waiting on you, boss');
+  chatOpen();status('waiting on you, boss');
   const btns=document.createElement('div');btns.className='btns';
   if(chan==='email')btns.insertAdjacentHTML('beforeend',`<em>Reply “approve ${id}” or “reject ${id}”.</em>`);
   for(const [lab,ok] of [[chan==='email'?'Simulate approve reply':'Approve',true],[chan==='email'?'Simulate reject reply':'Reject',false]]){const b=document.createElement('button');b.type='button';b.textContent=lab;if(!ok)b.className='no';

@@ -28,6 +28,7 @@ jobs:
         run: |
           mkdir -p _site
           cp site/*.html site/*.js _site/
+          cp -r site/vendor _site/vendor
           cp -r data agents orchestrators _site/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
