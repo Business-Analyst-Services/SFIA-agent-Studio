@@ -32,6 +32,8 @@ h2{font:700 21px/1.2 var(--f-display);margin:34px 0 6px;text-wrap:balance}
 .cap:first-of-type{border-top:0}
 .cap p{margin:0 0 4px;font-size:13px;font-weight:600}
 .tagp{margin-left:8px;font:500 10px var(--f-mono);color:var(--muted);border:1px dashed var(--muted);padding:0 5px;border-radius:3px}
+.demo{font:600 11px var(--f-body);color:var(--accent);margin-left:8px;text-decoration:none}.demo:hover{text-decoration:underline}
+.sel a{color:var(--accent);font-weight:600;margin-left:8px}
 .codes{font:500 11px var(--f-mono);color:var(--muted);margin-left:6px}
 .cat{margin-top:22px}
 .cat>h3{font:700 18px var(--f-display);margin:0 0 10px;display:flex;align-items:center;gap:10px}
@@ -59,7 +61,7 @@ h2{font:700 21px/1.2 var(--f-display);margin:34px 0 6px;text-wrap:balance}
 .step{border:1px solid var(--line);border-left:3px solid var(--c);border-radius:4px;padding:5px 8px;font-size:12.5px;background:var(--bg);max-width:220px}
 .step b{display:block;font-size:12.5px}
 .step span{color:var(--muted);font-size:11.5px}
-.sel{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--warn-soft);border:1px solid var(--warn);border-radius:6px;padding:8px 12px;font-size:13px;margin:10px 0}
+.sel{position:sticky;top:calc(env(safe-area-inset-top,0px) + 50px);z-index:5;background:var(--warn-soft);border:1px solid var(--warn);border-radius:6px;padding:8px 12px;font-size:13px;margin:10px 0}
 .sel button{font:inherit;border:0;background:none;color:var(--accent);cursor:pointer;text-decoration:underline}
 footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
 body{margin:0}[hidden]{display:none!important}
@@ -94,7 +96,10 @@ const FLOWS=[
 ["Data to insight","Governed data becomes decisions and performance reporting.",[["Development and implementation","Chief Data Officer","Data strategy"],["Development and implementation","Data governance practitioners","Quality and ownership"],["Development and implementation","Data engineering practitioners","Pipelines"],["Development and implementation","Data analytics practitioners","BI and reporting"],["Strategy and architecture","Performance analysis practitioners","IT performance"],["Strategy and architecture","Chief Information Officer","Decisions"]]]];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const short=r=>r.replace(/ practitioners$/,'').replace(/ \(L&D\)/,'');
-let pick=null;
+const rslug=r=>r.replace(/ practitioners$/,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+let pick=new URLSearchParams(location.search).get('role');
+if(pick&&!D.mapping[pick])pick=null;
+const firstPick=pick;
 const SUGGEST={"IT management and policy":"Give it to architecture practice management or a governance lead, built on IT management (ITMG).","End user computing":"No device or desktop engineer profile exists. Build one on Hardware and software installation (HSIN) and Incident management (USUP).","Identity and access management":"No identity profile exists. Build one on Identity and access management (IAMT).","Security training and awareness":"L&D contributes. A security awareness lead needs Information security (SCTY) plus Learning delivery (ETDL).","Stakeholder relations and engagement":"SFIA has no business relationship manager profile. Build one on Stakeholder relationship management (RLMT) and Consultancy (CNSL)."};
 function render(){
 const byCap={};for(const[r,xs]of Object.entries(D.mapping))for(const x of xs)(byCap[x.capability]=byCap[x.capability]||[]).push({r,t:x.role});
@@ -105,7 +110,7 @@ document.getElementById('stats').innerHTML=[[Object.keys(D.mapping).length,"of 7
 document.getElementById('cats').innerHTML=D.categories.map(cat=>{
  const n=new Set(cat.subcategories.flatMap(s=>s.capabilities.flatMap(c=>(byCap[c.name]||[]).map(x=>x.r)))).size;
  return `<section class="cat" style="--c:var(${COL[cat.name]})"><h3>${esc(cat.name)}<small>${n} roles</small></h3><div class="domains">${cat.subcategories.map(sub=>`<div class="dom"><h3>${esc(sub.name)}<small>${sub.capabilities.length} capabilities</small></h3>${sub.capabilities.length?sub.capabilities.map(c=>{const xs=(byCap[c.name]||[]).sort((a,b)=>(a.t>b.t?-1:1));
- return `<div class="cap ${xs.some(x=>x.t==='lead')?'':'gap'}"><p>${esc(c.name)}${c.proposed?'<span class="tagp">Proposed</span>':''}<span class="codes">${c.skills.join(' ')}</span></p><div class="chips">${xs.map(x=>`<button class="chip ${x.t==='lead'?'':'c'} ${pick===x.r?'hl':''}" data-r="${esc(x.r)}">${esc(short(x.r))}</button>`).join('')||'<span style="font-size:12px;color:var(--muted)">No SFIA profile covers this</span>'}</div></div>`}).join(''):`<p class="empty">No capability defined yet. SFIA skills here: ${SUBCODES[sub.name]||''}.</p>`}</div>`).join('')}</div></section>`}).join('');
+ return `<div class="cap ${xs.some(x=>x.t==='lead')?'':'gap'}"><p>${esc(c.name)}${c.proposed?'<span class="tagp">Proposed</span>':''}<span class="codes">${c.skills.join(' ')}</span><a class="demo" href="muster.html?cap=${encodeURIComponent(c.name)}">Demo</a></p><div class="chips">${xs.map(x=>`<button class="chip ${x.t==='lead'?'':'c'} ${pick===x.r?'hl':''}" data-r="${esc(x.r)}">${esc(short(x.r))}</button>`).join('')||'<span style="font-size:12px;color:var(--muted)">No SFIA profile covers this</span>'}</div></div>`}).join(''):`<p class="empty">No capability defined yet. SFIA skills here: ${SUBCODES[sub.name]||''}.</p>`}</div>`).join('')}</div></section>`}).join('');
 const proposed=caps.filter(c=>c.proposed);
 document.getElementById('gaps').innerHTML=`
 <div class="box"><h3>Capabilities with no lead role (${noLead.length})</h3><ul>${noLead.map(c=>`<li><b>${esc(c.name)}</b>: ${esc(SUGGEST[c.name]||'')}</li>`).join('')}</ul></div>
@@ -114,10 +119,12 @@ document.getElementById('gaps').innerHTML=`
 document.getElementById('flows').innerHTML=FLOWS.map(([n,w,s])=>`<div class="flow"><h3>${esc(n)}</h3><p class="why">${esc(w)}</p><ol class="steps">${s.map(([d,r,a])=>`<li><div class="step" style="--c:var(${COL[d]})"><b>${esc(short(r))}</b><span>${esc(a)}</span></div></li>`).join('')}</ol></div>`).join('');
 document.querySelectorAll('.chip[data-r]').forEach(b=>b.onclick=()=>{pick=pick===b.dataset.r?null:b.dataset.r;render()});
 const sel=document.getElementById('sel');
-if(pick){const xs=D.mapping[pick];sel.hidden=false;sel.innerHTML=`<b>${esc(short(pick))}</b> appears in ${xs.length} place${xs.length>1?'s':''}: ${xs.map(x=>esc(x.capability)+' ('+x.role+')').join('; ')}. <button id="clr">Clear</button>`;document.getElementById('clr').onclick=()=>{pick=null;render()}}else sel.hidden=true;
+if(pick){const xs=D.mapping[pick];sel.hidden=false;sel.innerHTML=`<b>${esc(short(pick))}</b> appears in ${xs.length} place${xs.length>1?'s':''}: ${xs.map(x=>esc(x.capability)+' ('+x.role+')').join('; ')}. <a href="index.html#${rslug(pick)}">Open agent</a><a href="muster.html?role=${rslug(pick)}">Demo with Muster</a> <button id="clr">Clear</button>`;document.getElementById('clr').onclick=()=>{pick=null;render()}}else sel.hidden=true;
 }
 render();
+if(firstPick){const b=document.querySelector('.chip.hl');if(b)b.scrollIntoView({block:'center'})}
 </script>
 
+<script src="nav.js" defer></script>
 </body>
 </html>

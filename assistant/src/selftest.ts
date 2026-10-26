@@ -33,6 +33,7 @@ const fakePort = (fake.address() as { port: number }).port;
 process.env.ANTHROPIC_BASE_URL = `http://127.0.0.1:${fakePort}`;
 process.env.ANTHROPIC_API_KEY = "test";
 process.env.MUSTER_WEB_TOKEN = "secret";
+process.env.MUSTER_WEBHOOK_TOKEN = "hook";
 
 const { classify, decide } = await import("./autonomy.js");
 assert.equal(classify("list_issues"), "read");
@@ -59,6 +60,7 @@ assert.equal(listPending().length, 0);
 console.log("✓ approval flow");
 
 const { app } = await import("./channels/web.js");
+(await import("./channels/webhook.js")).mountWebhook(app);
 const server = app.listen(0);
 await new Promise(ok => server.once("listening", ok));
 const port = (server.address() as { port: number }).port;
@@ -72,6 +74,10 @@ assert.match(j.reply, /Service Operations has it/);
 assert.match(j.events[0].text, /Calling in Service Operations/);
 console.log("✓ web chat → Muster → delegate → service-operations agent → reply");
 assert.equal((await (await call("/healthz")).json() as { agents: number }).agents, 75);
+const wh = await call("/api/webhook", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer hook" }, body: JSON.stringify({ source: "jira", conversationId: "ITSM-42", user: "Tester", text: "Portal down" }) });
+assert.equal(wh.status, 200);
+assert.equal((await wh.json() as { conversationId: string }).conversationId, "jira:ITSM-42");
+console.log("✓ webhook (Jira-style ticket) → reply");
 console.log("✓ health endpoint\nAll self-tests passed.");
 server.close(); fake.close();
 process.exit(0);

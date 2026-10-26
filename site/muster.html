@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Muster Demo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: controls strip, then two panes: the request as it looks in the chosen channel (left) and the behind-the-scenes trace (right); live-connect panel below */
+:root{--bg:#f4f6f6;--panel:#fff;--ink:#14211f;--muted:#5b6b68;--line:#d9e1df;--accent:#0f6e64;--accent-soft:#dcefeb;--warm:#c2410c;--warn-soft:#fbecd9;--bad:#b3261e;
+--f-display:"Familjen Grotesk",system-ui,sans-serif;--f-body:"Public Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--panel:#152120;--ink:#e3ecea;--muted:#93a6a2;--line:#273634;--accent:#5cc9b8;--accent-soft:#183a35;--warm:#ffb15c;--warn-soft:#3a2a16;--bad:#ff8a80;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1280px;margin:0 auto;padding-block:22px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero{display:flex;gap:16px;align-items:center;margin-bottom:6px}
+.hero svg{flex:none;width:76px;height:76px;animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.eye{animation:blink 5s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@media (prefers-reduced-motion:reduce){.hero svg,.eye{animation:none}}
+h1{font:700 30px/1.1 var(--f-display);margin:0;text-wrap:balance}
+.lede{color:var(--muted);margin:2px 0 0;max-width:70ch}
+h2{font:700 18px var(--f-display);margin:0 0 10px}
+.controls{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:flex-end;margin:18px 0;padding:14px 0;border-block:1px solid var(--line)}
+.ctl label,.ctl>span{display:block;font:600 11px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button{font:600 13px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:6px 11px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.seg.lv button{width:34px;padding:6px 0;font-family:var(--f-mono)}
+.play{font:600 14px var(--f-body);border:0;background:var(--accent);color:var(--bg);border-radius:8px;padding:9px 18px;cursor:pointer}
+.panes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:900px){.panes{grid-template-columns:1fr}}
+.frame{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+.fhead{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-weight:600}
+.fhead small{color:var(--muted);font-weight:400}
+.fhead .ch{margin-left:auto;font:500 11px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+.conv{padding:14px;display:flex;flex-direction:column;gap:12px;min-height:420px}
+.msg{display:flex;gap:10px;align-items:flex-start;min-width:0}
+.av{flex:none;width:32px;height:32px;border-radius:7px;background:var(--accent-soft);display:grid;place-items:center;font:700 12px var(--f-body);color:var(--accent);overflow:hidden}
+.av svg{width:32px;height:32px}
+.mb{min-width:0;flex:1}
+.mb .who{font-weight:700;font-size:13.5px}.mb .who span{font:500 10px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:3px;padding:0 4px;margin-left:6px}
+.mb .txt{white-space:pre-wrap;overflow-wrap:anywhere}
+.ch-teams .msg.me{flex-direction:row-reverse}.ch-teams .msg.me .mb{text-align:right}
+.ch-teams .txt,.ch-web .txt{display:inline-block;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+.ch-teams .msg.me .txt,.ch-web .msg.me .txt{background:var(--accent-soft);border-color:transparent}
+.ch-email .msg{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg)}
+.ch-email .meta{font-size:12px;color:var(--muted)}
+.ch-slack .thread{margin-left:42px;border-left:2px solid var(--line);padding-left:12px;display:flex;flex-direction:column;gap:12px}
+.card{border:1px solid var(--line);border-left:3px solid var(--warm);border-radius:8px;padding:9px 11px;background:var(--warn-soft);margin-top:4px;font-size:13.5px}
+.card code{font:500 12px var(--f-mono)}
+.card .btns{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.card button{font:600 12.5px var(--f-body);border-radius:6px;padding:4px 11px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--bg)}
+.card button.no{background:none;color:var(--accent)}
+.card em{font-size:12.5px;color:var(--muted)}
+.typing{font-size:12.5px;color:var(--muted);font-style:italic}
+.trace{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.st{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px}
+.st .n{width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:700 12px var(--f-mono);display:grid;place-items:center}
+.st b{font-family:var(--f-display);font-size:14.5px}
+.st p{margin:2px 0 0;font-size:13.5px;color:var(--muted)}
+.st a{color:var(--accent);font-weight:600}
+.ag{border:1px solid var(--line);border-radius:7px;padding:8px 10px;margin-top:6px;font-size:13px}
+.ag .h{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+.ag .h b{font-size:13.5px}.ag code{font:500 11px var(--f-mono);color:var(--accent)}
+.act{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:5px;font-size:12.5px}
+.r{font:500 10px var(--f-mono);padding:1px 5px;border-radius:3px;border:1px solid currentColor}
+.r.read{color:var(--accent)}.r.write{color:var(--warm)}.r.destructive{color:var(--bad)}
+.dec{font:500 11px var(--f-mono);color:var(--muted)}
+.log{font:12px/1.6 var(--f-mono);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:8px 10px;margin-top:6px;overflow-x:auto;white-space:pre}
+.gapnote{font-size:13px;border:1px dashed var(--warm);border-radius:7px;padding:7px 10px;margin-top:6px}
+.empty{color:var(--muted);font-size:14px}
+.live{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.live .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.live input{font:inherit;border:1px solid var(--line);border-radius:7px;padding:8px 10px;background:var(--panel);color:var(--ink);min-width:0;flex:1 1 220px}
+.live button{font:600 13px var(--f-body);border:0;background:var(--accent);color:var(--bg);border-radius:7px;padding:8px 14px;cursor:pointer}
+.live .out{white-space:pre-wrap;font-size:14px;margin-top:8px}
+.muted{color:var(--muted);font-size:13px}
+.live a{color:var(--accent)}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero"><svg viewBox="0 0 100 100" width="76" height="76" aria-hidden="true">
+    <defs><radialGradient id="k1" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#d9733d"/><stop offset="1" stop-color="#a84a22"/></radialGradient></defs>
+    <path d="M24 46 L18 6 L44 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M76 46 L82 6 L56 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M26 38 L22 15 L38 31 Z" fill="#e9a37a"/><path d="M74 38 L78 15 L62 31 Z" fill="#e9a37a"/>
+    <path d="M50 24 C72 24 82 40 81 56 C80 74 66 86 50 86 C34 86 20 74 19 56 C18 40 28 24 50 24Z" fill="url(#k1)" stroke="#7a3216" stroke-width="2"/>
+    <path d="M50 52 C62 52 70 60 69 70 C68 80 60 85 50 85 C40 85 32 80 31 70 C30 60 38 52 50 52Z" fill="#f0b98c"/>
+    <ellipse class="eye" cx="38" cy="47" rx="5" ry="6.5" fill="#1d2b29"/><ellipse class="eye" cx="62" cy="47" rx="5" ry="6.5" fill="#1d2b29"/>
+    <circle cx="39.5" cy="44.5" r="1.8" fill="#fff"/><circle cx="63.5" cy="44.5" r="1.8" fill="#fff"/>
+    <path d="M44 60 C44 56 56 56 56 60 C56 64 52 66 50 66 C48 66 44 64 44 60Z" fill="#1d2b29"/>
+    <path d="M50 66 L50 70 M42 71 Q50 77 58 71" fill="none" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M47 73 Q50 81 53 73 Z" fill="#e8687a"/>
+    <path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg><div><h1>Watch Muster work</h1><p class="lede">Pick a request and the channel it arrives in. Muster matches it to a capability, musters the right SFIA role agents, and gates every tool action by SFIA level. Approve or reject to see what happens next.</p></div></div>
+<div class="controls">
+ <div class="ctl"><span>Request</span><div class="seg" id="scen"></div></div>
+ <div class="ctl"><span>Channel</span><div class="seg" id="chan"></div></div>
+ <div class="ctl"><span>Agent SFIA level</span><div class="seg lv" id="lvl"></div></div>
+ <button class="play" id="play" type="button">Replay</button>
+</div>
+<div class="panes">
+ <section class="frame" aria-label="Conversation"><div class="fhead" id="fhead"></div><div class="conv" id="conv" aria-live="polite"></div></section>
+ <section class="trace" aria-label="Behind the scenes"><h2>Behind the scenes</h2><ol class="steps" id="steps"></ol></section>
+</div>
+<section class="live" aria-labelledby="lh">
+ <h2 id="lh">Try it with your own Muster server</h2>
+ <p class="muted">The demo above is scripted. Once you've deployed the assistant (see <a href="integrate.html">Integrate</a>), enter its address and web token to chat with the real thing. The server must allow this site in <code>MUSTER_ALLOWED_ORIGINS</code>. Nothing you type here is stored.</p>
+ <div class="row"><input id="lurl" type="url" placeholder="https://muster.your-org.com" aria-label="Muster server address"><input id="ltok" type="password" placeholder="Web token" aria-label="Web token"></div>
+ <form class="row" id="lform"><input id="lmsg" placeholder="Ask Muster something…" aria-label="Message"><button type="submit">Send</button></form>
+ <div class="out" id="lout"></div>
+</section>
+</div>
+<script>
+const FACE=`<svg viewBox="0 0 100 100" width="32" height="32" aria-hidden="true">
+    <defs><radialGradient id="k2" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#d9733d"/><stop offset="1" stop-color="#a84a22"/></radialGradient></defs>
+    <path d="M24 46 L18 6 L44 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M76 46 L82 6 L56 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M26 38 L22 15 L38 31 Z" fill="#e9a37a"/><path d="M74 38 L78 15 L62 31 Z" fill="#e9a37a"/>
+    <path d="M50 24 C72 24 82 40 81 56 C80 74 66 86 50 86 C34 86 20 74 19 56 C18 40 28 24 50 24Z" fill="url(#k2)" stroke="#7a3216" stroke-width="2"/>
+    <path d="M50 52 C62 52 70 60 69 70 C68 80 60 85 50 85 C40 85 32 80 31 70 C30 60 38 52 50 52Z" fill="#f0b98c"/>
+    <ellipse class="eye" cx="38" cy="47" rx="5" ry="6.5" fill="#1d2b29"/><ellipse class="eye" cx="62" cy="47" rx="5" ry="6.5" fill="#1d2b29"/>
+    <circle cx="39.5" cy="44.5" r="1.8" fill="#fff"/><circle cx="63.5" cy="44.5" r="1.8" fill="#fff"/>
+    <path d="M44 60 C44 56 56 56 56 60 C56 64 52 66 50 66 C48 66 44 64 44 60Z" fill="#1d2b29"/>
+    <path d="M50 66 L50 70 M42 71 Q50 77 58 71" fill="none" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M47 73 Q50 81 53 73 Z" fill="#e8687a"/>
+    <path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg>`;
+const LV={1:"Follow",2:"Assist",3:"Apply",4:"Enable",5:"Ensure, advise",6:"Initiate, influence",7:"Set strategy, inspire, mobilise"};
+const POL={1:{read:"approve",write:"never",destructive:"never"},2:{read:"auto",write:"never",destructive:"never"},3:{read:"auto",write:"approve",destructive:"never"},4:{read:"auto",write:"approve",destructive:"approve"},5:{read:"auto",write:"auto",destructive:"approve"},6:{read:"auto",write:"auto",destructive:"approve"},7:{read:"auto",write:"auto",destructive:"approve"}};
+const DEC={auto:"runs on its own",approve:"needs approval",never:"not allowed at this level"};
+const CHANNELS={slack:["Slack","# it-help"],teams:["Teams","Chat with Muster"],email:["Email","ask-muster@your-org.com"],web:["Intranet","IT help widget"]};
+const SCEN=[
+{id:"outage",label:"Portal outage",user:"Priya Nair",msg:"The staff portal has been down since 7am, nobody can log in",cap:"Incident and problem management",
+ say:"Righto, let me muster the crew. Calling in Service Operations and SRE.",
+ agents:[{id:"service-operations",actions:[["datadog.query_logs","read","Pull auth service errors since 7am","412 certificate errors from auth-svc, first at 07:02"],["servicenow.create_incident","write","Log a P2 incident: portal sign-in failure","INC0012931 created, assigned to Platform team"]]},
+  {id:"site-reliability-engineer-sre",actions:[["grafana.get_dashboard","read","Check availability for auth-svc","Availability 61% since 07:02"],["kubernetes.rollout_restart","destructive","Restart auth-svc with the renewed certificate","auth-svc restarted, sign-ins recovering"]]}],
+ reply:"Found it: the sign-in service's certificate expired at 7:02am. Service Operations has the incident ready and SRE can restart the service with the renewed certificate. Both are waiting for your OK."},
+{id:"crm",label:"New CRM for legal",user:"Tom Becker",msg:"The legal team wants a CRM for matter intake. Can we scope it?",cap:"Solution ideation, analysis and design",
+ say:"Ooh, a new system. Mustering Business Analysis, Solution Architecture and Procurement.",
+ agents:[{id:"business-analysis",actions:[["confluence.search","read","Find existing legal intake process pages","3 pages found, intake runs on email and a spreadsheet"],["jira.create_epic","write","Create a discovery epic with 6 starter stories","LEGAL-14 created with 6 stories"]]},
+  {id:"solution-architecture",actions:[["confluence.search","read","Check CRM standards and approved platforms","CRM standard: Salesforce or Dynamics only"],["confluence.create_page","write","Draft an options paper","Options paper drafted (3 options)"]]},
+  {id:"technology-procurement",actions:[["m365.search_files","read","Look for existing CRM licences and contracts","Existing Dynamics enterprise agreement, 40 spare seats"]]}],
+ reply:"Good start: there's an existing Dynamics agreement with 40 spare seats, which fits the CRM standard. Business Analysis can set up a discovery epic and Solution Architecture can draft an options paper. Approve both and you'll have a scoped plan by Friday."},
+{id:"audit",label:"Cyber audit readiness",user:"Grace Liu",msg:"Are we ready for next month's cyber audit?",cap:"Audit and compliance",
+ say:"Let me muster the security crew: Risk and Audit, plus Vulnerability Analysis.",
+ agents:[{id:"security-risk-management-audit-and-compliance",actions:[["jira.search","read","List open findings from last year's audit","7 open findings, 2 high"],["confluence.create_page","write","Create an audit readiness tracker","Readiness tracker drafted"]]},
+  {id:"vulnerability-analysis",actions:[["snyk.list_issues","read","Count critical vulnerabilities in production apps","3 critical, all with fixes available"],["nvd.lookup_cve","read","Check them against CISA's known-exploited list","1 is on the known-exploited list"]]}],
+ gap:"Identity and access management has no lead role on the capability map, so nobody owns the access review the auditors usually ask for.",
+ reply:"Mostly ready, with three things to fix: 2 high findings from last year are still open, 1 critical vulnerability is being actively exploited elsewhere, and nobody owns access reviews. I can draft the readiness tracker once you approve it."},
+{id:"backup",label:"Cloud backup business case",user:"Sam Okafor",msg:"Build a business case for moving backups to the cloud",cap:"Cost and budget management",
+ say:"Righto. Mustering Technology Finance and Infrastructure Operations.",
+ agents:[{id:"technology-finance",actions:[["aws.get_cost_forecast","read","Forecast storage costs for 120 TB","About $4,100 a month at current rates"],["gdrive.create_document","write","Draft the business case document","Business case draft created"]]},
+  {id:"infrastructure-operations",actions:[["aws.list_backup_plans","read","Check current backup coverage and restore times","2 of 9 systems backed up off-site; restore tested 14 months ago"]]}],
+ reply:"The numbers stack up: cloud backup would cost about $4,100 a month, against tape renewal and the risk that only 2 of 9 systems are backed up off-site. Technology Finance has a draft ready for your approval."}
+];
+let D=null,R=[],ROLE={},CAT={},MCPC={},MCPM={};
+let scen=SCEN[0],chan="slack",level=4,run=0;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const rid=r=>r.replace(/ practitioners$/,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wait=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
+const initials=n=>n.split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const stamp=()=>new Date().toISOString().slice(11,19);
+
+function seg(id,items,cur,on){const el=$(id);el.innerHTML='';items.forEach(([k,l])=>{const b=document.createElement('button');b.type='button';b.textContent=l;b.setAttribute('aria-pressed',k===cur);b.onclick=()=>on(k);el.appendChild(b)})}
+function controls(){
+ seg('#scen',SCEN.map(s=>[s.id,s.label]),scen.id,k=>{scen=SCEN.find(s=>s.id===k);controls();play()});
+ seg('#chan',Object.entries(CHANNELS).map(([k,v])=>[k,v[0]]),chan,k=>{chan=k;controls();play()});
+ seg('#lvl',[1,2,3,4,5,6,7].map(n=>[n,String(n)]),level,k=>{level=k;controls();play()});
+ document.querySelectorAll('#lvl button').forEach((b,i)=>b.title=`Level ${i+1}: ${LV[i+1]}`);
+}
+
+// Build a scripted scenario from any capability or role on the map.
+function generic({cap,role}){
+ const caps=D.categories.flatMap(c=>c.subcategories.flatMap(s=>s.capabilities.map(x=>({...x,cat:c.name,sub:s.name}))));
+ if(role&&!cap){const r=R.find(x=>rid(x.role)===role);if(!r)return null;const m=D.mapping[r.role]||[];cap=(m.find(x=>x.role==='lead')||m[0]||{}).capability}
+ const c=caps.find(x=>x.name===cap);if(!c)return null;
+ let ids=Object.entries(D.mapping).filter(([,xs])=>xs.some(x=>x.capability===cap&&x.role==='lead')).map(([r])=>rid(r));
+ const contrib=Object.entries(D.mapping).filter(([,xs])=>xs.some(x=>x.capability===cap&&x.role==='contributes')).map(([r])=>rid(r));
+ if(role){ids=[role,...ids.filter(x=>x!==role)]}
+ ids=[...new Set([...ids,...contrib])].slice(0,2);
+ const WRITE=['atl','sn','ado','lin','notion','m365','gdrive','gh'];
+ const agents=ids.map(id=>{const r=ROLE[id];const keys=[...new Set([...(MCPM.byRole[r.role]||[]),...(MCPM.byFamily[r.family]||[])])].filter(k=>MCPC[k]);
+  const wk=keys.find(k=>WRITE.includes(k))||'atl',rk=keys.find(k=>k!==wk)||wk;
+  const a=MCPC[rk]?MCPC[rk].name:'Knowledge base',b=MCPC[wk]?MCPC[wk].name:'Jira';
+  return {id,actions:[[`${a}: search`,"read",`Find current records and context for ${cap.toLowerCase()}`,"Context gathered"],[`${b}: create item`,"write",`Draft the ${cap.toLowerCase()} work item and next steps`,"Draft created"]]}});
+ const names=agents.map(a=>ROLE[a.id].short).join(' and ');
+ return {id:"custom",label:cap,user:"You",msg:`Can you help with ${cap.toLowerCase()}?`,cap,
+  say:agents.length?`Righto, that's ${cap} under ${c.cat}. Mustering ${names}.`:`That's ${cap} under ${c.cat}, but no role agent leads it yet.`,
+  agents,gap:agents.length?null:`No SFIA role profile leads ${cap}. Define a role around ${c.skills.join(', ')} to cover it.`,
+  reply:agents.length?`${names} have looked into it and drafted next steps. Anything that changes a system is waiting for your approval.`:`I can't action this yet. Suggest assigning an owner first.`};
+}
+
+function head(){const [n,sub]=CHANNELS[chan];$('#fhead').innerHTML=`${chan==='slack'?'':''}<span>${esc(sub)}</span><small>${chan==='email'?'Subject: '+esc(scen.msg.slice(0,60)):''}</small><span class="ch">${n}</span>`;$('#conv').className='conv ch-'+chan}
+
+function bubble(who,text,{bot=false,into=null}={}){
+ const m=document.createElement('div');m.className='msg'+(bot?'':' me');
+ const av=bot?`<div class="av">${FACE}</div>`:`<div class="av">${esc(initials(who))}</div>`;
+ const meta=chan==='email'?`<div class="meta">${bot?'From: Muster &lt;ask-muster@your-org.com&gt;':'From: '+esc(who)} · ${bot?'draft reply':'to ask-muster'}</div>`:'';
+ m.innerHTML=`${av}<div class="mb"><div class="who">${esc(bot?'Muster':who)}${bot?'<span>APP</span>':''}</div>${meta}<div class="txt"></div></div>`;
+ m.querySelector('.txt').textContent=text;(into||$('#conv')).appendChild(m);return m}
+
+function stepEl(n,title,html){const li=document.createElement('li');li.className='st';li.innerHTML=`<span class="n">${n}</span><div><b>${esc(title)}</b><p>${html}</p></div>`;$('#steps').appendChild(li);return li.querySelector('div')}
+
+async function play(){
+ const my=++run;const alive=()=>my===run;
+ $('#conv').innerHTML='';$('#steps').innerHTML='';head();
+ const s=scen,capInfo=D.categories.flatMap(c=>c.subcategories.flatMap(x=>x.capabilities.map(k=>({...k,cat:c.name,sub:x.name})))).find(k=>k.name===s.cap);
+ const logLines=[];const log=(e,d)=>logLines.push(`${stamp()} ${e.padEnd(18)} ${d}`);
+ bubble(s.user,s.msg);log('message',`${chan} · ${s.user}`);
+ if(s.id==='custom')$('#steps').insertAdjacentHTML('beforeend','<li class="muted" style="list-style:none">Built from the capability map: agents and tools are real, the results are illustrative.</li>');
+ stepEl(1,`Request arrives in ${CHANNELS[chan][0]}`,esc(chan==='email'?'Muster watches a mailbox label and reads the newest message only.':chan==='web'?'The intranet widget posts to Muster’s chat API.':`Muster is mentioned in ${CHANNELS[chan][1]}.`));
+ await wait(700);if(!alive())return;
+ const thread=chan==='slack'?(()=>{const t=document.createElement('div');t.className='thread';$('#conv').appendChild(t);return t})():null;
+ const typing=document.createElement('div');typing.className='typing';typing.textContent='Muster is rounding up the crew…';(thread||$('#conv')).appendChild(typing);
+ await wait(900);if(!alive())return;typing.remove();
+ stepEl(2,'Capability matched',capInfo?`<a href="capability-map.html?role=${encodeURIComponent((Object.entries(D.mapping).find(([,xs])=>xs.some(x=>x.capability===s.cap&&x.role==='lead'))||[''])[0])}">${esc(capInfo.name)}</a> · ${esc(capInfo.cat)} › ${esc(capInfo.sub)} · SFIA ${esc(capInfo.skills.join(' '))}`:esc(s.cap));
+ bubble('Muster',s.say,{bot:true,into:thread});log('route',s.agents.map(a=>a.id).join(', ')||'none');
+ await wait(800);if(!alive())return;
+ const st3=stepEl(3,`${s.agents.length} agent${s.agents.length===1?'':'s'} mustered`,`Each runs with its own SFIA skills and MCP tools, at SFIA level ${level} (${esc(LV[level])}).`);
+ if(s.gap)st3.insertAdjacentHTML('beforeend',`<div class="gapnote">Gap: ${esc(s.gap)}</div>`);
+ const pending=[];
+ for(const a of s.agents){const r=ROLE[a.id];if(!r)continue;
+  const box=document.createElement('div');box.className='ag';box.innerHTML=`<div class="h"><b><a href="index.html#${a.id}">${esc(r.short)}</a></b><code>${r.core.slice(0,4).map(x=>x.code).join(' · ')}</code></div>`;st3.appendChild(box);
+  log('agent.start',a.id);
+  for(const [tool,risk,summary,result] of a.actions){await wait(500);if(!alive())return;
+   const d=POL[level][risk];const row=document.createElement('div');row.className='act';
+   row.innerHTML=`<span class="r ${risk}">${risk}</span><code>${esc(tool)}</code><span class="dec">${DEC[d]}</span>`;box.appendChild(row);
+   if(d==='auto'){log('tool.executed',`${tool} (auto)`);row.insertAdjacentHTML('beforeend',`<span class="muted">→ ${esc(result)}</span>`)}
+   else if(d==='approve'){const id=Math.random().toString(16).slice(2,10);pending.push({id,a,tool,risk,summary,result});log('approval.request',`${id} ${tool}`)}
+   else log('tool.blocked',`${tool} (level ${level})`);
+  }}
+ await wait(600);if(!alive())return;
+ stepEl(4,'Muster replies',pending.length?`${pending.length} action${pending.length>1?'s':''} waiting for approval in the conversation.`:'Nothing needs approval at this level.');
+ bubble('Muster',s.reply,{bot:true,into:thread});
+ for(const p of pending){
+  const holder=bubble('Muster','',{bot:true,into:thread});const t=holder.querySelector('.txt');t.remove();
+  const c=document.createElement('div');c.className='card';
+  c.innerHTML=`<b>${esc(ROLE[p.a.id].short)}</b> wants to run <code>${esc(p.tool)}</code> (${p.risk})<br>${esc(p.summary)}`;
+  const btns=document.createElement('div');btns.className='btns';
+  if(chan==='email')btns.insertAdjacentHTML('beforeend',`<em>Reply “approve ${p.id}” or “reject ${p.id}”.</em>`);
+  for(const [lab,ok] of [[chan==='email'?'Simulate approve reply':'Approve',true],[chan==='email'?'Simulate reject reply':'Reject',false]]){const b=document.createElement('button');b.type='button';b.textContent=lab;if(!ok)b.className='no';
+   b.onclick=()=>{btns.remove();if(ok){c.insertAdjacentHTML('beforeend',`<div><em>Approved. Done: ${esc(p.result)}.</em></div>`);log('approval.granted',`${p.id} → ${p.tool} executed`)}else{c.insertAdjacentHTML('beforeend',`<div><em>Rejected. Nothing was changed.</em></div>`);log('approval.rejected',p.id)}drawLog()};btns.appendChild(b)}
+  c.appendChild(btns);holder.querySelector('.mb').appendChild(c);
+ }
+ const st5=stepEl(5,'Audit trail','Every routing decision, tool call and approval is logged.');
+ const pre=document.createElement('div');pre.className='log';st5.appendChild(pre);
+ function drawLog(){pre.textContent=logLines.join('\n')}
+ drawLog();
+}
+
+// Live mode: talk to a real Muster server.
+const convo='site-'+Math.random().toString(36).slice(2,9);
+$('#lform').onsubmit=async e=>{e.preventDefault();const url=$('#lurl').value.trim().replace(/\/$/,''),tok=$('#ltok').value.trim(),text=$('#lmsg').value.trim(),out=$('#lout');
+ if(!url||!text){out.textContent='Enter your server address and a message.';return}
+ out.textContent='Muster is rounding up the crew…';
+ try{const r=await fetch(url+'/api/chat',{method:'POST',headers:{'content-type':'application/json',...(tok?{authorization:'Bearer '+tok}:{})},body:JSON.stringify({conversationId:convo,user:'Site visitor',text})});
+  const j=await r.json();out.textContent=r.ok?[...(j.events||[]).map(x=>x.text),j.reply].join('\n\n'):(j.error||'The server returned an error.');$('#lmsg').value=''}
+ catch(err){out.textContent='Could not reach that server. Check the address, and that it allows this site in MUSTER_ALLOWED_ORIGINS.'}};
+
+Promise.all(['data/capability-map.json','data/roles.json','data/mcp-catalog.json','data/mcp-map.json'].map(u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()}))).then(([cm,roles,mc,mm])=>{
+ D=cm;R=roles;MCPC=mc;MCPM=mm;R.forEach(r=>{ROLE[rid(r.role)]={...r,short:r.role.replace(/ practitioners$/,'')}});
+ const q=new URLSearchParams(location.search);const g=(q.get('cap')||q.get('role'))&&generic({cap:q.get('cap'),role:q.get('role')});
+ if(g){SCEN.unshift(g);scen=g}
+ controls();play();
+}).catch(e=>{$('#conv').innerHTML=`<p class="empty">Couldn't load the role data (${esc(e.message)}). Serve the site over HTTP rather than opening the file directly.</p>`});
+$('#play').onclick=()=>play();
+</script>
+<script src="nav.js" defer></script>
+</body>
+</html>

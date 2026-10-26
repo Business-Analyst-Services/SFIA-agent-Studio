@@ -7,6 +7,16 @@ import { resolveApproval, listPending, type Notifier, type PendingAction } from 
 
 export const app = express();
 app.use(express.json({ limit: "1mb" }));
+// Let listed sites (for example the GitHub Pages demo) call the chat API from the browser.
+const allowed = (process.env.MUSTER_ALLOWED_ORIGINS ?? "").split(",").map(s => s.trim()).filter(Boolean);
+app.use((req, res, next) => {
+  const origin = req.get("origin");
+  if (origin && allowed.includes(origin)) {
+    res.set({ "Access-Control-Allow-Origin": origin, "Vary": "Origin", "Access-Control-Allow-Headers": "content-type, authorization", "Access-Control-Allow-Methods": "GET, POST, OPTIONS" });
+    if (req.method === "OPTIONS") return void res.sendStatus(204);
+  }
+  next();
+});
 app.use("/", express.static(join(ASSISTANT_ROOT, "public")));
 
 interface WebEvent { type: "say" | "approval"; text: string; approvalId?: string; at: number }

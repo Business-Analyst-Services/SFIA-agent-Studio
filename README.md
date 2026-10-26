@@ -8,6 +8,8 @@ Turns the SFIA Foundation's **SFIA 9 illustrative skills profiles** (March 2026)
 
 | Path | What it is |
 |---|---|
+| `site/muster.html` | Muster demo: plays a request through Slack, Teams, email or the intranet, shows capability matching, agents, tool actions and approvals, and can connect to a live Muster server. Link a request from the map with `?cap=` or `?role=`. |
+| `site/integrate.html` | How to plug Muster into Slack, Teams, email, intranets, Jira Service Management, ServiceNow, the REST API, and Rovo / Copilot Studio / Claude Code. |
 | `site/index.html` | The web interface. Browse 75 roles, choose 5–7 skills, set a target SFIA level (1–7), and copy the agent prompt, agent JSON or orchestrator prompt. |
 | `data/roles.json` | 75 role profiles extracted from the PDF: family, description, example job titles, "look at these first" skills and "other skills to consider", each with code and level range. |
 | `data/mcp-catalog.json` | MCP servers with status (Official, Reference, Community, Build), purpose and source. |
@@ -26,7 +28,7 @@ The **SFIA capability role map** (`site/capability-map.html`, data in `data/capa
 ## Run locally
 
 ```bash
-mkdir -p _site && cp site/*.html _site/ && cp -r data agents orchestrators _site/
+mkdir -p _site && cp site/*.html site/*.js _site/ && cp -r data agents orchestrators _site/
 python3 -m http.server --directory _site 8000
 # open http://localhost:8000
 ```

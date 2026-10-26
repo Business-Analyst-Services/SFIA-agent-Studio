@@ -23,7 +23,8 @@ h1{font:700 28px/1.1 var(--f-display);margin:0;letter-spacing:-.01em;text-wrap:b
 .lvl button[aria-pressed=true]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px}
 @media(max-width:820px){.grid{grid-template-columns:1fr}.idx{max-height:300px}}
-.idx{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:auto;max-height:calc(100vh - 140px);position:sticky;top:12px}
+.idx{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:auto;max-height:calc(100vh - 190px);position:sticky;top:60px}
+.xlinks{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;margin-top:8px}.xlinks a{color:var(--accent);font-weight:600}
 .idx input{width:100%;border:0;border-bottom:1px solid var(--line);padding:10px 12px;font:inherit;background:var(--panel);color:var(--ink)}
 .fam{font:600 11px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 12px 4px}
 .idx button.r{display:block;width:100%;text-align:left;border:0;background:none;color:var(--ink);font:inherit;font-size:14px;padding:5px 12px 5px 16px;cursor:pointer;border-left:3px solid transparent}
@@ -95,7 +96,8 @@ R.forEach((r,i)=>{const hay=(r.role+' '+r.titles+' '+r.family+' '+r.core.concat(
 if(r.family!==f){f=r.family;h+=`<div class="fam">${esc(f)}</div>`}
 h+=`<button class="r" data-i="${i}" aria-current="${i===cur}">${esc(r.role)}</button>`});
 $('#list').innerHTML=h||'<p class="muted" style="padding:12px">No roles match.</p>';
-$('#list').querySelectorAll('button.r').forEach(b=>b.onclick=()=>{cur=+b.dataset.i;draw();try{localStorage.setItem('sfia-cur',cur)}catch(e){}})}
+$('#list').querySelectorAll('button.r').forEach(b=>b.onclick=()=>{cur=+b.dataset.i;draw();try{history.replaceState(null,'','#'+rid(R[cur]))}catch(e){}try{localStorage.setItem('sfia-cur',cur)}catch(e){}})}
+const rid=r=>slug(r.role.replace(/ practitioners$/,''));
 function row(s,on){const[a,b]=rng(s.levels),t=lvFor(s);let sc='';for(let i=1;i<=7;i++)sc+=`<i class="${i===t&&on?'tgt':(i>=a&&i<=b?'on':'')}"></i>`;
 return `<tr><td><input type="checkbox" data-c="${s.code}" ${on?'checked':''} aria-label="Include ${esc(s.name)}"></td><td>${esc(s.name)}</td><td class="code">${s.code}</td><td><div class="scale" title="Available levels ${s.levels}">${sc}</div></td><td class="code">${s.levels}</td><td>${on?'<span class="pill off">L'+t+'</span>':''}</td></tr>`}
 function prompt(r){const S=skills(r),all=r.core.concat(r.other).filter(s=>S.has(s.code));const m=mcps(r).map(k=>MCP[k]);
@@ -128,7 +130,7 @@ function copy(t,b){const done=()=>{b.textContent='Copied';setTimeout(()=>b.textC
 try{navigator.clipboard.writeText(t).then(done,()=>sel2(b))}catch(e){sel2(b)}}
 function sel2(b){const p=b.closest('section').querySelector('pre');const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press Ctrl/⌘ C'}
 function draw(){lb.querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',i+1===lvl));list();
-const r=R[cur],S=skills(r);let h=`<div class="eyebrow">${esc(r.family)} · p.${r.page}</div><h2>${esc(r.role)}</h2><p class="desc">${esc(r.desc)}</p><p class="titles"><b>Example titles:</b> ${esc(r.titles)}</p>
+const r=R[cur],S=skills(r);let h=`<div class="eyebrow">${esc(r.family)} · p.${r.page}</div><h2>${esc(r.role)}</h2><p class="desc">${esc(r.desc)}</p><p class="titles"><b>Example titles:</b> ${esc(r.titles)}</p><div class="xlinks"><a href="capability-map.html?role=${encodeURIComponent(r.role)}">Where this role sits on the capability map →</a><a href="muster.html?role=${rid(r)}">See Muster call this agent →</a></div>
 <div class="tabs" role="tablist">${[['profile','Skills profile'],['agent','Agent'],['mcp','Recommended MCPs'],['team','Orchestrator']].map(([k,l])=>`<button role="tab" data-t="${k}" aria-selected="${tab===k}">${l}</button>`).join('')}</div>`;
 if(tab==='profile'){h+=(S.size>7?`<div class="note">${S.size} skills selected. SFIA guidance suggests 5–7 per role to keep focus; many roles need fewer.</div>`:'')+
 `<p class="muted">Level ${lvl} — ${LV[lvl]}. The filled square marks the target level, clamped to the range each skill offers.</p>
@@ -155,10 +157,12 @@ $('#main').querySelectorAll('.btn').forEach(b=>b.onclick=()=>copy(b.closest('sec
 $('#q').oninput=list;
 Promise.all(['data/roles.json','data/mcp-catalog.json','data/mcp-map.json'].map(u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()}))).then(([roles,cat,map])=>{
 R=roles;MCP=Object.fromEntries(Object.entries(cat).map(([k,v])=>[k,[v.name,v.status,v.purpose,v.source]]));FAM_MCP=map.byFamily;ROLE_MCP=map.byRole;
-try{const g=localStorage.getItem("sfia-cur"),c=+g;if(g!==null&&c>=0&&c<R.length)cur=c;else cur=R.findIndex(r=>r.role==='Business analysis practitioners')}catch(e){cur=R.findIndex(r=>r.role==='Business analysis practitioners')}
+const hi=R.findIndex(r=>rid(r)===location.hash.slice(1));
+if(hi>=0)cur=hi;else try{const g=localStorage.getItem("sfia-cur"),c=+g;if(g!==null&&c>=0&&c<R.length)cur=c;else cur=R.findIndex(r=>r.role==='Business analysis practitioners')}catch(e){cur=R.findIndex(r=>r.role==='Business analysis practitioners')}
 draw();
 }).catch(e=>{$('#main').innerHTML='<div class="note">Could not load the role data ('+esc(e.message)+'). Serve this folder over HTTP, for example <code>python3 -m http.server</code>, rather than opening the file directly.</div>'});
 </script>
 
+<script src="nav.js" defer></script>
 </body>
 </html>

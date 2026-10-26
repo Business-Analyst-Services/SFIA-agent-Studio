@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Integrate Muster</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: architecture diagram, then entry-point cards (one per platform, with steps and snippet), then tools, deploy, and a phased rollout */
+:root{--bg:#f4f6f6;--panel:#fff;--ink:#14211f;--muted:#5b6b68;--line:#d9e1df;--accent:#0f6e64;--accent-soft:#dcefeb;--warm:#c2410c;--warn-soft:#fbecd9;--code:#eef2f1;
+--f-display:"Familjen Grotesk",system-ui,sans-serif;--f-body:"Public Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--panel:#152120;--ink:#e3ecea;--muted:#93a6a2;--line:#273634;--accent:#5cc9b8;--accent-soft:#183a35;--warm:#ffb15c;--warn-soft:#3a2a16;--code:#0b1110;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--f-body)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:26px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:700 32px/1.1 var(--f-display);margin:0 0 6px;text-wrap:balance}
+h2{font:700 22px/1.2 var(--f-display);margin:40px 0 8px;text-wrap:balance}
+h3{font:700 16px var(--f-display);margin:0}
+p{max-width:72ch}
+.lede{color:var(--muted);font-size:16px}
+a{color:var(--accent)}
+.diagram{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;margin-top:14px}
+.diagram svg{display:block;min-width:760px;width:100%;height:auto}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+.toc a{font:600 13px var(--f-body);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 11px;background:var(--panel)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-top:12px}
+@media(max-width:420px){.cards{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:8px;scroll-margin-top:64px}
+.card header{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.status{margin-left:auto;font:500 11px var(--f-mono);border-radius:3px;padding:1px 6px;border:1px solid currentColor}
+.s-built{color:var(--accent)}.s-config{color:var(--muted)}.s-planned{color:var(--warm)}
+.what{font-size:14px;color:var(--muted);margin:0}
+ol{margin:0;padding-left:20px;font-size:14px}
+li{margin:3px 0}
+pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:12.5px/1.55 var(--f-mono);overflow-x:auto;margin:0;white-space:pre}
+code{font-family:var(--f-mono);font-size:.92em}
+.copy{align-self:flex-start;font:600 12px var(--f-body);border:1px solid var(--accent);background:none;color:var(--accent);border-radius:6px;padding:3px 10px;cursor:pointer}
+table{border-collapse:collapse;width:100%;font-size:14px}
+.tw{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-top:10px}
+td,th{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font:600 11px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:12px}
+.ph{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:10px;padding:12px 14px}
+.ph b{display:block;font:700 15px var(--f-display)}
+.ph small{font:500 11px var(--f-mono);color:var(--muted)}
+.ph p{font-size:13.5px;margin:6px 0 0}
+.note{background:var(--warn-soft);border-left:3px solid var(--warm);padding:10px 14px;border-radius:0 8px 8px 0;font-size:14px;margin-top:14px;max-width:none}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Integrate Muster into your live platforms</h1>
+<p class="lede">Muster is one service with several front doors. People ask in the tools they already use; Muster routes each request to SFIA role agents, which act through MCP connections to your systems, inside approval limits set by SFIA level. The code is in <a href="https://github.com/Business-Analyst-Services/SFIA-agent-Studio/tree/main/assistant"><code>assistant/</code></a>.</p>
+
+<div class="diagram" role="img" aria-label="Diagram: Slack, Teams, email, intranet and service desk tools send requests to Muster, which routes them to SFIA role agents. Agents use MCP tools to reach systems such as Jira, ServiceNow and GitHub. Actions that need approval go back to people in the original channel, and everything is written to an audit log.">
+<svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" font-family="Public Sans, system-ui, sans-serif">
+ <style>.bx{fill:var(--panel);stroke:var(--line);stroke-width:1.5}.ac{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5}.t{fill:var(--ink);font-size:13px}.tb{fill:var(--ink);font-size:14px;font-weight:700}.tm{fill:var(--muted);font-size:11.5px}.ln{stroke:var(--muted);stroke-width:1.5;fill:none}.lw{stroke:var(--warm);stroke-width:1.5;fill:none;stroke-dasharray:5 4}.ah{fill:var(--muted)}.aw{fill:var(--warm)}</style>
+ <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" class="ah"/></marker><marker id="w" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" class="aw"/></marker></defs>
+ <text x="20" y="22" class="tm">WHERE PEOPLE ASK</text>
+ <g><rect x="20" y="34" width="150" height="34" rx="7" class="bx"/><text x="34" y="56" class="t">Slack</text>
+ <rect x="20" y="76" width="150" height="34" rx="7" class="bx"/><text x="34" y="98" class="t">Microsoft Teams</text>
+ <rect x="20" y="118" width="150" height="34" rx="7" class="bx"/><text x="34" y="140" class="t">Email (Gmail)</text>
+ <rect x="20" y="160" width="150" height="34" rx="7" class="bx"/><text x="34" y="182" class="t">Intranet widget</text>
+ <rect x="20" y="202" width="150" height="34" rx="7" class="bx"/><text x="34" y="224" class="t">Jira SM / ServiceNow</text>
+ <rect x="20" y="244" width="150" height="34" rx="7" class="bx"/><text x="34" y="266" class="t">Any app (REST API)</text></g>
+ <path d="M170 51 C215 51 215 150 258 150" class="ln" marker-end="url(#a)"/><path d="M170 93 C215 93 215 150 258 150" class="ln"/><path d="M170 135 L258 150" class="ln"/><path d="M170 177 L258 156" class="ln"/><path d="M170 219 C215 219 215 156 258 156" class="ln"/><path d="M170 261 C215 261 215 156 258 156" class="ln"/>
+ <rect x="260" y="104" width="170" height="104" rx="10" class="ac"/><text x="276" y="132" class="tb">Muster</text><text x="276" y="152" class="tm">Persona + memory</text><text x="276" y="170" class="tm">Routes by SFIA skill</text><text x="276" y="188" class="tm">and capability</text>
+ <path d="M430 156 L478 156" class="ln" marker-end="url(#a)"/>
+ <text x="480" y="22" class="tm">SFIA ROLE AGENTS (75)</text>
+ <rect x="480" y="34" width="180" height="40" rx="7" class="bx"/><text x="494" y="59" class="t">Service operations · L4</text>
+ <rect x="480" y="84" width="180" height="40" rx="7" class="bx"/><text x="494" y="109" class="t">Solution architecture · L5</text>
+ <rect x="480" y="134" width="180" height="40" rx="7" class="bx"/><text x="494" y="159" class="t">Security operations · L4</text>
+ <rect x="480" y="184" width="180" height="40" rx="7" class="bx"/><text x="494" y="209" class="t">Technology finance · L4</text>
+ <text x="494" y="246" class="tm">…71 more</text>
+ <path d="M660 129 L718 129" class="ln" marker-end="url(#a)"/>
+ <text x="720" y="22" class="tm">SYSTEMS VIA MCP</text>
+ <rect x="720" y="34" width="160" height="190" rx="10" class="bx"/>
+ <text x="736" y="62" class="t">Jira · Confluence</text><text x="736" y="88" class="t">ServiceNow</text><text x="736" y="114" class="t">GitHub · GitLab</text><text x="736" y="140" class="t">Datadog · Grafana</text><text x="736" y="166" class="t">Splunk · Snyk</text><text x="736" y="192" class="t">AWS · Azure · M365</text>
+ <text x="736" y="214" class="tm">read → write → destructive</text>
+ <path d="M570 224 C570 300 300 300 95 280" class="lw" marker-end="url(#w)"/>
+ <text x="300" y="316" class="tm">Approvals go back to people in the same channel (buttons, cards or “approve id”)</text>
+ <rect x="740" y="262" width="140" height="34" rx="7" class="bx"/><text x="754" y="284" class="t">Audit log</text><path d="M660 230 C700 260 715 279 738 279" class="ln" marker-end="url(#a)"/>
+</svg>
+</div>
+
+<h2 id="entry">Front doors</h2>
+<p>Pick the places your people already ask for help. Each one starts automatically when its settings are in <code>assistant/.env</code>.</p>
+<nav class="toc" aria-label="Platforms"><a href="#slack">Slack</a><a href="#teams">Teams</a><a href="#email">Email</a><a href="#intranet">Intranet</a><a href="#jira">Jira Service Management</a><a href="#servicenow">ServiceNow</a><a href="#api">REST API</a><a href="#agents">Rovo, Copilot Studio, Claude Code</a></nav>
+<div class="cards">
+
+<article class="card" id="slack"><header><h3>Slack</h3><span class="status s-built">Built</span></header>
+<p class="what">Mention <code>@Muster</code> in a channel or DM it. Replies go in thread; approvals get Approve and Reject buttons.</p>
+<ol><li>At api.slack.com/apps choose <b>Create New App → From a manifest</b> and paste <code>assistant/manifests/slack-app.yaml</code>.</li><li>Install it to your workspace and create an app-level token with <code>connections:write</code>.</li><li>Add the three tokens to <code>.env</code> and restart. Socket Mode means no public URL is needed.</li></ol>
+<pre>SLACK_BOT_TOKEN=xoxb-…
+SLACK_APP_TOKEN=xapp-…
+SLACK_SIGNING_SECRET=…</pre></article>
+
+<article class="card" id="teams"><header><h3>Microsoft Teams</h3><span class="status s-built">Built</span></header>
+<p class="what">Chat with Muster or add it to a team. Approvals arrive as Adaptive Cards.</p>
+<ol><li>In Azure, create an <b>Azure Bot</b> (single tenant) with messaging endpoint <code>https://YOUR-HOST/api/messages</code>.</li><li>Put the app id and secret in <code>.env</code>.</li><li>Fill the app id into <code>manifests/teams-manifest.json</code>, add a colour and outline icon, zip the three files, and upload in Teams admin (or <b>Apps → Upload a custom app</b>).</li></ol>
+<pre>MICROSOFT_APP_ID=…
+MICROSOFT_APP_PASSWORD=…
+MICROSOFT_APP_TENANT_ID=…</pre></article>
+
+<article class="card" id="email"><header><h3>Email (Gmail)</h3><span class="status s-built">Built</span></header>
+<p class="what">People email a help address. Muster replies in the thread as a draft for a person to send, or sends itself if you allow it.</p>
+<ol><li>Create a Google OAuth client with <code>gmail.modify</code> and <code>gmail.compose</code>, and get a refresh token for the help mailbox.</li><li>Add a Gmail filter that labels incoming requests <code>Ask-Muster</code>.</li><li>Start in <code>draft</code> mode; switch to <code>send</code> once you trust the replies.</li></ol>
+<pre>GMAIL_CLIENT_ID=…
+GMAIL_CLIENT_SECRET=…
+GMAIL_REFRESH_TOKEN=…
+GMAIL_REPLY_MODE=draft</pre>
+<p class="what"><b>Outlook / Microsoft 365 mail</b> <span class="status s-planned" style="margin-left:4px">Planned</span> follows the same pattern through Microsoft Graph. Until then, use Teams or forward to the Gmail mailbox.</p></article>
+
+<article class="card" id="intranet"><header><h3>Intranet, SharePoint, Confluence</h3><span class="status s-built">Built</span></header>
+<p class="what">The kelpie sits in the corner of any page. One script tag; no build step.</p>
+<pre id="snip-widget">&lt;script src="https://YOUR-HOST/muster.js"
+  data-api="https://YOUR-HOST"
+  data-token="YOUR_WEB_TOKEN"
+  data-user="Signed-in user's name" defer&gt;&lt;/script&gt;</pre>
+<button class="copy" data-copy="snip-widget" type="button">Copy snippet</button>
+<ol><li>Set <code>MUSTER_WEB_TOKEN</code> and add the intranet's address to <code>MUSTER_ALLOWED_ORIGINS</code>.</li><li><b>SharePoint Online</b> blocks inline scripts on modern pages, so wrap the snippet in an SPFx application customizer. <b>Confluence</b> needs an HTML macro or a Forge app, depending on your admin settings.</li></ol></article>
+
+<article class="card" id="jira"><header><h3>Jira Service Management</h3><span class="status s-built">Built (webhook)</span></header>
+<p class="what">New tickets go to Muster; its triage comes back as a comment, and approvals as comments people can answer.</p>
+<ol><li>Set <code>MUSTER_WEBHOOK_TOKEN</code> on the server.</li><li>Create an Automation rule: <b>Work item created</b> → <b>Send web request</b> to <code>POST https://YOUR-HOST/api/webhook</code> with header <code>Authorization: Bearer YOUR_WEBHOOK_TOKEN</code> and this body.</li><li>Add a second rule with an <b>Incoming webhook</b> trigger that comments <code>{{webhookData.text}}</code> on the ticket, and use its URL as <code>callbackUrl</code>.</li></ol>
+<pre id="snip-jira">{
+  "source": "jira",
+  "conversationId": "{{issue.key}}",
+  "user": "{{reporter.displayName}}",
+  "text": "{{issue.summary}}\n\n{{issue.description}}",
+  "callbackUrl": "YOUR_JIRA_INCOMING_WEBHOOK_URL"
+}</pre>
+<button class="copy" data-copy="snip-jira" type="button">Copy body</button></article>
+
+<article class="card" id="servicenow"><header><h3>ServiceNow</h3><span class="status s-built">Built (webhook)</span></header>
+<p class="what">An incident or request triggers Muster; its reply lands in the work notes.</p>
+<ol><li>Store the webhook token as a system property or credential.</li><li>Add an async <b>Business Rule</b> (or Flow Designer REST step) on insert that posts to <code>/api/webhook</code>.</li><li>For later updates, expose a <b>Scripted REST API</b> that writes to work notes, and pass its URL as <code>callbackUrl</code>.</li></ol>
+<pre id="snip-sn">var r = new sn_ws.RESTMessageV2();
+r.setEndpoint('https://YOUR-HOST/api/webhook');
+r.setHttpMethod('POST');
+r.setRequestHeader('Content-Type', 'application/json');
+r.setRequestHeader('Authorization', 'Bearer ' +
+  gs.getProperty('muster.webhook.token'));
+r.setRequestBody(JSON.stringify({
+  source: 'servicenow',
+  conversationId: current.number.toString(),
+  user: current.caller_id.getDisplayValue(),
+  text: current.short_description + '\n\n' + current.description
+}));
+var res = JSON.parse(r.execute().getBody());
+current.work_notes = 'Muster: ' + res.reply;
+current.update();</pre>
+<button class="copy" data-copy="snip-sn" type="button">Copy script</button></article>
+
+<article class="card" id="api"><header><h3>REST API</h3><span class="status s-built">Built</span></header>
+<p class="what">For anything else: portals, bots, Power Automate, Zapier, scripts.</p>
+<pre id="snip-api">curl https://YOUR-HOST/api/chat \
+  -H "Authorization: Bearer $MUSTER_WEB_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"conversationId":"demo-1","user":"Jane",
+       "text":"Is the VPN down?"}'
+
+# Approve a pending action
+curl -X POST https://YOUR-HOST/api/approvals/1a2b3c4d \
+  -H "Authorization: Bearer $MUSTER_WEB_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"approved":true,"approver":"Jane"}'</pre>
+<button class="copy" data-copy="snip-api" type="button">Copy</button>
+<p class="what">Other endpoints: <code>GET /api/approvals</code>, <code>GET /api/agents</code>, <code>GET /healthz</code>.</p></article>
+
+<article class="card" id="agents"><header><h3>Rovo, Copilot Studio, Claude Code</h3><span class="status s-config">Configure</span></header>
+<p class="what">Prefer your existing agent platform? Use the 75 agent files without running Muster.</p>
+<ol><li><b>Claude Code:</b> copy <code>agents/</code> and <code>orchestrators/</code> into <code>.claude/agents/</code>.</li><li><b>Atlassian Rovo:</b> create one Rovo agent per role you need; paste the agent file's body as its instructions and turn on the Jira and Confluence actions it lists.</li><li><b>Microsoft Copilot Studio:</b> one agent per role, the body as instructions, and the MCP servers from its Tools section added as connectors.</li><li>Use a family orchestrator file as the routing agent.</li></ol>
+<p class="what">You lose Muster's SFIA-level approval gates, so set each platform's own approval settings to match.</p></article>
+</div>
+
+<h2 id="tools">Connect the tools agents use</h2>
+<p>Agents act through MCP servers. Each role only sees the servers recommended for it <i>and</i> enabled in <code>assistant/config/mcp-servers.json</code>.</p>
+<pre>"gh":  { "enabled": true, "transport": "http",
+         "url": "https://api.githubcopilot.com/mcp/",
+         "headers": { "Authorization": "Bearer ${GITHUB_TOKEN}" } },
+"atl": { "enabled": true, "transport": "http",
+         "url": "https://mcp.atlassian.com/v1/mcp",
+         "headers": { "Authorization": "Bearer ${ATLASSIAN_TOKEN}" } }</pre>
+<p class="note">Start every server with a read-only account or token. Tools are classed as read, write or destructive from the server's own hints, falling back to the tool's name, and unknown tools count as writes.</p>
+
+<h2 id="autonomy">How much agents do on their own</h2>
+<div class="tw"><table><thead><tr><th>SFIA level</th><th>Read</th><th>Write</th><th>Destructive</th></tr></thead><tbody>
+<tr><td>1 Follow</td><td>Asks</td><td>Not allowed</td><td>Not allowed</td></tr>
+<tr><td>2 Assist</td><td>Runs</td><td>Not allowed</td><td>Not allowed</td></tr>
+<tr><td>3 Apply</td><td>Runs</td><td>Asks</td><td>Not allowed</td></tr>
+<tr><td>4 Enable (default)</td><td>Runs</td><td>Asks</td><td>Asks</td></tr>
+<tr><td>5–7</td><td>Runs</td><td>Runs</td><td>Asks, always</td></tr>
+</tbody></table></div>
+<p style="margin-top:8px">Set a level per agent in <code>assistant/config/autonomy.json</code>. Try the effect in the <a href="muster.html">Muster demo</a>.</p>
+
+<h2 id="deploy">Deploy</h2>
+<pre>git clone https://github.com/Business-Analyst-Services/SFIA-agent-Studio
+cd SFIA-agent-Studio
+cp assistant/.env.example assistant/.env   # add ANTHROPIC_API_KEY and channel settings
+docker build -f assistant/Dockerfile -t muster .
+docker run --env-file assistant/.env -p 3000:3000 muster</pre>
+<div class="tw"><table><thead><tr><th>Host</th><th>Good for</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Azure App Service or Container Apps</td><td>Microsoft 365 shops</td><td>Sits next to the Azure Bot for Teams; use Key Vault for secrets.</td></tr>
+<tr><td>AWS App Runner or ECS</td><td>AWS shops</td><td>Use Secrets Manager; pairs with the AWS MCP server.</td></tr>
+<tr><td>Google Cloud Run</td><td>Google Workspace shops</td><td>Keep one instance warm so Gmail polling continues.</td></tr>
+<tr><td>A single VM</td><td>Pilots</td><td>Fine for Slack and Gmail; Teams needs a public HTTPS address.</td></tr>
+</tbody></table></div>
+
+<h2 id="rollout">Roll out in four steps</h2>
+<div class="phases">
+<div class="ph"><small>Weeks 1–2</small><b>Shadow</b><p>One channel, read-only tools, agents at level 2. Muster answers and recommends; it changes nothing. Review the audit log weekly.</p></div>
+<div class="ph"><small>Weeks 3–6</small><b>Approve</b><p>Raise service desk and operations agents to level 3–4. Every change needs a person's OK. Track approval rates and rejected actions.</p></div>
+<div class="ph"><small>Weeks 7–10</small><b>Delegate</b><p>Where approvals are always yes, raise those agents to level 5 for writes. Destructive actions still always ask.</p></div>
+<div class="ph"><small>After</small><b>Scale</b><p>Add channels and capability areas one at a time. Move memory and approvals to a database before going organisation-wide.</p></div>
+</div>
+<p class="note">Content from emails, tickets and tools is treated as information, never as instructions, but prompt injection is a real risk for any agent that can act. Keep write-capable agents on approvals until you've watched them work, and limit each MCP token to what its role needs.</p>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{const t=document.getElementById(b.dataset.copy).textContent;const l=b.textContent;
+ try{await navigator.clipboard.writeText(t);b.textContent='Copied'}catch(e){const r=document.createRange();r.selectNodeContents(document.getElementById(b.dataset.copy));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Press Ctrl/⌘ C'}
+ setTimeout(()=>b.textContent=l,1600)});
+</script>
+<script src="nav.js" defer></script>
+</body>
+</html>

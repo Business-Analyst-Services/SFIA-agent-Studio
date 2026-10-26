@@ -47,7 +47,10 @@ Each channel starts automatically once its variables are set in `.env`.
 | **Slack** | Create an app from `manifests/slack-app.yaml`, install it, then set `SLACK_BOT_TOKEN` (xoxb-), `SLACK_APP_TOKEN` (xapp-, connections:write) and `SLACK_SIGNING_SECRET`. Mention `@Muster` in a channel or DM it. Uses Socket Mode, so no public URL is needed. |
 | **Teams** | Create an Azure Bot (single tenant) with messaging endpoint `https://HOST/api/messages`. Set `MICROSOFT_APP_ID`, `MICROSOFT_APP_PASSWORD`, `MICROSOFT_APP_TENANT_ID`. Fill the app id into `manifests/teams-manifest.json`, add two icons, zip the three files and upload the app in Teams. |
 | **Gmail** | Create a Google OAuth client with the `gmail.modify` and `gmail.compose` scopes and get a refresh token for Muster's mailbox. Add a Gmail filter that labels incoming requests `Ask-Muster`. Muster replies as **drafts** by default. Set `GMAIL_REPLY_MODE=send` to let it reply itself. |
+| **Jira Service Management, ServiceNow, others** | Set `MUSTER_WEBHOOK_TOKEN`, then have the tool `POST /api/webhook` with `{source, conversationId, user, text, callbackUrl}`. The reply comes back in the response; approvals and later updates are POSTed to `callbackUrl`. Ready-made Jira Automation and ServiceNow snippets are on the site's Integrate page. |
 | **Outlook / M365 mail** | Not built yet. Use Teams, or forward to the Gmail mailbox. A Microsoft Graph adapter would follow the Gmail one (`src/channels/gmail.ts`). |
+
+Browser access from other sites (such as the GitHub Pages demo's live mode) needs their address in `MUSTER_ALLOWED_ORIGINS`.
 
 ## Connect tools (MCP)
 
@@ -73,7 +76,7 @@ Any container host works (Azure App Service, AWS App Runner, Fly.io, Cloud Run).
 | `src/autonomy.ts`, `config/autonomy.json` | SFIA level → what runs automatically |
 | `src/mcp.ts`, `config/mcp-servers.json` | MCP connections and tool risk classes |
 | `src/approvals.ts` | Pending actions and their approval or rejection |
-| `src/channels/*` | Web, Slack, Teams and Gmail adapters |
+| `src/channels/*` | Web, webhook, Slack, Teams and Gmail adapters |
 | `public/muster.js` | Embeddable web widget with the Muster character |
 
 ## Limits to know
