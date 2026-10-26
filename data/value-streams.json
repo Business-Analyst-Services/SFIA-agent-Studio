@@ -1,0 +1,641 @@
+{
+ "_doc": "End-to-end value streams: each step is one SFIA role agent, the capability it exercises, the tool actions it takes, and what it hands to the next step. Used by site/value-streams.html and the Muster demo.",
+ "streams": [
+  {
+   "id": "idea-to-service",
+   "name": "Idea to service",
+   "why": "A business request becomes a supported service.",
+   "trigger": {
+    "user": "Tom Becker",
+    "msg": "The legal team needs a proper system for matter intake. Can we get this going?"
+   },
+   "steps": [
+    {
+     "agent": "business-analysis-practice-management",
+     "capability": "Digital advisory for business units",
+     "task": "Validate the need and the sponsor",
+     "actions": [
+      {
+       "tool": "confluence.search",
+       "risk": "read",
+       "summary": "Find related demand and past requests",
+       "result": "Similar request from Finance in 2025, nothing built"
+      }
+     ],
+     "handoff": "Need confirmed, sponsor is the General Counsel"
+    },
+    {
+     "agent": "agile-change-agents",
+     "capability": "Demand and initiative intake",
+     "task": "Log it as an initiative",
+     "actions": [
+      {
+       "tool": "jira.create_issue",
+       "risk": "write",
+       "summary": "Log the initiative on the digital intake board",
+       "result": "INIT-88 created"
+      }
+     ],
+     "handoff": "INIT-88 ready for assessment"
+    },
+    {
+     "agent": "enterprise-architecture",
+     "capability": "Enterprise architecture",
+     "task": "Check fit with the roadmap and standards",
+     "actions": [
+      {
+       "tool": "confluence.search",
+       "risk": "read",
+       "summary": "Check the roadmap and CRM standard",
+       "result": "Fits the client platforms roadmap; CRM standard is Dynamics or Salesforce"
+      }
+     ],
+     "handoff": "Use the existing Dynamics platform"
+    },
+    {
+     "agent": "technology-finance",
+     "capability": "Cost and budget management",
+     "task": "Build the business case",
+     "actions": [
+      {
+       "tool": "m365.search_files",
+       "risk": "read",
+       "summary": "Pull licence costs and spare seats",
+       "result": "40 spare Dynamics seats; about $38k to implement"
+      },
+      {
+       "tool": "gdrive.create_document",
+       "risk": "write",
+       "summary": "Draft the business case",
+       "result": "Business case drafted"
+      }
+     ],
+     "handoff": "Business case: $38k, payback in 14 months"
+    },
+    {
+     "agent": "project-delivery-practice-management",
+     "capability": "Project portfolio management",
+     "task": "Prioritise and fund",
+     "actions": [
+      {
+       "tool": "jira.update_issue",
+       "risk": "write",
+       "summary": "Rank INIT-88 in the portfolio",
+       "result": "Ranked #3 and funded for Q1"
+      }
+     ],
+     "handoff": "Funded for Q1, project manager assigned"
+    },
+    {
+     "agent": "business-analysis",
+     "capability": "Solution ideation, analysis and design",
+     "task": "Run discovery and write requirements",
+     "actions": [
+      {
+       "tool": "jira.create_epic",
+       "risk": "write",
+       "summary": "Create a discovery epic with 6 starter stories",
+       "result": "LEGAL-14 created with 6 stories"
+      }
+     ],
+     "handoff": "Requirements agreed with the legal team"
+    },
+    {
+     "agent": "solution-architecture",
+     "capability": "Solution ideation, analysis and design",
+     "task": "Design the solution",
+     "actions": [
+      {
+       "tool": "confluence.create_page",
+       "risk": "write",
+       "summary": "Publish the solution design",
+       "result": "Solution design published"
+      }
+     ],
+     "handoff": "Design approved at the architecture forum"
+    },
+    {
+     "agent": "software-engineering",
+     "capability": "Solution configuration, enhancement and development",
+     "task": "Build and configure",
+     "actions": [
+      {
+       "tool": "github.create_pull_request",
+       "risk": "write",
+       "summary": "Configure intake forms and workflow",
+       "result": "PR #212 opened"
+      }
+     ],
+     "handoff": "Build complete, ready for test"
+    },
+    {
+     "agent": "testing",
+     "capability": "Solution testing and deployment",
+     "task": "Test, including accessibility",
+     "actions": [
+      {
+       "tool": "playwright.run_tests",
+       "risk": "read",
+       "summary": "Run UAT and accessibility checks",
+       "result": "48 of 48 pass; 2 accessibility warnings fixed"
+      }
+     ],
+     "handoff": "Signed off by the legal team"
+    },
+    {
+     "agent": "service-introduction",
+     "capability": "Service transition",
+     "task": "Take it live",
+     "actions": [
+      {
+       "tool": "servicenow.create_change",
+       "risk": "write",
+       "summary": "Raise a normal change for go-live",
+       "result": "CHG0034 approved for Tuesday"
+      },
+      {
+       "tool": "deploy.release_to_production",
+       "risk": "destructive",
+       "summary": "Release to production",
+       "result": "Live at 7:30am Tuesday"
+      }
+     ],
+     "handoff": "Live, with support handover pack"
+    },
+    {
+     "agent": "service-operations",
+     "capability": "Incident and problem management",
+     "task": "Run it as a service",
+     "actions": [
+      {
+       "tool": "servicenow.create_service_offering",
+       "risk": "write",
+       "summary": "Add Matter intake to the service catalogue",
+       "result": "Service added; support group assigned"
+      }
+     ],
+     "handoff": "In BAU"
+    }
+   ],
+   "outcome": "Matter intake is live. It went from request to service in 11 handoffs, with every system change approved along the way. The service desk now supports it."
+  },
+  {
+   "id": "incident-to-resolution",
+   "name": "Incident to resolution",
+   "why": "An outage is restored and the knowledge is kept.",
+   "trigger": {
+    "user": "Priya Nair",
+    "msg": "The staff portal has been down since 7am, nobody can log in"
+   },
+   "steps": [
+    {
+     "agent": "service-desk",
+     "capability": "Service desk",
+     "task": "Log and triage",
+     "actions": [
+      {
+       "tool": "servicenow.create_incident",
+       "risk": "write",
+       "summary": "Log a P2: portal sign-in failure",
+       "result": "INC0012931 logged as P2"
+      }
+     ],
+     "handoff": "P2 logged, 340 users affected"
+    },
+    {
+     "agent": "service-operations",
+     "capability": "Incident and problem management",
+     "task": "Diagnose",
+     "actions": [
+      {
+       "tool": "datadog.query_logs",
+       "risk": "read",
+       "summary": "Pull auth service errors since 7am",
+       "result": "412 certificate errors, first at 07:02"
+      },
+      {
+       "tool": "servicenow.create_problem",
+       "risk": "write",
+       "summary": "Open a problem record",
+       "result": "PRB0004410 opened"
+      }
+     ],
+     "handoff": "Expired certificate on the sign-in service"
+    },
+    {
+     "agent": "application-support",
+     "capability": "Application support",
+     "task": "Rule out the application",
+     "actions": [
+      {
+       "tool": "sentry.list_issues",
+       "risk": "read",
+       "summary": "Check for application errors and regressions",
+       "result": "No regressions; failures happen at the sign-in handshake"
+      }
+     ],
+     "handoff": "App is fine; fix belongs to the platform"
+    },
+    {
+     "agent": "infrastructure-operations",
+     "capability": "System administration",
+     "task": "Fix the platform",
+     "actions": [
+      {
+       "tool": "kubernetes.rollout_restart",
+       "risk": "destructive",
+       "summary": "Restart the sign-in service with the renewed certificate",
+       "result": "Sign-ins restored at 09:41"
+      }
+     ],
+     "handoff": "Service restored"
+    },
+    {
+     "agent": "site-reliability-engineer-sre",
+     "capability": "Capacity and availability management",
+     "task": "Stop it happening again",
+     "actions": [
+      {
+       "tool": "grafana.create_alert",
+       "risk": "write",
+       "summary": "Alert 14 days before any certificate expires",
+       "result": "Alert rule created for 23 certificates"
+      }
+     ],
+     "handoff": "Early warning in place"
+    },
+    {
+     "agent": "technical-writing",
+     "capability": "Knowledge management",
+     "task": "Keep the knowledge",
+     "actions": [
+      {
+       "tool": "confluence.create_page",
+       "risk": "write",
+       "summary": "Publish a knowledge article",
+       "result": "Knowledge article published"
+      }
+     ],
+     "handoff": "Knowledge article live"
+    }
+   ],
+   "outcome": "The portal is back up (down 2h39m). The cause was an expired certificate, an alert now covers all 23 certificates, and the knowledge article is published."
+  },
+  {
+   "id": "cyber-event-to-recovery",
+   "name": "Cyber event to recovery",
+   "why": "A security alert is contained and lessons are applied.",
+   "trigger": {
+    "user": "SOC alert",
+    "msg": "Impossible-travel sign-ins detected on 3 staff accounts"
+   },
+   "steps": [
+    {
+     "agent": "security-operations",
+     "capability": "Security monitoring and detection",
+     "task": "Detect and confirm",
+     "actions": [
+      {
+       "tool": "splunk.search_events",
+       "risk": "read",
+       "summary": "Correlate sign-ins across locations",
+       "result": "3 accounts signed in from Sydney and Lagos within 20 minutes"
+      }
+     ],
+     "handoff": "Confirmed account compromise, 3 users"
+    },
+    {
+     "agent": "incident-management",
+     "capability": "Security incident response",
+     "task": "Contain",
+     "actions": [
+      {
+       "tool": "entra.revoke_sessions",
+       "risk": "destructive",
+       "summary": "Revoke sessions and force a password reset for the 3 accounts",
+       "result": "Sessions revoked, resets forced"
+      }
+     ],
+     "handoff": "Contained at 10:12"
+    },
+    {
+     "agent": "infrastructure-operations",
+     "capability": "Backup and recovery",
+     "task": "Check for damage",
+     "actions": [
+      {
+       "tool": "aws.list_backup_plans",
+       "risk": "read",
+       "summary": "Confirm clean restore points for affected mailboxes",
+       "result": "Clean restore points from 06:00 available"
+      }
+     ],
+     "handoff": "No data loss; restore points confirmed"
+    },
+    {
+     "agent": "security-risk-management-audit-and-compliance",
+     "capability": "Risk management",
+     "task": "Review and record",
+     "actions": [
+      {
+       "tool": "jira.create_issue",
+       "risk": "write",
+       "summary": "Open the post-incident review and update the risk register",
+       "result": "SEC-301 opened; risk register updated"
+      }
+     ],
+     "handoff": "Root cause: phishing email, no MFA on 1 account"
+    },
+    {
+     "agent": "learning-development-l-d",
+     "capability": "Security training and awareness",
+     "task": "Apply the lessons",
+     "actions": [
+      {
+       "tool": "m365.send_mail",
+       "risk": "destructive",
+       "summary": "Send a phishing awareness module to affected teams",
+       "result": "Module sent to 4 teams (62 people)"
+      }
+     ],
+     "handoff": "Awareness training under way"
+    }
+   ],
+   "outcome": "Contained in 34 minutes with no data loss. The root cause was phishing plus one account without MFA. The review is logged and the affected teams have training."
+  },
+  {
+   "id": "change-and-release",
+   "name": "Change and release",
+   "why": "A change reaches production safely.",
+   "trigger": {
+    "user": "Mei Tanaka",
+    "msg": "Release 4.2 of the student app is ready. Can we ship it this weekend?"
+   },
+   "steps": [
+    {
+     "agent": "devops-automation-engineer",
+     "capability": "Platform engineering",
+     "task": "Build",
+     "actions": [
+      {
+       "tool": "github.get_workflow_run",
+       "risk": "read",
+       "summary": "Check the release 4.2 pipeline",
+       "result": "Build green; 0 critical findings"
+      }
+     ],
+     "handoff": "Build artefact ready"
+    },
+    {
+     "agent": "testing",
+     "capability": "Solution testing and deployment",
+     "task": "Regression test",
+     "actions": [
+      {
+       "tool": "playwright.run_tests",
+       "risk": "read",
+       "summary": "Run the regression suite",
+       "result": "212 of 212 pass"
+      }
+     ],
+     "handoff": "Regression passed"
+    },
+    {
+     "agent": "service-operations",
+     "capability": "Change management",
+     "task": "Approve the change",
+     "actions": [
+      {
+       "tool": "servicenow.create_change",
+       "risk": "write",
+       "summary": "Raise a standard change for Saturday's window",
+       "result": "CHG0035 scheduled for Saturday 10pm"
+      }
+     ],
+     "handoff": "Change approved"
+    },
+    {
+     "agent": "application-support",
+     "capability": "System updates and releases",
+     "task": "Deploy",
+     "actions": [
+      {
+       "tool": "deploy.release_to_production",
+       "risk": "destructive",
+       "summary": "Deploy 4.2 in the Saturday window",
+       "result": "Deployed 10:24pm, smoke tests pass"
+      }
+     ],
+     "handoff": "Deployed"
+    },
+    {
+     "agent": "service-desk",
+     "capability": "Service desk",
+     "task": "Tell people",
+     "actions": [
+      {
+       "tool": "m365.post_announcement",
+       "risk": "write",
+       "summary": "Post release notes on the staff news page",
+       "result": "Release notes posted"
+      }
+     ],
+     "handoff": "Users informed"
+    }
+   ],
+   "outcome": "Release 4.2 is live. It was built, tested, approved and deployed in the Saturday window, and users have the release notes."
+  },
+  {
+   "id": "plan-to-budget",
+   "name": "Plan to budget",
+   "why": "Strategy turns into funded capacity.",
+   "trigger": {
+    "user": "Chief Information Officer",
+    "msg": "Start the FY27 IT budget, aligned to the digital strategy"
+   },
+   "steps": [
+    {
+     "agent": "chief-information-officer",
+     "capability": "Digital and cyber strategy stewardship",
+     "task": "Set the priorities",
+     "actions": [
+      {
+       "tool": "m365.search_files",
+       "risk": "read",
+       "summary": "Pull the digital strategy and board priorities",
+       "result": "5 priorities; cyber and data platform are top two"
+      }
+     ],
+     "handoff": "5 priorities, cyber and data first"
+    },
+    {
+     "agent": "technology-finance",
+     "capability": "Cost and budget management",
+     "task": "Draft the budget",
+     "actions": [
+      {
+       "tool": "gdrive.create_spreadsheet",
+       "risk": "write",
+       "summary": "Draft the FY27 budget model",
+       "result": "Budget model drafted: $14.2M"
+      }
+     ],
+     "handoff": "Draft budget $14.2M"
+    },
+    {
+     "agent": "technology-procurement",
+     "capability": "Sourcing and procurement",
+     "task": "Check commitments",
+     "actions": [
+      {
+       "tool": "m365.search_files",
+       "risk": "read",
+       "summary": "List contracts renewing in FY27",
+       "result": "11 renewals, 3 over $100k"
+      }
+     ],
+     "handoff": "$1.9M in renewals to negotiate"
+    },
+    {
+     "agent": "workforce-planning",
+     "capability": "Workforce and resource management",
+     "task": "Plan the workforce",
+     "actions": [
+      {
+       "tool": "workday.get_headcount",
+       "risk": "read",
+       "summary": "Pull current headcount and vacancies",
+       "result": "118 staff, 9 vacancies, 14 contractors"
+      }
+     ],
+     "handoff": "Gap: 4 data and 2 security roles"
+    },
+    {
+     "agent": "resource-management",
+     "capability": "Workforce and resource management",
+     "task": "Allocate people",
+     "actions": [
+      {
+       "tool": "jira.update_issue",
+       "risk": "write",
+       "summary": "Allocate people to funded initiatives",
+       "result": "Allocations set for 12 initiatives"
+      }
+     ],
+     "handoff": "People allocated"
+    },
+    {
+     "agent": "project-delivery-practice-management",
+     "capability": "Project portfolio management",
+     "task": "Publish the plan",
+     "actions": [
+      {
+       "tool": "confluence.create_page",
+       "risk": "write",
+       "summary": "Publish the FY27 portfolio plan",
+       "result": "Portfolio plan published"
+      }
+     ],
+     "handoff": "Plan published"
+    }
+   ],
+   "outcome": "The FY27 draft is ready: a $14.2M budget, $1.9M in renewals to negotiate, 6 roles to hire, and a portfolio plan for 12 funded initiatives."
+  },
+  {
+   "id": "data-to-insight",
+   "name": "Data to insight",
+   "why": "Governed data becomes decisions and performance reporting.",
+   "trigger": {
+    "user": "Chief Data Officer",
+    "msg": "I need a trustworthy IT performance report for the board next week"
+   },
+   "steps": [
+    {
+     "agent": "chief-data-officer",
+     "capability": "Data quality management",
+     "task": "Set what matters",
+     "actions": [
+      {
+       "tool": "confluence.search",
+       "risk": "read",
+       "summary": "Pull the agreed IT KPIs",
+       "result": "8 board KPIs defined"
+      }
+     ],
+     "handoff": "8 KPIs to report"
+    },
+    {
+     "agent": "data-governance",
+     "capability": "Data quality management",
+     "task": "Check the data",
+     "actions": [
+      {
+       "tool": "dbt.list_test_results",
+       "risk": "read",
+       "summary": "Check data quality tests on KPI sources",
+       "result": "96% pass; 2 sources failing"
+      }
+     ],
+     "handoff": "2 sources need fixing"
+    },
+    {
+     "agent": "data-engineering",
+     "capability": "BI and reporting",
+     "task": "Fix the pipelines",
+     "actions": [
+      {
+       "tool": "dbt.run_models",
+       "risk": "write",
+       "summary": "Fix and re-run the failing pipelines",
+       "result": "Both pipelines fixed; tests now 100%"
+      }
+     ],
+     "handoff": "Data trustworthy"
+    },
+    {
+     "agent": "data-analytics",
+     "capability": "BI and reporting",
+     "task": "Build the report",
+     "actions": [
+      {
+       "tool": "snowflake.refresh_dashboard",
+       "risk": "write",
+       "summary": "Refresh the IT performance dashboard",
+       "result": "Dashboard refreshed"
+      }
+     ],
+     "handoff": "Dashboard ready"
+    },
+    {
+     "agent": "performance-analysis",
+     "capability": "IT performance management",
+     "task": "Analyse",
+     "actions": [
+      {
+       "tool": "snowflake.query",
+       "risk": "read",
+       "summary": "Analyse SLA trends over 12 months",
+       "result": "P2 resolution time down 18%; change success 97%"
+      }
+     ],
+     "handoff": "Key insights written up"
+    },
+    {
+     "agent": "chief-information-officer",
+     "capability": "IT governance",
+     "task": "Decide",
+     "actions": [
+      {
+       "tool": "m365.create_document",
+       "risk": "write",
+       "summary": "Prepare the board pack summary",
+       "result": "Board pack summary drafted"
+      }
+     ],
+     "handoff": "Board pack ready"
+    }
+   ],
+   "outcome": "The board pack is ready, built on data that now passes every quality test. Headlines: P2 incidents resolve 18% faster, and 97% of changes succeed."
+  }
+ ]
+}

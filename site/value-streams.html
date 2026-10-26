@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SFIA Value Streams</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: overview grid of six streams, then one section per stream with its numbered handoff chain (agent, capability, tool actions, handoff) and a Run button */
+:root{--bg:#f4f6f6;--panel:#fff;--ink:#14211f;--muted:#5b6b68;--line:#d9e1df;--accent:#0f6e64;--accent-soft:#dcefeb;--warm:#c2410c;--bad:#b3261e;
+--c1:#3b5bdb;--c2:#c2410c;--c3:#0f8a5f;--c4:#7c3aed;--c5:#b7791f;--c6:#be185d;
+--f-display:"Familjen Grotesk",system-ui,sans-serif;--f-body:"Public Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--panel:#152120;--ink:#e3ecea;--muted:#93a6a2;--line:#273634;--accent:#5cc9b8;--accent-soft:#183a35;--warm:#ffb15c;--bad:#ff8a80;--c1:#7b93ff;--c2:#ff9a5c;--c3:#4fd1a1;--c4:#b794ff;--c5:#f2c14e;--c6:#ff7eb6;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1280px;margin:0 auto;padding-block:24px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:700 30px/1.1 var(--f-display);margin:0 0 6px;text-wrap:balance}
+.lede{color:var(--muted);max-width:75ch;margin:0}
+a{color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:14px 0 0;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}.legend i{width:10px;height:10px;border-radius:2px;background:var(--c)}
+.over{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-top:18px}
+.oc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.oc h2{font:700 17px var(--f-display);margin:0}
+.oc p{margin:0;font-size:13.5px;color:var(--muted)}
+.dots{display:flex;gap:3px;flex-wrap:wrap}.dots i{width:14px;height:6px;border-radius:2px;background:var(--c)}
+.meta{font:500 11.5px var(--f-mono);color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.btn{font:600 13px var(--f-body);text-decoration:none;border-radius:7px;padding:6px 12px;border:1px solid var(--accent);background:var(--accent);color:var(--bg)}
+.btn.ghost{background:none;color:var(--accent)}
+section.vs{margin-top:40px;scroll-margin-top:64px}
+.vh{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px}
+.vh h2{font:700 22px var(--f-display);margin:0}
+.vh p{margin:0;color:var(--muted);flex:1 1 300px}
+.trig{margin:10px 0 12px;font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px;max-width:760px}
+.trig b{font-weight:600}
+.chain{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;counter-reset:s}
+.step{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;min-width:0;position:relative}
+.step .n{font:600 11px var(--f-mono);color:var(--muted)}
+.step b{font:700 14.5px var(--f-display)}
+.step b a{color:var(--ink);text-decoration:none}.step b a:hover{text-decoration:underline}
+.cap{font-size:12.5px;color:var(--muted)}.cap a{color:var(--muted)}
+.codes{font:500 11px var(--f-mono);color:var(--accent)}
+.act{display:flex;gap:6px;align-items:baseline;font-size:12.5px;flex-wrap:wrap}
+.act code{font:500 11.5px var(--f-mono);overflow-wrap:anywhere}
+.r{font:500 10px var(--f-mono);padding:0 5px;border-radius:3px;border:1px solid currentColor}
+.r.read{color:var(--accent)}.r.write{color:var(--warm)}.r.destructive{color:var(--bad)}
+.hand{margin-top:auto;padding-top:6px;border-top:1px dashed var(--line);font-size:12.5px}
+.hand::before{content:"Hands over → ";color:var(--muted)}
+.out{margin-top:12px;font-size:14px;max-width:820px;border-left:3px solid var(--accent);padding:4px 0 4px 12px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>How the role agents work together</h1>
+<p class="lede">Six end-to-end value streams. Each one crosses several SFIA categories, handing work from one role agent to the next. Every step shows the capability it exercises, the tools the agent uses, and what it passes on. Run any of them end to end in the Muster demo.</p>
+<div class="legend" id="legend"></div>
+<div class="over" id="over"><p class="lede">Loading value streams…</p></div>
+<div id="detail"></div>
+</div>
+<script>
+const COL={"Strategy and architecture":"--c1","Change and transformation":"--c2","Development and implementation":"--c3","Delivery and operation":"--c4","People and skills":"--c5","Relationships and engagement":"--c6"};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const rid=r=>r.replace(/ practitioners$/,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+document.getElementById('legend').innerHTML=Object.entries(COL).map(([k,v])=>`<span style="--c:var(${v})"><i></i>${k}</span>`).join('');
+Promise.all(['data/value-streams.json','data/capability-map.json','data/roles.json'].map(u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()}))).then(([vs,cm,roles])=>{
+ const catOf={};cm.categories.forEach(c=>c.subcategories.forEach(s=>s.capabilities.forEach(k=>catOf[k.name]=c.name)));
+ const role={};roles.forEach(r=>role[rid(r.role)]=r);
+ const L4={read:"auto",write:"approve",destructive:"approve"};
+ document.getElementById('over').innerHTML=vs.streams.map(s=>{const cats=s.steps.map(x=>catOf[x.capability]);const appr=s.steps.flatMap(x=>x.actions).filter(a=>L4[a.risk]==='approve').length;
+  return `<article class="oc"><h2>${esc(s.name)}</h2><p>${esc(s.why)}</p><div class="dots">${cats.map(c=>`<i style="--c:var(${COL[c]})" title="${esc(c)}"></i>`).join('')}</div>
+  <span class="meta">${s.steps.length} agents · ${new Set(cats).size} SFIA categories · ${appr} approvals at level 4</span>
+  <div class="row"><a class="btn" href="muster.html?stream=${s.id}">Run end to end</a><a class="btn ghost" href="#${s.id}">See the steps</a></div></article>`}).join('');
+ document.getElementById('detail').innerHTML=vs.streams.map(s=>`<section class="vs" id="${s.id}"><div class="vh"><h2>${esc(s.name)}</h2><p>${esc(s.why)}</p><a class="btn" href="muster.html?stream=${s.id}">Run end to end with Muster</a></div>
+  <div class="trig"><b>Starts with:</b> ${esc(s.trigger.user)}: “${esc(s.trigger.msg)}”</div>
+  <ol class="chain">${s.steps.map((x,i)=>{const r=role[x.agent];const c=catOf[x.capability];return `<li class="step" style="--c:var(${COL[c]})"><span class="n">Step ${i+1} of ${s.steps.length}</span>
+   <b><a href="index.html#${x.agent}">${esc(r?r.role.replace(/ practitioners$/,''):x.agent)}</a></b>
+   <span class="cap"><a href="capability-map.html?role=${encodeURIComponent(r?r.role:'')}">${esc(x.capability)}</a> · ${esc(c)}</span>
+   <span class="codes">${r?r.core.slice(0,4).map(k=>k.code).join(' · '):''}</span>
+   ${x.actions.map(a=>`<span class="act"><span class="r ${a.risk}">${a.risk}</span><code>${esc(a.tool)}</code></span>`).join('')}
+   <span class="hand">${esc(x.handoff)}</span></li>`}).join('')}</ol>
+  <p class="out"><b>Outcome:</b> ${esc(s.outcome)}</p></section>`).join('');
+ if(location.hash){const t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView()}
+}).catch(e=>{document.getElementById('over').innerHTML=`<p class="lede">Couldn't load the value streams (${esc(e.message)}). Serve the site over HTTP rather than opening the file directly.</p>`});
+</script>
+<script src="nav.js" defer></script>
+</body>
+</html>

@@ -35,7 +35,7 @@ h2{font:700 18px var(--f-display);margin:0 0 10px}
 .fhead{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-weight:600}
 .fhead small{color:var(--muted);font-weight:400}
 .fhead .ch{margin-left:auto;font:500 11px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
-.conv{padding:14px;display:flex;flex-direction:column;gap:12px;min-height:420px}
+.conv{padding:14px;display:flex;flex-direction:column;gap:12px;min-height:420px;max-height:720px;overflow-y:auto}
 .msg{display:flex;gap:10px;align-items:flex-start;min-width:0}
 .av{flex:none;width:32px;height:32px;border-radius:7px;background:var(--accent-soft);display:grid;place-items:center;font:700 12px var(--f-body);color:var(--accent);overflow:hidden}
 .av svg{width:32px;height:32px}
@@ -72,6 +72,20 @@ h2{font:700 18px var(--f-display);margin:0 0 10px}
 .log{font:12px/1.6 var(--f-mono);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:8px 10px;margin-top:6px;overflow-x:auto;white-space:pre}
 .gapnote{font-size:13px;border:1px dashed var(--warm);border-radius:7px;padding:7px 10px;margin-top:6px}
 .empty{color:var(--muted);font-size:14px}
+.rail{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.rl{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:start;padding:6px 8px;border-radius:7px;font-size:13.5px}
+.rl .d{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);margin-top:3px}
+.rl a{color:var(--ink);font-weight:600;text-decoration:none}.rl a:hover{text-decoration:underline}
+.rl small{display:block;color:var(--muted);font-size:12px}
+.rl .s{font:500 11px var(--f-mono);color:var(--muted);white-space:nowrap}
+.rl.working{background:var(--accent-soft)}.rl.working .d{border-color:var(--accent);border-top-color:transparent;animation:spin 1s linear infinite}
+.rl.done .d{background:var(--accent);border-color:var(--accent)}
+.rl.paused{background:var(--warn-soft)}.rl.paused .d{border-color:var(--warm);background:var(--warm)}
+.rl.stopped .d{border-color:var(--bad);background:var(--bad)}.rl.stopped .s{color:var(--bad)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.rl.working .d{animation:none}}
+.sum{display:flex;flex-wrap:wrap;gap:8px 20px;margin:10px 0 0;font-size:13px}.sum b{font:700 18px var(--f-display);display:block}
+.handoff{font-size:12.5px;color:var(--muted);margin-left:42px}
 .live{margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
 .live .row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
 .live input{font:inherit;border:1px solid var(--line);border-radius:7px;padding:8px 10px;background:var(--panel);color:var(--ink);min-width:0;flex:1 1 220px}
@@ -96,9 +110,11 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
     <path d="M44 60 C44 56 56 56 56 60 C56 64 52 66 50 66 C48 66 44 64 44 60Z" fill="#1d2b29"/>
     <path d="M50 66 L50 70 M42 71 Q50 77 58 71" fill="none" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round"/>
     <path d="M47 73 Q50 81 53 73 Z" fill="#e8687a"/>
-    <path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg><div><h1>Watch Muster work</h1><p class="lede">Pick a request and the channel it arrives in. Muster matches it to a capability, musters the right SFIA role agents, and gates every tool action by SFIA level. Approve or reject to see what happens next.</p></div></div>
+    <path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg><div><h1>Watch Muster work</h1><p class="lede">Pick a single request, or run a whole value stream end to end, and choose the channel it arrives in. Muster matches it to a capability, musters the right SFIA role agents, and gates every tool action by SFIA level. Approve or reject to see what happens next.</p></div></div>
 <div class="controls">
- <div class="ctl"><span>Request</span><div class="seg" id="scen"></div></div>
+ <div class="ctl"><span>Single request</span><div class="seg" id="scen"></div></div>
+ <div class="ctl"><span>End-to-end value stream</span><div class="seg" id="flow"></div></div>
+ <div class="ctl"><span>Approvals in end-to-end runs</span><div class="seg" id="appr"></div></div>
  <div class="ctl"><span>Channel</span><div class="seg" id="chan"></div></div>
  <div class="ctl"><span>Agent SFIA level</span><div class="seg lv" id="lvl"></div></div>
  <button class="play" id="play" type="button">Replay</button>
@@ -158,7 +174,7 @@ const SCEN=[
  reply:"The numbers stack up: cloud backup would cost about $4,100 a month, against tape renewal and the risk that only 2 of 9 systems are backed up off-site. Technology Finance has a draft ready for your approval."}
 ];
 let D=null,R=[],ROLE={},CAT={},MCPC={},MCPM={};
-let scen=SCEN[0],chan="slack",level=4,run=0;
+let scen=SCEN[0],chan="slack",level=4,run=0,mode="scenario",VS=[],stream=null,autoApprove=false;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const rid=r=>r.replace(/ practitioners$/,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -169,7 +185,9 @@ const stamp=()=>new Date().toISOString().slice(11,19);
 
 function seg(id,items,cur,on){const el=$(id);el.innerHTML='';items.forEach(([k,l])=>{const b=document.createElement('button');b.type='button';b.textContent=l;b.setAttribute('aria-pressed',k===cur);b.onclick=()=>on(k);el.appendChild(b)})}
 function controls(){
- seg('#scen',SCEN.map(s=>[s.id,s.label]),scen.id,k=>{scen=SCEN.find(s=>s.id===k);controls();play()});
+ seg('#scen',SCEN.map(s=>[s.id,s.label]),mode==='scenario'?scen.id:null,k=>{mode='scenario';scen=SCEN.find(s=>s.id===k);controls();play()});
+ seg('#flow',VS.map(v=>[v.id,v.name]),mode==='stream'?stream.id:null,k=>{mode='stream';stream=VS.find(v=>v.id===k);controls();play()});
+ seg('#appr',[['ask','Ask me'],['auto','Approve all']],autoApprove?'auto':'ask',k=>{autoApprove=k==='auto';controls();if(mode==='stream')play()});
  seg('#chan',Object.entries(CHANNELS).map(([k,v])=>[k,v[0]]),chan,k=>{chan=k;controls();play()});
  seg('#lvl',[1,2,3,4,5,6,7].map(n=>[n,String(n)]),level,k=>{level=k;controls();play()});
  document.querySelectorAll('#lvl button').forEach((b,i)=>b.title=`Level ${i+1}: ${LV[i+1]}`);
@@ -196,7 +214,7 @@ function generic({cap,role}){
   reply:agents.length?`${names} have looked into it and drafted next steps. Anything that changes a system is waiting for your approval.`:`I can't action this yet. Suggest assigning an owner first.`};
 }
 
-function head(){const [n,sub]=CHANNELS[chan];$('#fhead').innerHTML=`${chan==='slack'?'':''}<span>${esc(sub)}</span><small>${chan==='email'?'Subject: '+esc(scen.msg.slice(0,60)):''}</small><span class="ch">${n}</span>`;$('#conv').className='conv ch-'+chan}
+function head(msg){const [n,sub]=CHANNELS[chan];$('#fhead').innerHTML=`<span>${esc(sub)}</span><small>${chan==='email'?'Subject: '+esc((msg||scen.msg).slice(0,60)):''}</small><span class="ch">${n}</span>`;$('#conv').className='conv ch-'+chan}
 
 function bubble(who,text,{bot=false,into=null}={}){
  const m=document.createElement('div');m.className='msg'+(bot?'':' me');
@@ -208,6 +226,7 @@ function bubble(who,text,{bot=false,into=null}={}){
 function stepEl(n,title,html){const li=document.createElement('li');li.className='st';li.innerHTML=`<span class="n">${n}</span><div><b>${esc(title)}</b><p>${html}</p></div>`;$('#steps').appendChild(li);return li.querySelector('div')}
 
 async function play(){
+ if(mode==='stream')return playStream();
  const my=++run;const alive=()=>my===run;
  $('#conv').innerHTML='';$('#steps').innerHTML='';head();
  const s=scen,capInfo=D.categories.flatMap(c=>c.subcategories.flatMap(x=>x.capabilities.map(k=>({...k,cat:c.name,sub:x.name})))).find(k=>k.name===s.cap);
@@ -254,6 +273,65 @@ async function play(){
  drawLog();
 }
 
+// End-to-end run of a value stream: each step hands its output to the next; approvals pause the run.
+function approvalCard(into,agentName,a,id){
+ return new Promise(resolve=>{
+  const holder=bubble('Muster','',{bot:true,into});holder.querySelector('.txt').remove();
+  const c=document.createElement('div');c.className='card';
+  c.innerHTML=`<b>${esc(agentName)}</b> wants to run <code>${esc(a.tool)}</code> (${a.risk})<br>${esc(a.summary)}`;
+  holder.querySelector('.mb').appendChild(c);
+  if(autoApprove){c.insertAdjacentHTML('beforeend','<div><em>Approved automatically (demo setting).</em></div>');return resolve(true)}
+  const btns=document.createElement('div');btns.className='btns';
+  if(chan==='email')btns.insertAdjacentHTML('beforeend',`<em>Reply “approve ${id}” or “reject ${id}”.</em>`);
+  for(const [lab,ok] of [[chan==='email'?'Simulate approve reply':'Approve',true],[chan==='email'?'Simulate reject reply':'Reject',false]]){const b=document.createElement('button');b.type='button';b.textContent=lab;if(!ok)b.className='no';
+   b.onclick=()=>{btns.remove();c.insertAdjacentHTML('beforeend',`<div><em>${ok?'Approved.':'Rejected. Nothing was changed.'}</em></div>`);resolve(ok)};btns.appendChild(b)}
+  c.appendChild(btns);
+ });
+}
+async function playStream(){
+ const my=++run;const alive=()=>my===run;const st=stream;const t0=Date.now();
+ $('#conv').innerHTML='';$('#steps').innerHTML='';head(st.trigger.msg);
+ const catOf={};D.categories.forEach(c=>c.subcategories.forEach(s=>s.capabilities.forEach(k=>catOf[k.name]=c.name)));
+ const logLines=[];const log=(e,d)=>logLines.push(`${stamp()} ${e.padEnd(18)} ${d}`);
+ // Trace: progress rail + summary + audit
+ $('#steps').innerHTML=`<li class="muted" style="list-style:none;margin-bottom:6px">${esc(st.name)}: ${esc(st.why)} At SFIA level ${level} (${esc(LV[level])}).</li>`;
+ const rail=document.createElement('ol');rail.className='rail';$('#steps').appendChild(rail);
+ const rows=st.steps.map((x,i)=>{const li=document.createElement('li');li.className='rl';const r=ROLE[x.agent];
+  li.innerHTML=`<span class="d"></span><div><a href="index.html#${x.agent}">${esc(r?r.short:x.agent)}</a><small>${esc(x.capability)} · ${esc(catOf[x.capability]||'')}</small></div><span class="s">waiting</span>`;rail.appendChild(li);return li});
+ const set=(i,state,label)=>{rows[i].className='rl '+state;rows[i].querySelector('.s').textContent=label};
+ const sumEl=document.createElement('div');sumEl.className='sum';$('#steps').appendChild(sumEl);
+ const pre=document.createElement('div');pre.className='log';$('#steps').appendChild(pre);
+ const counts={auto:0,approved:0,blocked:0};
+ const drawSum=done=>{sumEl.innerHTML=[[`${rows.filter(r=>r.classList.contains('done')).length}/${rows.length}`,'steps done'],[counts.auto,'ran on their own'],[counts.approved,'approved by you'],[counts.blocked,'held back by SFIA level'],...(done?[[`${Math.max(1,Math.round((Date.now()-t0)/1000))}s`,'demo run time']]:[])].map(([n,l])=>`<div><b>${n}</b>${l}</div>`).join('');pre.textContent=logLines.join('\n')};
+ drawSum();
+ bubble(st.trigger.user,st.trigger.msg);log('message',`${chan} · ${st.trigger.user}`);
+ await wait(700);if(!alive())return;
+ const thread=chan==='slack'?(()=>{const t=document.createElement('div');t.className='thread';$('#conv').appendChild(t);return t})():null;
+ bubble('Muster',`Righto, this is ${/^[aeiou]/i.test(st.name)?'an':'a'} ${st.name.toLowerCase()} job: ${st.steps.length} handoffs across ${new Set(st.steps.map(x=>catOf[x.capability])).size} SFIA categories. I'll keep you posted and ask before anything changes.`,{bot:true,into:thread});log('route',`value stream ${st.id}`);
+ let context='';
+ for(let i=0;i<st.steps.length;i++){const x=st.steps[i],r=ROLE[x.agent],name=r?r.short:x.agent;
+  await wait(650);if(!alive())return;
+  set(i,'working','working');rows[i].scrollIntoView({block:'nearest'});
+  bubble('Muster',`Step ${i+1} of ${st.steps.length} · ${name}: ${x.task.charAt(0).toLowerCase()+x.task.slice(1)}.`,{bot:true,into:thread});
+  log('agent.start',`${x.agent}${context?' ← '+context:''}`);
+  for(const a of x.actions){await wait(500);if(!alive())return;
+   const d=POL[level][a.risk];
+   if(d==='auto'){counts.auto++;log('tool.executed',`${a.tool} (auto)`)}
+   else if(d==='never'){counts.blocked++;log('tool.blocked',`${a.tool} (level ${level})`);bubble('Muster',`${name} can't run ${a.tool} at SFIA level ${level}, so it's recommended to a person instead.`,{bot:true,into:thread});continue}
+   else{const id=Math.random().toString(16).slice(2,10);log('approval.request',`${id} ${a.tool}`);set(i,'paused','needs you');drawSum();
+    const ok=await approvalCard(thread,name,a,id);if(!alive())return;
+    if(!ok){log('approval.rejected',id);set(i,'stopped','stopped');for(let j=i+1;j<rows.length;j++)set(j,'','not started');
+     bubble('Muster',`Okay, stopping at step ${i+1}. Steps 1 to ${i} stay done; nothing after this has run. Tell me if you want to change the plan and carry on.`,{bot:true,into:thread});drawSum(true);return}
+    counts.approved++;log('approval.granted',`${id} → ${a.tool} executed`);set(i,'working','working')}
+   const res=document.createElement('div');res.className='handoff';res.textContent=`${a.tool} → ${a.result}`;(thread||$('#conv')).appendChild(res);
+  }
+  context=x.handoff;set(i,'done','done');log('handoff',x.handoff);drawSum();
+  if(i<st.steps.length-1){const h=document.createElement('div');h.className='handoff';h.textContent=`Handing over: ${x.handoff}`;(thread||$('#conv')).appendChild(h)}
+ }
+ await wait(600);if(!alive())return;
+ bubble('Muster',st.outcome,{bot:true,into:thread});log('done',st.id);drawSum(true);
+}
+
 // Live mode: talk to a real Muster server.
 const convo='site-'+Math.random().toString(36).slice(2,9);
 $('#lform').onsubmit=async e=>{e.preventDefault();const url=$('#lurl').value.trim().replace(/\/$/,''),tok=$('#ltok').value.trim(),text=$('#lmsg').value.trim(),out=$('#lout');
@@ -263,13 +341,15 @@ $('#lform').onsubmit=async e=>{e.preventDefault();const url=$('#lurl').value.tri
   const j=await r.json();out.textContent=r.ok?[...(j.events||[]).map(x=>x.text),j.reply].join('\n\n'):(j.error||'The server returned an error.');$('#lmsg').value=''}
  catch(err){out.textContent='Could not reach that server. Check the address, and that it allows this site in MUSTER_ALLOWED_ORIGINS.'}};
 
-Promise.all(['data/capability-map.json','data/roles.json','data/mcp-catalog.json','data/mcp-map.json'].map(u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()}))).then(([cm,roles,mc,mm])=>{
- D=cm;R=roles;MCPC=mc;MCPM=mm;R.forEach(r=>{ROLE[rid(r.role)]={...r,short:r.role.replace(/ practitioners$/,'')}});
+Promise.all(['data/capability-map.json','data/roles.json','data/mcp-catalog.json','data/mcp-map.json','data/value-streams.json'].map(u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()}))).then(([cm,roles,mc,mm,vs])=>{
+ VS=vs.streams;D=cm;R=roles;MCPC=mc;MCPM=mm;R.forEach(r=>{ROLE[rid(r.role)]={...r,short:r.role.replace(/ practitioners$/,'')}});
  const q=new URLSearchParams(location.search);const g=(q.get('cap')||q.get('role'))&&generic({cap:q.get('cap'),role:q.get('role')});
  if(g){SCEN.unshift(g);scen=g}
+ const sq=VS.find(v=>v.id===q.get('stream'));if(sq){mode='stream';stream=sq}
  controls();play();
 }).catch(e=>{$('#conv').innerHTML=`<p class="empty">Couldn't load the role data (${esc(e.message)}). Serve the site over HTTP rather than opening the file directly.</p>`});
 $('#play').onclick=()=>play();
+new MutationObserver(()=>{const c=$('#conv');c.scrollTop=c.scrollHeight}).observe($('#conv'),{childList:true,subtree:true});
 </script>
 <script src="nav.js" defer></script>
 </body>
