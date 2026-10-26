@@ -2,7 +2,7 @@
 
 Turns the SFIA Foundation's **SFIA 9 illustrative skills profiles** (March 2026) into AI agents: one agent per role, one orchestrator per role family, and MCP server recommendations for the tools each role uses.
 
-**Live interface:** https://business-analyst-services.github.io/sfia-agent-studio/
+**Live interface:** https://business-analyst-services.github.io/SFIA-agent-Studio/
 
 ## What's in the repo
 
