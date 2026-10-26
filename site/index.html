@@ -39,6 +39,19 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 [data-ui=meet]{--mink:#e9f4f1;--mmute:#9fbcb5;--mline:rgba(255,255,255,.14);background:radial-gradient(1100px 480px at 50% -8%,#17423a,#0a1512 70%);border-color:#1c3630}
 .callstage{position:relative;display:flex;align-items:center;gap:12px;padding:10px 16px;flex:none}
 [data-ui=meet] .callstage{flex-direction:column;justify-content:center;padding:18px 12px 8px;flex:1;min-height:0}
+.crew{display:none;gap:10px;flex-wrap:wrap;justify-content:center;max-width:min(500px,92%)}
+[data-ui=meet] .crew{display:flex}
+.crewt{position:relative;width:86px;border-radius:10px;background:#0b1f26;border:1px solid rgba(255,255,255,.14);padding:6px 4px 5px;text-align:center;animation:crewin .55s cubic-bezier(.34,1.56,.64,1)}
+.crewt img,.crewt canvas.guestcam{width:64px;height:64px;border-radius:8px;display:block;margin:0 auto;background:radial-gradient(circle at 50% 30%,#1b4350,#0b1f26)}
+.crewt b{display:block;font-size:9.5px;line-height:1.15;font-weight:600;color:#dfe9ec;margin-top:3px}
+.crewt small{display:block;font-size:8.5px;color:#8fa6ad;text-transform:capitalize}
+.crewt .tick{position:absolute;top:3px;right:3px;font-size:9px;background:#0f6e64;color:#fff;border-radius:50%;width:15px;height:15px;line-height:15px;display:none;z-index:1}
+.crewt.done .tick{display:block}
+.crewt.active{border-color:#f2c14e;box-shadow:0 0 0 2px rgba(242,193,78,.3)}
+@keyframes crewin{from{transform:scale(.25) translateY(22px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.msg .av img{width:100%;height:100%;border-radius:inherit;display:block;object-fit:cover;background:#163742}
+.agav{width:22px;height:22px;border-radius:5px;vertical-align:-6px;margin-right:6px;background:#eef2f1}
+.rl .rimg{width:26px;height:26px;border-radius:6px;flex:none;background:#eef2f1;margin-right:2px}
 .stage{flex:none;width:92px;height:92px;perspective:700px}
 [data-ui=meet] .stage{width:min(38vh,340px);height:min(38vh,340px)}
 .stage canvas{width:100%;height:100%;display:block;border-radius:14px}
@@ -266,6 +279,7 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,s
     <path id="mo" d="M42 71 Q50 77 58 71" fill="#8c2f3f" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg></div></div>
   <div class="plabel"><b>Muster</b><span id="mstatus">waiting for you to join</span></div>
+ <div class="crew" id="crew" aria-label="Agents in this session"></div>
   <p class="caption" id="caption"></p>
   <div class="youtile" id="youtile" aria-hidden="true"></div>
  </div>
@@ -319,6 +333,7 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,s
  <div class="tabbody" id="b-art" hidden><div class="afgrid" id="afgrid"><p class="empty">Records, pages and files the agents create land here.</p></div></div>
 </aside>
 <script src="vendor/three.min.js"></script>
+<script src="menagerie.js"></script>
 <script src="artefacts.js"></script>
 <script>
 const FACE=`<svg viewBox="0 0 100 100" width="32" height="32" aria-hidden="true"><defs><radialGradient id="k2" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#d9733d"/><stop offset="1" stop-color="#a84a22"/></radialGradient></defs><path d="M24 46 L18 6 L44 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2"/><path d="M76 46 L82 6 L56 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2"/><path d="M26 38 L22 15 L38 31 Z" fill="#e9a37a"/><path d="M74 38 L78 15 L62 31 Z" fill="#e9a37a"/><path d="M50 24 C72 24 82 40 81 56 C80 74 66 86 50 86 C34 86 20 74 19 56 C18 40 28 24 50 24Z" fill="url(#k2)" stroke="#7a3216" stroke-width="2"/><path d="M50 52 C62 52 70 60 69 70 C68 80 60 85 50 85 C40 85 32 80 31 70 C30 60 38 52 50 52Z" fill="#f0b98c"/><ellipse cx="38" cy="47" rx="5" ry="6.5" fill="#1d2b29"/><ellipse cx="62" cy="47" rx="5" ry="6.5" fill="#1d2b29"/><circle cx="39.5" cy="44.5" r="1.8" fill="#fff"/><circle cx="63.5" cy="44.5" r="1.8" fill="#fff"/><path d="M44 60 C44 56 56 56 56 60 C56 64 52 66 50 66 C48 66 44 64 44 60Z" fill="#1d2b29"/><path d="M50 66 L50 70 M42 71 Q50 77 58 71" fill="none" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round"/><path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg>`;
@@ -613,7 +628,7 @@ function syncSnd(){$('#snd').setAttribute('aria-pressed',String(soundOn));$('#sn
 function joinAs(c){chan=c;if(c==='meet'&&'speechSynthesis' in window)soundOn=true;applyUI();drawSettings();
  $('#join').classList.remove('show');greet();
  if(c==='meet')narrateOnly("G'day! Good to see you. What are we sorting out today?")}
-function showJoin(){run++;Head.hush();xiStop();if('speechSynthesis' in window)speechSynthesis.cancel();$('#chatdock').classList.remove('open');$('#caption').textContent='';
+function showJoin(){run++;Crew.clear();Head.hush();xiStop();if('speechSynthesis' in window)speechSynthesis.cancel();$('#chatdock').classList.remove('open');$('#caption').textContent='';
  $('#conv').innerHTML='';$('#join').classList.add('show');started=false;$('#cur').textContent='';status('waiting for you to join')}
 document.querySelectorAll('#join [data-chan]').forEach(b=>b.onclick=()=>joinAs(b.dataset.chan));
 $('#leave').onclick=()=>showJoin();
@@ -772,16 +787,35 @@ function generic({cap,role}){
   reply:agents.length?`${names} have had a look and drafted the next steps. Anything that changes a system is sitting there waiting for your OK — no surprises.`:`I can't action this one yet. First move: give it an owner.`};
 }
 function setChannelBar(msg){const [n,sub]=CHANNELS[chan];$('#fhead').innerHTML=`<span>${esc(sub)}</span><small>${chan==='email'?'Subject: '+esc((msg||'').slice(0,60)):''}</small><span class="ch">${n}</span>`;$('#conv').className='conv ch-'+chan}
-function bubble(who,text,{bot=false,into=null}={}){
+/* ---------- The crew: a native-animal avatar per agent ---------- */
+const famOf=id=>{const r=ROLE[id];return r&&r.family?r.family:'Business Analysis'};
+const avatarURL=(id,size)=>window.Menagerie&&Menagerie.ready?Menagerie.still(id,famOf(id),size||128):null;
+const Crew={tiles:{},
+ join(id){if(this.tiles[id])return this.tiles[id];const r=ROLE[id];const t=document.createElement('div');t.className='crewt';
+  const u=avatarURL(id);
+  t.innerHTML=`<span class="tick">✓</span>${u?'<img alt="">':''}<b>${esc(r?r.short:id)}</b><small>${esc(window.Menagerie&&Menagerie.species?Menagerie.species(famOf(id)):'')}</small>`;
+  if(u)t.querySelector('img').src=u;
+  $('#crew').appendChild(t);this.tiles[id]=t;return t},
+ active(id){const t=this.join(id);
+  Object.values(this.tiles).forEach(x=>{x.classList.remove('active');const im=x.querySelector('img');if(im)im.style.display=''});
+  if(window.Menagerie&&Menagerie.ready&&$('#callwrap').dataset.ui==='meet'){Menagerie.guest.show(t,id,famOf(id));const im=t.querySelector('img');if(im)im.style.display='none'}
+  t.classList.add('active')},
+ done(id){const t=this.tiles[id];if(!t)return;t.classList.remove('active');t.classList.add('done');
+  if(window.Menagerie&&Menagerie.ready&&Menagerie.guest.home===t)Menagerie.guest.park();
+  const im=t.querySelector('img');if(im)im.style.display=''},
+ clear(){if(window.Menagerie&&Menagerie.ready)Menagerie.guest.park();$('#crew').innerHTML='';this.tiles={}}
+};
+function bubble(who,text,{bot=false,into=null,avatar=null}={}){
  const m=document.createElement('div');m.className='msg'+(bot?'':' me');
- const av=bot?`<div class="av">${FACE}</div>`:`<div class="av">${esc(initials(who))}</div>`;
- const meta=chan==='email'?`<div class="meta">${bot?'From: Muster &lt;ask-muster@your-org.com&gt;':'From: '+esc(who)} · ${bot?'draft reply':'to ask-muster'}</div>`:'';
- m.innerHTML=`${av}<div class="mb"><div class="who">${esc(bot?'Muster':who)}${bot?'<span>APP</span>':''}</div>${meta}<div class="txt"></div></div>`;
+ const av=avatar?`<div class="av"><img src="${avatar}" alt=""></div>`:bot?`<div class="av">${FACE}</div>`:`<div class="av">${esc(initials(who))}</div>`;
+ const label=avatar?who:(bot?'Muster':who);
+ const meta=chan==='email'?`<div class="meta">${avatar?'From: '+esc(who)+' (agent, via Muster)':bot?'From: Muster &lt;ask-muster@your-org.com&gt;':'From: '+esc(who)} · ${bot?'draft reply':'to ask-muster'}</div>`:'';
+ m.innerHTML=`${av}<div class="mb"><div class="who">${esc(label)}${bot?'<span>'+(avatar?'AGENT':'APP')+'</span>':''}</div>${meta}<div class="txt"></div></div>`;
  m.querySelector('.txt').textContent=text;(into||$('#conv')).appendChild(m);return m}
 function narrateOnly(text){narrate(text)}
 function mup(text,into){const b=bubble('Muster',text,{bot:true,into});if($('#callwrap').dataset.ui==='meet')$('#caption').textContent=text;narrate(text);return b}
 function stepEl(n,title,html){const li=document.createElement('li');li.className='st';li.innerHTML=`<span class="n">${n}</span><div><b>${esc(title)}</b><p>${html}</p></div>`;$('#steps').appendChild(li);return li.querySelector('div')}
-function resetPanels(){xiStop();$('#caption').textContent='';$('#afgrid').innerHTML='<p class="empty">Records, pages and files the agents create land here.</p>';$('#afn').textContent='0';$('#steps').innerHTML='';if('speechSynthesis' in window)speechSynthesis.cancel();Head.hush()}
+function resetPanels(){Crew.clear();xiStop();$('#caption').textContent='';$('#afgrid').innerHTML='<p class="empty">Records, pages and files the agents create land here.</p>';$('#afn').textContent='0';$('#steps').innerHTML='';if('speechSynthesis' in window)speechSynthesis.cancel();Head.hush()}
 function addArtefact(a){const g=$('#afgrid');const e=g.querySelector('.empty');if(e)e.remove();g.prepend(Artefacts.card(a,true));$('#afn').textContent=g.querySelectorAll('.af-card').length;const d=$('#d-art');d.classList.remove('pulse');void d.offsetWidth;d.classList.add('pulse')}
 
 /* ---------- Greeting ---------- */
@@ -816,7 +850,9 @@ async function play(){
  if(s.gap)st3.insertAdjacentHTML('beforeend',`<div class="gapnote">Gap: ${esc(s.gap)}</div>`);
  const pending=[];
  for(const a of s.agents){const r=ROLE[a.id];if(!r)continue;
-  const box=document.createElement('div');box.className='ag';box.innerHTML=`<div class="h"><b><a href="agents.html#${a.id}">${esc(r.short)}</a></b><code>${r.core.slice(0,4).map(x=>x.code).join(' · ')}</code></div>`;st3.appendChild(box);
+  Crew.join(a.id);Crew.active(a.id);
+  const au=avatarURL(a.id);
+  const box=document.createElement('div');box.className='ag';box.innerHTML=`<div class="h"><b>${au?`<img class="agav" src="${au}" alt="">`:''}<a href="agents.html#${a.id}">${esc(r.short)}</a></b><code>${r.core.slice(0,4).map(x=>x.code).join(' · ')}</code></div>`;st3.appendChild(box);
   log('agent.start',a.id);
   for(const [tool,risk,summary,result] of a.actions){await wait(500);if(!alive())return;
    const d=POL[level][risk];const row=document.createElement('div');row.className='act';
@@ -824,13 +860,13 @@ async function play(){
    if(d==='auto'){log('tool.executed',`${tool} (auto)`);row.insertAdjacentHTML('beforeend',`<span class="muted">→ ${esc(result)}</span>`);if(risk!=='read')addArtefact(simpleArtefact(tool,summary,result,a.id))}
    else if(d==='approve'){const id=Math.random().toString(16).slice(2,10);pending.push({id,a,tool,risk,summary,result});log('approval.request',`${id} ${tool}`)}
    else log('tool.blocked',`${tool} (level ${level})`);
-  }}
+  }Crew.done(a.id)}
  await wait(600);if(!alive())return;
  stepEl(4,'Muster replies',pending.length?`${pending.length} action${pending.length>1?'s':''} waiting for approval in the conversation.`:'Nothing needs approval at this level.');
  mup(s.reply,thread);
  if(pending.length)status('waiting on you, boss');else status('ready when you are');
  for(const p of pending){
-  const holder=bubble('Muster','',{bot:true,into:thread});holder.querySelector('.txt').remove();
+  const holder=bubble(ROLE[p.a.id].short,'',{bot:true,into:thread,avatar:avatarURL(p.a.id)});holder.querySelector('.txt').remove();
   const c=document.createElement('div');c.className='card';
   c.innerHTML=`<b>${esc(ROLE[p.a.id].short)}</b> wants to run <code>${esc(p.tool)}</code> (${p.risk})<br>${esc(p.summary)}`;
   const btns=document.createElement('div');btns.className='btns';
@@ -856,9 +892,9 @@ function simpleArtefact(tool,summary,result,agentId){const sys=tool.split(/[.:]/
   sections:[{h:'What was done',text:summary+'.'},{h:'Result',items:[result]},{h:'Traceability',items:['Created through the '+system+' API with its own workflow and audit trail','Logged by Muster: agent, tool, risk class and approver','Linked to the originating conversation']}]}}
 
 /* ---------- End-to-end runs ---------- */
-function approvalCard(into,agentName,a,id){
+function approvalCard(into,agentName,a,id,agentId){
  return new Promise(resolve=>{
-  const holder=bubble('Muster','',{bot:true,into});holder.querySelector('.txt').remove();
+  const holder=bubble(agentName,'',{bot:true,into,avatar:agentId?avatarURL(agentId):null});holder.querySelector('.txt').remove();
   const c=document.createElement('div');c.className='card';
   c.innerHTML=`<b>${esc(agentName)}</b> wants to run <code>${esc(a.tool)}</code> (${a.risk})<br>${esc(a.summary)}`;
   holder.querySelector('.mb').appendChild(c);
@@ -878,8 +914,8 @@ async function playStream(){
  const logLines=[];const log=(e,d)=>logLines.push(`${stamp()} ${e.padEnd(18)} ${d}`);
  $('#steps').innerHTML=`<li class="muted" style="list-style:none;margin-bottom:6px">${dpack?`<b>${esc(dpack.name)}</b> domain pack · `:''}${esc(st.name)}: ${esc(st.why)} At SFIA level ${level} (${esc(LV[level])}).${dpack?` Systems of record: ${dpack.systemsOfRecord.map(x=>`${esc(x.name)} (${x.maxRisk==='read'?'read only':'changes need approval'})`).join('; ')}. <a href="domains.html#${dpack.id}">See the pack</a>`:''}</li>`;
  const rail=document.createElement('ol');rail.className='rail';$('#steps').appendChild(rail);
- const rows=st.steps.map((x,i)=>{const li=document.createElement('li');li.className='rl';const r=ROLE[x.agent];
-  li.innerHTML=`<span class="d"></span><div><a href="agents.html#${x.agent}">${esc(r?r.short:x.agent)}</a><small>${esc(x.capability)} · ${esc(catOf[x.capability]||'')}</small></div><span class="s">waiting</span>`;rail.appendChild(li);return li});
+ const rows=st.steps.map((x,i)=>{const li=document.createElement('li');li.className='rl';const r=ROLE[x.agent];const u=avatarURL(x.agent);
+  li.innerHTML=`<span class="d"></span>${u?`<img class="rimg" src="${u}" alt="">`:''}<div><a href="agents.html#${x.agent}">${esc(r?r.short:x.agent)}</a><small>${esc(x.capability)} · ${esc(catOf[x.capability]||'')}</small></div><span class="s">waiting</span>`;rail.appendChild(li);return li});
  const set=(i,state,label)=>{rows[i].className='rl '+state;rows[i].querySelector('.s').textContent=label};
  const sumEl=document.createElement('div');sumEl.className='sum';$('#steps').appendChild(sumEl);
  const pre=document.createElement('div');pre.className='log';$('#steps').appendChild(pre);
@@ -893,6 +929,7 @@ async function playStream(){
  let context='';
  for(let i=0;i<st.steps.length;i++){const x=st.steps[i],r=ROLE[x.agent],name=r?r.short:x.agent;
   await wait(650);if(!alive())return;
+  Crew.join(x.agent);Crew.active(x.agent);
   set(i,'working','working');status(pick(P.think));
   const task=x.task.charAt(0).toLowerCase()+x.task.slice(1);
   mup(`${pick(P.step)(name,task)} (${i+1} of ${st.steps.length})`,thread);
@@ -903,7 +940,7 @@ async function playStream(){
    if(d==='auto'){counts.auto++;log('tool.executed',`${a.tool} (auto)`)}
    else if(d==='never'){counts.blocked++;log('tool.blocked',`${a.tool} (level ${level})`);mup(`${name} would normally run ${a.tool} here, but at SFIA level ${level} that's above their pay grade — I've flagged it for a person instead.`,thread);Head.react('shake');continue}
    else{const id=Math.random().toString(16).slice(2,10);log('approval.request',`${id} ${a.tool}`);set(i,'paused','needs you');drawSum();
-    const ok=await approvalCard(thread,name,a,id);if(!alive())return;
+    const ok=await approvalCard(thread,name,a,id,x.agent);if(!alive())return;
     if(!ok){log('approval.rejected',id);set(i,'stopped','stopped');for(let j=i+1;j<rows.length;j++)set(j,'','not started');
      mup(`All good — I've pulled the crew up at step ${i+1}. Everything before it stands, nothing after it ran. Sing out when you want to pick it back up, or change tack entirely.`,thread);status('ready when you are');drawSum(true);return}
     counts.approved++;log('approval.granted',`${id} → ${a.tool} executed`);set(i,'working','working');status(pick(P.think))}
@@ -911,7 +948,7 @@ async function playStream(){
    if(a.artefact){res.appendChild(Artefacts.chip(a.artefact));addArtefact(a.artefact);log('artefact',`${a.artefact.system} ${a.artefact.id}`)}
    (thread||$('#conv')).appendChild(res);
   }
-  context=x.handoff;set(i,'done','done');log('handoff',x.handoff);drawSum();
+  context=x.handoff;Crew.done(x.agent);set(i,'done','done');log('handoff',x.handoff);drawSum();
   if(i<st.steps.length-1){const h=document.createElement('div');h.className='handoff';h.textContent=`Handing over: ${x.handoff}`;(thread||$('#conv')).appendChild(h)}
  }
  await wait(600);if(!alive())return;
