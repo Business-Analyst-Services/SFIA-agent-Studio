@@ -942,17 +942,52 @@ async function play(){
  const pre=document.createElement('div');pre.className='log';st5.appendChild(pre);
  function drawLog(){pre.textContent=logLines.join('\n')}
  drawLog();
+ setTimeout(()=>{if(alive())$('#caption').textContent=''},9000);
 }
 
 /* ---------- Generated artefacts for single requests ---------- */
 const SYS={servicenow:'ServiceNow',jira:'Jira',confluence:'Confluence',github:'GitHub',gdrive:'Google Drive',m365:'Microsoft 365',kubernetes:'Kubernetes',grafana:'Grafana'};
 function simpleArtefact(tool,summary,result,agentId){const sys=tool.split(/[.:]/)[0].trim().toLowerCase();const system=SYS[sys]||tool.split(/[.:]/)[0];
  const id=(result.match(/\b([A-Z]{2,}[-]?\d+|PR #\d+)\b/)||[])[1]||(system.slice(0,3).toUpperCase()+'-'+Math.floor(1000+Math.random()*9000));
- const kind=/incident/i.test(tool)?'Incident':/epic/i.test(tool)?'Epic':/page|document/i.test(tool)?'Document':/restart|deploy|release/i.test(tool)?'Platform action':'Record';
+ const kind=/incident/i.test(tool)?'Incident':/epic/i.test(tool)?'Epic':/story/i.test(tool)?'Story':/paper|proposal|business.case/i.test(summary)?'Options paper':/page|document/i.test(tool)?'Document':/restart|deploy|release/i.test(tool)?'Platform action':'Record';
  const r=ROLE[agentId]||{short:agentId,core:[]};
- return {kind,system,id,title:summary,
-  fields:{'Status':'Created','Created by':r.short+' agent','Requested via':'Muster','SFIA skills applied':(r.core||[]).slice(0,3).map(x=>x.code).join(', '),'Approval':'Granted in the conversation'},
-  sections:[{h:'What was done',text:summary+'.'},{h:'Result',items:[result]},{h:'Traceability',items:['Created through the '+system+' API with its own workflow and audit trail','Logged by Muster: agent, tool, risk class and approver','Linked to the originating conversation']}]}}
+ const f={'Status':'Created','Created by':r.short+' agent','Requested via':'Muster','SFIA skills applied':(r.core||[]).slice(0,3).map(x=>x.code).join(', '),'Approval':'Granted in the conversation','Labels':'ai-generated · ba-approved','AI runs':'1 of 3'};
+ const okStamp={stamp:{by:'you, at the gate in this conversation',note:'label ba-approved added · AI Run Count reset to 0'}};
+ const trace={h:'Traceability',items:['Created through the '+system+' API with its own workflow and audit trail','Logged by Muster: agent, tool, risk class and approver','Linked to the originating conversation and to its REQ IDs']};
+ let sections;
+ if(kind==='Epic'){sections=[
+  {h:'Problem statement and objective',text:summary+'. Drafted by the '+r.short+' agent from the conversation and the linked source pages.'},
+  {h:'Requirements (draft for review)',reqs:[
+   {id:'REQ-001',m:'Must',text:'Capture the current-state process, actors and pain points',accept:'Walkthrough signed off by the process owner'},
+   {id:'REQ-002',m:'Must',text:'Define success measures with a baseline to compare against',accept:'Each measure has an owner and a source report'},
+   {id:'REQ-003',m:'Should',text:'Integrate with the existing systems of record — no side copies of master data',accept:'Interface list agreed with the platform owner'},
+   {id:'REQ-004',m:'Could',text:'Automate the highest-volume request type end to end',accept:'One request completes without manual touch'}]},
+  {h:'Open questions',items:['Who owns the budget line for licences? → finance partner','Which regions are in scope for the first release? → sponsor']},
+  {h:'Gate',...okStamp},trace]}
+ else if(kind==='Story'){sections=[
+  {h:'Story',text:summary+'.'},
+  {h:'Acceptance criteria (Gherkin)',gherkin:[
+   {g:'a signed-in user with the standard role',w:'they complete the primary flow described in this story',t:'the result is saved, auditable and visible to the team'},
+   {g:'invalid or incomplete input',w:'the user submits',t:'a clear error explains what to fix — nothing is saved'}]},
+  {h:'Gate',...okStamp},trace]}
+ else if(kind==='Options paper'||kind==='Document'&&/option|approach|assessment|business case/i.test(summary)){sections=[
+  {h:'Purpose',text:summary+'. Prepared so the sponsor can choose a direction with the trade-offs on one page.'},
+  {h:'Options considered',table:[['Option','Fit','Cost','Risk','Time to value'],
+   ['A — Reuse what we already run','Good','Low — existing licences','Low','Weeks'],
+   ['B — Extend the current platform','Strong','Medium','Medium — change freeze windows','1–2 quarters'],
+   ['C — Buy a new product','Strong','High — new contract','Higher — migration and training','2+ quarters']]},
+  {h:'Recommendation',text:'Option A first: prove the workflow on what we already pay for, revisit B if volume outgrows it. Nothing in A blocks a later move.'},
+  {h:'Decision log',items:['Drafted by the '+r.short+' agent · reviewed at the gate in this conversation','Assumptions and the scoring behind the table are on the appendix page']},
+  {h:'Sign-off',...okStamp},trace]}
+ else if(kind==='Incident'){sections=[
+  {h:'Impact',text:summary+'.'},
+  {h:'Timeline',items:['Detected and triaged by the service desk agent','Diagnosis attached — monitoring queries linked below','Fix applied after approval at the gate in this conversation','Verified: service healthy, watch in place for 24h']},
+  {h:'Gate',...okStamp},trace]}
+ else if(kind==='Platform action'){sections=[
+  {h:'Run log',items:['00:01  change record linked and window checked','00:02  '+tool+' executed against the approved target','00:04  health checks green — rollback plan not needed','00:05  '+result]},
+  {h:'Gate',...okStamp},trace]}
+ else{sections=[{h:'What was done',text:summary+'.'},{h:'Result',items:[result]},{h:'Gate',...okStamp},trace]}
+ return {kind,system,id,title:summary,fields:f,sections}}
 
 /* ---------- End-to-end runs ---------- */
 function approvalCard(into,agentName,a,id,agentId){
@@ -1026,7 +1061,7 @@ async function playStream(){
  await wait(600);if(!alive())return;
  Head.react('bounce');mup(pick(P.wrap)+st.outcome,thread);
  await wait(500);if(!alive())return;
- mup(pick(P.more),thread);log('done',st.id);drawSum(true);status('ready when you are');
+ mup(pick(P.more),thread);log('done',st.id);drawSum(true);status('ready when you are');setTimeout(()=>{if(alive())$('#caption').textContent=''},9000);
 }
 
 /* ---------- Live mode ---------- */

@@ -214,7 +214,8 @@
           "Status": "Draft for legal review",
           "Space": "Digital Assets",
           "Owner": "Business analysis agent",
-          "Reviewers": "Legal, Compliance, Risk"
+          "Reviewers": "Legal, Compliance, Risk",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -296,7 +297,7 @@
         "artefact": {
          "kind": "Contract deployment",
          "system": "Ledger (testnet)",
-         "id": "0x7a\u2026c21",
+         "id": "0x7a…c21",
          "title": "InvoiceToken v0.3 on testnet",
          "fields": {
           "Network": "Test network",
@@ -304,7 +305,8 @@
           "Owner": "Multisig (2 of 3)",
           "Compiler": "solc 0.8.26",
           "Standard": "ERC-20 with transfer restrictions",
-          "Deploy gas": "1.84M"
+          "Deploy gas": "1.84M",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -459,7 +461,7 @@
         "tool": "corebank.query_arrears",
         "risk": "read",
         "summary": "Analyse missed repayments by cohort",
-        "result": "Most misses are 1\u20133 days late, on payday mismatches"
+        "result": "Most misses are 1–3 days late, on payday mismatches"
        }
       ]
      },
@@ -485,17 +487,43 @@
           "Project": "LEND",
           "Priority": "High",
           "Compliance reviewer": "Assigned",
-          "Target": "Next quarter"
+          "Target": "Next quarter",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
-           "h": "Stories",
-           "items": [
-            "LEND-78 Remind me 2 days before a repayment is due",
-            "LEND-79 Let me move my repayment date to payday, once per term",
-            "LEND-80 Respect my contact preferences and quiet hours",
-            "LEND-81 Suppress all reminders for hardship-flagged accounts",
-            "LEND-82 Measure missed-payment rate per cohort"
+           "h": "Stories (AI-drafted, BA to refine)",
+           "table": [
+            [
+             "Story",
+             "Summary",
+             "Acceptance"
+            ],
+            [
+             "LEND‑78",
+             "Remind me 2 days before a repayment is due",
+             "Gherkin drafted for review"
+            ],
+            [
+             "LEND‑79",
+             "Let me move my repayment date to payday, once per term",
+             "Gherkin drafted for review"
+            ],
+            [
+             "LEND‑80",
+             "Respect my contact preferences and quiet hours",
+             "Gherkin drafted for review"
+            ],
+            [
+             "LEND‑81",
+             "Suppress all reminders for hardship-flagged accounts",
+             "Gherkin drafted for review"
+            ],
+            [
+             "LEND‑82",
+             "Measure missed-payment rate per cohort",
+             "Gherkin drafted for review"
+            ]
            ]
           },
           {
@@ -508,9 +536,19 @@
           },
           {
            "h": "Out of scope",
-           "items": [
-            "Collections messaging",
-            "New credit assessments"
+           "reqs": [
+            {
+             "id": "REQ-001",
+             "m": "Must",
+             "text": "Collections messaging",
+             "accept": "Testable — acceptance note drafted for review"
+            },
+            {
+             "id": "REQ-002",
+             "m": "Must",
+             "text": "New credit assessments",
+             "accept": "Testable — acceptance note drafted for review"
+            }
            ]
           }
          ]
@@ -552,8 +590,9 @@
           "Mode": "Test",
           "Events": "invoice.upcoming",
           "Endpoint": "https://api.lender.example/muster/payments",
-          "Signing secret": "whsec_\u2022\u2022\u2022\u2022",
-          "API version": "2026-01-15"
+          "Signing secret": "whsec_••••",
+          "API version": "2026-01-15",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -716,7 +755,8 @@
           "Guardrail": "Error rate under 0.5%",
           "Project": "PROD",
           "Flag": "ai-search",
-          "Owner": "Product management agent"
+          "Owner": "Product management agent",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -750,12 +790,33 @@
            ]
           },
           {
-           "h": "Stories",
-           "items": [
-            "PROD-302 Natural-language search behind the ai-search flag",
-            "PROD-303 Fallback to keyword search on timeout",
-            "PROD-304 Per-stage analytics dashboard",
-            "PROD-305 Kill switch wired to on-call"
+           "h": "Stories (AI-drafted, BA to refine)",
+           "table": [
+            [
+             "Story",
+             "Summary",
+             "Acceptance"
+            ],
+            [
+             "PROD‑302",
+             "Natural-language search behind the ai-search flag",
+             "Gherkin drafted for review"
+            ],
+            [
+             "PROD‑303",
+             "Fallback to keyword search on timeout",
+             "Gherkin drafted for review"
+            ],
+            [
+             "PROD‑304",
+             "Per-stage analytics dashboard",
+             "Gherkin drafted for review"
+            ],
+            [
+             "PROD‑305",
+             "Kill switch wired to on-call",
+             "Gherkin drafted for review"
+            ]
            ]
           }
          ]
@@ -782,9 +843,9 @@
          "fields": {
           "Checks": "All passing",
           "Reviewers": "2 approvals",
-          "Branch": "feature/ai-search \u2192 main",
+          "Branch": "feature/ai-search → main",
           "Files changed": "17",
-          "Lines": "+1,204 \u2212310",
+          "Lines": "+1,204 −310",
           "Labels": "feature-flag, search"
          },
          "sections": [
@@ -833,7 +894,8 @@
           "Approved by": "You",
           "Environment": "Production",
           "Rule": "10% by user-id hash",
-          "Change ref": "FL-2291"
+          "Change ref": "FL-2291",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -846,7 +908,7 @@
             ],
             [
              "Today 14:02",
-             "0% \u2192 10%",
+             "0% → 10%",
              "Muster, approved by you"
             ],
             [
@@ -1020,7 +1082,8 @@
           "Workshops": "2 wards",
           "Pain points": "7",
           "Participants": "14 staff (nursing, pharmacy, allied health)",
-          "Facilitator": "Service experience design agent"
+          "Facilitator": "Service experience design agent",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -1029,7 +1092,7 @@
             "Medication charts finalised late morning",
             "Transport booked on the day, not the day before",
             "Families not told the discharge plan",
-            "Pharmacy queue peaks 10am\u20131pm",
+            "Pharmacy queue peaks 10am–1pm",
             "Paperwork waits for one consultant round",
             "No visibility of bed demand downstream"
            ]
@@ -1072,7 +1135,8 @@
           "Clinical sign-off": "Required",
           "Space": "Health improvement",
           "Status": "For clinical review",
-          "Reviewers": "Director of Medical Services, NUM 4 West"
+          "Reviewers": "Director of Medical Services, NUM 4 West",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -1284,7 +1348,8 @@
           "Space": "Operations",
           "Status": "Agreed with the depot manager",
           "Evidence": "90 days of TMS and telematics data",
-          "Owner": "Business analysis agent"
+          "Owner": "Business analysis agent",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -1302,7 +1367,7 @@
             "Pre-stage north loads by 1pm",
             "Move the north cut-off to 12:30",
             "Dock scheduling by route, published the day before",
-            "Second dock crew 12\u20133pm on Mon/Thu peaks"
+            "Second dock crew 12–3pm on Mon/Thu peaks"
            ]
           },
           {
@@ -1360,13 +1425,14 @@
           "Routes": "3",
           "Rule set": "North region v12",
           "Rollback": "Revert to v11 (one click)",
-          "Promotion": "CHG0041, Monday"
+          "Promotion": "CHG0041, Monday",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
            "h": "Rule changes",
            "items": [
-            "Cut-off for north routes: 15:30 \u2192 12:30",
+            "Cut-off for north routes: 15:30 → 12:30",
             "Pre-stage flag required before tender",
             "Dock windows assigned per route"
            ]
@@ -1539,7 +1605,8 @@
           "Median time": "6 minutes",
           "Frames": "12",
           "Flows": "Lodge, track, upload photos",
-          "Completion": "7 of 8 unaided"
+          "Completion": "7 of 8 unaided",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -1584,18 +1651,48 @@
           "Fraud checks": "Scored before acceptance",
           "Project": "CLM",
           "Target": "Release 3",
-          "Dependencies": "Claims API v2"
+          "Dependencies": "Claims API v2",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
-           "h": "Stories",
-           "items": [
-            "CLM-141 Lodge a motor claim online in under 10 minutes",
-            "CLM-142 Upload damage photos from a phone",
-            "CLM-143 See repairer options by postcode",
-            "CLM-144 Track claim status without calling",
-            "CLM-145 Fraud score runs before acceptance",
-            "CLM-146 Hand off complex claims to a consultant with context"
+           "h": "Stories (AI-drafted, BA to refine)",
+           "table": [
+            [
+             "Story",
+             "Summary",
+             "Acceptance"
+            ],
+            [
+             "CLM‑141",
+             "Lodge a motor claim online in under 10 minutes",
+             "Gherkin drafted for review"
+            ],
+            [
+             "CLM‑142",
+             "Upload damage photos from a phone",
+             "Gherkin drafted for review"
+            ],
+            [
+             "CLM‑143",
+             "See repairer options by postcode",
+             "Gherkin drafted for review"
+            ],
+            [
+             "CLM‑144",
+             "Track claim status without calling",
+             "Gherkin drafted for review"
+            ],
+            [
+             "CLM‑145",
+             "Fraud score runs before acceptance",
+             "Gherkin drafted for review"
+            ],
+            [
+             "CLM‑146",
+             "Hand off complex claims to a consultant with context",
+             "Gherkin drafted for review"
+            ]
            ]
           },
           {
@@ -1758,15 +1855,16 @@
          "fields": {
           "Schema": "Sandbox",
           "Rows": "142",
-          "Grain": "Cost centre \u00d7 month",
+          "Grain": "Cost centre × month",
           "Sources": "ERP GL actuals, EPM forecast",
-          "Refreshed": "Today 07:00"
+          "Refreshed": "Today 07:00",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
            "h": "Definition",
            "items": [
-            "actual_amount \u2212 forecast_amount AS variance",
+            "actual_amount − forecast_amount AS variance",
             "variance / forecast_amount AS variance_pct",
             "Joined on cost_centre and period",
             "Excludes capitalised project codes"
@@ -1833,7 +1931,8 @@
           "Period": "October",
           "Prepared for": "CFO",
           "Status": "Draft",
-          "Data quality": "All checks passing"
+          "Data quality": "All checks passing",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -2019,7 +2118,8 @@
           "Rules": "6",
           "Expected auto-match": "About 870 lines a month",
           "Control": "Match only; approvals unchanged",
-          "Created by": "Business analysis agent, approved by you"
+          "Created by": "Business analysis agent, approved by you",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -2033,7 +2133,7 @@
             [
              "R1",
              "CloudCo",
-             "Memo contains CLOUDCO, amount \u00b12%"
+             "Memo contains CLOUDCO, amount ±2%"
             ],
             [
              "R2",
@@ -2109,7 +2209,8 @@
           "Owner": "Finance Manager",
           "Effective": "Next month-end",
           "Previous close": "8 days",
-          "Target": "4 days"
+          "Target": "4 days",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -2274,7 +2375,8 @@
           "Target": "4,200 lapsing family members",
           "Space": "Membership",
           "Status": "Option chosen: flexi pack",
-          "Decision": "Head of Membership"
+          "Decision": "Head of Membership",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -2341,7 +2443,8 @@
           "Status": "Draft",
           "Offer": "Flexi 5-game family pack",
           "Send": "Tuesday 10am",
-          "Exclusions": "Hardship flags, unsubscribed, renewed"
+          "Exclusions": "Hardship flags, unsubscribed, renewed",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -2512,7 +2615,8 @@
           "Groups involved": "10",
           "Sessions": "3 co-design workshops",
           "Participants": "10 community groups",
-          "Facilitator": "Service experience design agent"
+          "Facilitator": "Service experience design agent",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -2565,7 +2669,8 @@
           "Retention": "7 years after program close",
           "Classification": "Program records",
           "Access": "Program team",
-          "Filed by": "Business analysis agent, approved by you"
+          "Filed by": "Business analysis agent, approved by you",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -2709,7 +2814,8 @@
           "Approved by": "Privacy officer",
           "Review": "Each semester",
           "Status": "Approved",
-          "Opt-out": "Available to all students"
+          "Opt-out": "Available to all students",
+          "Labels": "ai-generated · ba-approved"
          },
          "sections": [
           {
@@ -2788,7 +2894,8 @@
           "Owner": "Student advisors",
           "Due": "Friday",
           "Script": "Supportive check-in v2",
-          "Opt-outs excluded": "Yes"
+          "Opt-outs excluded": "Yes",
+          "Labels": "ai-generated"
          },
          "sections": [
           {
@@ -2993,7 +3100,8 @@
           "Data": "De-identified extract only",
           "Space": "Operations",
           "Status": "For command review",
-          "Author": "Business analysis agent"
+          "Author": "Business analysis agent",
+          "Labels": "ai-generated"
          },
          "sections": [
           {

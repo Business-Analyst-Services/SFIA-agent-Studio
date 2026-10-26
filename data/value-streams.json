@@ -44,7 +44,8 @@
          "Requester": "Tom Becker",
          "Sponsor": "General Counsel",
          "Status": "Assess",
-         "Priority": "Medium"
+         "Priority": "Medium",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -103,7 +104,8 @@
         "fields": {
          "Author": "Technology finance agent",
          "Version": "0.1 draft",
-         "Linked to": "INIT-88"
+         "Linked to": "INIT-88",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -165,10 +167,11 @@
         "id": "INIT-88",
         "title": "Matter intake system for the legal team",
         "fields": {
-         "Status": "Assess \u2192 Approved",
+         "Status": "Assess → Approved",
          "Portfolio rank": "3 of 27",
          "Funding": "Q1, $38,000",
-         "Project manager": "Assigned"
+         "Project manager": "Assigned",
+         "Labels": "ai-generated · ba-approved"
         },
         "sections": [
          {
@@ -199,18 +202,48 @@
         "fields": {
          "Project": "LEGAL",
          "Linked to": "INIT-88",
-         "Stories": "6"
+         "Stories": "6",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
-          "h": "Stories",
-          "items": [
-           "LEGAL-15 As a lawyer, I can submit a new matter in one form",
-           "LEGAL-16 As a paralegal, I can see conflict-check results before acceptance",
-           "LEGAL-17 As a partner, I can approve or decline a matter",
-           "LEGAL-18 As the legal team, we can see every matter's status",
-           "LEGAL-19 As records, matters are filed with the right retention",
-           "LEGAL-20 As an admin, I can report on intake volumes"
+          "h": "Stories (AI-drafted, BA to refine)",
+          "table": [
+           [
+            "Story",
+            "Summary",
+            "Acceptance"
+           ],
+           [
+            "LEGAL‑15",
+            "As a lawyer, I can submit a new matter in one form",
+            "Gherkin drafted for review"
+           ],
+           [
+            "LEGAL‑16",
+            "As a paralegal, I can see conflict-check results before acceptance",
+            "Gherkin drafted for review"
+           ],
+           [
+            "LEGAL‑17",
+            "As a partner, I can approve or decline a matter",
+            "Gherkin drafted for review"
+           ],
+           [
+            "LEGAL‑18",
+            "As the legal team, we can see every matter's status",
+            "Gherkin drafted for review"
+           ],
+           [
+            "LEGAL‑19",
+            "As records, matters are filed with the right retention",
+            "Gherkin drafted for review"
+           ],
+           [
+            "LEGAL‑20",
+            "As an admin, I can report on intake volumes",
+            "Gherkin drafted for review"
+           ]
           ]
          }
         ]
@@ -237,7 +270,8 @@
         "fields": {
          "Space": "Architecture",
          "Status": "Approved at forum",
-         "Pattern": "Dynamics model-driven app"
+         "Pattern": "Dynamics model-driven app",
+         "Labels": "ai-generated · ba-approved"
         },
         "sections": [
          {
@@ -278,10 +312,11 @@
         "id": "PR #212",
         "title": "Configure matter intake forms and approval flow",
         "fields": {
-         "Branch": "feature/legal-intake \u2192 main",
+         "Branch": "feature/legal-intake → main",
          "Files changed": "14",
          "Checks": "All passing",
-         "Reviewers": "2 approvals"
+         "Reviewers": "2 approvals",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -331,9 +366,10 @@
         "fields": {
          "Type": "Normal",
          "Risk": "Low",
-         "Window": "Tuesday 6:30\u20137:30am",
+         "Window": "Tuesday 6:30–7:30am",
          "Approval": "CAB approved",
-         "Backout": "Disable app; revert solution package"
+         "Backout": "Disable app; revert solution package",
+         "Labels": "ai-generated · ba-approved"
         },
         "sections": [
          {
@@ -343,6 +379,13 @@
            "Run smoke tests",
            "Enable access for the legal team security group"
           ]
+         },
+         {
+          "h": "Gate",
+          "stamp": {
+           "by": "you, at the gate in the conversation",
+           "note": "label ba-approved added · AI Run Count reset to 0"
+          }
          }
         ]
        }
@@ -360,7 +403,8 @@
         "fields": {
          "Started": "07:02",
          "Finished": "07:30",
-         "Result": "Success"
+         "Result": "Success",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -397,7 +441,8 @@
          "Service owner": "Legal operations",
          "Support group": "Business applications",
          "Hours": "Business hours",
-         "Target response": "P3: 8 business hours"
+         "Target response": "P3: 8 business hours",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -442,7 +487,8 @@
          "Impact": "340 users",
          "Opened": "07:14",
          "Assignment group": "Service operations",
-         "Caller": "Priya Nair"
+         "Caller": "Priya Nair",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -479,7 +525,8 @@
         "fields": {
          "Linked incident": "INC0012931",
          "State": "Root cause known",
-         "Assigned to": "Platform team"
+         "Assigned to": "Platform team",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -532,7 +579,8 @@
          "Cluster": "prod-syd-1",
          "Started": "09:36",
          "Finished": "09:41",
-         "Result": "Success"
+         "Result": "Success",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -569,7 +617,8 @@
          "Covers": "23 certificates",
          "Condition": "days_to_expiry < 14",
          "Notify": "Platform team channel and on-call",
-         "Repeat": "Daily until renewed"
+         "Repeat": "Daily until renewed",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -608,7 +657,8 @@
         "fields": {
          "Space": "IT knowledge base",
          "Audience": "Service desk",
-         "Linked": "INC0012931, PRB0004410"
+         "Linked": "INC0012931, PRB0004410",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -676,7 +726,8 @@
         "fields": {
          "Accounts": "3",
          "Executed": "10:12",
-         "Approved by": "You"
+         "Approved by": "You",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -727,7 +778,8 @@
          "Severity": "High",
          "Time to contain": "34 minutes",
          "Data loss": "None found",
-         "Risk register": "R-17 updated"
+         "Risk register": "R-17 updated",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -766,7 +818,8 @@
         "fields": {
          "To": "4 teams (62 people)",
          "From": "IT Security",
-         "Sent": "11:05"
+         "Sent": "11:05",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -837,9 +890,10 @@
         "fields": {
          "Type": "Standard",
          "Risk": "Low",
-         "Window": "Saturday 10\u201311pm",
+         "Window": "Saturday 10–11pm",
          "Tests": "212/212 regression pass",
-         "Backout": "Redeploy 4.1.3"
+         "Backout": "Redeploy 4.1.3",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -879,7 +933,8 @@
         "fields": {
          "Started": "22:05",
          "Finished": "22:24",
-         "Result": "Success"
+         "Result": "Success",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -914,7 +969,8 @@
         "title": "What's new in the student app 4.2",
         "fields": {
          "Published to": "Staff news",
-         "Audience": "All staff"
+         "Audience": "All staff",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -974,7 +1030,8 @@
         "title": "FY27 IT budget model",
         "fields": {
          "Total": "$14.2M",
-         "Version": "Draft 1"
+         "Version": "Draft 1",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -1063,7 +1120,8 @@
         "title": "People allocated to funded initiatives",
         "fields": {
          "Initiatives": "12",
-         "People": "64 FTE"
+         "People": "64 FTE",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -1114,7 +1172,8 @@
         "title": "FY27 IT portfolio plan",
         "fields": {
          "Space": "IT leadership",
-         "Status": "Draft for executive review"
+         "Status": "Draft for executive review",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -1198,7 +1257,8 @@
         "fields": {
          "Models": "14",
          "Tests": "128/128 pass",
-         "Duration": "6m 12s"
+         "Duration": "6m 12s",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -1231,7 +1291,8 @@
         "title": "IT performance",
         "fields": {
          "Refreshed": "Today 14:20",
-         "Data quality": "100% tests passing"
+         "Data quality": "100% tests passing",
+         "Labels": "ai-generated"
         },
         "sections": [
          {
@@ -1301,7 +1362,8 @@
         "title": "IT performance: board summary",
         "fields": {
          "Meeting": "Next board meeting",
-         "Pages": "2"
+         "Pages": "2",
+         "Labels": "ai-generated"
         },
         "sections": [
          {

@@ -109,7 +109,38 @@
   .af-dev i{display:block;background:var(--line);border-radius:3px;height:9px}
   .af-dev i.b{background:var(--accent,#0f6e64);height:22px;margin-top:auto;border-radius:6px}
   .af-dev i.hero{height:44px;background:var(--accent-soft,#dcefeb)}
-  .af-dev em{font:600 9px "Public Sans",system-ui,sans-serif;color:var(--muted);font-style:normal;text-align:center}`;
+  .af-dev em{font:600 9px "Public Sans",system-ui,sans-serif;color:var(--muted);font-style:normal;text-align:center}
+  /* governance */
+  .af-ai{display:flex;gap:8px;align-items:center;border:1px solid #b7791f;background:rgba(242,193,78,.16);color:#7a5a12;border-radius:7px;padding:7px 11px;font:600 12px "Public Sans",system-ui,sans-serif;margin:8px 0}
+  .af-stamp{border:1px solid var(--line);border-left:4px solid #1a7f37;border-radius:6px;padding:8px 12px;margin:10px 0 2px;font-size:12.5px;background:var(--bg,#f4f6f6)}
+  .af-stamp.rw{border-left-color:#c2410c}.af-stamp.as{border-left-color:#1f4e8c}
+  .af-lab{display:inline-block;font:600 10.5px "IBM Plex Mono",ui-monospace,monospace;background:var(--line,#d9e1df);border-radius:4px;padding:1px 7px;margin:0 4px 4px 0}
+  .af-lab.ai{background:rgba(242,193,78,.3);color:#6b4e0e}.af-lab.ok{background:var(--accent-soft,#dcefeb);color:var(--accent,#0f6e64)}
+  /* requirement register */
+  .af-reqs{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:6px}
+  .af-reqs td,.af-reqs th{border:1px solid var(--line,#d9e1df);padding:5px 8px;text-align:left;vertical-align:top}
+  .af-reqs th{background:#1d3461;color:#fff;font:600 11px "Public Sans",system-ui,sans-serif;letter-spacing:.04em;white-space:nowrap}
+  .af-reqs .rid{font:600 11.5px "IBM Plex Mono",ui-monospace,monospace;white-space:nowrap}
+  .msc{font:700 10px "Public Sans",system-ui,sans-serif;border-radius:3px;padding:1px 6px;white-space:nowrap}
+  .msc.M{background:#1d3461;color:#fff}.msc.S{background:#3f6bb5;color:#fff}.msc.C{background:#8fa6c8;color:#14211f}.msc.W{background:var(--line);color:var(--ink,#14211f)}
+  /* gherkin */
+  .af-gk .gk{color:#f2c14e;font-weight:700}
+  /* numbered doc sections (Confluence style) */
+  .cf-num{counter-reset:cfs}
+  .cf-num .af-sec h4{counter-increment:cfs}
+  .cf-num .af-sec h4:before{content:counter(cfs) ". ";color:var(--accent,#0f6e64)}
+  /* BAS practice-deliverable page */
+  .bas-doc{border:1px solid var(--line,#d9e1df);border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);margin:6px 0 8px;background:#f7f9fb;color:#14211f}
+  .bas-head{background:#1d3461;color:#fff;padding:14px 46px;text-align:center;position:relative}
+  .bas-code{position:absolute;left:10px;top:10px;font:700 10px "IBM Plex Mono",ui-monospace,monospace;background:#f2c14e;color:#1d2b29;border-radius:3px;padding:2px 7px}
+  .bas-head h3{margin:0;font:700 19px "Familjen Grotesk",system-ui,sans-serif;text-wrap:balance}
+  .bas-head p{margin:5px 0 0;font-size:11.5px;color:#c7d3e8}
+  .bas-body{padding:12px 14px;display:grid;gap:10px}
+  .bas-sec{background:#fff;border:1px solid #dbe3ea;border-radius:5px;overflow:hidden}
+  .bas-sec>h4{margin:0;background:#2a4f8f;color:#fff;font:700 11px "Public Sans",system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;padding:6px 11px}
+  .bas-sec>div{padding:9px 12px;font-size:13px}
+  .bas-sec .af-sec h4{margin-top:0}
+  .bas-foot{background:#1d3461;color:#c7d3e8;font-size:10.5px;padding:7px 14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
 
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -118,15 +149,24 @@
   const F = (a) => a.fields || {};
   const take = (a, used, keys) => { for (const k of keys) if (F(a)[k] != null) { used.add(k); return F(a)[k]; } return null; };
   const grid = (a, used) => { const en = Object.entries(F(a)).filter(([k]) => !used.has(k)); return en.length ? `<dl class="af-grid">${en.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""; };
-  const secs = (a, skipTable) => (a.sections || []).map((s) => `<div class="af-sec"><h4>${esc(s.h)}</h4>${s.text ? `<p>${esc(s.text)}</p>` : ""}${s.items ? `<ul>${s.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}${s.table && !skipTable ? `<table>${s.table.map((r, i) => `<tr>${r.map((c) => i ? `<td>${esc(c)}</td>` : `<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</table>` : ""}</div>`).join("");
+  const secs = (a, skipTable) => (a.sections || []).map((s) => `<div class="af-sec">${s.h ? `<h4>${esc(s.h)}</h4>` : ""}${s.text ? `<p>${esc(s.text)}</p>` : ""}${s.items ? `<ul>${s.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}${s.reqs ? reqTable(s.reqs) : ""}${s.gherkin ? gherkin(s.gherkin) : ""}${s.stamp ? stamp(s.stamp) : ""}${s.table && !skipTable ? `<table>${s.table.map((r, i) => `<tr>${r.map((c) => i ? `<td>${esc(c)}</td>` : `<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</table>` : ""}</div>`).join("");
   const title = (a) => `<h3 class="af-title">${esc(a.title)}</h3>`;
+  const stamp = (x) => { const cls = x.kind === "rework" ? "rw" : x.kind === "assurance" ? "as" : ""; const ic = x.kind === "rework" ? "↩" : "✓";
+    const lab = x.label || (x.kind === "rework" ? "Sent back for rework" : x.kind === "assurance" ? "Domain assurance approved" : "Approved");
+    return `<div class="af-stamp ${cls}"><b>${ic} ${esc(lab)}</b> by ${esc(x.by)}${x.date ? ` on ${esc(x.date)}` : ""}${x.note ? ` · ${esc(x.note)}` : ""}</div>`; };
+  const reqTable = (rows) => `<table class="af-reqs"><tr><th>ID</th><th>Requirement</th><th>MoSCoW</th><th>Acceptance</th></tr>${rows.map((r) => `<tr><td class="rid">${esc(r.id)}</td><td>${esc(r.text)}</td><td><span class="msc ${esc((r.m || "M")[0])}">${esc(r.m || "Must")}</span></td><td>${esc(r.accept || "Testable — note drafted")}</td></tr>`).join("")}</table>`;
+  const gherkin = (g) => `<div class="af-term af-gk">${g.map((x) => `<div><span class="gk">Given</span> ${esc(x.g)}</div><div><span class="gk">When</span> ${esc(x.w)}</div><div><span class="gk">Then</span> ${esc(x.t)}</div>`).join('<div> </div>')}</div>`;
+  const labelList = (a) => String((a.fields || {}).Labels || "").split(/[·,]/).map((x) => x.trim()).filter(Boolean);
+  const labChips = (a) => { const ls = labelList(a); return ls.length ? `<div>${ls.map((l) => `<span class="af-lab ${/^ai-/.test(l) ? "ai" : /approved|assured/.test(l) ? "ok" : ""}">${esc(l)}</span>`).join("")}</div>` : ""; };
+  const aiBan = (a) => { const ls = labelList(a); return ls.includes("ai-generated") && !ls.some((l) => /ba-approved|domain-assured/.test(l)) ? `<div class="af-ai">⚠ AI-generated draft — a human reviews and approves before this is final.</div>` : ""; };
   const firstItems = (a) => ((a.sections || []).find((s) => s.items) || {}).items || [];
   const firstTable = (a) => ((a.sections || []).find((s) => s.table) || {}).table || null;
 
   const T = {
     jira(a) { const u = new Set(); const stt = take(a, u, ["Status", "State"]) || "Open";
-      return `<div class="jr-top"><span>${esc(a.id)}</span>${pill(stt)}<span>· ${esc(a.kind)}</span></div>${title(a)}
-      <div class="jr-cols"><div>${secs(a) || '<p class="af-sec">No description.</p>'}</div><aside class="jr-side"><h5>Details</h5>${grid(a, u) || '<dl class="af-grid"><dt>Reporter</dt><dd>Muster</dd></dl>'}</aside></div>`; },
+      u.add("Labels");
+      return `<div class="jr-top"><span>${esc(a.id)}</span>${pill(stt)}<span>· ${esc(a.kind)}</span></div>${title(a)}${aiBan(a)}
+      <div class="jr-cols"><div>${secs(a) || '<p class="af-sec">No description.</p>'}</div><aside class="jr-side"><h5>Details</h5>${grid(a, u) || '<dl class="af-grid"><dt>Reporter</dt><dd>Muster</dd></dl>'}${labelList(a).length ? `<h5 style="margin-top:12px">Labels</h5>${labChips(a)}` : ""}</aside></div>`; },
     sn(a) { const u = new Set(); const stt = take(a, u, ["State", "Status", "Approval", "Result"]) || "New";
       return `<div class="sn-state"><span>${esc(a.id)}</span>${pill(stt)}<span style="margin-left:auto;font-weight:400;color:var(--muted)">${esc(a.kind)}</span></div>${title(a)}
       <div class="sn-grid">${Object.entries(F(a)).filter(([k]) => !u.has(k)).map(([k, v]) => `<div class="sn-f"><label>${esc(k)}</label><span>${esc(v)}</span></div>`).join("")}</div>${secs(a)}`; },
@@ -135,12 +175,17 @@
       return `${title(a)}<div><span class="gh-badge">⊶ Open</span> ${from ? `<span class="gh-branch">${esc(from)}</span> → <span class="gh-branch">${esc(to || "main")}</span>` : ""}</div>
       <div class="gh-meta">${files ? `<span><b>${esc(files)}</b> files changed</span>` : ""}${rev ? `<span><b>${esc(rev)}</b></span>` : ""}<span>Opened by <b>Muster</b> for the software engineering agent</span></div>
       ${secs(a)}<div class="gh-checks"><div><span class="gh-ok">✓</span> build and unit tests</div><div><span class="gh-ok">✓</span> static analysis</div><div><span class="gh-ok">✓</span> ${esc(checks || "All checks have passed")}</div></div>${grid(a, u)}`; },
-    conf(a) { const u = new Set(); const space = take(a, u, ["Space"]) || "Knowledge base";
+    conf(a) { const u = new Set(); const space = take(a, u, ["Space"]) || "Knowledge base"; u.add("Labels"); const ver = take(a, u, ["Version"]) || "v. 1";
       return `<div class="cf-crumb">${esc(space)} / … / <b>${esc(a.title)}</b></div>${title(a)}
-      <div class="cf-by"><span class="cf-av">M</span><span>Published by <b>Muster</b> on behalf of the authoring agent · just now</span>${["Status"].map(k => F(a)[k] ? (u.add(k), pill(F(a)[k])) : "").join("")}</div>
-      ${secs(a)}${grid(a, u)}`; },
-    doc(a) { const u = new Set();
-      return `<div class="af-page">${title(a)}<div class="meta">${Object.entries(F(a)).map(([k, v]) => `${esc(k)}: <b>${esc(v)}</b>`).join(" · ") || "Draft"}</div>${secs(a) || '<p class="af-sec">Draft prepared for review.</p>'}</div>`; },
+      <div class="cf-by"><span class="cf-av">M</span><span>Published by <b>Muster</b> on behalf of the authoring agent · ${esc(ver)} · just now</span>${["Status"].map(k => F(a)[k] ? (u.add(k), pill(F(a)[k])) : "").join("")}</div>
+      ${aiBan(a)}<div class="cf-num">${secs(a)}</div>${labChips(a)}${grid(a, u)}`; },
+    doc(a) { const u = new Set(); u.add("Labels");
+      const code = a.code || (a.kind || "DOC").split(/\s+/).map((w) => w[0]).join("").toUpperCase().slice(0, 3);
+      const purpose = a.purpose || ((a.sections || [])[0] || {}).text || "";
+      const body = (a.sections || []).filter((s) => s.items || s.reqs || s.gherkin || s.stamp || s.table || (s.text && s.text !== purpose)).map((s) => `<div class="bas-sec"><h4>${esc(s.h || a.kind)}</h4><div>${s.text && s.text !== purpose ? `<p style="margin:0 0 6px">${esc(s.text)}</p>` : ""}${s.items ? `<ul style="margin:0;padding-left:18px">${s.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}${s.reqs ? reqTable(s.reqs) : ""}${s.gherkin ? gherkin(s.gherkin) : ""}${s.stamp ? stamp(s.stamp) : ""}${s.table ? `<table class="af-reqs">${s.table.map((r, i) => `<tr>${r.map((c) => i ? `<td>${esc(c)}</td>` : `<th>${esc(c)}</th>`).join("")}</tr>`).join("")}</table>` : ""}</div></div>`).join("");
+      return `${aiBan(a)}<div class="bas-doc"><div class="bas-head"><span class="bas-code">${esc(code)}</span><h3>${esc(a.title)}</h3>${purpose ? `<p>${esc(purpose)}</p>` : ""}</div>
+      <div class="bas-body">${body || '<div class="bas-sec"><h4>Draft</h4><div>Prepared for review.</div></div>'}</div>
+      <div class="bas-foot"><span>${Object.entries(F(a)).slice(0, 3).map(([k, v]) => `${esc(k)}: ${esc(v)}`).join("  ·  ") || "Draft for review"}</span><span>${esc(a.id)} · drafted by the ${esc((F(a)["Created by"] || "authoring agent").replace(/ agent$/, ""))} agent via Muster</span></div></div>${labChips(a)}`; },
     sheet(a) { const t = firstTable(a) || [["Item", "Value"], ...Object.entries(F(a))]; const cols = t[0].length;
       const letters = Array.from({ length: cols }, (_, i) => String.fromCharCode(65 + i));
       return `${title(a)}<div class="af-grid" style="margin:4px 0 0">${Object.entries(F(a)).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</div>
@@ -196,7 +241,7 @@
     let body; try { body = pickT(a)(a); } catch (e) { body = T.gen(a); }
     dlg.innerHTML = `<div class="af-bar"><span class="af-tile ${dk ? "dk" : ""}" style="--ah:${hue}">${esc(letters)}</span><b>${esc(a.system)}</b><span class="af-k">${esc(a.kind)} · ${esc(a.id)}</span><button class="af-x" aria-label="Close preview">×</button></div>
     <div class="af-body">${body}</div>
-    <div class="af-note">Illustrative example created by the demo. In a live deployment this is the real record, page or file in ${esc(a.system)}, created through its own API with its workflow and audit intact.</div>`;
+    <div class="af-note">Illustrative example created by the demo. In a live deployment this is the real record, page or file in ${esc(a.system)}, created through its own API with its workflow and audit intact — labelled, versioned and gated exactly as shown.</div>`;
     dlg.querySelector(".af-x").onclick = () => dlg.close();
     dlg.showModal();
   }
