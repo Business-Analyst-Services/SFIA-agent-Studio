@@ -96,7 +96,7 @@ function draw(){
   <div class="route"><span class="k">MCP route</span><br>${esc(s.mcp)}</div>
   <ul class="perm"><li class="r"><b>READ</b><span>${esc(s.read)}</span></li><li class="w"><b>WITH OK</b><span>${esc(s.write)}</span></li><li class="n"><b>NEVER</b><span>${esc(s.never)}</span></li></ul>
   <p><span class="k">Data</span><br>${esc(s.dataClass)}</p>
-  <div><span class="k">Agents that use it</span><div class="who">${s.agents.length?s.agents.map(a=>`<a href="index.html#${a}">${esc(name(a))}</a>`).join(''):'<span style="font-size:12.5px;color:var(--muted)">None: people only</span>'}</div></div>
+  <div><span class="k">Agents that use it</span><div class="who">${s.agents.length?s.agents.map(a=>`<a href="agents.html#${a}">${esc(name(a))}</a>`).join(''):'<span style="font-size:12.5px;color:var(--muted)">None: people only</span>'}</div></div>
  </article>`).join('')}</div>
 
  <h2>How Muster works with these systems</h2>
@@ -113,7 +113,7 @@ function draw(){
  <div class="scn"><p style="margin:0">${esc(d.scenario.why)} <b>Starts with</b> ${esc(d.scenario.trigger.user)}: “${esc(d.scenario.trigger.msg)}”</p>
  <ol>${d.scenario.steps.map(s=>`<li><b>${esc(name(s.agent))}</b>: ${esc(s.task)}. ${s.actions.map(a=>`<code>${esc(a.tool)}</code> (${a.risk})`).join(', ')}</li>`).join('')}</ol>
  <p style="margin:10px 0 0;font-size:14px"><b>Outcome:</b> ${esc(d.scenario.outcome)}</p>
- <a class="btn" href="muster.html?domain=${d.id}">Run this end to end in the Muster demo</a></div>
+ <a class="btn" href="index.html?domain=${d.id}">Run this end to end in the Muster demo</a></div>
 
  <h2>Switch Muster to ${esc(d.name.toLowerCase())}</h2>
  <p class="lede">Set the domain, then add one MCP server per system of record in <code>assistant/config/mcp-servers.json</code>, keyed by the system's id. Agents only see the systems listed for their role.</p>

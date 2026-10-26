@@ -8,11 +8,11 @@ Turns the SFIA Foundation's **SFIA 9 illustrative skills profiles** (March 2026)
 
 | Path | What it is |
 |---|---|
-| `site/muster.html` | Muster demo: plays a request through Slack, Teams, email or the intranet, shows capability matching, agents, tool actions and approvals, and can connect to a live Muster server. Link a request from the map with `?cap=` or `?role=`. |
+| `site/index.html` | **The main interface: the Muster demo.** Talk to Muster by text or voice (browser speech recognition), watch its animated head read replies aloud, pick quick requests, end-to-end value streams or industry scenarios from one menu, and set channel, SFIA level and approvals inside the chat. `?stream=`, `?domain=`, `?cap=` and `?role=` deep-link a run. `site/muster.html` redirects here. |
 | `site/value-streams.html` | Six end-to-end value streams (data in `data/value-streams.json`): each step's agent, capability, tools and handoff, with a button to run it in the Muster demo (`muster.html?stream=<id>`). Each write action carries an example artefact (incident, epic, business case, PR, change, release…) that the demo shows being created. |
 | `site/domains.html` | Domain packs for 12 industries (data in `data/domains.json`, built by `scripts/build_domains.py`): each industry's systems of record, the standards they speak, the MCP route, what agents may read, write with approval or never touch, and a scenario you can run in the Muster demo (`muster.html?domain=<id>`). |
 | `site/integrate.html` | How to plug Muster into Slack, Teams, email, intranets, Jira Service Management, ServiceNow, the REST API, and Rovo / Copilot Studio / Claude Code. |
-| `site/index.html` | The web interface. Browse 75 roles, choose 5–7 skills, set a target SFIA level (1–7), and copy the agent prompt, agent JSON or orchestrator prompt. |
+| `site/agents.html` | The role agent studio. Browse 75 roles, choose 5–7 skills, set a target SFIA level (1–7), and copy the agent prompt, agent JSON or orchestrator prompt. |
 | `data/roles.json` | 75 role profiles extracted from the PDF: family, description, example job titles, "look at these first" skills and "other skills to consider", each with code and level range. |
 | `data/mcp-catalog.json` | MCP servers with status (Official, Reference, Community, Build), purpose and source. |
 | `data/mcp-map.json` | Which servers are recommended for each role family, plus role-specific additions. |

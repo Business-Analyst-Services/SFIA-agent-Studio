@@ -79,11 +79,11 @@ Promise.all(['data/value-streams.json','data/capability-map.json','data/roles.js
  document.getElementById('over').innerHTML=vs.streams.map(s=>{const cats=s.steps.map(x=>catOf[x.capability]);const appr=s.steps.flatMap(x=>x.actions).filter(a=>L4[a.risk]==='approve').length;
   return `<article class="oc"><h2>${esc(s.name)}</h2><p>${esc(s.why)}</p><div class="dots">${cats.map(c=>`<i style="--c:var(${COL[c]})" title="${esc(c)}"></i>`).join('')}</div>
   <span class="meta">${s.steps.length} agents · ${new Set(cats).size} SFIA categories · ${appr} approvals at level 4 · ${s.steps.flatMap(x=>x.actions).filter(a=>a.artefact).length} artefacts</span>
-  <div class="row"><a class="btn" href="muster.html?stream=${s.id}">Run end to end</a><a class="btn ghost" href="#${s.id}">See the steps</a></div></article>`}).join('');
- document.getElementById('detail').innerHTML=vs.streams.map(s=>`<section class="vs" id="${s.id}"><div class="vh"><h2>${esc(s.name)}</h2><p>${esc(s.why)}</p><a class="btn" href="muster.html?stream=${s.id}">Run end to end with Muster</a></div>
+  <div class="row"><a class="btn" href="index.html?stream=${s.id}">Run end to end</a><a class="btn ghost" href="#${s.id}">See the steps</a></div></article>`}).join('');
+ document.getElementById('detail').innerHTML=vs.streams.map(s=>`<section class="vs" id="${s.id}"><div class="vh"><h2>${esc(s.name)}</h2><p>${esc(s.why)}</p><a class="btn" href="index.html?stream=${s.id}">Run end to end with Muster</a></div>
   <div class="trig"><b>Starts with:</b> ${esc(s.trigger.user)}: “${esc(s.trigger.msg)}”</div>
   <ol class="chain">${s.steps.map((x,i)=>{const r=role[x.agent];const c=catOf[x.capability];return `<li class="step" style="--c:var(${COL[c]})"><span class="n">Step ${i+1} of ${s.steps.length}</span>
-   <b><a href="index.html#${x.agent}">${esc(r?r.role.replace(/ practitioners$/,''):x.agent)}</a></b>
+   <b><a href="agents.html#${x.agent}">${esc(r?r.role.replace(/ practitioners$/,''):x.agent)}</a></b>
    <span class="cap"><a href="capability-map.html?role=${encodeURIComponent(r?r.role:'')}">${esc(x.capability)}</a> · ${esc(c)}</span>
    <span class="codes">${r?r.core.slice(0,4).map(k=>k.code).join(' · '):''}</span>
    ${x.actions.map(a=>`<span class="act"><span class="r ${a.risk}">${a.risk}</span><code>${esc(a.tool)}</code></span>`).join('')}
