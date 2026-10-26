@@ -22,7 +22,15 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)
 h1{font:700 30px/1.1 var(--f-display);margin:0;text-wrap:balance}
 .lede{color:var(--muted);margin:2px 0 0;max-width:70ch}
 h2{font:700 18px var(--f-display);margin:0 0 10px}
-.controls{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:flex-end;margin:18px 0;padding:14px 0;border-block:1px solid var(--line)}
+.controls{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:flex-end;margin:18px 0;padding:10px 0;border-block:1px solid var(--line);background:var(--bg)}
+@media(min-width:900px){.controls{position:sticky;top:calc(env(safe-area-inset-top,0px) + 46px);z-index:15}}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media(min-width:900px){.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 58px + var(--ctlh,190px));max-height:calc(100vh - 72px - var(--ctlh,190px));overflow-y:auto}}
+.afs{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.afs h2 span{font:500 12px var(--f-mono);color:var(--muted);margin-left:6px}
+.afgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;max-height:270px;overflow-y:auto}
+.afgrid .empty{grid-column:1/-1;font-size:13px}
+.result{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .ctl label,.ctl>span{display:block;font:600 11px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
 .seg{display:flex;flex-wrap:wrap;gap:4px}
 .seg button{font:600 13px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:6px 11px;cursor:pointer}
@@ -36,6 +44,7 @@ h2{font:700 18px var(--f-display);margin:0 0 10px}
 .fhead small{color:var(--muted);font-weight:400}
 .fhead .ch{margin-left:auto;font:500 11px var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
 .conv{padding:14px;display:flex;flex-direction:column;gap:12px;min-height:420px;max-height:720px;overflow-y:auto}
+@media(min-width:900px){.conv{max-height:calc(100vh - 118px - var(--ctlh,190px));min-height:360px}}
 .msg{display:flex;gap:10px;align-items:flex-start;min-width:0}
 .av{flex:none;width:32px;height:32px;border-radius:7px;background:var(--accent-soft);display:grid;place-items:center;font:700 12px var(--f-body);color:var(--accent);overflow:hidden}
 .av svg{width:32px;height:32px}
@@ -121,7 +130,8 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 </div>
 <div class="panes">
  <section class="frame" aria-label="Conversation"><div class="fhead" id="fhead"></div><div class="conv" id="conv" aria-live="polite"></div></section>
- <section class="trace" aria-label="Behind the scenes"><h2>Behind the scenes</h2><ol class="steps" id="steps"></ol></section>
+ <div class="side"><section class="afs" aria-label="Artefacts created"><h2>Artefacts created<span id="afn">0</span></h2><div class="afgrid" id="afgrid"></div></section>
+ <section class="trace" aria-label="Behind the scenes"><h2>Behind the scenes</h2><ol class="steps" id="steps"></ol></section></div>
 </div>
 <section class="live" aria-labelledby="lh">
  <h2 id="lh">Try it with your own Muster server</h2>
@@ -131,6 +141,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
  <div class="out" id="lout"></div>
 </section>
 </div>
+<script src="artefacts.js"></script>
 <script>
 const FACE=`<svg viewBox="0 0 100 100" width="32" height="32" aria-hidden="true">
     <defs><radialGradient id="k2" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#d9733d"/><stop offset="1" stop-color="#a84a22"/></radialGradient></defs>
@@ -185,8 +196,8 @@ const stamp=()=>new Date().toISOString().slice(11,19);
 
 function seg(id,items,cur,on){const el=$(id);el.innerHTML='';items.forEach(([k,l])=>{const b=document.createElement('button');b.type='button';b.textContent=l;b.setAttribute('aria-pressed',k===cur);b.onclick=()=>on(k);el.appendChild(b)})}
 function controls(){
- seg('#scen',SCEN.map(s=>[s.id,s.label]),mode==='scenario'?scen.id:null,k=>{mode='scenario';scen=SCEN.find(s=>s.id===k);controls();play()});
- seg('#flow',VS.map(v=>[v.id,v.name]),mode==='stream'?stream.id:null,k=>{mode='stream';stream=VS.find(v=>v.id===k);controls();play()});
+ seg('#scen',SCEN.map(s=>[s.id,s.label]),mode==='scenario'?scen.id:null,k=>{mode='scenario';scen=SCEN.find(s=>s.id===k);controls();play();toPanes()});
+ seg('#flow',VS.map(v=>[v.id,v.name]),mode==='stream'?stream.id:null,k=>{mode='stream';stream=VS.find(v=>v.id===k);controls();play();toPanes()});
  seg('#appr',[['ask','Ask me'],['auto','Approve all']],autoApprove?'auto':'ask',k=>{autoApprove=k==='auto';controls();if(mode==='stream')play()});
  seg('#chan',Object.entries(CHANNELS).map(([k,v])=>[k,v[0]]),chan,k=>{chan=k;controls();play()});
  seg('#lvl',[1,2,3,4,5,6,7].map(n=>[n,String(n)]),level,k=>{level=k;controls();play()});
@@ -225,7 +236,11 @@ function bubble(who,text,{bot=false,into=null}={}){
 
 function stepEl(n,title,html){const li=document.createElement('li');li.className='st';li.innerHTML=`<span class="n">${n}</span><div><b>${esc(title)}</b><p>${html}</p></div>`;$('#steps').appendChild(li);return li.querySelector('div')}
 
+function toPanes(){if(innerWidth<900)return;const c=document.querySelector('.controls').getBoundingClientRect().height;const y=document.querySelector('.panes').getBoundingClientRect().top+scrollY-46-c-12;if(scrollY<y-4)scrollTo({top:y,behavior:reduce?'auto':'smooth'})}
+function resetArtefacts(){$('#afgrid').innerHTML='<p class="empty muted">Records, pages and files the agents create will appear here as the run goes.</p>';$('#afn').textContent='0'}
+function addArtefact(a){const g=$('#afgrid');const sd=document.querySelector('.side');if(sd)sd.scrollTop=0;const e=g.querySelector('.empty');if(e)e.remove();g.prepend(Artefacts.card(a,true));$('#afn').textContent=g.querySelectorAll('.af-card').length}
 async function play(){
+ resetArtefacts();
  if(mode==='stream')return playStream();
  const my=++run;const alive=()=>my===run;
  $('#conv').innerHTML='';$('#steps').innerHTML='';head();
@@ -250,7 +265,7 @@ async function play(){
   for(const [tool,risk,summary,result] of a.actions){await wait(500);if(!alive())return;
    const d=POL[level][risk];const row=document.createElement('div');row.className='act';
    row.innerHTML=`<span class="r ${risk}">${risk}</span><code>${esc(tool)}</code><span class="dec">${DEC[d]}</span>`;box.appendChild(row);
-   if(d==='auto'){log('tool.executed',`${tool} (auto)`);row.insertAdjacentHTML('beforeend',`<span class="muted">→ ${esc(result)}</span>`)}
+   if(d==='auto'){log('tool.executed',`${tool} (auto)`);row.insertAdjacentHTML('beforeend',`<span class="muted">→ ${esc(result)}</span>`);if(risk!=='read')addArtefact(simpleArtefact(tool,summary,result,a.id))}
    else if(d==='approve'){const id=Math.random().toString(16).slice(2,10);pending.push({id,a,tool,risk,summary,result});log('approval.request',`${id} ${tool}`)}
    else log('tool.blocked',`${tool} (level ${level})`);
   }}
@@ -264,7 +279,7 @@ async function play(){
   const btns=document.createElement('div');btns.className='btns';
   if(chan==='email')btns.insertAdjacentHTML('beforeend',`<em>Reply “approve ${p.id}” or “reject ${p.id}”.</em>`);
   for(const [lab,ok] of [[chan==='email'?'Simulate approve reply':'Approve',true],[chan==='email'?'Simulate reject reply':'Reject',false]]){const b=document.createElement('button');b.type='button';b.textContent=lab;if(!ok)b.className='no';
-   b.onclick=()=>{btns.remove();if(ok){c.insertAdjacentHTML('beforeend',`<div><em>Approved. Done: ${esc(p.result)}.</em></div>`);log('approval.granted',`${p.id} → ${p.tool} executed`)}else{c.insertAdjacentHTML('beforeend',`<div><em>Rejected. Nothing was changed.</em></div>`);log('approval.rejected',p.id)}drawLog()};btns.appendChild(b)}
+   b.onclick=()=>{btns.remove();if(ok){c.insertAdjacentHTML('beforeend',`<div><em>Approved. Done: ${esc(p.result)}.</em></div>`);const art=simpleArtefact(p.tool,p.summary,p.result,p.a.id);addArtefact(art);c.appendChild(Artefacts.chip(art));log('approval.granted',`${p.id} → ${p.tool} executed`)}else{c.insertAdjacentHTML('beforeend',`<div><em>Rejected. Nothing was changed.</em></div>`);log('approval.rejected',p.id)}drawLog()};btns.appendChild(b)}
   c.appendChild(btns);holder.querySelector('.mb').appendChild(c);
  }
  const st5=stepEl(5,'Audit trail','Every routing decision, tool call and approval is logged.');
@@ -272,6 +287,13 @@ async function play(){
  function drawLog(){pre.textContent=logLines.join('\n')}
  drawLog();
 }
+
+// Single requests: build a simple artefact from the tool name and result.
+const SYS={servicenow:'ServiceNow',jira:'Jira',confluence:'Confluence',github:'GitHub',gdrive:'Google Drive',m365:'Microsoft 365',kubernetes:'Kubernetes',grafana:'Grafana'};
+function simpleArtefact(tool,summary,result,agentId){const sys=tool.split(/[.:]/)[0].trim().toLowerCase();const system=SYS[sys]||tool.split(/[.:]/)[0];
+ const id=(result.match(/\b([A-Z]{2,}[-]?\d+|PR #\d+)\b/)||[])[1]||(system.slice(0,3).toUpperCase()+'-'+Math.floor(1000+Math.random()*9000));
+ const kind=/incident/i.test(tool)?'Incident':/epic/i.test(tool)?'Epic':/page|document/i.test(tool)?'Document':/restart|deploy|release/i.test(tool)?'Platform action':'Record';
+ return {kind,system,id,title:summary,fields:{'Created by':(ROLE[agentId]||{short:agentId}).short+' agent','Result':result}}}
 
 // End-to-end run of a value stream: each step hands its output to the next; approvals pause the run.
 function approvalCard(into,agentName,a,id){
@@ -311,7 +333,7 @@ async function playStream(){
  let context='';
  for(let i=0;i<st.steps.length;i++){const x=st.steps[i],r=ROLE[x.agent],name=r?r.short:x.agent;
   await wait(650);if(!alive())return;
-  set(i,'working','working');rows[i].scrollIntoView({block:'nearest'});
+  set(i,'working','working');
   bubble('Muster',`Step ${i+1} of ${st.steps.length} · ${name}: ${x.task.charAt(0).toLowerCase()+x.task.slice(1)}.`,{bot:true,into:thread});
   log('agent.start',`${x.agent}${context?' ← '+context:''}`);
   for(const a of x.actions){await wait(500);if(!alive())return;
@@ -323,7 +345,9 @@ async function playStream(){
     if(!ok){log('approval.rejected',id);set(i,'stopped','stopped');for(let j=i+1;j<rows.length;j++)set(j,'','not started');
      bubble('Muster',`Okay, stopping at step ${i+1}. Steps 1 to ${i} stay done; nothing after this has run. Tell me if you want to change the plan and carry on.`,{bot:true,into:thread});drawSum(true);return}
     counts.approved++;log('approval.granted',`${id} → ${a.tool} executed`);set(i,'working','working')}
-   const res=document.createElement('div');res.className='handoff';res.textContent=`${a.tool} → ${a.result}`;(thread||$('#conv')).appendChild(res);
+   const res=document.createElement('div');res.className='handoff result';res.append(document.createTextNode(`${a.tool} → ${a.result}`));
+   if(a.artefact){res.appendChild(Artefacts.chip(a.artefact));addArtefact(a.artefact);log('artefact',`${a.artefact.system} ${a.artefact.id}`)}
+   (thread||$('#conv')).appendChild(res);
   }
   context=x.handoff;set(i,'done','done');log('handoff',x.handoff);drawSum();
   if(i<st.steps.length-1){const h=document.createElement('div');h.className='handoff';h.textContent=`Handing over: ${x.handoff}`;(thread||$('#conv')).appendChild(h)}
@@ -349,6 +373,7 @@ Promise.all(['data/capability-map.json','data/roles.json','data/mcp-catalog.json
  controls();play();
 }).catch(e=>{$('#conv').innerHTML=`<p class="empty">Couldn't load the role data (${esc(e.message)}). Serve the site over HTTP rather than opening the file directly.</p>`});
 $('#play').onclick=()=>play();
+new ResizeObserver(([e])=>document.documentElement.style.setProperty('--ctlh',Math.ceil(e.target.getBoundingClientRect().height)+'px')).observe(document.querySelector('.controls'));
 new MutationObserver(()=>{const c=$('#conv');c.scrollTop=c.scrollHeight}).observe($('#conv'),{childList:true,subtree:true});
 </script>
 <script src="nav.js" defer></script>
