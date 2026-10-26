@@ -21,7 +21,7 @@ Turns the SFIA Foundation's **SFIA 9 illustrative skills profiles** (March 2026)
 
 `assistant/` is a working service: **Muster**, a cheerful IT helper that lives in Slack, Teams, Gmail and the web, routes each request to the right SFIA role agent, and lets agents act through MCP tools within limits set by their SFIA level. See [assistant/README.md](assistant/README.md).
 
-The **ITU capability role map** (`site/itu.html`, data in `data/itu-map.json`) places the 75 roles on the ITU capability model and shows the gaps and value-stream handoffs.
+The **SFIA capability role map** (`site/capability-map.html`, data in `data/capability-map.json`, built by `scripts/build_capability_map.py`) organises IT capabilities by SFIA 9 categories and subcategories, places all 75 roles on them, and shows the gaps and value-stream handoffs.
 
 ## Run locally
 

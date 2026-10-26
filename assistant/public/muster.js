@@ -113,7 +113,7 @@
     try { const j = await fetch(API + "/api/events?conversationId=" + convo, { headers }).then(r => r.json()); showEvents(j.events); } catch (e) {}
   }
 
-  const SUGGEST = ["Our student portal is down", "Scope a new CRM for Faculty of Law", "Are we ready for the cyber audit?", "Build a business case for cloud backup"];
+  const SUGGEST = ["Our student portal is down", "Scope a new CRM for the legal team", "Are we ready for the cyber audit?", "Build a business case for cloud backup"];
   $(".muster-chips").innerHTML = SUGGEST.map(s => `<button type="button">${s}</button>`).join("");
   $(".muster-chips").onclick = (e) => { if (e.target.tagName === "BUTTON") send(e.target.textContent); };
 

@@ -9,7 +9,7 @@ import { audit } from "./audit.js";
 const anthropic = new Anthropic();
 const MODEL = process.env.MUSTER_MODEL ?? "claude-opus-5-5";
 export const catalog = loadCatalog();
-const SYSTEM = `${PERSONA}\n\n## Agent roster (id | family | key SFIA skill codes | ITU capability led)\n${roster(catalog.agents)}`;
+const SYSTEM = `${PERSONA}\n\n## Agent roster (id | family | key SFIA skill codes | capability led, by SFIA category)\n${roster(catalog.agents)}`;
 
 const DELEGATE: Anthropic.Tool = {
   name: "delegate",

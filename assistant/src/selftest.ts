@@ -46,7 +46,7 @@ console.log("✓ autonomy rules");
 
 const { catalog } = await import("./muster.js");
 assert.equal(catalog.agents.size, 75);
-assert.ok(catalog.agents.get("business-analysis")?.itu.length);
+assert.ok(catalog.agents.get("business-analysis")?.capabilities.length);
 console.log(`✓ catalogue: ${catalog.agents.size} agents, ${Object.keys(catalog.orchestrators).length} orchestrators`);
 
 const { requestApproval, resolveApproval, listPending } = await import("./approvals.js");

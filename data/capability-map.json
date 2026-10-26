@@ -1,0 +1,1497 @@
+{
+ "framework": "SFIA 9 categories and subcategories",
+ "categories": [
+  {
+   "name": "Strategy and architecture",
+   "subcategories": [
+    {
+     "name": "Strategy and planning",
+     "capabilities": [
+      {
+       "name": "Digital and cyber strategy stewardship",
+       "skills": [
+        "ITSP",
+        "SCTY"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Enterprise architecture",
+       "skills": [
+        "STPL"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Roadmaps, standards, policies and principles",
+       "skills": [
+        "ARCH"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Innovation",
+       "skills": [
+        "INOV",
+        "EMRG"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Financial and value management",
+     "capabilities": [
+      {
+       "name": "Cost and budget management",
+       "skills": [
+        "FMIT",
+        "BUDF"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "IT performance management",
+       "skills": [
+        "MEAS"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Demand and initiative intake",
+       "skills": [
+        "DEMM"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Security and privacy",
+     "capabilities": [
+      {
+       "name": "Cybersecurity strategy and roadmap",
+       "skills": [
+        "SCTY"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Governance, risk and compliance",
+     "capabilities": [
+      {
+       "name": "IT governance",
+       "skills": [
+        "GOVN"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Risk management",
+       "skills": [
+        "BURM"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Audit and compliance",
+       "skills": [
+        "AUDT"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Delivery assurance",
+       "skills": [
+        "QUAS"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Advice and guidance",
+     "capabilities": [
+      {
+       "name": "Digital advisory for business units",
+       "skills": [
+        "CNSL"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Architecture advisory",
+       "skills": [
+        "TECH"
+       ],
+       "proposed": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Change and transformation",
+   "subcategories": [
+    {
+     "name": "Change implementation",
+     "capabilities": [
+      {
+       "name": "Project portfolio management",
+       "skills": [
+        "POMG"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Project initiation",
+       "skills": [
+        "PRMG"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Project management",
+       "skills": [
+        "PRMG"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Project governance and reporting",
+       "skills": [
+        "PROF"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Change analysis",
+     "capabilities": [
+      {
+       "name": "Solution ideation, analysis and design",
+       "skills": [
+        "BUSA",
+        "REQM",
+        "BSMO"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Change planning",
+     "capabilities": [
+      {
+       "name": "Organisational design",
+       "skills": [
+        "ORDI"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Organisational change",
+       "skills": [
+        "CIPM"
+       ],
+       "proposed": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Development and implementation",
+   "subcategories": [
+    {
+     "name": "Systems development",
+     "capabilities": [
+      {
+       "name": "Application portfolio management",
+       "skills": [
+        "PROD",
+        "DLMG"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Solution configuration, enhancement and development",
+       "skills": [
+        "SWDN",
+        "PROG",
+        "SINT"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Solution testing and deployment",
+       "skills": [
+        "TEST",
+        "DEPL"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Product management",
+       "skills": [
+        "PROD"
+       ],
+       "proposed": true
+      }
+     ]
+    },
+    {
+     "name": "Data and analytics",
+     "capabilities": [
+      {
+       "name": "Data quality management",
+       "skills": [
+        "DATM"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "BI and reporting",
+       "skills": [
+        "BINT",
+        "DAAN",
+        "VISL"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "AI and machine learning",
+       "skills": [
+        "MLNG",
+        "DATS"
+       ],
+       "proposed": true
+      }
+     ]
+    },
+    {
+     "name": "User centred design",
+     "capabilities": [
+      {
+       "name": "Experience design",
+       "skills": [
+        "URCH",
+        "CEXP",
+        "ACIN",
+        "UNAN",
+        "HCEV",
+        "USEV"
+       ],
+       "proposed": true
+      }
+     ]
+    },
+    {
+     "name": "Content management",
+     "capabilities": [
+      {
+       "name": "Knowledge management",
+       "skills": [
+        "KNOW"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Content design",
+       "skills": [
+        "ICPM",
+        "INCA"
+       ],
+       "proposed": true
+      }
+     ]
+    },
+    {
+     "name": "Computational science",
+     "capabilities": [
+      {
+       "name": "Research computing",
+       "skills": [
+        "SCMO",
+        "NUAN",
+        "HPCC"
+       ],
+       "proposed": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Delivery and operation",
+   "subcategories": [
+    {
+     "name": "Technology management",
+     "capabilities": [
+      {
+       "name": "IT management and policy",
+       "skills": [
+        "ITMG"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Cloud, hosting and infrastructure",
+       "skills": [
+        "ITOP",
+        "SYSP",
+        "NTAS"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Platform engineering",
+       "skills": [
+        "SFEN",
+        "DEPL"
+       ],
+       "proposed": true
+      },
+      {
+       "name": "End user computing",
+       "skills": [
+        "HSIN"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Audio-visual and learning spaces",
+       "skills": [
+        "HSIN",
+        "ITOP"
+       ],
+       "proposed": true
+      },
+      {
+       "name": "Backup and recovery",
+       "skills": [
+        "ITOP"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "System administration",
+       "skills": [
+        "SYSP"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "System updates and releases",
+       "skills": [
+        "RELM",
+        "DEPL"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Application support",
+       "skills": [
+        "ASUP"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Service management",
+     "capabilities": [
+      {
+       "name": "Service desk",
+       "skills": [
+        "USUP"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Incident and problem management",
+       "skills": [
+        "USUP",
+        "PBMG"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Change management",
+       "skills": [
+        "CHMG"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Asset, licence and configuration management",
+       "skills": [
+        "ASMG",
+        "CFMG"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Capacity and availability management",
+       "skills": [
+        "CPMG",
+        "AVMT"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Disaster recovery and continuity",
+       "skills": [
+        "COPL"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Service transition",
+       "skills": [
+        "SEAC"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Security services",
+     "capabilities": [
+      {
+       "name": "Identity and access management",
+       "skills": [
+        "IAMT"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Security monitoring and detection",
+       "skills": [
+        "SCAD"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Security incident response",
+       "skills": [
+        "SCAD",
+        "DGFS"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Data and records operations",
+     "capabilities": []
+    }
+   ]
+  },
+  {
+   "name": "People and skills",
+   "subcategories": [
+    {
+     "name": "People management",
+     "capabilities": [
+      {
+       "name": "Workforce and resource management",
+       "skills": [
+        "WFPL",
+        "RESC"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Leadership, culture and values",
+       "skills": [
+        "PEMT",
+        "EEXP"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Skills management",
+     "capabilities": [
+      {
+       "name": "Training and adoption",
+       "skills": [
+        "ETDL",
+        "TMCR"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Security training and awareness",
+       "skills": [
+        "ETDL",
+        "SCTY"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Teaching and education",
+       "skills": [
+        "TEAC"
+       ],
+       "proposed": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Relationships and engagement",
+   "subcategories": [
+    {
+     "name": "Stakeholder management",
+     "capabilities": [
+      {
+       "name": "Stakeholder relations and engagement",
+       "skills": [
+        "RLMT"
+       ],
+       "proposed": false
+      },
+      {
+       "name": "Sourcing and procurement",
+       "skills": [
+        "SORC",
+        "SUPP"
+       ],
+       "proposed": false
+      }
+     ]
+    },
+    {
+     "name": "Sales and bid management",
+     "capabilities": [
+      {
+       "name": "Bids and sales",
+       "skills": [
+        "BIDM",
+        "SALE",
+        "SSUP"
+       ],
+       "proposed": true
+      }
+     ]
+    },
+    {
+     "name": "Marketing",
+     "capabilities": [
+      {
+       "name": "Digital marketing",
+       "skills": [
+        "DIGM",
+        "MKTG"
+       ],
+       "proposed": true
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "mapping": {
+  "Chief Information Officer": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Strategy and planning",
+    "capability": "Digital and cyber strategy stewardship",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "IT governance",
+    "role": "lead"
+   },
+   {
+    "category": "People and skills",
+    "subcategory": "People management",
+    "capability": "Leadership, culture and values",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "IT management and policy",
+    "role": "contributes"
+   },
+   {
+    "category": "Relationships and engagement",
+    "subcategory": "Stakeholder management",
+    "capability": "Stakeholder relations and engagement",
+    "role": "contributes"
+   }
+  ],
+  "Chief Technology Officer": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Strategy and planning",
+    "capability": "Innovation",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Strategy and planning",
+    "capability": "Roadmaps, standards, policies and principles",
+    "role": "contributes"
+   }
+  ],
+  "Chief Information Security Officer": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Security and privacy",
+    "capability": "Cybersecurity strategy and roadmap",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Strategy and planning",
+    "capability": "Digital and cyber strategy stewardship",
+    "role": "lead"
+   }
+  ],
+  "Chief Data Officer": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "Data quality management",
+    "role": "lead"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "BI and reporting",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "IT governance",
+    "role": "contributes"
+   }
+  ],
+  "Performance analysis practitioners": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Financial and value management",
+    "capability": "IT performance management",
+    "role": "lead"
+   }
+  ],
+  "Business analysis practice management": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Advice and guidance",
+    "capability": "Digital advisory for business units",
+    "role": "lead"
+   },
+   {
+    "category": "Relationships and engagement",
+    "subcategory": "Stakeholder management",
+    "capability": "Stakeholder relations and engagement",
+    "role": "contributes"
+   }
+  ],
+  "Business analysis practitioners": [
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change analysis",
+    "capability": "Solution ideation, analysis and design",
+    "role": "lead"
+   },
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change implementation",
+    "capability": "Project initiation",
+    "role": "contributes"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Advice and guidance",
+    "capability": "Digital advisory for business units",
+    "role": "contributes"
+   }
+  ],
+  "Product management practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Product management",
+    "role": "lead"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Application portfolio management",
+    "role": "contributes"
+   }
+  ],
+  "Agile product management": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Product management",
+    "role": "contributes"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Financial and value management",
+    "capability": "Demand and initiative intake",
+    "role": "contributes"
+   }
+  ],
+  "Service ownership practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Application portfolio management",
+    "role": "lead"
+   },
+   {
+    "category": "Relationships and engagement",
+    "subcategory": "Stakeholder management",
+    "capability": "Stakeholder relations and engagement",
+    "role": "contributes"
+   }
+  ],
+  "Agile change agents": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Financial and value management",
+    "capability": "Demand and initiative intake",
+    "role": "lead"
+   },
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change planning",
+    "capability": "Organisational change",
+    "role": "contributes"
+   }
+  ],
+  "Delivery management practitioners": [
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change implementation",
+    "capability": "Project management",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "Delivery assurance",
+    "role": "contributes"
+   }
+  ],
+  "Project delivery practice management": [
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change implementation",
+    "capability": "Project portfolio management",
+    "role": "lead"
+   },
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change implementation",
+    "capability": "Project governance and reporting",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "Delivery assurance",
+    "role": "lead"
+   }
+  ],
+  "Project delivery practitioners": [
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change implementation",
+    "capability": "Project management",
+    "role": "lead"
+   },
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change implementation",
+    "capability": "Project initiation",
+    "role": "lead"
+   }
+  ],
+  "Service introduction practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Service transition",
+    "role": "lead"
+   }
+  ],
+  "Technology finance practitioners": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Financial and value management",
+    "capability": "Cost and budget management",
+    "role": "lead"
+   }
+  ],
+  "Technology procurement practitioners": [
+   {
+    "category": "Relationships and engagement",
+    "subcategory": "Stakeholder management",
+    "capability": "Sourcing and procurement",
+    "role": "lead"
+   }
+  ],
+  "Organisation design practitioners": [
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change planning",
+    "capability": "Organisational design",
+    "role": "lead"
+   }
+  ],
+  "Resource management practitioners": [
+   {
+    "category": "People and skills",
+    "subcategory": "People management",
+    "capability": "Workforce and resource management",
+    "role": "lead"
+   }
+  ],
+  "Workforce planning practitioners": [
+   {
+    "category": "People and skills",
+    "subcategory": "People management",
+    "capability": "Workforce and resource management",
+    "role": "lead"
+   }
+  ],
+  "Change management practitioners": [
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change planning",
+    "capability": "Organisational change",
+    "role": "lead"
+   }
+  ],
+  "Learning & development (L&D) practitioners": [
+   {
+    "category": "People and skills",
+    "subcategory": "Skills management",
+    "capability": "Training and adoption",
+    "role": "lead"
+   },
+   {
+    "category": "People and skills",
+    "subcategory": "Skills management",
+    "capability": "Security training and awareness",
+    "role": "contributes"
+   }
+  ],
+  "Teaching practitioners": [
+   {
+    "category": "People and skills",
+    "subcategory": "Skills management",
+    "capability": "Teaching and education",
+    "role": "lead"
+   }
+  ],
+  "Architecture practice management": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Strategy and planning",
+    "capability": "Roadmaps, standards, policies and principles",
+    "role": "lead"
+   }
+  ],
+  "Enterprise architecture practitioners": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Strategy and planning",
+    "capability": "Enterprise architecture",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Advice and guidance",
+    "capability": "Architecture advisory",
+    "role": "lead"
+   }
+  ],
+  "Solution architecture practitioners": [
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change analysis",
+    "capability": "Solution ideation, analysis and design",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Advice and guidance",
+    "capability": "Architecture advisory",
+    "role": "contributes"
+   }
+  ],
+  "Technical architecture practitioners": [
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change analysis",
+    "capability": "Solution ideation, analysis and design",
+    "role": "contributes"
+   }
+  ],
+  "Data architecture practitioners": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Strategy and planning",
+    "capability": "Enterprise architecture",
+    "role": "contributes"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "Data quality management",
+    "role": "contributes"
+   }
+  ],
+  "Network architecture practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Cloud, hosting and infrastructure",
+    "role": "contributes"
+   }
+  ],
+  "Security architecture practitioners": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Security and privacy",
+    "capability": "Cybersecurity strategy and roadmap",
+    "role": "contributes"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Security services",
+    "capability": "Identity and access management",
+    "role": "contributes"
+   }
+  ],
+  "Application platform management practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Application portfolio management",
+    "role": "lead"
+   }
+  ],
+  "Application development practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Solution configuration, enhancement and development",
+    "role": "lead"
+   }
+  ],
+  "Software engineering practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Solution configuration, enhancement and development",
+    "role": "lead"
+   }
+  ],
+  "Software engineering practice management": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Solution configuration, enhancement and development",
+    "role": "contributes"
+   }
+  ],
+  "Testing practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Solution testing and deployment",
+    "role": "lead"
+   }
+  ],
+  "Testing practice management": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Solution testing and deployment",
+    "role": "contributes"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "Delivery assurance",
+    "role": "contributes"
+   }
+  ],
+  "DevOps automation engineer": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Platform engineering",
+    "role": "contributes"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Solution testing and deployment",
+    "role": "contributes"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "System updates and releases",
+    "role": "contributes"
+   }
+  ],
+  "DevOps practice management": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Platform engineering",
+    "role": "lead"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Solution testing and deployment",
+    "role": "contributes"
+   }
+  ],
+  "Platform engineer": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Platform engineering",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Cloud, hosting and infrastructure",
+    "role": "contributes"
+   }
+  ],
+  "Application support practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Application support",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "System updates and releases",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "System administration",
+    "role": "contributes"
+   }
+  ],
+  "User experience practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "User centred design",
+    "capability": "Experience design",
+    "role": "lead"
+   },
+   {
+    "category": "Change and transformation",
+    "subcategory": "Change analysis",
+    "capability": "Solution ideation, analysis and design",
+    "role": "contributes"
+   }
+  ],
+  "User research practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "User centred design",
+    "capability": "Experience design",
+    "role": "contributes"
+   }
+  ],
+  "Interaction design practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "User centred design",
+    "capability": "Experience design",
+    "role": "contributes"
+   }
+  ],
+  "Service experience design practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "User centred design",
+    "capability": "Experience design",
+    "role": "contributes"
+   }
+  ],
+  "Accessibility practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "User centred design",
+    "capability": "Experience design",
+    "role": "contributes"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Systems development",
+    "capability": "Solution testing and deployment",
+    "role": "contributes"
+   }
+  ],
+  "Content design practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Content management",
+    "capability": "Content design",
+    "role": "lead"
+   }
+  ],
+  "Graphic design and visual communication practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Content management",
+    "capability": "Content design",
+    "role": "contributes"
+   },
+   {
+    "category": "Relationships and engagement",
+    "subcategory": "Marketing",
+    "capability": "Digital marketing",
+    "role": "contributes"
+   }
+  ],
+  "Technical writing practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Content management",
+    "capability": "Knowledge management",
+    "role": "lead"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Content management",
+    "capability": "Content design",
+    "role": "contributes"
+   }
+  ],
+  "Security risk management, audit and compliance": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "Risk management",
+    "role": "lead"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "Audit and compliance",
+    "role": "lead"
+   }
+  ],
+  "Security leadership, strategy and management": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Security and privacy",
+    "capability": "Cybersecurity strategy and roadmap",
+    "role": "lead"
+   }
+  ],
+  "Security operations": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Security services",
+    "capability": "Security monitoring and detection",
+    "role": "lead"
+   }
+  ],
+  "Incident management practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Security services",
+    "capability": "Security incident response",
+    "role": "lead"
+   }
+  ],
+  "Vulnerability analysis practitioners": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "Risk management",
+    "role": "contributes"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Security services",
+    "capability": "Security monitoring and detection",
+    "role": "contributes"
+   }
+  ],
+  "Penetration testing practitioners": [
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Governance, risk and compliance",
+    "capability": "Audit and compliance",
+    "role": "contributes"
+   }
+  ],
+  "Service desk practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Service desk",
+    "role": "lead"
+   }
+  ],
+  "Service operations practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Incident and problem management",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Change management",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Asset, licence and configuration management",
+    "role": "lead"
+   }
+  ],
+  "IT Service designer": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Service transition",
+    "role": "contributes"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Capacity and availability management",
+    "role": "contributes"
+   }
+  ],
+  "Service management architecture practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Change management",
+    "role": "contributes"
+   },
+   {
+    "category": "Strategy and architecture",
+    "subcategory": "Strategy and planning",
+    "capability": "Roadmaps, standards, policies and principles",
+    "role": "contributes"
+   }
+  ],
+  "Site reliability engineer (SRE)": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Capacity and availability management",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Disaster recovery and continuity",
+    "role": "contributes"
+   }
+  ],
+  "Infrastructure engineers": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Cloud, hosting and infrastructure",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Security services",
+    "capability": "Identity and access management",
+    "role": "contributes"
+   }
+  ],
+  "Infrastructure operations practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Backup and recovery",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Disaster recovery and continuity",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "System administration",
+    "role": "lead"
+   }
+  ],
+  "Infrastructure platform management practitioners": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Cloud, hosting and infrastructure",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Service management",
+    "capability": "Capacity and availability management",
+    "role": "contributes"
+   }
+  ],
+  "Data governance practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "Data quality management",
+    "role": "lead"
+   }
+  ],
+  "Data operations practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "Data quality management",
+    "role": "contributes"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "AI and machine learning",
+    "role": "contributes"
+   }
+  ],
+  "Data analytics practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "BI and reporting",
+    "role": "lead"
+   }
+  ],
+  "Data engineering practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "BI and reporting",
+    "role": "contributes"
+   }
+  ],
+  "Data science practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "AI and machine learning",
+    "role": "lead"
+   },
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "BI and reporting",
+    "role": "contributes"
+   }
+  ],
+  "Machine learning engineering practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Data and analytics",
+    "capability": "AI and machine learning",
+    "role": "lead"
+   }
+  ],
+  "Computational science practitioners": [
+   {
+    "category": "Development and implementation",
+    "subcategory": "Computational science",
+    "capability": "Research computing",
+    "role": "lead"
+   }
+  ],
+  "AV Installation Engineer": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Audio-visual and learning spaces",
+    "role": "contributes"
+   }
+  ],
+  "AV Support Engineer": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Audio-visual and learning spaces",
+    "role": "lead"
+   },
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "End user computing",
+    "role": "contributes"
+   }
+  ],
+  "AV Systems Designer": [
+   {
+    "category": "Delivery and operation",
+    "subcategory": "Technology management",
+    "capability": "Audio-visual and learning spaces",
+    "role": "contributes"
+   }
+  ],
+  "Bid management practitioners": [
+   {
+    "category": "Relationships and engagement",
+    "subcategory": "Sales and bid management",
+    "capability": "Bids and sales",
+    "role": "lead"
+   }
+  ],
+  "Sales and sales support practitioners": [
+   {
+    "category": "Relationships and engagement",
+    "subcategory": "Sales and bid management",
+    "capability": "Bids and sales",
+    "role": "contributes"
+   }
+  ],
+  "Digital marketing practitioners": [
+   {
+    "category": "Relationships and engagement",
+    "subcategory": "Marketing",
+    "capability": "Digital marketing",
+    "role": "lead"
+   }
+  ]
+ }
+}
