@@ -38,7 +38,8 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 .callwrap{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);height:calc(100vh - 128px);min-height:560px}
 [data-ui=meet]{--mink:#e9f4f1;--mmute:#9fbcb5;--mline:rgba(255,255,255,.14);background:radial-gradient(1100px 480px at 50% -8%,#17423a,#0a1512 70%);border-color:#1c3630}
 .callstage{position:relative;display:flex;align-items:center;gap:12px;padding:10px 16px;flex:none}
-[data-ui=meet] .callstage{flex-direction:column;justify-content:center;padding:18px 12px 8px;flex:1;min-height:0}
+[data-ui=meet] .callstage{flex-direction:column;justify-content:center;justify-content:safe center;padding:18px 12px 8px;flex:1;min-height:0;overflow:auto}
+.stagerow,.plabel,.crew{flex:none}
 .crew{display:none;gap:10px;flex-wrap:wrap;justify-content:center;max-width:min(500px,92%)}
 [data-ui=meet] .crew{display:flex}
 .crewt{position:relative;width:86px;border-radius:10px;background:#0b1f26;border:1px solid rgba(255,255,255,.14);padding:6px 4px 5px;text-align:center;animation:crewin .55s cubic-bezier(.34,1.56,.64,1)}
@@ -54,7 +55,7 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 .rl .rimg{width:26px;height:26px;border-radius:6px;flex:none;background:#eef2f1;margin-right:2px}
 .stage{flex:none;width:92px;height:92px;perspective:700px}
 [data-ui=meet] .stage{width:min(38vh,340px);height:min(38vh,340px)}
-.stage canvas{width:100%;height:100%;display:block;border-radius:14px}
+.stage canvas{width:100%!important;height:100%!important;display:block;border-radius:14px}
 [data-ui=meet] .stage canvas{border-radius:18px;border:1px solid var(--mline);box-shadow:0 14px 44px rgba(0,0,0,.45)}
 .head3d{width:100%;height:100%;transform-style:preserve-3d;transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .25s ease;animation:sway 6s ease-in-out infinite}
 @keyframes sway{0%,100%{translate:0 0}50%{translate:0 -3px}}
@@ -126,7 +127,22 @@ h1{font:700 21px/1.1 var(--f-display);margin:0}
 [data-ui=meet] .cph{display:flex}
 [data-ui=meet] .composer{display:flex}
 .caption{display:none}
-[data-ui=meet] .caption{display:block;margin:6px auto 0;max-width:68ch;min-height:20px;text-align:center;font-size:14px;color:var(--mink);opacity:.9;padding:0 14px}
+[data-ui=meet] .caption{display:block;position:absolute;left:50%;transform:translateX(-50%);bottom:78px;z-index:6;max-width:min(72ch,92%);text-align:center;font-size:14px;line-height:1.45;color:#f2f6f7;background:rgba(7,18,22,.82);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:7px 14px;pointer-events:none}
+[data-ui=meet] .caption:empty{display:none}
+.stagerow{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;max-width:100%;min-height:0}
+[data-ui=meet] .stagerow.with .stage{width:min(26vh,230px);height:min(26vh,230px)}
+.spot{display:flex;flex-direction:column;width:min(40vh,320px);border-radius:14px;background:#0b1f26;border:1px solid var(--mline);box-shadow:0 14px 44px rgba(0,0,0,.45);overflow:hidden;animation:crewin .5s cubic-bezier(.34,1.56,.64,1)}
+.spothead{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--mline)}
+.spothead img{width:30px;height:30px;border-radius:7px;background:#163742}
+.spothead b{font-size:12.5px;color:#eaf2f4;display:block;line-height:1.15}
+.spothead small{font-size:10px;color:#8fa6ad;text-transform:capitalize;display:block}
+.spothead .live{margin-left:auto;font-size:9px;font-weight:700;color:#ff6b6b;letter-spacing:.1em}
+.spotcam{display:grid;place-items:center;min-height:120px;padding:4px}
+.spotcam canvas.guestcam{width:min(26vh,210px);height:min(26vh,210px);border-radius:10px;background:radial-gradient(circle at 50% 30%,#1b4350,#0b1f26)}
+.spotout{display:flex;flex-direction:column;gap:6px;padding:8px 10px;max-height:132px;overflow:auto;border-top:1px solid var(--mline)}
+.spotout:empty{display:none}
+.sout{font-size:11px;color:#cfe0e5;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.4}
+@media (max-width:560px){.spot{width:min(86vw,300px)}[data-ui=meet] .stagerow.with .stage{width:110px;height:110px}}
 /* composer pop-out + call controls */
 .composer{display:none;gap:8px;padding:10px 14px 4px}
 .composer.open{display:flex}
@@ -267,6 +283,7 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,s
   </div>
  </div>
  <div class="callstage">
+  <div class="stagerow" id="stagerow">
   <div class="stage"><div class="head3d" id="head" data-state="idle"><svg viewBox="0 0 100 100" aria-hidden="true">
     <defs><radialGradient id="kh" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#d9733d"/><stop offset="1" stop-color="#a84a22"/></radialGradient></defs>
     <g class="earL"><path d="M24 46 L18 6 L44 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2" stroke-linejoin="round"/><path d="M26 38 L22 15 L38 31 Z" fill="#e9a37a"/></g>
@@ -278,11 +295,17 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,s
     <path d="M44 60 C44 56 56 56 56 60 C56 64 52 66 50 66 C48 66 44 64 44 60Z" fill="#1d2b29"/>
     <path id="mo" d="M42 71 Q50 77 58 71" fill="#8c2f3f" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg></div></div>
-  <div class="plabel"><b>Muster</b><span id="mstatus">waiting for you to join</span></div>
+   <div class="spot" id="spot" hidden>
+   <div class="spothead"><img id="spotav" alt=""><div><b id="spotname"></b><small id="spotsp"></small></div><span class="live">● LIVE</span></div>
+   <div class="spotcam" id="spotcam"></div>
+   <div class="spotout" id="spotout"></div>
+  </div>
+  </div>
+ <div class="plabel"><b>Muster</b><span id="mstatus">waiting for you to join</span></div>
  <div class="crew" id="crew" aria-label="Agents in this session"></div>
-  <p class="caption" id="caption"></p>
   <div class="youtile" id="youtile" aria-hidden="true"></div>
  </div>
+ <p class="caption" id="caption"></p>
  <div class="fhead" id="fhead"><span>Say g'day</span><span class="ch">Demo</span></div>
  <div id="chatdock">
   <div class="cph">💬 In-call chat<button id="cclose" type="button" aria-label="Close chat">✕</button></div>
@@ -371,6 +394,11 @@ const SCEN=[
 const P={
  think:["rounding up the crew…","sniffing through the logs…","having a think…","checking who's free…"],
  step:[(n,t)=>`${n} is up — ${t}.`,(n,t)=>`Passing the baton to ${n}: ${t}.`,(n,t)=>`${n}'s got this bit — ${t}.`,(n,t)=>`Next up, ${n} — ${t}.`],
+ hand:[(n,t)=>`Over to you, ${n} — ${t}.`,(n,t)=>`${n}, you're up: ${t}.`,(n,t)=>`Righto ${n}, your bit — ${t}.`,(n,t)=>`${n}, take the floor — ${t}.`],
+ ack:[n=>`Cheers, ${n}.`,n=>`Good stuff, ${n}.`,n=>`Ta, ${n}.`,()=>`Nice work.`],
+ agIn:[t=>`On it, Muster — I'll ${t} now.`,t=>`G'day boss. Taking this one: ${t}.`,t=>`Thanks, Muster. Getting onto it: ${t}.`,t=>`Got it — ${t}, coming right up.`],
+ agOut:[(h,k)=>`That's my bit squared away${k?` — ${k} artefact${k>1?'s':''} in the tray`:''}. ${h}. Back to you, Muster.`,(h,k)=>`All done on my end${k?`, and I've left ${k} record${k>1?'s':''} for the paper trail`:''}. Handing back: ${h}.`,(h,k)=>`Wrapping up my end — ${h}. Over to you, boss dog.`],
+ agOutS:["That's mine done — back to you, Muster.","Done my bit. All yours again, Muster.","That's me — handing back to the kelpie."],
  ok:["Beauty — running it now.","Good call, on it.","Done — consider it handled.","Righto, executing."],
  no:["No worries — leaving that one well alone.","Fair enough, I won't touch it.","Righto, skipping that one."],
  wrap:["That's a wrap. ","All sorted. ","And we're done — nice work, team. "],
@@ -548,7 +576,7 @@ Head.init();
    const tY=meetUI?1.7:2.3,tZ=meetUI?9.4:4.4,tL=meetUI?1.25:2.15;
    camY+=(tY-camY)*.08;camZ+=(tZ-camZ)*.08;lookY+=(tL-lookY)*.08;
    cam.position.set(0,camY,camZ);cam.lookAt(0,lookY,0);
-   if((fr++%45)===0&&stage.clientWidth&&stage.clientWidth!==RW){RW=stage.clientWidth;renderer.setSize(RW,RW)}
+   if((fr++%12)===0&&stage.clientWidth&&stage.clientWidth!==RW){RW=stage.clientWidth;renderer.setSize(RW,RW)}
    renderer.render(scene,cam)})(performance.now());
  }catch(e){/* WebGL unavailable: the drawn head stays */}
 })();
@@ -796,15 +824,44 @@ const Crew={tiles:{},
   t.innerHTML=`<span class="tick">✓</span>${u?'<img alt="">':''}<b>${esc(r?r.short:id)}</b><small>${esc(window.Menagerie&&Menagerie.species?Menagerie.species(famOf(id)):'')}</small>`;
   if(u)t.querySelector('img').src=u;
   $('#crew').appendChild(t);this.tiles[id]=t;return t},
- active(id){const t=this.join(id);
-  Object.values(this.tiles).forEach(x=>{x.classList.remove('active');const im=x.querySelector('img');if(im)im.style.display=''});
-  if(window.Menagerie&&Menagerie.ready&&$('#callwrap').dataset.ui==='meet'){Menagerie.guest.show(t,id,famOf(id));const im=t.querySelector('img');if(im)im.style.display='none'}
-  t.classList.add('active')},
- done(id){const t=this.tiles[id];if(!t)return;t.classList.remove('active');t.classList.add('done');
-  if(window.Menagerie&&Menagerie.ready&&Menagerie.guest.home===t)Menagerie.guest.park();
-  const im=t.querySelector('img');if(im)im.style.display=''},
- clear(){if(window.Menagerie&&Menagerie.ready)Menagerie.guest.park();$('#crew').innerHTML='';this.tiles={}}
+ active(id){const t=this.join(id);Object.values(this.tiles).forEach(x=>x.classList.remove('active'));t.classList.add('active')},
+ done(id){const t=this.tiles[id];if(!t)return;t.classList.remove('active');t.classList.add('done')},
+ clear(){if(window.Menagerie&&Menagerie.ready)Menagerie.guest.park();$('#crew').innerHTML='';this.tiles={};
+  $('#spot').hidden=true;const sr=$('#stagerow');if(sr)sr.classList.remove('with')}
 };
+/* ---------- The spotlight: the active agent presents on screen ---------- */
+const ahash=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))>>>0;return h};
+const Spot={cur:null,
+ on(id,name){this.cur=id;Crew.join(id);Crew.active(id);
+  const meet=$('#callwrap').dataset.ui==='meet';if(!meet)return;
+  const sp=$('#spot');sp.hidden=false;const sr=$('#stagerow');if(sr)sr.classList.add('with');
+  $('#spotname').textContent=name;
+  $('#spotsp').textContent=window.Menagerie&&Menagerie.species?Menagerie.species(famOf(id)):'';
+  const u=avatarURL(id);const av=$('#spotav');if(u){av.src=u;av.style.display=''}else av.style.display='none';
+  $('#spotout').innerHTML='';
+  if(window.Menagerie&&Menagerie.ready)Menagerie.guest.show($('#spotcam'),id,famOf(id))},
+ out(text,art){if($('#spot').hidden)return;const r=document.createElement('div');r.className='sout';r.textContent=text;
+  if(art&&window.Artefacts)r.appendChild(Artefacts.chip(art));
+  const o=$('#spotout');o.appendChild(r);o.scrollTop=o.scrollHeight},
+ talk(on){if(window.Menagerie&&Menagerie.ready)Menagerie.guest.talking=!!on},
+ off(id){this.talk(false);$('#spot').hidden=true;const sr=$('#stagerow');if(sr)sr.classList.remove('with');
+  if(window.Menagerie&&Menagerie.ready)Menagerie.guest.park();Crew.done(id);this.cur=null}
+};
+/* agents speak with their own browser voice */
+function agentVoices(){try{return speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang))}catch(e){return[]}}
+function narrateAs(id,text){
+ if(!soundOn||!('speechSynthesis' in window)){Spot.talk(true);setTimeout(()=>Spot.talk(false),Math.min(5200,text.length*55));return}
+ const u=new SpeechSynthesisUtterance(text.replace(/[—·…]/g,', ').replace(/[^\p{L}\p{N}\p{P}\s$%]/gu,''));
+ const vs=agentVoices();if(vs.length)u.voice=vs[ahash(id)%vs.length];
+ u.pitch=.85+((ahash(id+'p')%55)/100);u.rate=1+((ahash(id+'r')%14)/100);
+ u.onstart=()=>Spot.talk(true);u.onend=()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)Spot.talk(false)};
+ speechSynthesis.speak(u)}
+function agentSay(id,name,text,into){const b=bubble(name,text,{bot:true,into,avatar:avatarURL(id)});
+ if($('#callwrap').dataset.ui==='meet')$('#caption').textContent=name+': '+text;
+ narrateAs(id,text);return b}
+const ttsIdle=(max=9000)=>new Promise(res=>{const t0=Date.now();
+ (function p(){const busy=(soundOn&&'speechSynthesis' in window&&(speechSynthesis.speaking||speechSynthesis.pending))||(xi&&xi.audio);
+  if(!busy||Date.now()-t0>max)return res();setTimeout(p,180)})()});
 function bubble(who,text,{bot=false,into=null,avatar=null}={}){
  const m=document.createElement('div');m.className='msg'+(bot?'':' me');
  const av=avatar?`<div class="av"><img src="${avatar}" alt=""></div>`:bot?`<div class="av">${FACE}</div>`:`<div class="av">${esc(initials(who))}</div>`;
@@ -850,17 +907,23 @@ async function play(){
  if(s.gap)st3.insertAdjacentHTML('beforeend',`<div class="gapnote">Gap: ${esc(s.gap)}</div>`);
  const pending=[];
  for(const a of s.agents){const r=ROLE[a.id];if(!r)continue;
-  Crew.join(a.id);Crew.active(a.id);
+  Spot.on(a.id,r.short);
   const au=avatarURL(a.id);
   const box=document.createElement('div');box.className='ag';box.innerHTML=`<div class="h"><b>${au?`<img class="agav" src="${au}" alt="">`:''}<a href="agents.html#${a.id}">${esc(r.short)}</a></b><code>${r.core.slice(0,4).map(x=>x.code).join(' · ')}</code></div>`;st3.appendChild(box);
   log('agent.start',a.id);
+  const t1=((a.actions[0]||[])[2]||'my piece of this');
+  agentSay(a.id,r.short,pick(P.agIn)(t1.charAt(0).toLowerCase()+t1.slice(1)),thread);
+  await ttsIdle(8000);if(!alive())return;
   for(const [tool,risk,summary,result] of a.actions){await wait(500);if(!alive())return;
    const d=POL[level][risk];const row=document.createElement('div');row.className='act';
    row.innerHTML=`<span class="r ${risk}">${risk}</span><code>${esc(tool)}</code><span class="dec">${DEC[d]}</span>`;box.appendChild(row);
-   if(d==='auto'){log('tool.executed',`${tool} (auto)`);row.insertAdjacentHTML('beforeend',`<span class="muted">→ ${esc(result)}</span>`);if(risk!=='read')addArtefact(simpleArtefact(tool,summary,result,a.id))}
+   if(d==='auto'){log('tool.executed',`${tool} (auto)`);row.insertAdjacentHTML('beforeend',`<span class="muted">→ ${esc(result)}</span>`);let art=null;if(risk!=='read'){art=simpleArtefact(tool,summary,result,a.id);addArtefact(art)}Spot.out(`${tool} → ${result}`,art)}
    else if(d==='approve'){const id=Math.random().toString(16).slice(2,10);pending.push({id,a,tool,risk,summary,result});log('approval.request',`${id} ${tool}`)}
    else log('tool.blocked',`${tool} (level ${level})`);
-  }Crew.done(a.id)}
+  }
+  agentSay(a.id,r.short,pick(P.agOutS),thread);
+  await ttsIdle(8000);if(!alive())return;
+  Spot.off(a.id)}
  await wait(600);if(!alive())return;
  stepEl(4,'Muster replies',pending.length?`${pending.length} action${pending.length>1?'s':''} waiting for approval in the conversation.`:'Nothing needs approval at this level.');
  mup(s.reply,thread);
@@ -872,7 +935,7 @@ async function play(){
   const btns=document.createElement('div');btns.className='btns';
   if(chan==='email')btns.insertAdjacentHTML('beforeend',`<em>Reply “approve ${p.id}” or “reject ${p.id}”.</em>`);
   for(const [lab,ok] of [[chan==='email'?'Simulate approve reply':'Approve',true],[chan==='email'?'Simulate reject reply':'Reject',false]]){const b=document.createElement('button');b.type='button';b.textContent=lab;if(!ok)b.className='no';
-   b.onclick=()=>{btns.remove();if(ok){const line=pick(P.ok);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)} ${esc(p.result)}.</em></div>`);narrate(line);Head.react('bounce');const art=simpleArtefact(p.tool,p.summary,p.result,p.a.id);addArtefact(art);c.appendChild(Artefacts.chip(art));log('approval.granted',`${p.id} → ${p.tool} executed`)}else{const line=pick(P.no);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)} Nothing was changed.</em></div>`);narrate(line);Head.react('shake');log('approval.rejected',p.id)}drawLog();if(!document.querySelector('.card .btns'))status('ready when you are')};btns.appendChild(b)}
+   b.onclick=()=>{btns.remove();if(ok){const line=pick(P.ok);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)} ${esc(p.result)}.</em></div>`);narrateAs(p.a.id,line);Head.react('bounce');const art=simpleArtefact(p.tool,p.summary,p.result,p.a.id);addArtefact(art);c.appendChild(Artefacts.chip(art));log('approval.granted',`${p.id} → ${p.tool} executed`)}else{const line=pick(P.no);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)} Nothing was changed.</em></div>`);narrateAs(p.a.id,line);Head.react('shake');log('approval.rejected',p.id)}drawLog();if(!document.querySelector('.card .btns'))status('ready when you are')};btns.appendChild(b)}
   c.appendChild(btns);holder.querySelector('.mb').appendChild(c);
  }
  const st5=stepEl(5,'Audit trail','Every routing decision, tool call and approval is logged.');
@@ -903,7 +966,7 @@ function approvalCard(into,agentName,a,id,agentId){
   const btns=document.createElement('div');btns.className='btns';
   if(chan==='email')btns.insertAdjacentHTML('beforeend',`<em>Reply “approve ${id}” or “reject ${id}”.</em>`);
   for(const [lab,ok] of [[chan==='email'?'Simulate approve reply':'Approve',true],[chan==='email'?'Simulate reject reply':'Reject',false]]){const b=document.createElement('button');b.type='button';b.textContent=lab;if(!ok)b.className='no';
-   b.onclick=()=>{btns.remove();const line=ok?pick(P.ok):pick(P.no);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)}</em></div>`);narrate(line);Head.react(ok?'bounce':'shake');resolve(ok)};btns.appendChild(b)}
+   b.onclick=()=>{btns.remove();const line=ok?pick(P.ok):pick(P.no);c.insertAdjacentHTML('beforeend',`<div><em>${esc(line)}</em></div>`);if(agentId)narrateAs(agentId,line);else narrate(line);Head.react(ok?'bounce':'shake');resolve(ok)};btns.appendChild(b)}
   c.appendChild(btns);
  });
 }
@@ -925,15 +988,20 @@ async function playStream(){
  bubble(st.trigger.user,st.trigger.msg);log('message',`${chan} · ${st.trigger.user}`);
  await wait(700);if(!alive())return;
  const thread=chan==='slack'?(()=>{const t=document.createElement('div');t.className='thread';$('#conv').appendChild(t);return t})():null;
- mup(`Righto, this is ${/^[aeiou]/i.test(st.name)?'an':'a'} ${st.name.toLowerCase()} job — ${st.steps.length} handoffs across ${new Set(st.steps.map(x=>catOf[x.capability])).size} SFIA categories. I'll keep you in the loop the whole way, and nothing changes without your say-so.`,thread);log('route',`value stream ${st.id}`);
- let context='';
+ mup(`Righto, this is ${/^[aeiou]/i.test(st.name)?'an':'a'} ${st.name.toLowerCase()} job — ${st.steps.length} handoffs across ${new Set(st.steps.map(x=>catOf[x.capability])).size} SFIA categories. I'll bring each specialist on screen to talk you through their bit, and nothing changes without your say-so.`,thread);log('route',`value stream ${st.id}`);
+ let context='',prevName=null;
  for(let i=0;i<st.steps.length;i++){const x=st.steps[i],r=ROLE[x.agent],name=r?r.short:x.agent;
   await wait(650);if(!alive())return;
-  Crew.join(x.agent);Crew.active(x.agent);
   set(i,'working','working');status(pick(P.think));
   const task=x.task.charAt(0).toLowerCase()+x.task.slice(1);
-  mup(`${pick(P.step)(name,task)} (${i+1} of ${st.steps.length})`,thread);
+  const ack=prevName?pick(P.ack)(prevName)+' ':'';
+  mup(`${ack}${pick(P.hand)(name,task)} (${i+1} of ${st.steps.length})`,thread);
+  await ttsIdle(9000);if(!alive())return;
+  Spot.on(x.agent,name);set(i,'working','on screen');status(name+' has the floor');
+  agentSay(x.agent,name,pick(P.agIn)(task),thread);
+  await ttsIdle(9000);if(!alive())return;
   log('agent.start',`${x.agent}${context?' ← '+context:''}`);
+  let made=0;
   for(const a of x.actions){await wait(500);if(!alive())return;
    const d=decideFor(a.risk,a.tool);
    if(d==='sor-never'){counts.blocked++;log('tool.blocked',`${a.tool} (system-of-record limit)`);mup(`Hold up — ${name} can't touch ${a.tool}. The ${(dpack.systemsOfRecord.find(x=>x.id===a.tool.split('.')[0])||{}).name} is ${dpack.systemsOfRecord.find(x=>x.id===a.tool.split('.')[0]).maxRisk}-only for agents, and that's a line we don't cross. One for a person.`,thread);continue}
@@ -941,14 +1009,18 @@ async function playStream(){
    else if(d==='never'){counts.blocked++;log('tool.blocked',`${a.tool} (level ${level})`);mup(`${name} would normally run ${a.tool} here, but at SFIA level ${level} that's above their pay grade — I've flagged it for a person instead.`,thread);Head.react('shake');continue}
    else{const id=Math.random().toString(16).slice(2,10);log('approval.request',`${id} ${a.tool}`);set(i,'paused','needs you');drawSum();
     const ok=await approvalCard(thread,name,a,id,x.agent);if(!alive())return;
-    if(!ok){log('approval.rejected',id);set(i,'stopped','stopped');for(let j=i+1;j<rows.length;j++)set(j,'','not started');
+    if(!ok){log('approval.rejected',id);Spot.off(x.agent);set(i,'stopped','stopped');for(let j=i+1;j<rows.length;j++)set(j,'','not started');
      mup(`All good — I've pulled the crew up at step ${i+1}. Everything before it stands, nothing after it ran. Sing out when you want to pick it back up, or change tack entirely.`,thread);status('ready when you are');drawSum(true);return}
     counts.approved++;log('approval.granted',`${id} → ${a.tool} executed`);set(i,'working','working');status(pick(P.think))}
    const res=document.createElement('div');res.className='handoff result';res.append(document.createTextNode(`${a.tool} → ${a.result}`));
-   if(a.artefact){res.appendChild(Artefacts.chip(a.artefact));addArtefact(a.artefact);log('artefact',`${a.artefact.system} ${a.artefact.id}`)}
+   if(a.artefact){res.appendChild(Artefacts.chip(a.artefact));addArtefact(a.artefact);log('artefact',`${a.artefact.system} ${a.artefact.id}`);made++}
    (thread||$('#conv')).appendChild(res);
+   Spot.out(`${a.tool} → ${a.result}`,a.artefact);
   }
-  context=x.handoff;Crew.done(x.agent);set(i,'done','done');log('handoff',x.handoff);drawSum();
+  context=x.handoff;
+  agentSay(x.agent,name,pick(P.agOut)(x.handoff,made),thread);
+  await ttsIdle(10000);if(!alive())return;
+  Spot.off(x.agent);set(i,'done','done');log('handoff',x.handoff);drawSum();prevName=name;
   if(i<st.steps.length-1){const h=document.createElement('div');h.className='handoff';h.textContent=`Handing over: ${x.handoff}`;(thread||$('#conv')).appendChild(h)}
  }
  await wait(600);if(!alive())return;

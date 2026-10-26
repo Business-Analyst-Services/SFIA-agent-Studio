@@ -143,10 +143,10 @@ window.Menagerie=(function(){
   }catch(e){return null}
  }
  /* the one live guest cam */
- const guest={rend:null,sc:null,cam:null,parts:null,home:null,raf:0,t:0,
+ const guest={rend:null,sc:null,cam:null,parts:null,home:null,raf:0,t:0,talking:false,
   show(container,id,family){
    try{
-    if(!this.rend){this.rend=new T.WebGLRenderer({antialias:true,alpha:true});this.rend.setPixelRatio(Math.min(devicePixelRatio||1,2));this.rend.setSize(160,160,false);this.rend.domElement.className='guestcam'}
+    if(!this.rend){this.rend=new T.WebGLRenderer({antialias:true,alpha:true});this.rend.setPixelRatio(Math.min(devicePixelRatio||1,2));this.rend.setSize(260,260,false);this.rend.domElement.className='guestcam'}
     if(this.home)this.park();
     this.parts=build(id,family);this.sc=scene(this.parts);
     this.cam=new T.PerspectiveCamera(32,1,.1,40);
@@ -155,14 +155,14 @@ window.Menagerie=(function(){
     if(!this.raf)this.loop();
    }catch(e){}
   },
-  park(){if(this.home){this.rend.domElement.remove();this.home=null}},
+  park(){this.talking=false;if(this.home){this.rend.domElement.remove();this.home=null}},
   loop(){const self=this;this.raf=requestAnimationFrame(()=>self.loop());
    if(!this.home||!this.sc)return;
-   const t=(this.t+=.016),p=this.parts;
-   p.g.position.y=Math.sin(t*1.6)*.03;
-   if(p.head){p.head.rotation.y=.2+Math.sin(t*.8)*.12;p.head.rotation.x=Math.sin(t*1.3)*.05}
-   if(p.tail)p.tail.rotation.y=Math.sin(t*9)*.3;
-   p.wings.forEach((w,i)=>w.rotation.z=(i?-1:1)*(.15+Math.sin(t*10)*.12));
+   const t=(this.t+=.016),p=this.parts,tk=this.talking;
+   p.g.position.y=Math.sin(t*(tk?5.2:1.6))*(tk?.05:.03);
+   if(p.head){p.head.rotation.y=.2+Math.sin(t*(tk?2.2:.8))*.12;p.head.rotation.x=tk?.04+Math.sin(t*11)*.085:Math.sin(t*1.3)*.05}
+   if(p.tail)p.tail.rotation.y=Math.sin(t*(tk?13:9))*(tk?.42:.3);
+   p.wings.forEach((w,i)=>w.rotation.z=(i?-1:1)*(.15+Math.sin(t*(tk?14:10))*(tk?.2:.12)));
    if(p.eyes){const bl=(t%3.4)>3.25?.1:1;p.eyes.forEach(e=>e.scale.y=bl)}
    this.rend.render(this.sc,this.cam)}
  };
