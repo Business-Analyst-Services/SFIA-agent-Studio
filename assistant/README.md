@@ -52,6 +52,10 @@ Each channel starts automatically once its variables are set in `.env`.
 
 Browser access from other sites (such as the GitHub Pages demo's live mode) needs their address in `MUSTER_ALLOWED_ORIGINS`.
 
+## Industry domain packs
+
+Set `MUSTER_DOMAIN` (for example `healthcare`, `insurance`, `law-enforcement`) to load a pack from `../data/domains.json`. Muster and each agent are told the industry's systems of record and their rules; agents get MCP access only to the systems listed for their role; and each system's cap is enforced before the agent's SFIA level. A read-only system (such as a healthcare EMR or a police records system) can never be written to by any agent, and any write to a system of record always needs a person's approval. Add one MCP server per system in `config/mcp-servers.json`, keyed by the system's id.
+
 ## Connect tools (MCP)
 
 `config/mcp-servers.json` holds connection details for MCP servers in the catalogue (`../data/mcp-catalog.json`). Set `"enabled": true` and add the token to `.env`. Agents only see servers recommended for their role (`../data/mcp-map.json`) **and** enabled here. Both remote (Streamable HTTP) and local (stdio) servers work. Check each URL against the vendor's docs before enabling.

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Muster Domain Packs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: BA core practices strip, pinned domain picker, then the chosen domain: profile, systems of record with agent permissions, interaction sequence, scenario and config */
+:root{--bg:#f4f6f6;--panel:#fff;--ink:#14211f;--muted:#5b6b68;--line:#d9e1df;--accent:#0f6e64;--accent-soft:#dcefeb;--warm:#c2410c;--bad:#b3261e;--code:#eef2f1;
+--f-display:"Familjen Grotesk",system-ui,sans-serif;--f-body:"Public Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--panel:#152120;--ink:#e3ecea;--muted:#93a6a2;--line:#273634;--accent:#5cc9b8;--accent-soft:#183a35;--warm:#ffb15c;--bad:#ff8a80;--code:#0b1110;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+.wrap{max-width:1280px;margin:0 auto;padding-block:24px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:700 30px/1.1 var(--f-display);margin:0 0 6px;text-wrap:balance}
+h2{font:700 21px/1.2 var(--f-display);margin:34px 0 10px;text-wrap:balance}
+h3{font:700 16px var(--f-display);margin:0}
+.lede{color:var(--muted);max-width:78ch;margin:0}
+a{color:var(--accent)}
+.prac{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px}
+.prac div{padding:6px 8px;border-radius:7px}
+.prac b{display:block;font-size:13px;line-height:1.3}
+.prac code{font:500 11px var(--f-mono);color:var(--accent)}
+.picker{position:sticky;top:calc(env(safe-area-inset-top,0px) + 46px);z-index:15;background:var(--bg);display:flex;gap:6px;overflow-x:auto;padding:10px 0;margin-top:18px;border-bottom:1px solid var(--line);scrollbar-width:thin}
+.picker button{flex:none;font:600 13px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:5px 12px 5px 8px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.picker button i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.picker button[aria-pressed=true]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
+.dh{margin-top:20px;background:var(--panel);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:12px;padding:16px 18px}
+.dh h2{margin:0 0 10px;font-size:26px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 22px}
+.facts dt{font:600 11px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-size:14px}
+.sors{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.sor{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.sor header{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.cap{margin-left:auto;font:500 10.5px var(--f-mono);border:1px solid currentColor;border-radius:3px;padding:0 5px;white-space:nowrap}
+.cap.read{color:var(--accent)}.cap.write{color:var(--warm)}.cap.destructive{color:var(--bad)}
+.sor p{margin:0;font-size:13.5px}
+.k{font:600 11px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.route{font-size:12.5px;border-radius:6px;padding:4px 8px;background:var(--accent-soft)}
+.perm{list-style:none;margin:0;padding:0;font-size:13px;display:flex;flex-direction:column;gap:4px}
+.perm li{display:grid;grid-template-columns:96px 1fr;gap:6px}
+.perm b{font:600 11px var(--f-mono)}
+.perm .r b{color:var(--accent)}.perm .w b{color:var(--warm)}.perm .n b{color:var(--bad)}
+.who{display:flex;flex-wrap:wrap;gap:4px}
+.who a{font-size:12px;text-decoration:none;border:1px solid var(--accent);border-radius:4px;padding:1px 7px}
+.seq{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;counter-reset:q}
+.seq li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;counter-increment:q}
+.seq li::before{content:counter(q);display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:700 12px var(--f-mono);margin-bottom:4px}
+.seq b{display:block;font-family:var(--f-display);font-size:14.5px}
+.seq em{display:block;color:var(--muted);font-style:normal;font-size:12.5px;margin-top:4px}
+.scn{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.scn ol{margin:8px 0 0;padding-left:20px;font-size:14px}.scn li{margin:4px 0}
+.scn code{font:500 12px var(--f-mono)}
+.btn{display:inline-block;font:600 13.5px var(--f-body);text-decoration:none;border-radius:8px;padding:8px 14px;background:var(--accent);color:var(--bg);margin-top:10px}
+pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:12.5px/1.55 var(--f-mono);overflow-x:auto;margin:0}
+.copy{font:600 12px var(--f-body);border:1px solid var(--accent);background:none;color:var(--accent);border-radius:6px;padding:3px 10px;cursor:pointer;margin-top:6px}
+.note{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:14px;margin-top:12px;max-width:none}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>One agent team, any industry</h1>
+<p class="lede">The 75 SFIA role agents and the business analysis core practices are the same in every sector. A <b>domain pack</b> adds what changes: the industry's systems of record, the standards they speak, the regulation that applies, and hard limits on what agents may do in each system. Set <code>MUSTER_DOMAIN</code> and Muster works in that industry.</p>
+<div class="prac" id="prac" aria-label="Business analysis core practices and their SFIA skills"></div>
+<nav class="picker" id="picker" aria-label="Domains"></nav>
+<div id="detail"><p class="lede" style="margin-top:20px">Loading domain packs…</p></div>
+</div>
+<script src="artefacts.js"></script>
+<script>
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const rid=r=>r.replace(/ practitioners$/,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const CAP={read:"Read only",write:"Up to write, with approval",destructive:"Up to destructive, with approval"};
+let DOM=[],ROLE={},cur=null;
+function pick(id){cur=DOM.find(d=>d.id===id)||DOM[0];try{history.replaceState(null,'','#'+cur.id)}catch(e){}draw()}
+function draw(){
+ document.querySelectorAll('#picker button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.id===cur.id));
+ const d=cur;document.documentElement.style.setProperty('--c',d.colour);
+ const name=id=>ROLE[id]?ROLE[id].role.replace(/ practitioners$/,''):id;
+ const reads=d.systemsOfRecord.filter(s=>s.maxRisk==='read').length;
+ document.getElementById('detail').innerHTML=`
+ <section class="dh" style="--c:${d.colour}"><h2>${esc(d.name)}</h2><dl class="facts">
+  <div><dt>Typical BA roles</dt><dd>${esc(d.roles.join(', '))}</dd></div>
+  <div><dt>Challenges</dt><dd>${esc(d.challenges)}</dd></div>
+  <div><dt>Regulation</dt><dd>${esc(d.regulations)}</dd></div>
+  <div><dt>Value</dt><dd>${esc(d.value)}</dd></div></dl></section>
+
+ <h2>Systems of record</h2>
+ <p class="lede">The authoritative systems agents work with in ${esc(d.name.toLowerCase())}. ${reads} of ${d.systemsOfRecord.length} are read-only for every agent, whatever its SFIA level. Anything above read always needs a person's approval.</p>
+ <div class="sors" style="margin-top:12px">${d.systemsOfRecord.map(s=>`<article class="sor"><header><h3>${esc(s.name)}</h3><span class="cap ${s.maxRisk}">${CAP[s.maxRisk]}</span></header>
+  <p>${esc(s.holds)}</p>
+  <p><span class="k">Examples</span><br>${esc(s.examples.join(' · '))}</p>
+  <p><span class="k">Speaks</span><br>${esc(s.standard)}</p>
+  <div class="route"><span class="k">MCP route</span><br>${esc(s.mcp)}</div>
+  <ul class="perm"><li class="r"><b>READ</b><span>${esc(s.read)}</span></li><li class="w"><b>WITH OK</b><span>${esc(s.write)}</span></li><li class="n"><b>NEVER</b><span>${esc(s.never)}</span></li></ul>
+  <p><span class="k">Data</span><br>${esc(s.dataClass)}</p>
+  <div><span class="k">Agents that use it</span><div class="who">${s.agents.length?s.agents.map(a=>`<a href="index.html#${a}">${esc(name(a))}</a>`).join(''):'<span style="font-size:12.5px;color:var(--muted)">None: people only</span>'}</div></div>
+ </article>`).join('')}</div>
+
+ <h2>How Muster works with these systems</h2>
+ <ol class="seq">
+  <li><b>Ask</b>Someone asks in Slack, Teams, email, the intranet or a ticket.<em>Example: “${esc(d.scenario.trigger.msg)}”</em></li>
+  <li><b>Route</b>Muster picks agents by SFIA skill and capability, and tells them which systems they may use.<em>${esc(d.scenario.steps.map(s=>name(s.agent)).filter((v,i,a)=>a.indexOf(v)===i).join(', '))}</em></li>
+  <li><b>Read</b>Agents read the system of record through its MCP server, with a scoped, least-privilege account.<em>${esc(d.systemsOfRecord[0].name)}: ${esc(d.systemsOfRecord[0].read.toLowerCase())}</em></li>
+  <li><b>Check limits</b>The system's own cap is checked first, then the agent's SFIA level. Above the cap means never.<em>${esc(d.systemsOfRecord[0].name)}: never ${esc(d.systemsOfRecord[0].never.toLowerCase())}</em></li>
+  <li><b>Approve</b>Allowed changes wait for a person, in the channel where the request started.<em>Approve or reject with a button, card or reply</em></li>
+  <li><b>Write and record</b>Approved changes go through the system's own API, so its rules, workflow and audit apply. Muster logs it too.<em>The system of record stays the source of truth</em></li>
+ </ol>
+
+ <h2>Scenario: ${esc(d.scenario.name)}</h2>
+ <div class="scn"><p style="margin:0">${esc(d.scenario.why)} <b>Starts with</b> ${esc(d.scenario.trigger.user)}: “${esc(d.scenario.trigger.msg)}”</p>
+ <ol>${d.scenario.steps.map(s=>`<li><b>${esc(name(s.agent))}</b>: ${esc(s.task)}. ${s.actions.map(a=>`<code>${esc(a.tool)}</code> (${a.risk})`).join(', ')}</li>`).join('')}</ol>
+ <p style="margin:10px 0 0;font-size:14px"><b>Outcome:</b> ${esc(d.scenario.outcome)}</p>
+ <a class="btn" href="muster.html?domain=${d.id}">Run this end to end in the Muster demo</a></div>
+
+ <h2>Switch Muster to ${esc(d.name.toLowerCase())}</h2>
+ <p class="lede">Set the domain, then add one MCP server per system of record in <code>assistant/config/mcp-servers.json</code>, keyed by the system's id. Agents only see the systems listed for their role.</p>
+ <pre id="cfg" style="margin-top:10px">${esc(`# assistant/.env
+MUSTER_DOMAIN=${d.id}
+
+// assistant/config/mcp-servers.json → "servers"
+${d.systemsOfRecord.map(s=>`"${s.id}": { "enabled": true, "transport": "http",
+  "url": "https://YOUR-${s.id.toUpperCase()}-MCP/mcp",   // ${s.mcp}
+  "headers": { "Authorization": "Bearer \${${s.id.toUpperCase()}_TOKEN}" } }`).join(',\n')}`)}</pre>
+ <button class="copy" type="button" id="cp">Copy</button>
+ <p class="note">Use a read-only service account for every system of record first. Systems marked read-only are enforced by Muster as well, so even a misconfigured token can't be used to write.</p>`;
+ document.getElementById('cp').onclick=async e=>{const b=e.target;try{await navigator.clipboard.writeText(document.getElementById('cfg').textContent);b.textContent='Copied'}catch(x){const r=document.createRange();r.selectNodeContents(document.getElementById('cfg'));getSelection().removeAllRanges();getSelection().addRange(r);b.textContent='Press Ctrl/⌘ C'}setTimeout(()=>b.textContent='Copy',1600)};
+}
+Promise.all(['data/domains.json','data/roles.json'].map(u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()}))).then(([dm,roles])=>{
+ DOM=dm.domains;roles.forEach(r=>ROLE[rid(r.role)]=r);
+ document.getElementById('prac').innerHTML=dm.practices.map(p=>`<div><b>${esc(p.name)}</b><code>${p.skills.join(' ')}</code></div>`).join('');
+ document.getElementById('picker').innerHTML=DOM.map(d=>`<button type="button" data-id="${d.id}" style="--c:${d.colour}"><i></i>${esc(d.name)}</button>`).join('');
+ document.querySelectorAll('#picker button').forEach(b=>b.onclick=()=>pick(b.dataset.id));
+ pick(location.hash.slice(1));
+}).catch(e=>{document.getElementById('detail').innerHTML=`<p class="lede">Couldn't load the domain packs (${esc(e.message)}). Serve the site over HTTP rather than opening the file directly.</p>`});
+</script>
+<script src="nav.js" defer></script>
+</body>
+</html>

@@ -44,6 +44,18 @@ assert.equal(decide("service-desk", "write"), "approve");           // level 3
 assert.equal(decide("site-reliability-engineer-sre", "write"), "auto"); // level 5
 assert.equal(decide("site-reliability-engineer-sre", "destructive"), "approve");
 console.log("✓ autonomy rules");
+{ // Domain caps: a healthcare EMR is read-only for every agent, whatever its level.
+  process.env.MUSTER_DOMAIN = "healthcare";
+  const dm = await import("./domain.js?healthcare" as string) as typeof import("./domain.js");
+  assert.equal(dm.domain?.name, "Healthcare");
+  assert.equal(dm.sorDecision("emr", "write"), "never");
+  assert.equal(dm.sorDecision("emr", "read"), null);
+  assert.equal(dm.sorDecision("safety", "write"), "approve");
+  assert.ok(dm.sorIdsFor("data-analytics").includes("emr"));
+  assert.match(dm.domainBrief("data-analytics"), /Never: Write to any clinical record/);
+  delete process.env.MUSTER_DOMAIN;
+  console.log("✓ domain pack: healthcare EMR read-only, safety writes need approval");
+}
 
 const { catalog } = await import("./muster.js");
 assert.equal(catalog.agents.size, 75);

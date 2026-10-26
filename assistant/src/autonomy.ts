@@ -2,6 +2,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ASSISTANT_ROOT } from "./catalog.js";
+import { sorDecision } from "./domain.js";
 
 export type Risk = "read" | "write" | "destructive";
 export type Decision = "auto" | "approve" | "never";
@@ -19,10 +20,15 @@ export function levelFor(agentId: string): number {
   return cfg.agentLevels[agentId] ?? Number(process.env.MUSTER_DEFAULT_LEVEL ?? 4);
 }
 
-export function decide(agentId: string, risk: Risk): Decision {
+export function decide(agentId: string, risk: Risk, serverId?: string): Decision {
+  // A system of record's own limit wins over the agent's SFIA level.
+  const sor = serverId ? sorDecision(serverId, risk) : null;
+  if (sor === "never") return "never";
   const policy = cfg.levels[String(levelFor(agentId))] ?? cfg.levels["4"];
   const d = policy[risk];
   // Destructive actions always need a person, whatever the config says.
+  if (d === "never") return "never";
+  if (sor === "approve") return "approve";
   return risk === "destructive" && d === "auto" ? "approve" : d;
 }
 

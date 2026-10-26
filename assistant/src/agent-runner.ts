@@ -5,6 +5,7 @@ import { toolsFor, callTool, type McpTool } from "./mcp.js";
 import { decide, levelFor, MAX_TOOL_CALLS } from "./autonomy.js";
 import { requestApproval, type Notifier } from "./approvals.js";
 import { audit } from "./audit.js";
+import { domainBrief, sorIdsFor } from "./domain.js";
 
 const anthropic = new Anthropic();
 const MODEL = process.env.MUSTER_AGENT_MODEL ?? "claude-sonnet-5-5";
@@ -13,11 +14,11 @@ export interface AgentResult { agentId: string; output: string; toolCalls: numbe
 
 export async function runAgent(agent: AgentDef, task: string, context: string, notifier: Notifier, requestedBy: string): Promise<AgentResult> {
   const level = levelFor(agent.id);
-  const { tools, unavailable } = await toolsFor(agent.mcpIds);
+  const { tools, unavailable } = await toolsFor([...new Set([...agent.mcpIds, ...sorIdsFor(agent.id)])]);
   const byName = new Map<string, McpTool>(tools.map(t => [t.exposedName, t]));
   const pendingIds: string[] = [];
 
-  const system = `${agent.prompt}
+  const system = `${agent.prompt}${domainBrief(agent.id)}
 
 ## Execution context
 - You were called by Muster, the IT assistant, on behalf of ${requestedBy}. Your output goes back to Muster, who will relay it.
@@ -52,7 +53,7 @@ export async function runAgent(agent: AgentDef, task: string, context: string, n
       if (!tool) content = `ERROR: unknown tool ${u.name}`;
       else if (++calls > MAX_TOOL_CALLS) content = "ERROR: tool-call budget for this task is used up. Report what you have.";
       else {
-        const d = decide(agent.id, tool.risk);
+        const d = decide(agent.id, tool.risk, tool.serverId);
         if (d === "never") content = `NOT ALLOWED: ${tool.risk} actions are outside SFIA level ${level}. Recommend it to a person instead.`;
         else if (d === "approve") {
           const p = requestApproval({ agentId: agent.id, tool, input, reason: task.slice(0, 200), notifier, requestedBy });

@@ -5,11 +5,12 @@ import { PERSONA } from "./persona.js";
 import { runAgent } from "./agent-runner.js";
 import { resolveApproval, listPending, type Notifier } from "./approvals.js";
 import { audit } from "./audit.js";
+import { domainBrief } from "./domain.js";
 
 const anthropic = new Anthropic();
 const MODEL = process.env.MUSTER_MODEL ?? "claude-opus-5-5";
 export const catalog = loadCatalog();
-const SYSTEM = `${PERSONA}\n\n## Agent roster (id | family | key SFIA skill codes | capability led, by SFIA category)\n${roster(catalog.agents)}`;
+const SYSTEM = `${PERSONA}${domainBrief()}\n\n## Agent roster (id | family | key SFIA skill codes | capability led, by SFIA category)\n${roster(catalog.agents)}`;
 
 const DELEGATE: Anthropic.Tool = {
   name: "delegate",

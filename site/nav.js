@@ -1,6 +1,6 @@
 /* Shared top menu for the SFIA Agent Studio site. Add <script src="nav.js" defer></script> to a page. */
 (function () {
-  const pages = [["index.html", "Role agents"], ["capability-map.html", "Capability map"], ["value-streams.html", "Value streams"], ["muster.html", "Muster demo"], ["integrate.html", "Integrate"]];
+  const pages = [["index.html", "Role agents"], ["capability-map.html", "Capability map"], ["value-streams.html", "Value streams"], ["domains.html", "Domains"], ["muster.html", "Muster demo"], ["integrate.html", "Integrate"]];
   const here = location.pathname.split("/").pop() || "index.html";
   const css = `.site-nav{position:sticky;top:0;z-index:20;background:var(--panel,#fff);border-bottom:1px solid var(--line,#d9e1df);
     padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));padding-top:env(safe-area-inset-top,0px)}
