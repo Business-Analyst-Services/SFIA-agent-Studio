@@ -35,7 +35,7 @@ h1{font:700 22px/1.1 var(--f-display);margin:0}
 .frame{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0;display:flex;flex-direction:column;height:calc(100vh - 170px);min-height:520px}
 @media(max-width:920px){.frame{height:min(78vh,680px);min-height:460px}}
 .mhead{display:flex;align-items:center;gap:12px;padding:10px 14px 8px;position:relative}
-.stage{flex:none;width:86px;height:86px;perspective:600px}
+.stage{flex:none;width:100px;height:100px;perspective:600px}
 .head3d{width:100%;height:100%;transform-style:preserve-3d;transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .25s ease;animation:sway 6s ease-in-out infinite}
 @keyframes sway{0%,100%{translate:0 0}50%{translate:0 -3px}}
 .head3d svg{width:100%;height:100%;filter:drop-shadow(0 5px 7px rgba(0,0,0,.22))}
@@ -133,6 +133,21 @@ h1{font:700 22px/1.1 var(--f-display);margin:0}
 @media (prefers-reduced-motion:reduce){.rl.working .d{animation:none}}
 .sum{display:flex;flex-wrap:wrap;gap:8px 20px;margin:10px 0 0;font-size:13px}.sum b{font:700 18px var(--f-display);display:block}
 .afgrid{display:grid;grid-template-columns:1fr;gap:8px}
+.stage canvas{width:100%;height:100%;display:block}
+.row2{display:flex;gap:6px}
+#vsel{flex:1;min-width:0;font:600 12px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:5px}
+#vtest{font:600 12px var(--f-body);border:1px solid var(--accent);background:none;color:var(--accent);border-radius:6px;padding:5px 10px;cursor:pointer}
+.plan{border:1px solid var(--line);border-radius:10px;margin-top:8px;overflow:hidden;background:var(--panel)}
+.ph{padding:10px 12px;border-top:1px solid var(--line)}
+.ph:first-child{border-top:0}
+.ph h4{margin:0;font:700 14px var(--f-display);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ph h4 small{font:500 11px var(--f-mono);color:var(--muted)}
+.ph .tm{font-size:12.5px;color:var(--muted);margin:3px 0 5px}
+.ph .who{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
+.ph .who a{font-size:12px;text-decoration:none;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:1px 7px}
+.ph .arts{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px}
+.ph .gate{font-size:12px;color:var(--muted);margin:0}
+.ph .gate b{color:var(--ink)}
 .muted{color:var(--muted);font-size:13px}
 .empty{color:var(--muted);font-size:13.5px}
 .live{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px 16px 8px}
@@ -149,7 +164,7 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{o
 <div class="wrap">
 <header class="top">
  <div><h1>Muster</h1></div>
- <p class="sub">The IT helper with 75 SFIA experts on call. A scripted demo: speak or type a request, or pick a scenario.</p>
+ <p class="sub">The IT helper with 75 SFIA experts on call. A scripted demo: speak or type a request, pick a scenario, or ask for a delivery plan.</p>
  <div class="tools"><span class="cur" id="cur"></span>
   <span class="mwrap"><button class="btn ghost" id="scenbtn" aria-haspopup="true" aria-expanded="false">Scenario ▾</button><div class="smenu" id="smenu" role="menu"></div></span>
   <button class="btn" id="play" type="button">Replay</button></div>
@@ -177,6 +192,8 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{o
     <h5>Channel the request arrives in</h5><div class="seg" id="chan"></div>
     <h5>Agent SFIA level</h5><div class="seg lv" id="lvl"></div><p id="lvlcap"></p>
     <h5>Approvals in end-to-end runs</h5><div class="seg" id="appr"></div>
+    <h5>Muster's voice</h5><div class="row2"><select id="vsel" aria-label="Muster's voice"></select><button type="button" id="vtest">Test</button></div>
+    <p>Voices come from your browser. Muster picks the deepest Australian or British male voice it can find; choose another if your machine has a better one.</p>
     <p>Changing a setting replays the current scenario so you can see the difference.</p>
    </div>
   </div>
@@ -207,6 +224,7 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{o
  <div class="out" id="lout"></div>
 </details>
 </div>
+<script src="vendor/three.min.js"></script>
 <script src="artefacts.js"></script>
 <script>
 const FACE=`<svg viewBox="0 0 100 100" width="32" height="32" aria-hidden="true"><defs><radialGradient id="k2" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#d9733d"/><stop offset="1" stop-color="#a84a22"/></radialGradient></defs><path d="M24 46 L18 6 L44 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2"/><path d="M76 46 L82 6 L56 30 Z" fill="#9c4320" stroke="#7a3216" stroke-width="2"/><path d="M26 38 L22 15 L38 31 Z" fill="#e9a37a"/><path d="M74 38 L78 15 L62 31 Z" fill="#e9a37a"/><path d="M50 24 C72 24 82 40 81 56 C80 74 66 86 50 86 C34 86 20 74 19 56 C18 40 28 24 50 24Z" fill="url(#k2)" stroke="#7a3216" stroke-width="2"/><path d="M50 52 C62 52 70 60 69 70 C68 80 60 85 50 85 C40 85 32 80 31 70 C30 60 38 52 50 52Z" fill="#f0b98c"/><ellipse cx="38" cy="47" rx="5" ry="6.5" fill="#1d2b29"/><ellipse cx="62" cy="47" rx="5" ry="6.5" fill="#1d2b29"/><circle cx="39.5" cy="44.5" r="1.8" fill="#fff"/><circle cx="63.5" cy="44.5" r="1.8" fill="#fff"/><path d="M44 60 C44 56 56 56 56 60 C56 64 52 66 50 66 C48 66 44 64 44 60Z" fill="#1d2b29"/><path d="M50 66 L50 70 M42 71 Q50 77 58 71" fill="none" stroke="#1d2b29" stroke-width="2.5" stroke-linecap="round"/><path d="M28 84 Q50 94 72 84 L74 90 Q50 100 26 90 Z" fill="#0f6e64"/><circle cx="50" cy="94" r="4" fill="#f2c14e" stroke="#c99a2a"/></svg>`;
@@ -247,6 +265,7 @@ const P={
  ok:["Beauty — running it now.","Good call, on it.","Done — consider it handled.","Righto, executing."],
  no:["No worries — leaving that one well alone.","Fair enough, I won't touch it.","Righto, skipping that one."],
  wrap:["That's a wrap. ","All sorted. ","And we're done — nice work, team. "],
+ plan:["Can do — here's how I'd crew it.","Good thinking: map first, run second.","Righto, here's the game plan."],
  more:["Anything else I can muster for you?","Want to see another? Pick a scenario up top, or just tell me.","Happy to run another — type below or hit the scenario menu."]};
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 let D=null,R=[],ROLE={},MCPC={},MCPM={};
@@ -269,19 +288,105 @@ const Head={el:$('#head'),mouth:null,talkUntil:0,tts:false,
    else if(this.mouth.getAttribute('d')!==this.M.closed){this.mouth.setAttribute('d',this.M.closed);if(this.el.dataset.state==='talk')this.el.dataset.state='idle'}},reduce?240:110);
   if(!reduce)document.addEventListener('pointermove',e=>{const r=this.el.getBoundingClientRect();if(!r.width)return;
    const dx=Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/300)),dy=Math.max(-1,Math.min(1,(e.clientY-(r.top+r.height/2))/300));
-   this.el.style.setProperty('--ry',(dx*13)+'deg');this.el.style.setProperty('--rx',(-dy*8)+'deg')});},
+   this.tRy=dx*.33;this.tRx=dy*.16;this.el.style.setProperty('--ry',(dx*13)+'deg');this.el.style.setProperty('--rx',(-dy*8)+'deg')});},
  set(s){this.el.dataset.state=s},
  mouthFor(text){this.talkUntil=Math.max(this.talkUntil,Date.now()+Math.min(900+text.length*52,9000))},
  hush(){this.talkUntil=0;this.tts=false}};
 Head.init();
 
+/* ---------- The 3D head: a low-poly kelpie modelled in three.js; the drawn head stays as fallback ---------- */
+(function init3D(){
+ try{
+  if(!window.THREE)return;
+  const stage=document.querySelector('.stage');
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+  const px=Math.min(devicePixelRatio||1,2);renderer.setPixelRatio(px);let RW=stage.clientWidth||100;renderer.setSize(RW,RW);
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(30,1,.1,50);cam.position.set(0,.55,6.6);cam.lookAt(0,.05,0);
+  scene.add(new THREE.HemisphereLight(0xfff3e4,0x2a1c12,.85));
+  const key=new THREE.DirectionalLight(0xffffff,1.2);key.position.set(2.2,3,4);scene.add(key);
+  const fill=new THREE.DirectionalLight(0xffe9c9,.35);fill.position.set(-2.5,.5,2);scene.add(fill);
+  const rim=new THREE.DirectionalLight(0x5cc9b8,.6);rim.position.set(-2,2,-3);scene.add(rim);
+  const M=(c,o)=>new THREE.MeshStandardMaterial(Object.assign({color:c,flatShading:true,roughness:.85},o));
+  const russet=M(0xa8502a),darkR=M(0x7a3216),tan=M(0xdf9f72),black=new THREE.MeshStandardMaterial({color:0x17100c,roughness:.3}),teal=M(0x0f6e64,{roughness:.55}),brass=new THREE.MeshStandardMaterial({color:0xf2c14e,roughness:.3,metalness:.55});
+  const rig=new THREE.Group();scene.add(rig);rig.position.y=.25;
+  const add=(geo,mat,x,y,z,g)=>{const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);(g||rig).add(m);return m};
+  // skull and cheeks
+  add(new THREE.SphereGeometry(1.02,7,5),russet,0,0,0).scale.set(1,.9,.98);
+  add(new THREE.SphereGeometry(.47,6,4),tan,.45,-.28,.46).scale.set(1,.72,.8);
+  add(new THREE.SphereGeometry(.47,6,4),tan,-.45,-.28,.46).scale.set(1,.72,.8);
+  // muzzle bridge (top) and nose
+  const bridge=add(new THREE.CylinderGeometry(.21,.44,1.25,6),russet,0,.1,1.1);bridge.rotation.x=Math.PI/2;
+  add(new THREE.SphereGeometry(.42,6,4),tan,0,-.14,1.0).scale.set(1.02,.72,1.45); // snout mass
+  add(new THREE.DodecahedronGeometry(.115),black,0,.12,1.8);
+  const mouth=add(new THREE.BoxGeometry(.3,.22,.16),black,0,-.3,1.38);mouth.scale.y=.12;
+  // jaw (pivots to talk)
+  const jawG=new THREE.Group();jawG.position.set(0,-.3,.5);rig.add(jawG);
+  add(new THREE.CylinderGeometry(.24,.28,.14,6),tan,0,-.12,.62,jawG).rotation.y=.5;
+  // eyes
+  const eyeL=add(new THREE.SphereGeometry(.16,10,8),black,.43,.34,.78);
+  const eyeR=add(new THREE.SphereGeometry(.16,10,8),black,-.43,.34,.78);
+  // brows
+  add(new THREE.BoxGeometry(.32,.09,.16),darkR,.44,.57,.74).rotation.z=-.16;
+  add(new THREE.BoxGeometry(.32,.09,.16),darkR,-.44,.57,.74).rotation.z=.16;
+  // ears: outer + inner
+  const earL=new THREE.Group(),earR=new THREE.Group();
+  earL.position.set(.46,.72,-.1);earR.position.set(-.46,.72,-.1);rig.add(earL,earR);
+  const eo=new THREE.ConeGeometry(.37,1.0,4),ei=new THREE.ConeGeometry(.2,.58,4);
+  add(eo,darkR,0,.4,0,earL).scale.set(1,1,.6);add(ei,tan,0,.34,.12,earL).scale.set(1,1,.5);
+  add(eo,darkR,0,.4,0,earR).scale.set(1,1,.6);add(ei,tan,0,.34,.12,earR).scale.set(1,1,.5);
+  // neck, collar, tag
+  add(new THREE.CylinderGeometry(.55,.78,.95,7),russet,0,-1.1,-.08);
+  const col=add(new THREE.TorusGeometry(.66,.11,8,14),teal,0,-.98,-.05);col.rotation.x=1.38;
+  const tag=add(new THREE.CylinderGeometry(.14,.14,.06,10),brass,0,-1.3,.55);tag.rotation.x=1.25;
+  renderer.render(scene,cam); // first frame proves WebGL works before we swap
+  const svg=Head.el.querySelector('svg');if(svg)svg.style.display='none';
+  Head.el.style.animation='none';Head.el.style.transform='none';
+  Head.el.appendChild(renderer.domElement);
+  let t=0,ry=0,rx=0,fr=0,blinkAt=performance.now()+2400,blinkUntil=0;
+  (function loop(now){requestAnimationFrame(loop);t+=.016;
+   const st=Head.el.dataset.state;
+   const talking=Head.tts||Date.now()<Head.talkUntil;
+   if(talking&&st!=='talk')Head.el.dataset.state='talk';
+   if(!talking&&st==='talk')Head.el.dataset.state='idle';
+   const idle=reduce?0:1;
+   ry+=(((Head.tRy||0)+idle*Math.sin(t*.6)*.06)-ry)*.1;
+   rx+=(((Head.tRx||0)+.07+(st==='think'?-.16:0)+idle*Math.sin(t*1.1)*.02)-rx)*.1;
+   rig.rotation.y=ry;rig.rotation.x=rx;rig.rotation.z=idle*Math.sin(t*.8)*.015;
+   rig.position.y=.25+idle*Math.sin(t*1.4)*.03;
+   const op=talking?Math.abs(Math.sin(t*13)):0;
+   jawG.rotation.x=op*.22;mouth.scale.y=.12+op*.8;mouth.position.y=-.3-op*.07;
+   const perk=st==='listen'?1:0;
+   earL.rotation.z+=((-.12-perk*.22)-earL.rotation.z)*.12;earR.rotation.z+=((.12+perk*.22)-earR.rotation.z)*.12;
+   earL.rotation.x=earR.rotation.x=-.08-perk*.12;
+   if(now>blinkAt){eyeL.scale.y=eyeR.scale.y=.1;blinkUntil=now+130;blinkAt=now+2300+Math.random()*2800}
+   if(blinkUntil&&now>blinkUntil){eyeL.scale.y=eyeR.scale.y=1;blinkUntil=0}
+   if((fr++%45)===0&&stage.clientWidth&&stage.clientWidth!==RW){RW=stage.clientWidth;renderer.setSize(RW,RW)}
+   renderer.render(scene,cam)})(performance.now());
+ }catch(e){/* WebGL unavailable: the drawn head stays */}
+})();
+
 /* ---------- Voice out (read replies aloud) and voice in (speak to Muster) ---------- */
-let soundOn=false,voice=null;
-function pickVoice(){const vs=speechSynthesis.getVoices();voice=vs.find(v=>/en[-_]AU/i.test(v.lang))||vs.find(v=>/en[-_]GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null}
-if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let soundOn=false,voice=null,voicePitch=.9;
+const MALEV=/william|russell|daniel|james|liam|lee|gordon|ryan|guy|david|mark|oliver|thomas|george|arthur|\bmale\b/i;
+function enVoices(){return speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang))}
+function setVoice(v){voice=v||null;voicePitch=v&&MALEV.test(v.name)?0.92:0.72;fillVoiceSel()}
+function pickVoice(){const vs=enVoices();if(!vs.length)return setVoice(null);
+ let saved=null;try{saved=localStorage.getItem('muster-voice')}catch(e){}
+ setVoice(vs.find(v=>v.name===saved)
+  ||vs.find(v=>/en[-_]AU/i.test(v.lang)&&MALEV.test(v.name))
+  ||vs.find(v=>/en[-_](GB|UK)/i.test(v.lang)&&MALEV.test(v.name))
+  ||vs.find(v=>MALEV.test(v.name))
+  ||vs.find(v=>/en[-_]AU/i.test(v.lang))||vs[0])}
+function fillVoiceSel(){const sel=$('#vsel');if(!sel)return;const vs=enVoices();
+ sel.innerHTML=vs.length?vs.map(v=>`<option${voice&&v.name===voice.name?' selected':''}>${esc(v.name)} (${v.lang})</option>`).join(''):'<option>Browser default</option>'}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;
+ $('#vsel').onchange=()=>{const name=$('#vsel').value.replace(/ \([^)]*\)$/,'');const v=enVoices().find(x=>name.startsWith(x.name)||x.name===name);if(v){setVoice(v);try{localStorage.setItem('muster-voice',v.name)}catch(e){}}};
+ $('#vtest').onclick=()=>{const was=soundOn;soundOn=true;narrate("G'day, this is how I sound. Deep enough for a kelpie?");soundOn=was}}
+else{$('#vsel').disabled=true;$('#vtest').disabled=true}
 function narrate(text){
  if(soundOn&&'speechSynthesis' in window){const u=new SpeechSynthesisUtterance(text.replace(/[—·…]/g,', ').replace(/[^\p{L}\p{N}\p{P}\s$%]/gu,''));
-  if(voice)u.voice=voice;u.rate=1.06;u.pitch=1.08;u.onstart=()=>{Head.tts=true};u.onend=()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)Head.tts=false};
+  if(voice)u.voice=voice;u.rate=1.02;u.pitch=voicePitch;u.onstart=()=>{Head.tts=true};u.onend=()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)Head.tts=false};
   speechSynthesis.speak(u)}
  else Head.mouthFor(text)}
 $('#snd').onclick=()=>{soundOn=!soundOn;$('#snd').setAttribute('aria-pressed',String(soundOn));$('#snd').textContent=soundOn?'🔊':'🔈';
@@ -317,7 +422,9 @@ function buildMenu(){const m=$('#smenu');m.innerHTML='<h5>Quick requests</h5>';
  m.insertAdjacentHTML('beforeend','<h5>End to end: value streams</h5>');
  VS.filter(v=>!v.domain).forEach(v=>menuItem(m,v.name,v.why,()=>runStream(v,null)));
  m.insertAdjacentHTML('beforeend','<h5>End to end: by industry</h5>');
- DOMS.forEach(x=>menuItem(m,x.name,x.scenario.name,()=>runStream(VS.find(v=>v.domain===x.id),x)));}
+ DOMS.forEach(x=>menuItem(m,x.name,x.scenario.name,()=>runStream(VS.find(v=>v.domain===x.id),x)));
+ m.insertAdjacentHTML('beforeend','<h5>Delivery plans: teams and artefacts over a lifecycle</h5>');
+ VS.filter(v=>!v.domain).forEach(v=>menuItem(m,'Plan: '+v.name,'Who works together, what they produce, and the gates',()=>showPlan(v,null)));}
 function tab(which){const act=which==='act';$('#t-act').setAttribute('aria-selected',String(act));$('#t-art').setAttribute('aria-selected',String(!act));$('#b-act').hidden=!act;$('#b-art').hidden=act}
 $('#t-act').onclick=()=>tab('act');$('#t-art').onclick=()=>tab('art');
 
@@ -326,9 +433,67 @@ function runStream(v,pack,overrideUser,overrideMsg){mode='stream';dpack=pack;str
 function replay(){play()}
 $('#play').onclick=()=>{if(!started)runScenario(SCEN[0]);else play()};
 
+/* ---------- Delivery plans: teams, artefacts and gates across a build lifecycle ---------- */
+const PH_ORDER=['Discover & shape','Design','Build','Test & assure','Transition','Run & improve'];
+const CAP2PH={'Digital advisory for business units':'Discover & shape','Demand and initiative intake':'Discover & shape','Digital and cyber strategy stewardship':'Discover & shape','IT performance management':'Discover & shape','IT governance':'Discover & shape','Innovation':'Discover & shape','Stakeholder relations and engagement':'Discover & shape','Risk management':'Discover & shape','Cost and budget management':'Discover & shape','Sourcing and procurement':'Discover & shape','Project portfolio management':'Discover & shape','Workforce and resource management':'Discover & shape','Bids and sales':'Discover & shape','Product management':'Discover & shape','Leadership, culture and values':'Discover & shape',
+'Solution ideation, analysis and design':'Design','Enterprise architecture':'Design','Roadmaps, standards, policies and principles':'Design','Architecture advisory':'Design','Experience design':'Design','Organisational design':'Design','Cybersecurity strategy and roadmap':'Design','Content design':'Design','Project initiation':'Design',
+'Solution configuration, enhancement and development':'Build','Platform engineering':'Build','Data quality management':'Build','BI and reporting':'Build','AI and machine learning':'Build','Application portfolio management':'Build','Research computing':'Build','Project management':'Build',
+'Solution testing and deployment':'Test & assure','Audit and compliance':'Test & assure','Identity and access management':'Test & assure','Delivery assurance':'Test & assure','Project governance and reporting':'Test & assure',
+'Service transition':'Transition','Change management':'Transition','System updates and releases':'Transition','Organisational change':'Transition','Training and adoption':'Transition','Security training and awareness':'Transition','Knowledge management':'Transition','Digital marketing':'Transition','Teaching and education':'Transition',
+'Incident and problem management':'Run & improve','Service desk':'Run & improve','Application support':'Run & improve','Capacity and availability management':'Run & improve','Security monitoring and detection':'Run & improve','Security incident response':'Run & improve','Backup and recovery':'Run & improve','Disaster recovery and continuity':'Run & improve','Asset, licence and configuration management':'Run & improve','System administration':'Run & improve'};
+const CAT2PH={'Strategy and architecture':'Discover & shape','Change and transformation':'Design','Development and implementation':'Build','Delivery and operation':'Run & improve','People and skills':'Transition','Relationships and engagement':'Discover & shape'};
+function planFor(v,pack){
+ const catOf={};D.categories.forEach(c=>c.subcategories.forEach(s=>s.capabilities.forEach(k=>catOf[k.name]=c.name)));
+ const prev=dpack;dpack=pack||null;
+ const ph={};
+ v.steps.forEach(x=>{const p=CAP2PH[x.capability]||CAT2PH[catOf[x.capability]]||'Build';
+  const o=ph[p]=ph[p]||{teams:new Set(),agents:new Map(),arts:[],appr:0,gate:''};
+  const r=ROLE[x.agent];o.teams.add(r?r.family:'IT');o.agents.set(x.agent,r?r.short:x.agent);
+  x.actions.forEach(a=>{if(a.artefact)o.arts.push(a.artefact);const d=decideFor(a.risk,a.tool);if(d==='approve')o.appr++});
+  o.gate=x.handoff});
+ dpack=prev;
+ return PH_ORDER.filter(p=>ph[p]).map(p=>({name:p,...ph[p]}));}
+function planDoc(v,pack,plan){
+ return {kind:'Document',system:'Confluence',id:'PLAN-'+v.id.toUpperCase().slice(0,12),title:`Delivery plan: ${v.name}`,
+  fields:{Space:'Delivery',Status:'Draft for kickoff',Phases:String(plan.length),Teams:String(new Set(plan.flatMap(p=>[...p.teams])).size),'Artefacts produced':String(plan.reduce((n,p)=>n+p.arts.length,0)),['Approvals at level '+level]:String(plan.reduce((n,p)=>n+p.appr,0)),...(pack?{'Industry pack':pack.name}:{})},
+  sections:plan.map((p,i)=>({h:`${i+1}. ${p.name} — ${[...p.teams].join(', ')}`,items:[
+   `Agents: ${[...p.agents.values()].join(', ')}`,
+   ...(p.arts.length?[`Artefacts: ${p.arts.map(a=>`${a.title} (${a.system} ${a.id})`).join('; ')}`]:['Artefacts: analysis and evidence only in this phase']),
+   `Gate to proceed: ${p.gate}`]}))}}
+function showPlan(v,pack,userText){
+ if(!$('#conv').children.length)setChannelBar('');
+ bubble('You',userText||`Plan the ${v.name.toLowerCase()} build for me`);
+ status(pick(P.think));Head.set('think');
+ const plan=planFor(v,pack);
+ const teams=new Set(plan.flatMap(p=>[...p.teams])),arts=plan.reduce((n,p)=>n+p.arts.length,0),appr=plan.reduce((n,p)=>n+p.appr,0);
+ const b=mup(`${pick(P.plan)} ${v.name} runs as ${plan.length} phases: ${teams.size} teams hand the work along ${v.steps.length} steps, producing ${arts} artefacts on the way, with ${appr} points where a person signs off${pack?`. ${pack.name} systems of record apply — the read-only ones stay read-only`:''}. Here's who does what, and what each phase leaves behind:`);
+ const el=document.createElement('div');el.className='plan';
+ plan.forEach((p,i)=>{const d=document.createElement('div');d.className='ph';
+  d.innerHTML=`<h4>${i+1}. ${esc(p.name)}<small>${p.agents.size} agent${p.agents.size>1?'s':''} · ${p.appr} approval${p.appr===1?'':'s'}</small></h4>
+  <p class="tm">Team${p.teams.size>1?'s':''}: ${esc([...p.teams].join(', '))}</p>
+  <div class="who">${[...p.agents].map(([id,n])=>`<a href="agents.html#${id}">${esc(n)}</a>`).join('')}</div>`;
+  if(p.arts.length){const ar=document.createElement('div');ar.className='arts';p.arts.forEach(a=>ar.appendChild(Artefacts.chip(a)));d.appendChild(ar)}
+  d.insertAdjacentHTML('beforeend',`<p class="gate"><b>Gate:</b> ${esc(p.gate)}</p>`);
+  el.appendChild(d)});
+ b.querySelector('.mb').appendChild(el);
+ const doc=planDoc(v,pack,plan);addArtefact(doc);
+ const chips=document.createElement('div');chips.className='chips';
+ [['▶ Run this end to end',()=>runStream(v,pack)],['Open the plan document',()=>Artefacts.open(doc)]].forEach(([l,fn])=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)});
+ b.querySelector('.mb').appendChild(chips);
+ status('ready when you are');
+}
+
 /* ---------- Free text and voice: match a request to something Muster can run ---------- */
 function allCaps(){return D.categories.flatMap(c=>c.subcategories.flatMap(s=>s.capabilities))}
 function matchRequest(text){const t=(' '+text.toLowerCase()+' ');
+ if(/\bplan\b|lifecycle|road ?map|who (will|would) work|which teams/.test(t)){
+  const SW2={'incident-to-resolution':['incident'],'cyber-event-to-recovery':['phish','breach','cyber'],'change-and-release':['release','deploy'],'plan-to-budget':['budget'],'data-to-insight':['insight','kpi','report'],'idea-to-service':['service','crm','system','build','intake']};
+  let v=null,pack=null;
+  for(const [id,ws] of Object.entries(SW2))if(ws.some(w=>t.includes(w))){v=VS.find(x=>x.id===id);break}
+  const dm=DOMS.find(d=>d.name.toLowerCase().split(/[^a-z]+/).some(w=>w.length>5&&t.includes(w)));
+  if(dm){pack=dm;v=VS.find(x=>x.domain===dm.id)}
+  return {kind:'plan',v:v||VS.find(x=>x.id==='idea-to-service'),pack};
+ }
  const Q={outage:['portal','outage',' down','log in','login','sign-in','sign in'],crm:[' crm','legal','matter intake'],audit:['audit','compliance check'],backup:['backup','business case']};
  for(const [id,ws] of Object.entries(Q))if(ws.some(w=>t.includes(w)))return{kind:'scenario',s:SCEN.find(x=>x.id===id)};
  const SW={'incident-to-resolution':['incident','restore','broke'],'cyber-event-to-recovery':['phish','breach','compromis','cyber event','hacked'],'change-and-release':['release','deploy','ship '],'plan-to-budget':['budget','workforce plan','fy2'],'data-to-insight':['insight','kpi','board report','performance report'],'idea-to-service':['new service','idea to','end to end','intake to']};
@@ -341,7 +506,7 @@ function matchRequest(text){const t=(' '+text.toLowerCase()+' ');
 function send(text){text=(text||$('#say').value).trim();if(!text)return;$('#say').value='';
  const m=matchRequest(text);
  if(!m){bubble('You',text);const b=bubble('Muster',"Hmm, that one's outside my demo script — in the real deployment I'd route it by SFIA skill and have a crack. Here, try me on an outage, a new system, an audit, a release… or pick anything from the scenario menu up top.",{bot:true});narrate(b.querySelector('.txt').textContent);return}
- if(m.kind==='scenario')runScenario(m.s,'You',text);else runStream(m.v,m.pack||null,'You',text)}
+ if(m.kind==='plan')showPlan(m.v,m.pack,text);else if(m.kind==='scenario')runScenario(m.s,'You',text);else runStream(m.v,m.pack||null,'You',text)}
 $('#composer').onsubmit=e=>{e.preventDefault();send()};
 
 /* ---------- Shared chat pieces ---------- */
@@ -381,7 +546,7 @@ function greet(){
  $('#conv').innerHTML='';setChannelBar('');$('#fhead').firstChild.textContent="Say g'day";
  const b=mup("G'day! Muster here — resident kelpie and chief crew-wrangler. I've got 75 SFIA specialists one whistle away: analysts, architects, engineers, security folk, the lot. Tell me what needs doing — type it, say it with the mic, or tap one of these and watch us work.");
  const chips=document.createElement('div');chips.className='chips';
- [...SCEN.map(s=>[s.label,()=>runScenario(s)]),['Run an incident end to end',()=>runStream(VS.find(v=>v.id==='incident-to-resolution'),null)],['Pick an industry…',()=>{$('#scenbtn').click();$('#scenbtn').focus()}]].forEach(([l,fn])=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)});
+ [...SCEN.map(s=>[s.label,()=>runScenario(s)]),['Run an incident end to end',()=>runStream(VS.find(v=>v.id==='incident-to-resolution'),null)],['Plan a build lifecycle',()=>showPlan(VS.find(v=>v.id==='idea-to-service'),null,'Plan a build lifecycle for me')],['Pick an industry…',()=>{$('#scenbtn').click();$('#scenbtn').focus()}]].forEach(([l,fn])=>{const c=document.createElement('button');c.type='button';c.textContent=l;c.onclick=fn;chips.appendChild(c)});
  b.querySelector('.mb').appendChild(chips);status('ready when you are');
 }
 
